@@ -172,4 +172,6 @@ public class TecbotConstants {
     public static final double JOYSTICK_SPEED_MULTIPLIER = .45;
     public static final boolean APPLY_SPEED_RELEASE_TO_LEFT_AXIS = true;
 
+    public static final TecbotController.TypeOfController CONTROLLER_TYPE_PILOT = TecbotController.TypeOfController.XBOX;
+    public static final TecbotController.TypeOfController CONTROLLER_TYPE_COPILOT = TecbotController.TypeOfController.PS4;
 }

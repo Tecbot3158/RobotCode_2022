@@ -71,8 +71,8 @@ public class RobotConfigurator {
      * @param lowSolenoidPort  reverse channel in double solenoid
      * @return {@link DoubleSolenoid} new instance
      */
-    public static DoubleSolenoid buildDoubleSolenoid(int highSolenoidPort, int lowSolenoidPort) {
-        return new DoubleSolenoid(TecbotConstants.PNEUMATICS_MODULE_TYPE, highSolenoidPort, lowSolenoidPort);
+    public static DoubleSolenoid buildDoubleSolenoid(int[] ports) {
+        return new DoubleSolenoid(ports[0], TecbotConstants.PNEUMATICS_MODULE_TYPE, ports[1], ports[2]);
     }
 
     /**
