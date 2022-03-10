@@ -2,9 +2,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotSpeedController;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 public class Intake extends SubsystemBase {
 
@@ -14,7 +14,7 @@ public class Intake extends SubsystemBase {
     // constructor
     public Intake() {
 
-        intakeSolenoids = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
+        intakeSolenoids = RobotConfigurator.buildDoubleSolenoid(RobotMap.INTAKE_SOLENOID_PORTS);
         intakeMotor = new TecbotSpeedController(RobotMap.INTAKE_MOTOR_PORT, RobotMap.INTAKE_MOTOR_TYPE);
     }
 

@@ -9,44 +9,52 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.resources.Navx;
 import frc.robot.resources.TecbotSensors;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.chassis.DriveTrain;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-
   private Navx gyroscope;
+
+  private Intake intake;
 
   private DriveTrain driveTrain;
 
-
   private OI oi;
 
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
   public RobotContainer() {
 
     gyroscope = new Navx();
 
     driveTrain = new DriveTrain();
 
+    intake = new Intake();
 
-   // configureButtonBindings();
-    // this NEEDS to be called from the RobotInit class after all subsystems are initialized.
-
+    // configureButtonBindings();
+    // this NEEDS to be called from the RobotInit class after all subsystems are
+    // initialized.
 
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
@@ -70,5 +78,9 @@ public class RobotContainer {
 
   public Navx getOI() {
     return gyroscope;
+  }
+
+  public Intake getIntake() {
+    return intake;
   }
 }
