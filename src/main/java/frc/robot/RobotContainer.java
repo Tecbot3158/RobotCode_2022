@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.resources.Navx;
 import frc.robot.resources.TecbotSensors;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.chassis.DriveTrain;
@@ -20,10 +21,26 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
 
+  private Navx gyroscope;
+
+  private DriveTrain driveTrain;
+
+
+  private OI oi;
+
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
+
+    gyroscope = new Navx();
+
+    driveTrain = new DriveTrain();
+
+
+   // configureButtonBindings();
+    // this NEEDS to be called from the RobotInit class after all subsystems are initialized.
+
+
   }
 
   /**
@@ -32,7 +49,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+    oi.configureButtonBindings();
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -44,11 +64,11 @@ public class RobotContainer {
     return null;
   }
 
-  public TecbotSensors getTecbotSensors() {
-    return null;
+  public DriveTrain getDriveTrain() {
+    return driveTrain;
   }
 
-  public DriveTrain getDriveTrain() {
-    return null;
+  public Navx getOI() {
+    return gyroscope;
   }
 }

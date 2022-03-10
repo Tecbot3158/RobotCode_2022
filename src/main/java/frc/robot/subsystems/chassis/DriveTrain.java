@@ -26,6 +26,11 @@ public class DriveTrain extends SubsystemBase {
     TecbotMotorList rightMotors;
     TecbotMotorList middleMotors;
 
+    TecbotEncoder leftMotorEncoders,
+                    rightMotorEncoders,
+                    middleMotorEncoders;
+
+
     DoubleSolenoid dragonFlyWheelSolenoid;
 
     DoubleSolenoid transmission;
@@ -90,6 +95,30 @@ public class DriveTrain extends SubsystemBase {
 
         middleMotors = RobotConfigurator.buildMotorList(RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_PORT,
                 RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_INVERTED_MOTORS, RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_MOTOR_TYPES);
+
+        // leftMotorEncoders = RobotConfigurator.buildEncoder(leftMotors.getSpecificMotor(RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_WITH_ENCODER) , RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[0], RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[1] ) ;
+
+
+        // encoders begin!
+
+        leftMotorEncoders = RobotConfigurator.buildEncoder
+                (getSpecificMotor(RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_WITH_ENCODER),
+                        RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[0], RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[1]);
+        rightMotorEncoders= RobotConfigurator.buildEncoder
+                (getSpecificMotor(RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_MOTOR_WITH_ENCODER),
+                        RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[0], RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[1]);
+        middleMotorEncoders = RobotConfigurator.buildEncoder
+                (getSpecificMotor(RobotMap.DRIVE_TRAIN_MIDDLE_CHASSIS_MOTOR_WITH_ENCODER)
+                        , RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[0], RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[1]);
+
+        if (RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_IS_INVERTED && middleMotorEncoders != null)
+            leftMotorEncoders.setInverted(true);
+        if (RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_IS_INVERTED && middleMotorEncoders != null)
+            rightMotorEncoders.setInverted(true);
+        if (RobotMap.DRIVE_TRAIN_MIDDLE_CHASSIS_ENCODER_IS_INVERTED && middleMotorEncoders != null)
+            middleMotorEncoders.setInverted(true);
+
+        // encoders --- end!
     }
 
     /**
@@ -154,7 +183,7 @@ public class DriveTrain extends SubsystemBase {
 
         maxPower = Math.clamp(maxPower, 0, 1);
 
-        double diffAngle = target - Robot.getRobotContainer().getTecbotSensors().getYaw();
+        double diffAngle = target - Robot.getRobotContainer().getOI().getYaw();
 
         if (diffAngle > 180) {
             diffAngle = diffAngle - 360;
@@ -183,7 +212,7 @@ public class DriveTrain extends SubsystemBase {
     public boolean moveStraight(double target, double maxPower) {
         maxPower = Math.clamp(maxPower, 0, 1);
 
-        double deltaEncoder = target - Robot.getRobotContainer().getTecbotSensors().getEncoderRaw(TecbotSensors.SubsystemType.LEFT_CHASSIS);
+        double deltaEncoder = target - getEncoderRaw(CHASSIS_SIDE.LEFT_CHASSIS);
         double power = Math.clamp(deltaEncoder / TecbotConstants.CHASSIS_STRAIGHT_MAX_DISTANCE, -maxPower, maxPower);
 
         double diffAbs = Math.abs(deltaEncoder);
@@ -199,10 +228,10 @@ public class DriveTrain extends SubsystemBase {
     public boolean moveStraight(double target, double maxPower, double targetAngle) {
         maxPower = Math.clamp(maxPower, 0, 1);
 
-        double deltaEncoder = target - Robot.getRobotContainer().getTecbotSensors().getEncoderRaw(TecbotSensors.SubsystemType.LEFT_CHASSIS);
+        double deltaEncoder = target - getEncoderRaw(CHASSIS_SIDE.LEFT_CHASSIS);
         double power = Math.clamp(deltaEncoder / TecbotConstants.CHASSIS_STRAIGHT_MAX_DISTANCE, -maxPower, maxPower);
 
-        double deltaAngle = targetAngle - Robot.getRobotContainer().getTecbotSensors().getYaw();
+        double deltaAngle = targetAngle - Robot.getRobotContainer().getOI().getYaw();
         if (deltaAngle > 180) {
             deltaAngle = deltaAngle - 360;
         } else if (deltaAngle < -180) {
@@ -298,7 +327,7 @@ public class DriveTrain extends SubsystemBase {
     public void mecanumDrive(double x, double y, double turn) {
 
         if (!hasSetAngle) {
-            startingAngle = Robot.getRobotContainer().getTecbotSensors().getYaw();
+            startingAngle = Robot.getRobotContainer().getOI().getYaw();
             hasSetAngle = true;
 
             // This condition will happen once every time the robot enters mecanum drive.
@@ -307,9 +336,9 @@ public class DriveTrain extends SubsystemBase {
             setDragonFlyWheelState(WheelState.Lowered);
         }
         if (turn >= .1 || turn <= -.1)
-            startingAngle = Robot.getRobotContainer().getTecbotSensors().getYaw();
+            startingAngle = Robot.getRobotContainer().getOI().getYaw();
 
-        double deltaAngle = Robot.getRobotContainer().getTecbotSensors().getYaw() - startingAngle;
+        double deltaAngle = Robot.getRobotContainer().getOI().getYaw() - startingAngle;
 
         // Prevents robot from turning in the incorrect direction
         if (deltaAngle > 180) {
@@ -387,7 +416,7 @@ public class DriveTrain extends SubsystemBase {
             }
         }
         // The angle at which the robot will move, considering its rotation.
-        double relativeAngle = absoluteAngle - Robot.getRobotContainer().getTecbotSensors().getYaw();
+        double relativeAngle = absoluteAngle - Robot.getRobotContainer().getOI().getYaw();
         // The max power that will be given to the motors.
         double speed = Math.hypot(x, y);
 
@@ -408,7 +437,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void moveStraightPID(double output) {
-        drive((Robot.getRobotContainer().getTecbotSensors().getYaw() - pidAngleTarget) * TecbotConstants.TURN_CORRECTION, output);
+        drive((Robot.getRobotContainer().getOI().getYaw() - pidAngleTarget) * TecbotConstants.TURN_CORRECTION, output);
     }
 
     public double getPidStraightTarget() {
@@ -526,4 +555,32 @@ public class DriveTrain extends SubsystemBase {
             }
         }
     }
+
+
+    // get encoder shit
+
+//    double deltaEncoder = target - Robot.getRobotContainer().getTecbotSensors().getEncoderRaw(TecbotSensors.SubsystemType.LEFT_CHASSIS);
+
+   enum CHASSIS_SIDE {
+       LEFT_CHASSIS,
+       RIGHT_CHASSIS,
+       DRAGON_FLY
+   }
+
+   double getEncoderRaw( CHASSIS_SIDE side ) {
+
+       switch( side) {
+           case LEFT_CHASSIS:
+               return leftMotorEncoders.getRaw();
+           case RIGHT_CHASSIS:
+               return rightMotorEncoders.getRaw();
+           case DRAGON_FLY:
+               return middleMotorEncoders.getRaw();
+           default:
+               return 0;
+
+       }
+
+
+   }
 }
