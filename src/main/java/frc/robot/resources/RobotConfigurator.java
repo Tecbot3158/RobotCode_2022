@@ -20,19 +20,23 @@ public class RobotConfigurator {
 
     /**
      * This constant is intended to be used when creating a new TecbotEncoder
-     * which is connected to a TALON_SRX, and in that case this variable replaces port <i>a</i>
+     * which is connected to a TALON_SRX, and in that case this variable replaces
+     * port <i>a</i>
      * and <i>b</i>
      */
     public static final int CONFIG_NOT_SET = -1;
 
     /**
-     * This method is use to create a new TecbotEncoder, it can be either two-channel or just linked
+     * This method is use to create a new TecbotEncoder, it can be either
+     * two-channel or just linked
      * to a TALON_SRX speed controller.
      *
      * @param speedController the speed controller that the encoder is linked to.
-     * @param a               If encoder is a two-channel sensor, this should correspond to the first channel,
+     * @param a               If encoder is a two-channel sensor, this should
+     *                        correspond to the first channel,
      *                        otherwise use {@link #CONFIG_NOT_SET}
-     * @param b               If encoder is a two-channel sensor, this should correspond to the second channel,
+     * @param b               If encoder is a two-channel sensor, this should
+     *                        correspond to the second channel,
      *                        otherwise use {@link #CONFIG_NOT_SET}
      * @return {@link TecbotEncoder}
      */
@@ -51,9 +55,11 @@ public class RobotConfigurator {
     }
 
     /**
-     * This method is intended to be used when creating a new instance of {@link TecbotMotorList},
+     * This method is intended to be used when creating a new instance of
+     * {@link TecbotMotorList},
      * and will receive 3 parameters:
-     * <br> ports, invertedMotors, and motorTypes
+     * <br>
+     * ports, invertedMotors, and motorTypes
      *
      * @param ports              ports in which the speed controllers are located.
      * @param invertedMotorPorts the ports of the motors that are inverted.
@@ -87,5 +93,3 @@ public class RobotConfigurator {
     }
 
 }
-
-
