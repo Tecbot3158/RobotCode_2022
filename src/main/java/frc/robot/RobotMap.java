@@ -149,10 +149,10 @@ public class RobotMap {
     // TURRET --- end
 
     // CLIMBER
-    public static final int[] CLIMBER_MOTOR_PORTS = { 40, 41 };
+    public static final int[] CLIMBER_MOTOR_PORTS = { 50, 51 };
     public static final TypeOfMotor[] CLIMBER_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS,
             TypeOfMotor.CAN_SPARK_BRUSHLESS };
-    public static final boolean[] CLIMBER_MOTORS_ARE_INVERTED = { false, false };
+    public static final int[] CLIMBER_INVERTED_MOTORS = { };
 
     // in theory 2 pistons, but just one solenoid
     public static final int[] CLIMBER_SOLENOID_PORTS = { 9, 10 };
