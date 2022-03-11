@@ -1,6 +1,7 @@
 package frc.robot.resources;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PWM;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -50,6 +51,7 @@ public class TecbotSensors {
             rightChassisEncoder.setInverted(true);
         if (RobotMap.DRIVE_TRAIN_MIDDLE_CHASSIS_ENCODER_IS_INVERTED && middleChassisEncoder != null)
             middleChassisEncoder.setInverted(true);
+
 
         climberLeftLimitSwitch = new DigitalInput(RobotMap.CLIMBER_LEFT_LIMIT_SWITCH_PORT);
         climberRightLimitSwitch = new DigitalInput(RobotMap.CLIMBER_RIGHT_LIMIT_SWITCH_PORT);
@@ -122,6 +124,8 @@ public class TecbotSensors {
             default:
                 return null;
         }
+
+
     }
 
     /**

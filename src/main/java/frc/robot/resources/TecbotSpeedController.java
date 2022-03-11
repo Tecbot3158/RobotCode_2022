@@ -128,22 +128,21 @@ public class TecbotSpeedController {
             DriverStation.reportError("That type of motor doesn't exist!", true);
     }
 
-    public int getEncPosition() {
+    public double getEncPosition() {
 
-        if (motorToUse == TypeOfMotor.TALON_SRX)
-            return (int) phoenixMotor.getSelectedSensorPosition(0);
-        else
-            DriverStation.reportWarning("That is not a Talon SRX nor a Spark Max!", true);
-        return 0;
+        switch( motorToUse ) {
+            case TALON_SRX:
+                return phoenixMotor.getSelectedSensorPosition(0);
+            case CAN_SPARK_BRUSHLESS:
+                return ((CANSparkMax) frcMotor).getEncoder().getPosition();
+
+            default:
+                DriverStation.reportWarning("That is not a Talon SRX nor a Spark Max!", true);
+                return 0;
+        }
 
     }
 
-    public double getSparkEncPosition() {
-        if (motorToUse == TypeOfMotor.CAN_SPARK_BRUSHLESS) {
-            return ((CANSparkMax) frcMotor).getEncoder().getPosition();
-        } else
-            return 0;
-    }
 
     public void stopMotor() {
 

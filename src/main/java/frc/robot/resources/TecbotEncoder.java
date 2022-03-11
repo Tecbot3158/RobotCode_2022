@@ -110,30 +110,30 @@ public class TecbotEncoder implements CounterBase {
 
     }
 
-    public int getRaw() {
+    public double getRaw() {
 
-        if (encoder != null) {
+        if (encoder != null && talonEncoder == null) {
 
             return encoder.getRaw();
 
         }
+        else if ( talonEncoder != null) {
+        switch ( talonEncoder.getType() ) {
 
-        if (talonEncoder != null) {
-
-            return (isInverted ? -1 : 1) * talonEncoder.getEncPosition();
+            case TALON_SRX:
+                return (isInverted ? -1 : 1) * talonEncoder.getEncPosition();
+            case CAN_SPARK_BRUSHLESS:
+                return (isInverted() ? -1:1) * talonEncoder.getEncPosition();
+            default:
+                DriverStation.reportWarning("There's no encoder instantiated", true);
+                return 0;
 
         }
 
-        DriverStation.reportWarning("There's no encoder instantiated", true);
-
-        return 0;
-
-    }
-    public double getSparkRaw(){
-        if(talonEncoder != null)
-            return (isInverted() ? -1:1) *talonEncoder.getSparkEncPosition();
+        }
         else
             return 0;
+
     }
 
     public void setEncoderPosition(int value) {
