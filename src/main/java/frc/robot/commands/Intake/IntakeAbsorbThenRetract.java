@@ -1,17 +1,18 @@
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
-public class DoIntake extends CommandBase {
+public class IntakeAbsorbThenRetract extends CommandBase {
 
     Intake intake;
 
     /** Creates a new DoIntake. */
-    public DoIntake(Intake subsys) {
+    public IntakeAbsorbThenRetract() {
         // Use addRequirements() here to declare subsystem dependencies.
 
-        intake = subsys;
+        intake = Robot.getRobotContainer().getIntake();
         addRequirements(intake);
     }
 
