@@ -7,6 +7,14 @@ Read more about it [here](https://www.firstinspires.org/robotics/frc/game-and-se
 
 Anyways, here is a rough overview of the subsystems:
 
+
+# TODO 
+- Joe:
+  - PID. Shooter + Turret + Feeder !!
+  - plus simple proportional control.
+- view LAMBOT and BOTBUSTERS modes
+  - 3 modes. 1; not doing anything. 2; looking but have not found yet. 3; aimed & ready to shoot.
+
 ## DriveTrain
 The drivetrain is the most important subsystem. It
 allows the robot to move on the floor using wheel and motors.
