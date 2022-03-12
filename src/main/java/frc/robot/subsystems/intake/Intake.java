@@ -1,10 +1,10 @@
 package frc.robot.subsystems.intake;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotSpeedController;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Intake extends SubsystemBase {
 
