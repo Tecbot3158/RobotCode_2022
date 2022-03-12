@@ -9,7 +9,7 @@ public class OI {
 
     private TecbotController pilot, copilot;
 
-    private OI () {
+    private OI() {
 
     }
 
@@ -19,15 +19,15 @@ public class OI {
      */
     public void configureButtonBindings() {
 
-        pilot = new TecbotController ( 0, TecbotConstants.CONTROLLER_TYPE_PILOT);
-        copilot = new TecbotController ( 1, TecbotConstants.CONTROLLER_TYPE_COPILOT);
+        pilot = new TecbotController(0, TecbotConstants.CONTROLLER_TYPE_PILOT);
+        copilot = new TecbotController(1, TecbotConstants.CONTROLLER_TYPE_COPILOT);
 
     }
 
 
     // singleton
-    public static OI getInstance(){
-        if (instance == null )
+    public static OI getInstance() {
+        if (instance == null)
             instance = new OI();
 
         return instance;

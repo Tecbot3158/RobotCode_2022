@@ -5,24 +5,26 @@
 package frc.robot.subsystems.transport;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.resources.TecbotSpeedController;
 import frc.robot.RobotMap;
+import frc.robot.resources.TecbotSpeedController;
 
 public class Feeder extends SubsystemBase {
 
-  TecbotSpeedController feeder;
+    TecbotSpeedController feeder;
 
-  /** Creates a new Feeder. */
-  public Feeder() {
-    feeder = new TecbotSpeedController(RobotMap.TRANSPORT_FEEDER_PORT, RobotMap.TRANSPORT_FEEDER_MOTOR_TYPE);
-  }
+    /**
+     * Creates a new Feeder.
+     */
+    public Feeder() {
+        feeder = new TecbotSpeedController(RobotMap.TRANSPORT_FEEDER_PORT, RobotMap.TRANSPORT_FEEDER_MOTOR_TYPE);
+    }
 
-  public TecbotSpeedController getFeederMotor() {
-    return feeder;
-  }
+    public TecbotSpeedController getFeederMotor() {
+        return feeder;
+    }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    }
 }

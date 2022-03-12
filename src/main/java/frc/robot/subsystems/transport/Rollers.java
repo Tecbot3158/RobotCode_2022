@@ -10,23 +10,25 @@ import frc.robot.resources.TecbotSpeedController;
 
 public class Rollers extends SubsystemBase {
 
-  TecbotSpeedController roller;
+    TecbotSpeedController roller;
 
-  /** Creates a new Rollers. */
-  public Rollers() {
-    roller = new TecbotSpeedController(RobotMap.TRANSPORT_ROLLER_PORT, RobotMap.TRANSPORT_ROLLER_MOTOR_TYPE);
-  }
+    /**
+     * Creates a new Rollers.
+     */
+    public Rollers() {
+        roller = new TecbotSpeedController(RobotMap.TRANSPORT_ROLLER_PORT, RobotMap.TRANSPORT_ROLLER_MOTOR_TYPE);
+    }
 
-  public TecbotSpeedController getRollerMotor() {
-    return roller;
-  }
+    public TecbotSpeedController getRollerMotor() {
+        return roller;
+    }
 
-  public void rollerSpin() {
+    public void rollerSpin() {
 
-  }
+    }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    }
 }

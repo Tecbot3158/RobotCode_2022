@@ -8,7 +8,6 @@
 package frc.robot.subsystems.chassis;
 
 
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,8 +17,6 @@ import frc.robot.RobotMap;
 import frc.robot.resources.Math;
 import frc.robot.resources.*;
 
-import java.sql.Driver;
-
 public class DriveTrain extends SubsystemBase {
     // Motors
     TecbotMotorList leftMotors;
@@ -27,8 +24,8 @@ public class DriveTrain extends SubsystemBase {
     TecbotMotorList middleMotors;
 
     TecbotEncoder leftMotorEncoders,
-                    rightMotorEncoders,
-                    middleMotorEncoders;
+            rightMotorEncoders,
+            middleMotorEncoders;
 
 
     DoubleSolenoid dragonFlyWheelSolenoid;
@@ -104,7 +101,7 @@ public class DriveTrain extends SubsystemBase {
         leftMotorEncoders = RobotConfigurator.buildEncoder
                 (getSpecificMotor(RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_WITH_ENCODER),
                         RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[0], RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[1]);
-        rightMotorEncoders= RobotConfigurator.buildEncoder
+        rightMotorEncoders = RobotConfigurator.buildEncoder
                 (getSpecificMotor(RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_MOTOR_WITH_ENCODER),
                         RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[0], RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[1]);
         middleMotorEncoders = RobotConfigurator.buildEncoder
@@ -561,26 +558,26 @@ public class DriveTrain extends SubsystemBase {
 
 //    double deltaEncoder = target - Robot.getRobotContainer().getTecbotSensors().getEncoderRaw(TecbotSensors.SubsystemType.LEFT_CHASSIS);
 
-   enum CHASSIS_SIDE {
-       LEFT_CHASSIS,
-       RIGHT_CHASSIS,
-       DRAGON_FLY
-   }
+    enum CHASSIS_SIDE {
+        LEFT_CHASSIS,
+        RIGHT_CHASSIS,
+        DRAGON_FLY
+    }
 
-   double getEncoderRaw( CHASSIS_SIDE side ) {
+    double getEncoderRaw(CHASSIS_SIDE side) {
 
-       switch( side) {
-           case LEFT_CHASSIS:
-               return leftMotorEncoders.getRaw();
-           case RIGHT_CHASSIS:
-               return rightMotorEncoders.getRaw();
-           case DRAGON_FLY:
-               return middleMotorEncoders.getRaw();
-           default:
-               return 0;
+        switch (side) {
+            case LEFT_CHASSIS:
+                return leftMotorEncoders.getRaw();
+            case RIGHT_CHASSIS:
+                return rightMotorEncoders.getRaw();
+            case DRAGON_FLY:
+                return middleMotorEncoders.getRaw();
+            default:
+                return 0;
 
-       }
+        }
 
 
-   }
+    }
 }

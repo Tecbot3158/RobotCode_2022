@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -307,10 +306,10 @@ public class TecbotController {
             default:
                 value = 0;
                 DriverStation.reportWarning("Could not get axis value from getLeftAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.", false);
-            break;
-}
+                break;
+        }
         return ground(value, getOffset());
-                }
+    }
 
     /**
      * This function will return the value of the Left Axis <i>Y</i>.

@@ -7,12 +7,12 @@
 
 package frc.robot.resources;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.resources.TecbotSpeedController.TypeOfMotor;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import edu.wpi.first.wpilibj.DriverStation;
-import frc.robot.resources.TecbotSpeedController.TypeOfMotor;
 
 /**
  * Add your docs here.
