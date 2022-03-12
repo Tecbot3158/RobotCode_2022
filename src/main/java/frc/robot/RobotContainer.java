@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.resources.Navx;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.chassis.DriveTrain;
 
 /**
@@ -31,6 +32,8 @@ public class RobotContainer {
 
   private OI oi;
 
+  private Turret turret;
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -41,6 +44,8 @@ public class RobotContainer {
     driveTrain = new DriveTrain();
 
     intake = new Intake();
+
+    turret = new Turret();
 
     // configureButtonBindings();
     // this NEEDS to be called from the RobotInit class after all subsystems are
@@ -82,4 +87,9 @@ public class RobotContainer {
   public Intake getIntake() {
     return intake;
   }
+
+  public Turret getTurret() {
+    return turret;
+  }
+
 }
