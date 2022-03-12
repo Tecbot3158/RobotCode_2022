@@ -20,7 +20,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.motorcontrol.*;
 
 /**
@@ -85,7 +85,7 @@ public class TecbotSpeedController {
             case JAGUAR:
 
                 frcMotor = new Jaguar(port);
-                
+
 
                 break;
 
@@ -103,6 +103,9 @@ public class TecbotSpeedController {
             case CAN_SPARK_BRUSHLESS:
 
                 frcMotor = new CANSparkMax(port, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+                getCANSparkMax().restoreFactoryDefaults();
+                // TODO check if this kills the code ?
 
                 break;
             case CAN_SPARK_BRUSHED:
@@ -130,7 +133,7 @@ public class TecbotSpeedController {
 
     public double getEncPosition() {
 
-        switch( motorToUse ) {
+        switch (motorToUse) {
             case TALON_SRX:
                 return phoenixMotor.getSelectedSensorPosition(0);
             case CAN_SPARK_BRUSHLESS:
