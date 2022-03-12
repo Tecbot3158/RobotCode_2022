@@ -61,19 +61,26 @@ public class Tecbotcamera extends SubsystemBase {
      */
 
     public double getYaw() {
-        yaw = pepethefrog.getLatestResult().getBestTarget().getYaw();
-        return yaw;
+        if (peperesult.hasTargets()) {
+
+            yaw = pepethefrog.getLatestResult().getBestTarget().getYaw();
+            return yaw;
+        }
+
+        else {
+            return 0.0;
+        }
 
     }
 
     public double getArea() {
-        yaw = pepethefrog.getLatestResult().getBestTarget().getYaw();
+        yaw = pepethefrog.getLatestResult().getBestTarget().getArea();
         return area;
 
     }
 
     public double getPitch() {
-        yaw = pepethefrog.getLatestResult().getBestTarget().getYaw();
+        yaw = pepethefrog.getLatestResult().getBestTarget().getPitch();
         return pitch;
 
     }

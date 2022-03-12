@@ -71,23 +71,14 @@ public class Turret extends SubsystemBase {
    * Sets Turret to a Target.
    * This method should be set to a photonvision target
    * 
-   * @param camera PhotonVision Camera
+   * @param yaw PhotonVision Camera raw
    */
-  public void settoTarget(PhotonCamera camera) {
+  public void settoTarget(double yaw) {
 
     double setpoint = 0.0;
     turretpid.setSetpoint(setpoint);
 
-    PhotonPipelineResult result = camera.getLatestResult();
-
-    if (result.hasTargets()) {
-
-      turretmotor.set(turretpid.calculate(result.getBestTarget().getYaw(), 0.0));
-    }
-
-    else {
-      turretmotor.set(0);
-    }
+    turretmotor.set(turretpid.calculate(yaw, setpoint));
 
   }
 

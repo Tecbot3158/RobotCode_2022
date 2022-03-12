@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.resources.Navx;
 import frc.robot.subsystems.turret.Turret;
+import frc.robot.subsystems.vision.Tecbotcamera;
 import frc.robot.subsystems.chassis.DriveTrain;
 import frc.robot.subsystems.intake.Intake;
 
@@ -32,19 +33,18 @@ public class RobotContainer {
 
     private OI oi;
 
-<<<<<<< HEAD
+    private Tecbotcamera tecbotcamera;
+
+    private Turret turret;
+
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
+
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
-=======
-  private Turret turret;
-
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
-  public RobotContainer() {
->>>>>>> 7b53d3922cbe5cf710c93eddee708e0afd8f0368
 
         gyroscope = new Navx();
 
@@ -52,17 +52,17 @@ public class RobotContainer {
 
         intake = new Intake();
 
-<<<<<<< HEAD
+        turret = new Turret();
+
+        tecbotcamera = new Tecbotcamera();
+
         // configureButtonBindings();
         // this NEEDS to be called from the RobotInit class after all subsystems are
         // initialized.
-=======
-    turret = new Turret();
 
-    // configureButtonBindings();
-    // this NEEDS to be called from the RobotInit class after all subsystems are
-    // initialized.
->>>>>>> 7b53d3922cbe5cf710c93eddee708e0afd8f0368
+        // configureButtonBindings();
+        // this NEEDS to be called from the RobotInit class after all subsystems are
+        // initialized.
 
     }
 
@@ -97,18 +97,16 @@ public class RobotContainer {
         return gyroscope;
     }
 
-<<<<<<< HEAD
     public Intake getIntake() {
         return intake;
     }
-=======
-  public Intake getIntake() {
-    return intake;
-  }
 
-  public Turret getTurret() {
-    return turret;
-  }
+    public Turret getTurret() {
+        return turret;
+    }
 
->>>>>>> 7b53d3922cbe5cf710c93eddee708e0afd8f0368
+    public Tecbotcamera getTecbotcamera() {
+        return tecbotcamera;
+    }
+
 }

@@ -24,8 +24,14 @@ public class MoveTurretToTarget extends CommandBase {
   @Override
   public void execute() {
 
-    // TODO: ADD TARGET FROM THE VISION SUBSYSTEM
-    // Robot.getRobotContainer().getTurret().settoTarget(TARGET);
+    double yaw = Robot.getRobotContainer().getTecbotcamera().getYaw();
+    Robot.getRobotContainer().getTurret().settoTarget(yaw);
+
+    if (Robot.getRobotContainer().getTurret().getTurretPID().atSetpoint()) {
+
+      end(true);
+
+    }
 
   }
 
