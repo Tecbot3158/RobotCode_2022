@@ -11,6 +11,9 @@ public class OI {
 
     private OI() {
 
+        pilot = new TecbotController(0, TecbotController.TypeOfController.XBOX);
+        copilot = new TecbotController(1, TecbotController.TypeOfController.PS4);
+
     }
 
     /**
@@ -24,7 +27,6 @@ public class OI {
 
     }
 
-
     // singleton
     public static OI getInstance() {
         if (instance == null)
@@ -32,4 +34,16 @@ public class OI {
 
         return instance;
     }
+
+    public TecbotController getPilot() {
+
+        return pilot;
+    }
+
+    public TecbotController getCopilot() {
+
+        return copilot;
+
+    }
+
 }

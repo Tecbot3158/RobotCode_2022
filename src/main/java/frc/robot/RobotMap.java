@@ -142,6 +142,19 @@ public class RobotMap {
     public static final int[] SHOOTER_ANGLE_SERVO_PORTS = {0, 1};
     public static final boolean[] SHOOTER_ANGLE_SERVOS_ARE_INVERTED = {false, true};
 
+        // TURRET
+        // should go clockwise when in positive.
+        public static final int[] TURRET_MOTOR_PORT = { 29 };
+        public static final TypeOfMotor TURRET_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
+        public static final boolean TURRET_MOTOR_IS_INVERTED = false;
+        public static final int[] TURRET_ENCODER_CHANNELS = { 0, 1 };
+
+        public static final double TURRET_P = 0.8;
+        public static final double TURRET_I = 0;
+        public static final double TURRET_D = 0;
+
+        public static final double TURRET_MAX_DISTANCE = (776 / 27);
+        // TURRET --- end
 
     public static final double SHOOTER_PID_kP = 6e-5;
     public static final double SHOOTER_PID_kI = 0;
