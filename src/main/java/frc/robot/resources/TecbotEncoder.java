@@ -14,7 +14,10 @@ package frc.robot.resources;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.DigitalSource;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  * TecbotEncoder can be used to create almost any kind of encoder,
@@ -116,22 +119,20 @@ public class TecbotEncoder implements CounterBase {
 
             return encoder.getRaw();
 
-        }
-        else if ( talonEncoder != null) {
-        switch ( talonEncoder.getType() ) {
+        } else if (talonEncoder != null) {
+            switch (talonEncoder.getType()) {
 
-            case TALON_SRX:
-                return (isInverted ? -1 : 1) * talonEncoder.getEncPosition();
-            case CAN_SPARK_BRUSHLESS:
-                return (isInverted() ? -1:1) * talonEncoder.getEncPosition();
-            default:
-                DriverStation.reportWarning("There's no encoder instantiated", true);
-                return 0;
+                case TALON_SRX:
+                    return (isInverted ? -1 : 1) * talonEncoder.getEncPosition();
+                case CAN_SPARK_BRUSHLESS:
+                    return (isInverted() ? -1 : 1) * talonEncoder.getEncPosition();
+                default:
+                    DriverStation.reportWarning("There's no encoder instantiated", true);
+                    return 0;
 
-        }
+            }
 
-        }
-        else
+        } else
             return 0;
 
     }
@@ -198,7 +199,7 @@ public class TecbotEncoder implements CounterBase {
     }
 
     public void doDefaultSRXConfig() {
-        if(talonEncoder.getType() == TecbotSpeedController.TypeOfMotor.TALON_SRX) {
+        if (talonEncoder.getType() == TecbotSpeedController.TypeOfMotor.TALON_SRX) {
             talonEncoder.getTalonSRX().configFactoryDefault();
             talonEncoder.getTalonSRX().setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 1);
             talonEncoder.getTalonSRX().configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
