@@ -71,7 +71,7 @@ public class Turret extends SubsystemBase {
    * Sets Turret to a Target.
    * This method should be set to a photonvision target
    * 
-   * @param target The Target that the turret is trying to folllow
+   * @param camera PhotonVision Camera
    */
   public void settoTarget(PhotonCamera camera) {
 
