@@ -180,7 +180,7 @@ public class DriveTrain extends SubsystemBase {
 
         maxPower = Math.clamp(maxPower, 0, 1);
 
-        double diffAngle = target - Robot.getRobotContainer().getOI().getYaw();
+        double diffAngle = target - Robot.getRobotContainer().getNavx().getYaw();
 
         if (diffAngle > 180) {
             diffAngle = diffAngle - 360;
@@ -228,7 +228,7 @@ public class DriveTrain extends SubsystemBase {
         double deltaEncoder = target - getEncoderRaw(CHASSIS_SIDE.LEFT_CHASSIS);
         double power = Math.clamp(deltaEncoder / TecbotConstants.CHASSIS_STRAIGHT_MAX_DISTANCE, -maxPower, maxPower);
 
-        double deltaAngle = targetAngle - Robot.getRobotContainer().getOI().getYaw();
+        double deltaAngle = targetAngle - Robot.getRobotContainer().getNavx().getYaw();
         if (deltaAngle > 180) {
             deltaAngle = deltaAngle - 360;
         } else if (deltaAngle < -180) {
@@ -324,7 +324,7 @@ public class DriveTrain extends SubsystemBase {
     public void mecanumDrive(double x, double y, double turn) {
 
         if (!hasSetAngle) {
-            startingAngle = Robot.getRobotContainer().getOI().getYaw();
+            startingAngle = Robot.getRobotContainer().getNavx().getYaw();
             hasSetAngle = true;
 
             // This condition will happen once every time the robot enters mecanum drive.
@@ -333,9 +333,9 @@ public class DriveTrain extends SubsystemBase {
             setDragonFlyWheelState(WheelState.Lowered);
         }
         if (turn >= .1 || turn <= -.1)
-            startingAngle = Robot.getRobotContainer().getOI().getYaw();
+            startingAngle = Robot.getRobotContainer().getNavx().getYaw();
 
-        double deltaAngle = Robot.getRobotContainer().getOI().getYaw() - startingAngle;
+        double deltaAngle = Robot.getRobotContainer().getNavx().getYaw() - startingAngle;
 
         // Prevents robot from turning in the incorrect direction
         if (deltaAngle > 180) {
@@ -413,7 +413,7 @@ public class DriveTrain extends SubsystemBase {
             }
         }
         // The angle at which the robot will move, considering its rotation.
-        double relativeAngle = absoluteAngle - Robot.getRobotContainer().getOI().getYaw();
+        double relativeAngle = absoluteAngle - Robot.getRobotContainer().getNavx().getYaw();
         // The max power that will be given to the motors.
         double speed = Math.hypot(x, y);
 
@@ -434,7 +434,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void moveStraightPID(double output) {
-        drive((Robot.getRobotContainer().getOI().getYaw() - pidAngleTarget) * TecbotConstants.TURN_CORRECTION, output);
+        drive((Robot.getRobotContainer().getNavx().getYaw() - pidAngleTarget) * TecbotConstants.TURN_CORRECTION, output);
     }
 
     public double getPidStraightTarget() {
