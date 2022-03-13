@@ -1,5 +1,6 @@
 package frc.robot;
 
+import frc.robot.commands.feeder.FeederSetToSpeed;
 import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotController;
 
@@ -25,6 +26,8 @@ public class OI {
         pilot = new TecbotController(0, TecbotConstants.CONTROLLER_TYPE_PILOT);
         copilot = new TecbotController(1, TecbotConstants.CONTROLLER_TYPE_COPILOT);
 
+        pilot.whileHeld(TecbotController.ButtonType.RB, new FeederSetToSpeed());
+
     }
 
     // singleton
@@ -33,6 +36,10 @@ public class OI {
             instance = new OI();
 
         return instance;
+    }
+
+    public double getRollersInput(){
+        return pilot.getRightAxisX();
     }
 
     public TecbotController getPilot() {
