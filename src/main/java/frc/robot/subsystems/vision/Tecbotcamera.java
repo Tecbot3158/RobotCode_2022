@@ -5,83 +5,112 @@
 package frc.robot.subsystems.vision;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 
 public class Tecbotcamera extends SubsystemBase {
 
-    PhotonCamera pepethefrog;
-    PhotonPipelineResult peperesult;
-    Double yaw;
-    Double area;
-    Double pitch;
+    PhotonCamera photonCamera;
+    PhotonPipelineResult latestResult, previousResult;
+
+    boolean hasTargets = false;
 
     /**
-     * Creates a new Photonvision.
+     * Creates a new Tecbot camera.
+     * For now it uses Photonvision with Photonlib to retrieve the values
+     * from the Network Tables
      */
     public Tecbotcamera() {
 
-        pepethefrog = new PhotonCamera("Pepe.the.frog");
+        photonCamera = new PhotonCamera(RobotMap.TECBOT_CAMERA_NAME);
 
     }
 
-    // @Override
-    /*
-     * public void periodic() {
-     * // System.out.println("kangaroo");
+    /**
+     * Returns yaw value from latest result.
+     * <p></p>
+     * <b>{@link Tecbotcamera#update() } MUST be called
+     * to update the latest Result. Otherwise, the last fetched
+     * result will be used.</b>
      *
-     * double yaw = 0;
-     * double pitch = 0;
-     * double area = 0;
-     * boolean hasTargets = pepethefrog.getLatestResult().hasTargets();
-     *
-     * if (hasTargets == true) {
-     * peperesult = pepethefrog.getLatestResult();
-     * PhotonTrackedTarget target = peperesult.getBestTarget();
-     *
-     * yaw = target.getYaw();
-     * pitch = target.getPitch();
-     * area = target.getArea();
-     *
-     * }
-     *
-     * // Shuffleboard.getTab("SmartDashboard").addBoolean(title, valueSupplier)
-     *
-     * SmartDashboard.putBoolean("targets", hasTargets);
-     * SmartDashboard.putNumber("yaw", yaw);
-     * SmartDashboard.putNumber("pitch", pitch);
-     * SmartDashboard.putNumber("area", area);
-     * }
-     *
-     * public Tecbotcamera(PhotonCamera pepethefrog, PhotonPipelineResult
-     * peperesult) {
-     * this.pepethefrog = pepethefrog;
-     * this.peperesult = peperesult;
-     * }
+     * @return the yaw from the best target, if any.
+     * otherwise, returns 0.
      */
-
     public double getYaw() {
-        if (peperesult.hasTargets()) {
+        double yaw = 0;
 
-            yaw = pepethefrog.getLatestResult().getBestTarget().getYaw();
-            return yaw;
+        if( hasTargets) {
+            yaw = latestResult.getBestTarget().getYaw();
         }
 
-        else {
-            return 0.0;
-        }
+        return yaw;
 
     }
-
+    /**
+     * Returns area value from target.
+     * <p></p>
+     * <b>{@link Tecbotcamera#update() } MUST be called
+     * to update the latest Result. Otherwise, the last fetched
+     * result will be used.</b>
+     *
+     * @return the area from the best target, if any.
+     * otherwise, returns 0.
+     */
     public double getArea() {
-        yaw = pepethefrog.getLatestResult().getBestTarget().getArea();
+        double area = 0;
+
+        if(hasTargets) {
+            area = latestResult.getBestTarget().getArea();
+        }
+
         return area;
 
     }
 
+    /**
+     * Returns pitch value from latest result.
+     * <p></p>
+     * <b>{@link Tecbotcamera#update() } MUST be called
+     * to update the latest Result. Otherwise, the last fetched
+     * result will be used.</b>
+     *
+     * @return the pitch from the best target, if any.
+     * otherwise, returns 0.
+     */
     public double getPitch() {
-        yaw = pepethefrog.getLatestResult().getBestTarget().getPitch();
+        double pitch = 0;
+
+        if(hasTargets) {
+            pitch = latestResult.getBestTarget().getPitch();
+        }
+
         return pitch;
 
     }
+
+    /**
+     * Fetches latest result.
+     * It will overwrite {@link Tecbotcamera#latestResult} and
+     * {@link Tecbotcamera#previousResult}
+     *
+     */
+    public void update(){
+
+        previousResult = latestResult;
+
+        latestResult = photonCamera.getLatestResult();
+
+        hasTargets = latestResult.hasTargets();
+
+    }
+
+    public PhotonPipelineResult getLatestResult() {
+        return latestResult;
+    }
+
+    public PhotonPipelineResult getPreviousResult() {
+        return previousResult;
+    }
+
 }
