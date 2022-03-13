@@ -17,13 +17,15 @@ public class Rollers extends SubsystemBase {
      */
     public Rollers() {
         roller = new TecbotSpeedController(RobotMap.TRANSPORT_ROLLER_PORT, RobotMap.TRANSPORT_ROLLER_MOTOR_TYPE);
+        roller.setInverted(RobotMap.TRANSPORT_ROLLER_IS_INVERTED);
     }
 
     public TecbotSpeedController getRollerMotor() {
         return roller;
     }
 
-    public void rollerSpin() {
+    public void setRaw(double speed) {
+        roller.set(speed);
 
     }
 
