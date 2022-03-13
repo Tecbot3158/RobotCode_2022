@@ -119,11 +119,28 @@ public class RobotMap {
         // INTAKE --- end
 
         // TRANSPORT
+        //      ROLLERS
         public static final int TRANSPORT_ROLLER_PORT = 7;
-        public static final int TRANSPORT_FEEDER_PORT = 8;
         public static final TypeOfMotor TRANSPORT_ROLLER_MOTOR_TYPE = TypeOfMotor.TALON_SRX;
+        public static final boolean TRANSPORT_ROLLER_IS_INVERTED = false;
+
+        //      FEEDER
+        public static final int TRANSPORT_FEEDER_PORT = 8;
         public static final TypeOfMotor TRANSPORT_FEEDER_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
-        public static final boolean[] TRANSPORT_MOTORS_ARE_INVERTED = { false, false };
+        public static final boolean TRANSPORT_FEEDER_IS_INVERTED = false;
+
+        public static final int FEEDER_ENCODER_MOTOR_PORT = TRANSPORT_FEEDER_PORT;
+
+        public static final double FEEDER_PID_kP = 6e-5;
+        public static final double FEEDER_PID_kI = 0;
+        public static final double FEEDER_PID_kD = 0;
+        public static final double FEEDER_PID_kIz = 0;
+        public static final double FEEDER_PID_kFF = 0.000015;
+        public static final double FEEDER_PID_kMaxOutput = 1;
+        public static final double FEEDER_PID_kMinOutput = -1;
+        public static final double FEEDER_PID_kMaxRPM = 6969;
+
+        public static final double FEEDER_PID_Target = 6696;
 
         // TRANSPORT --- end
 
@@ -134,13 +151,28 @@ public class RobotMap {
         public static final boolean[] SHOOTER_MOTORS_ARE_INVERTED = { false, false };
         public static final int[] SHOOTER_INVERTED_MOTORS = {};
 
+
+
+        public static final int[] SHOOTER_ANGLE_SERVO_PORTS = { 0, 1 };
+        public static final boolean[] SHOOTER_ANGLE_SERVOS_ARE_INVERTED = { false, true };
+
         public static final int SHOOTER_ENCODER_MOTOR_PORT = SHOOTER_MOTOR_PORTS[0];
 
         public static final int SHOOTER_MOTOR_MASTER_PORT = SHOOTER_MOTOR_PORTS[0];
         public static final int SHOOTER_MOTOR_SLAVE_PORT = SHOOTER_MOTOR_PORTS[1];
 
-        public static final int[] SHOOTER_ANGLE_SERVO_PORTS = { 0, 1 };
-        public static final boolean[] SHOOTER_ANGLE_SERVOS_ARE_INVERTED = { false, true };
+        public static final double SHOOTER_PID_kP = 6e-5;
+        public static final double SHOOTER_PID_kI = 0;
+        public static final double SHOOTER_PID_kD = 0;
+        public static final double SHOOTER_PID_kIz = 0;
+        public static final double SHOOTER_PID_kFF = 0.000015;
+        public static final double SHOOTER_PID_kMaxOutput = 1;
+        public static final double SHOOTER_PID_kMinOutput = -1;
+        public static final double SHOOTER_PID_kMaxRPM = 6969;
+
+        public static final double SHOOTER_PID_Target = 6696;
+
+        // SHOOTER --- end
 
         // TURRET
         // should go clockwise when in positive.
@@ -157,18 +189,7 @@ public class RobotMap {
         public static final double TURRET_MAX_DISTANCE = (776 / 27);
         // TURRET --- end
 
-        public static final double SHOOTER_PID_kP = 6e-5;
-        public static final double SHOOTER_PID_kI = 0;
-        public static final double SHOOTER_PID_kD = 0;
-        public static final double SHOOTER_PID_kIz = 0;
-        public static final double SHOOTER_PID_kFF = 0.000015;
-        public static final double SHOOTER_PID_kMaxOutput = 1;
-        public static final double SHOOTER_PID_kMinOutput = -1;
-        public static final double SHOOTER_PID_kMaxRPM = 6969;
 
-        public static final double SHOOTER_PID_Target = 6696;
-
-        // SHOOTER --- end
 
         // CLIMBER
         public static final int[] CLIMBER_MOTOR_PORTS = { 50, 51 };
