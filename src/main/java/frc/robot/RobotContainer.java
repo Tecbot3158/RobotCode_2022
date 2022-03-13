@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.resources.Navx;
+import frc.robot.subsystems.transport.Feeder;
+import frc.robot.subsystems.transport.Rollers;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.vision.Tecbotcamera;
 import frc.robot.subsystems.chassis.DriveTrain;
@@ -25,17 +27,17 @@ import frc.robot.subsystems.intake.Intake;
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
 
-    private Navx gyroscope;
-
     private Intake intake;
-
     private DriveTrain driveTrain;
-
-    private OI oi;
-
     private Tecbotcamera tecbotcamera;
 
     private Turret turret;
+    private Feeder feeder;
+    private Rollers rollers;
+
+    private Navx gyroscope;
+
+
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -47,6 +49,7 @@ public class RobotContainer {
     public RobotContainer() {
 
         gyroscope = new Navx();
+        tecbotcamera = new Tecbotcamera();
 
         driveTrain = new DriveTrain();
 
@@ -54,7 +57,9 @@ public class RobotContainer {
 
         turret = new Turret();
 
-        tecbotcamera = new Tecbotcamera();
+        feeder = new Feeder();
+
+        rollers = new Rollers();
 
         // configureButtonBindings();
         // this NEEDS to be called from the RobotInit class after all subsystems are
@@ -74,9 +79,9 @@ public class RobotContainer {
      * it to a {@link
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
-    private void configureButtonBindings() {
+    public void configureButtonBindings() {
 
-        oi.configureButtonBindings();
+        OI.getInstance().configureButtonBindings();
     }
 
     /**
@@ -93,8 +98,22 @@ public class RobotContainer {
         return driveTrain;
     }
 
-    public Navx getOI() {
+    public Navx getNavx() {
         return gyroscope;
+    }
+
+    public Feeder getFeeder(){
+        return feeder;
+    }
+
+    public Rollers getRollers(){
+        return rollers;
+    }
+
+    public OI getOI(){
+
+        return OI.getInstance();
+
     }
 
     public Intake getIntake() {
