@@ -18,16 +18,16 @@ public class RobotMap {
         public static final int CLIMBER_LEFT_LIMIT_SWITCH_PORT = 0;
 
         // PCM
-        private static final int PCM_1_PORT = 21;
-        private static final int PCM_2_PORT = 2;
+        private static final int PCM_1_PORT = 50;
+
         private static final PneumaticsModuleType PCM_TYPE = PneumaticsModuleType.REVPH;
         // PCM end
 
         // DRIVETRAIN
 
         // chassis
-        public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_PORTS = { 1, 2 };
-        public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_PORTS = { 9, 10 };
+        public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_PORTS = { 10, 11 };
+        public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_PORTS = { 1, 2 };
 
         // chassis motor types
         public static final TypeOfMotor[] DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS,
@@ -40,8 +40,8 @@ public class RobotMap {
          * If any of the motors of the chassis must be inverted,
          * indicate the port(s) in these arrays.
          */
-        public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_INVERTED_MOTORS = { 1, 2 };
-        public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = { 9, 10 };
+        public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_INVERTED_MOTORS = {  };
+        public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = { 1, 2 };
 
         // encoders
         // specify which motors are responsible for each side of the robot odometry.
@@ -87,7 +87,7 @@ public class RobotMap {
 
         // dragonfly
 
-        public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_PORT = { 11 };
+        public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_PORT = { 47 };
         // before mechanical change the wheel was inverted.
         public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_INVERTED_MOTORS = {};
         public static final TypeOfMotor[] DRIVE_TRAIN_MIDDLE_WHEEL_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS };
@@ -186,7 +186,7 @@ public class RobotMap {
         public static final double TURRET_I = 0;
         public static final double TURRET_D = 0;
 
-        public static final double TURRET_MAX_DISTANCE = (776 / 27);
+        public static final double TURRET_MAX_DISTANCE = ((double) 776 / (double) 27);
         // TURRET --- end
 
 
@@ -217,7 +217,7 @@ public class RobotMap {
 
         // VISION
 
-        // dont know what to add here... yet
+        public static String TECBOT_CAMERA_NAME = "limelight";
 
         // VISION --- end
 
