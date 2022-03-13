@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
 
         robotContainer.configureButtonBindings();
 
-        robotContainer.getDriveTrain().setDefaultCommand( new DefaultDrive());
+        robotContainer.getDriveTrain().setDefaultCommand(new DefaultDrive());
 
 
     }

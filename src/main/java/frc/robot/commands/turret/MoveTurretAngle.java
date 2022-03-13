@@ -8,44 +8,46 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class MoveTurretAngle extends CommandBase {
-  /** Creates a new MoveTurretAngle. */
+    /**
+     * Creates a new MoveTurretAngle.
+     */
 
-  double angle;
+    double angle;
 
-  public MoveTurretAngle(double Angle) {
-    // Use addRequirements() here to declare subsystem dependencies.
+    public MoveTurretAngle(double Angle) {
+        // Use addRequirements() here to declare subsystem dependencies.
 
-    addRequirements(Robot.getRobotContainer().getTurret());
+        addRequirements(Robot.getRobotContainer().getTurret());
 
-    angle = Angle;
+        angle = Angle;
 
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-
-    Robot.getRobotContainer().getTurret().settoAngle(angle);
-
-    if (Robot.getRobotContainer().getTurret().getTurretPID().atSetpoint()) {
-      end(true);
     }
 
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+        Robot.getRobotContainer().getTurret().settoAngle(angle);
+
+        if (Robot.getRobotContainer().getTurret().getTurretPID().atSetpoint()) {
+            end(true);
+        }
+
+    }
+
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

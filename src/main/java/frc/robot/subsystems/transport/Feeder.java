@@ -7,7 +7,6 @@ package frc.robot.subsystems.transport;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.resources.TecbotSpeedController;
@@ -37,7 +36,7 @@ public class Feeder extends SubsystemBase {
 
     }
 
-    public void initPID(){
+    public void initPID() {
         CANSparkMax motor = feeder.getCANSparkMax();
 
         feederEncoder = motor.getEncoder();
@@ -68,7 +67,7 @@ public class Feeder extends SubsystemBase {
 
     }
 
-    public SparkMaxPIDController getFeederPIDController(){
+    public SparkMaxPIDController getFeederPIDController() {
         return feederPIDController;
     }
 
@@ -76,7 +75,7 @@ public class Feeder extends SubsystemBase {
         return feeder;
     }
 
-    public void setRaw(double speed){
+    public void setRaw(double speed) {
         feeder.set(speed);
     }
 

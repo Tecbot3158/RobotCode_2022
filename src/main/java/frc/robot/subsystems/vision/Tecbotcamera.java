@@ -40,13 +40,14 @@ public class Tecbotcamera extends SubsystemBase {
     public double getYaw() {
         double yaw = 0;
 
-        if( hasTargets) {
+        if (hasTargets) {
             yaw = latestResult.getBestTarget().getYaw();
         }
 
         return yaw;
 
     }
+
     /**
      * Returns area value from target.
      * <p></p>
@@ -60,7 +61,7 @@ public class Tecbotcamera extends SubsystemBase {
     public double getArea() {
         double area = 0;
 
-        if(hasTargets) {
+        if (hasTargets) {
             area = latestResult.getBestTarget().getArea();
         }
 
@@ -81,7 +82,7 @@ public class Tecbotcamera extends SubsystemBase {
     public double getPitch() {
         double pitch = 0;
 
-        if(hasTargets) {
+        if (hasTargets) {
             pitch = latestResult.getBestTarget().getPitch();
         }
 
@@ -93,9 +94,8 @@ public class Tecbotcamera extends SubsystemBase {
      * Fetches latest result.
      * It will overwrite {@link Tecbotcamera#latestResult} and
      * {@link Tecbotcamera#previousResult}
-     *
      */
-    public void update(){
+    public void update() {
 
         previousResult = latestResult;
 

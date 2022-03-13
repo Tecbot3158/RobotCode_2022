@@ -38,7 +38,7 @@ public class OI {
         return instance;
     }
 
-    public double getRollersInput(){
+    public double getRollersInput() {
         return pilot.getRightAxisX();
     }
 

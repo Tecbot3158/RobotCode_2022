@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.resources.Navx;
+import frc.robot.subsystems.chassis.DriveTrain;
+import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.transport.Feeder;
 import frc.robot.subsystems.transport.Rollers;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.vision.Tecbotcamera;
-import frc.robot.subsystems.chassis.DriveTrain;
-import frc.robot.subsystems.intake.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -36,7 +36,6 @@ public class RobotContainer {
     private Rollers rollers;
 
     private Navx gyroscope;
-
 
 
     /**
@@ -102,15 +101,15 @@ public class RobotContainer {
         return gyroscope;
     }
 
-    public Feeder getFeeder(){
+    public Feeder getFeeder() {
         return feeder;
     }
 
-    public Rollers getRollers(){
+    public Rollers getRollers() {
         return rollers;
     }
 
-    public OI getOI(){
+    public OI getOI() {
 
         return OI.getInstance();
 

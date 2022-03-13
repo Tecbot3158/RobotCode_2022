@@ -11,48 +11,50 @@ import frc.robot.subsystems.vision.Tecbotcamera;
 
 public class MoveTurretToTarget extends CommandBase {
 
-  Tecbotcamera vision;
-  Turret turret;
+    Tecbotcamera vision;
+    Turret turret;
 
-  /** Creates a new MoveTurretToTarget. */
-  public MoveTurretToTarget() {
-    // Use addRequirements() here to declare subsystem dependencies.
+    /**
+     * Creates a new MoveTurretToTarget.
+     */
+    public MoveTurretToTarget() {
+        // Use addRequirements() here to declare subsystem dependencies.
 
-    vision = Robot.getRobotContainer().getTecbotcamera();
-    turret = Robot.getRobotContainer().getTurret();
+        vision = Robot.getRobotContainer().getTecbotcamera();
+        turret = Robot.getRobotContainer().getTurret();
 
-    addRequirements(turret, vision);
-  }
+        addRequirements(turret, vision);
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
 
-    vision.update();
-    double yaw = Robot.getRobotContainer().getTecbotcamera().getYaw();
-    turret.settoTarget(yaw);
+        vision.update();
+        double yaw = Robot.getRobotContainer().getTecbotcamera().getYaw();
+        turret.settoTarget(yaw);
 
-    if (turret.getTurretPID().atSetpoint()) {
+        if (turret.getTurretPID().atSetpoint()) {
 
-      end(true);
+            end(true);
+
+        }
 
     }
 
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
