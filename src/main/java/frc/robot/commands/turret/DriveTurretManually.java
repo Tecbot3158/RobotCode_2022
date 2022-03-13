@@ -28,7 +28,7 @@ public class DriveTurretManually extends CommandBase {
     double left = OI.getInstance().getCopilot().getLeftTrigger();
     double right = OI.getInstance().getCopilot().getRightTrigger();
 
-    Robot.getRobotContainer().getTurret().setTurretManually(left, right);
+    Robot.getRobotContainer().getTurret().setTurretRaw(right-left);
 
   }
 
