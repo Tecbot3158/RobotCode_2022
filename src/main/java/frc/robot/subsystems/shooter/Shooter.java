@@ -14,6 +14,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.resources.Math;
 import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotMotorList;
 
@@ -35,8 +36,8 @@ public class Shooter extends SubsystemBase {
                 RobotMap.SHOOTER_INVERTED_MOTORS,
                 RobotMap.SHOOTER_MOTOR_TYPES);
 
-        shooterEncoder = shooterMotors.getSpecificMotor(RobotMap.SHOOTER_ENCODER_MOTOR_PORT).
-                getCANSparkMax().getEncoder();
+        // shooterEncoder = shooterMotors.getSpecificMotor(RobotMap.SHOOTER_ENCODER_MOTOR_PORT).
+        //        getCANSparkMax().getEncoder();
 
         shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_SLAVE_PORT).getCANSparkMax().
                 follow(shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).getCANSparkMax()
@@ -64,11 +65,19 @@ public class Shooter extends SubsystemBase {
 
         shooterPIDTarget = RobotMap.SHOOTER_PID_Target;
 
-        setShooterPIDController(shooterPIDController);
+        // setShooterPIDController(shooterPIDController);
 
     }
 
-    private void setShooterPIDController(SparkMaxPIDController pidController) {
+    public SparkMaxPIDController getShooterPIDController(){
+        return shooterPIDController;
+    }
+
+    public RelativeEncoder getShooterEncoder() {
+        return shooterEncoder;
+    }
+
+    public void setShooterPIDController(SparkMaxPIDController pidController) {
         pidController.setP(kP);
         pidController.setI(kI);
         pidController.setD(kD);
@@ -78,11 +87,14 @@ public class Shooter extends SubsystemBase {
 
     }
 
-    public REVLibError shooterRunPID(SparkMaxPIDController pidController) {
-        double setPoint = shooterPIDTarget;
+    public REVLibError shooterSetPIDReference(double reference,  SparkMaxPIDController pidController) {
+        reference = Math.clamp(reference, -maxRPM, maxRPM);
+        return pidController.setReference(reference, CANSparkMax.ControlType.kVelocity);
 
-        return pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
+    }
 
+    public REVLibError shooterSetDefaultPIDReference( SparkMaxPIDController pidController){
+        return pidController.setReference(Math.clamp(shooterPIDTarget, -maxRPM, maxRPM) , CANSparkMax.ControlType.kVelocity);
     }
 
     /**

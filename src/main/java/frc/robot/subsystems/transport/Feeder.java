@@ -5,10 +5,12 @@
 package frc.robot.subsystems.transport;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.resources.Math;
 import frc.robot.resources.TecbotSpeedController;
 
 public class Feeder extends SubsystemBase {
@@ -19,7 +21,7 @@ public class Feeder extends SubsystemBase {
     private SparkMaxPIDController feederPIDController;
     private RelativeEncoder feederEncoder;
 
-    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
+    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM ;
     private double feederPIDTarget;
 
 
@@ -30,9 +32,7 @@ public class Feeder extends SubsystemBase {
         feeder = new TecbotSpeedController(RobotMap.TRANSPORT_FEEDER_PORT, RobotMap.TRANSPORT_FEEDER_MOTOR_TYPE);
         feeder.setInverted(RobotMap.TRANSPORT_FEEDER_IS_INVERTED);
 
-
         initPID();
-
 
     }
 
@@ -65,6 +65,18 @@ public class Feeder extends SubsystemBase {
         pidController.setFF(kFF);
         pidController.setOutputRange(kMinOutput, kMaxOutput);
 
+
+
+    }
+
+    public REVLibError shooterSetPIDReference(double reference, SparkMaxPIDController pidController) {
+        reference = Math.clamp( reference, -maxRPM, maxRPM);
+        return pidController.setReference(reference, CANSparkMax.ControlType.kVelocity);
+
+    }
+
+    public REVLibError shooterSetDefaultPIDReference( SparkMaxPIDController pidController){
+        return pidController.setReference(Math.clamp(feederPIDTarget, -maxRPM, maxRPM), CANSparkMax.ControlType.kVelocity);
     }
 
     public SparkMaxPIDController getFeederPIDController() {
@@ -82,5 +94,9 @@ public class Feeder extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+    }
+
+    public RelativeEncoder getFeederEncoder(){
+        return feederEncoder;
     }
 }
