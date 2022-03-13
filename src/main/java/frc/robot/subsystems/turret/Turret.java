@@ -4,9 +4,6 @@
 
 package frc.robot.subsystems.turret;
 
-import org.photonvision.PhotonCamera;
-import org.photonvision.targeting.PhotonPipelineResult;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -32,12 +29,9 @@ public class Turret extends SubsystemBase {
   /**
    * Moves Turret Manually
    * 
-   * @param left  Left Speed
-   * @param right Right Speed
+   * @param speed  Left Speed
    */
-  public void setTurretManually(double left, double right) {
-
-    double speed = right - left;
+  public void setTurretRaw(double speed) {
 
     turretmotor.set(speed);
 
