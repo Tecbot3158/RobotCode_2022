@@ -31,13 +31,19 @@ public class FeederSetToSpeed extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        feeder.setPIDController(feeder.getFeederPIDController());
+        // feeder.feederSetDefaultPIDReference(feeder.getFeederPIDController());
+        System.out.println("FEeder set to speed!!!");
+        feeder.setRaw(0.42);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        feeder.setRaw(0);
+        // feeder.setRaw(0);
+
+        System.out.println("OUTTT!");
+
+
     }
 
     // Returns true when the command should end.

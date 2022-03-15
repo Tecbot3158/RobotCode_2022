@@ -112,7 +112,7 @@ public class RobotMap {
     // negative when going out of the robot.
 
     // solenoid
-    public static final int[] INTAKE_SOLENOID_PORTS = {9, 11};
+    public static final int[] INTAKE_SOLENOID_PORTS = {PCM_1_PORT, 9, 11};
     public static final DoubleSolenoid.Value INTAKE_POSITION_ACTIVE = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value INTAKE_POSITION_RETRACTED = DoubleSolenoid.Value.kReverse;
 
@@ -175,7 +175,7 @@ public class RobotMap {
 
     // TURRET
     // should go clockwise when in positive.
-    public static final int[] TURRET_MOTOR_PORT = {29};
+    public static final int TURRET_MOTOR_PORT = 29;
     public static final TypeOfMotor TURRET_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
     public static final boolean TURRET_MOTOR_IS_INVERTED = false;
     public static final int[] TURRET_ENCODER_CHANNELS = {RobotConfigurator.CONFIG_NOT_SET,
@@ -185,7 +185,20 @@ public class RobotMap {
     public static final double TURRET_I = 0;
     public static final double TURRET_D = 0;
 
+    public static final double TURRET_PID_kP = 0.1;
+    public static final double TURRET_PID_kI = 1e-4;
+    public static final double TURRET_PID_kD = 1;
+    public static final double TURRET_PID_kIz = 0;
+    public static final double TURRET_PID_kFF = 0;
+    public static final double TURRET_PID_kMaxOutput = 1;
+    public static final double TURRET_PID_kMinOutput = -1;
+    // public static final double TURRET_PID_kMaxRPM = 6969;
+
+    public static final double TURRET_PID_Target = 6696;
+
     public static final double TURRET_MAX_DISTANCE = ((double) 776 / (double) 27);
+
+    public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = (double) 776 / (double) 27;
     // TURRET --- end
 
 
@@ -196,7 +209,7 @@ public class RobotMap {
     public static final int[] CLIMBER_INVERTED_MOTORS = {};
 
     // in theory 2 pistons, but just one solenoid
-    public static final int[] CLIMBER_SOLENOID_PORTS = {9, 10};
+    public static final int[] CLIMBER_SOLENOID_PORTS = { PCM_1_PORT, 9, 10};
     public static final DoubleSolenoid.Value CLIMBER_SOLENOID_EXTENDED_POSITION = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value CLIMBER_SOLENOID_RETRACTED_POSITION = DoubleSolenoid.Value.kReverse;
 

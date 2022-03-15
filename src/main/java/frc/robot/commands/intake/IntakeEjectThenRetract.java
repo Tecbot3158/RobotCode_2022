@@ -25,7 +25,7 @@ public class IntakeEjectThenRetract extends CommandBase {
     @Override
     public void initialize() {
         intake.intakeExtend();
-        intake.intakeEject();
+        intake.intakeMotorsEject();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -37,7 +37,7 @@ public class IntakeEjectThenRetract extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         intake.intakeRetract();
-        intake.intakeOff();
+        intake.intakeMotorsOff();
     }
 
     // Returns true when the command should end.

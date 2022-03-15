@@ -37,13 +37,13 @@ public class MoveTurretToTarget extends CommandBase {
 
         vision.update();
         double yaw = Robot.getRobotContainer().getTecbotcamera().getYaw();
-        turret.settoTarget(yaw);
+//        turret.settoTarget(yaw);
 
-        if (turret.getTurretPID().atSetpoint()) {
-
-            end(true);
-
-        }
+//        if (turret.getTurretPID().atSetpoint()) {
+//
+//            end(true);
+//
+//        }
 
     }
 

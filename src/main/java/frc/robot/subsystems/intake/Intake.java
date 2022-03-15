@@ -36,16 +36,17 @@ public class Intake extends SubsystemBase {
         intakeSolenoids.set(RobotMap.INTAKE_POSITION_ACTIVE);
     }
 
-    public void intakeAbsorb() {
+    public void intakeMotorsAbsorb() {
         intakeMotor.set(RobotMap.INTAKE_ABSORB_SPEED);
     }
 
-    public void intakeEject() {
+    public void intakeMotorsEject() {
         intakeMotor.set(RobotMap.INTAKE_EJECT_SPEED);
     }
 
-    public void intakeOff() {
+    public void intakeMotorsOff() {
         intakeMotor.set(RobotMap.INTAKE_OFF);
     }
+
 
 }

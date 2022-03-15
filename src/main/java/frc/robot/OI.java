@@ -1,6 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.commands.feeder.FeederSetToSpeed;
+import frc.robot.commands.oitests.OITestTriggers;
 import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotController;
 
@@ -27,6 +29,14 @@ public class OI {
         copilot = new TecbotController(1, TecbotConstants.CONTROLLER_TYPE_COPILOT);
 
         pilot.whileHeld(TecbotController.ButtonType.RB, new FeederSetToSpeed());
+
+        pilot.whenPressed(TecbotController.ButtonType.A, new OITestTriggers());
+
+        // pilot.whenPressed(new Intake);
+
+
+
+
 
     }
 

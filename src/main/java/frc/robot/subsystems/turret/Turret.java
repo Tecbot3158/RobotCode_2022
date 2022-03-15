@@ -4,85 +4,100 @@
 
 package frc.robot.subsystems.turret;
 
-import edu.wpi.first.math.controller.PIDController;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
+import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotEncoder;
 import frc.robot.resources.TecbotSpeedController;
+
+import javax.naming.ldap.Control;
 
 public class Turret extends SubsystemBase {
     /**
      * Creates a new Turret.
      */
 
-    TecbotSpeedController turretmotor;
-    TecbotEncoder turretencoder;
+    TecbotSpeedController turretMotor;
+    TecbotEncoder turretEncoder;
 
-    PIDController turretpid;
+    SparkMaxPIDController turretPIDController;
+
+    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
+    private double turretPIDTarget;
+
 
     public Turret() {
 
-        turretmotor = new TecbotSpeedController(RobotMap.TURRET_MOTOR_PORT[0], RobotMap.TURRET_MOTOR_TYPE);
-        turretencoder = new TecbotEncoder(RobotMap.TURRET_ENCODER_CHANNELS[0], RobotMap.TURRET_ENCODER_CHANNELS[1]);
-        turretpid = new PIDController(RobotMap.TURRET_P, RobotMap.TURRET_I, RobotMap.TURRET_D);
+        turretMotor = new TecbotSpeedController(RobotMap.TURRET_MOTOR_PORT, RobotMap.TURRET_MOTOR_TYPE);
+        turretMotor.setInverted(RobotMap.TURRET_MOTOR_IS_INVERTED);
+
+        turretMotor.getCANSparkMax().restoreFactoryDefaults();
+        turretMotor.getCANSparkMax().setIdleMode(CANSparkMax.IdleMode.kBrake);
+
+        turretEncoder = RobotConfigurator.buildEncoder(turretMotor, RobotMap.TURRET_ENCODER_CHANNELS[0], RobotMap.TURRET_ENCODER_CHANNELS[1]);
+        turretPIDController = turretMotor.getCANSparkMax().getPIDController();
+
+        initPID();
+
+        turretMotor.getCANSparkMax().getEncoder().setPosition(0);
 
     }
 
     /**
      * Moves Turret Manually
      *
-     * @param speed Left Speed
+     * @param speed speed for turret
      */
     public void setTurretRaw(double speed) {
 
-        turretmotor.set(speed);
+        turretMotor.set(speed);
+
 
     }
 
-    /***
-     * Sets Turret to an angle from 0 to 270 Robot Centered using a PID Controller
-     *
-     * @param angle The angle that the turret is going to move towards
+    public void initPID() {
+        kP = RobotMap.TURRET_PID_kP;
+        kI = RobotMap.TURRET_PID_kI;
+        kD = RobotMap.TURRET_PID_kD;
+        kIz = RobotMap.TURRET_PID_kIz;
+        kFF = RobotMap.TURRET_PID_kFF;
+
+        kMaxOutput = RobotMap.TURRET_PID_kMaxOutput;
+        kMinOutput = RobotMap.TURRET_PID_kMinOutput;
+
+        setPIDController(turretPIDController);
+
+    }
+
+    public void setPIDController(SparkMaxPIDController pidController) {
+        pidController.setP(kP);
+        pidController.setI(kI);
+        pidController.setD(kD);
+        pidController.setIZone(kIz);
+        pidController.setFF(kFF);
+        pidController.setOutputRange(kMinOutput, kMaxOutput);
+
+    }
+
+    public REVLibError setReferencePIDController(double rotations){
+        return turretPIDController.setReference(rotations, CANSparkMax.ControlType.kPosition);
+    }
+
+    /**
+     * get number of rotations converted from an angle in degrees.
+     * Assumes that the turret at its center is at 0 deg.
+     * To the left it's negative degrees and positive to the right.
+     * @return number of rotations based on angle.
      */
-    public void settoAngle(double angle) {
+    private double getRotationsFromAngle(double angleDegrees ){
 
-        if (angle > 270) {
-
-            angle = 270;
-
-        } else if (angle < 0) {
-            angle = 0;
-        }
-
-        double setpoint = ((angle - 135) / 180) * RobotMap.TURRET_MAX_DISTANCE;
-
-        turretpid.setSetpoint(setpoint);
-        turretmotor.set(turretpid.calculate(turretencoder.getRaw(), setpoint));
+        return angleDegrees / (double) 360 * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION ;
 
     }
 
-    /***
-     * Sets Turret to a Target.
-     * This method should be set to a photonvision target
-     *
-     * @param yaw PhotonVision Camera raw
-     */
-    public void settoTarget(double yaw) {
 
-        double setpoint = 0.0;
-        turretpid.setSetpoint(setpoint);
 
-        turretmotor.set(turretpid.calculate(yaw, setpoint));
-
-    }
-
-    public PIDController getTurretPID() {
-
-        return turretpid;
-    }
-
-    @Override
-    public void periodic() {
-        // This method will be called once per scheduler run
-    }
 }

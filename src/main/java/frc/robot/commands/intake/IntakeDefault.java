@@ -26,7 +26,7 @@ public class IntakeDefault extends CommandBase {
     @Override
     public void initialize() {
         intake.intakeRetract();
-        intake.intakeOff();
+        intake.intakeMotorsOff();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -42,6 +42,6 @@ public class IntakeDefault extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 }

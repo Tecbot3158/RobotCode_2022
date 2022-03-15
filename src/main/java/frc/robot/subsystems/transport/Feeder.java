@@ -53,8 +53,7 @@ public class Feeder extends SubsystemBase {
 
         feederPIDTarget = RobotMap.FEEDER_PID_Target;
 
-        // only when actually wanting the motors to move
-        // setPIDController(feederPIDController);
+        setPIDController(feederPIDController);
     }
 
     public void setPIDController(SparkMaxPIDController pidController) {
@@ -65,17 +64,15 @@ public class Feeder extends SubsystemBase {
         pidController.setFF(kFF);
         pidController.setOutputRange(kMinOutput, kMaxOutput);
 
-
-
     }
 
-    public REVLibError shooterSetPIDReference(double reference, SparkMaxPIDController pidController) {
+    public REVLibError feederSetPIDReference(double reference, SparkMaxPIDController pidController) {
         reference = Math.clamp( reference, -maxRPM, maxRPM);
         return pidController.setReference(reference, CANSparkMax.ControlType.kVelocity);
 
     }
 
-    public REVLibError shooterSetDefaultPIDReference( SparkMaxPIDController pidController){
+    public REVLibError feederSetDefaultPIDReference( SparkMaxPIDController pidController){
         return pidController.setReference(Math.clamp(feederPIDTarget, -maxRPM, maxRPM), CANSparkMax.ControlType.kVelocity);
     }
 
