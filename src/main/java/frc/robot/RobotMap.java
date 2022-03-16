@@ -145,7 +145,7 @@ public class RobotMap {
         // TRANSPORT --- end
 
         // SHOOTER
-        public static final int[] SHOOTER_MOTOR_PORTS = { 30, 31 };
+        public static final int[] SHOOTER_MOTOR_PORTS = { 40, 41 };
         public static final TypeOfMotor[] SHOOTER_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS,
                         TypeOfMotor.CAN_SPARK_BRUSHLESS };
         public static final boolean[] SHOOTER_MOTORS_ARE_INVERTED = { false, false };
