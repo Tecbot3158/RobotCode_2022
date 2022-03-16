@@ -13,8 +13,6 @@ import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotEncoder;
 import frc.robot.resources.TecbotSpeedController;
 
-import javax.naming.ldap.Control;
-
 public class Turret extends SubsystemBase {
     /**
      * Creates a new Turret.
@@ -82,22 +80,26 @@ public class Turret extends SubsystemBase {
 
     }
 
-    public REVLibError setReferencePIDController(double rotations){
+    public REVLibError setReferencePIDController(double rotations) {
         return turretPIDController.setReference(rotations, CANSparkMax.ControlType.kPosition);
+    }
+
+    public SparkMaxPIDController getTurretPIDController() {
+        return turretPIDController;
     }
 
     /**
      * get number of rotations converted from an angle in degrees.
      * Assumes that the turret at its center is at 0 deg.
      * To the left it's negative degrees and positive to the right.
+     *
      * @return number of rotations based on angle.
      */
-    private double getRotationsFromAngle(double angleDegrees ){
+    private double getRotationsFromAngle(double angleDegrees) {
 
-        return angleDegrees / (double) 360 * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION ;
+        return angleDegrees / (double) 360 * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION;
 
     }
-
 
 
 }
