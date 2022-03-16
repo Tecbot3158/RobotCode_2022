@@ -3,6 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.commands.feeder.FeederSetToSpeed;
 import frc.robot.commands.oitests.OITestTriggers;
+import frc.robot.commands.shooter.ShooterGoRaw;
+import frc.robot.commands.shooter.ShooterGoToTarget;
 import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotController;
 
@@ -31,6 +33,11 @@ public class OI {
         pilot.whileHeld(TecbotController.ButtonType.POV_0, new OITestTriggers());
 
         // pilot.whenPressed(new Intake);
+
+        pilot.whileHeld(TecbotController.ButtonType.RB, new ShooterGoToTarget());
+
+        pilot.whileHeld(TecbotController.ButtonType.POV_0, new ShooterGoRaw(0.5));
+        pilot.whileHeld(TecbotController.ButtonType.POV_180, new ShooterGoRaw(-0.5));
 
 
 
