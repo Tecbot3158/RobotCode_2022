@@ -128,6 +128,7 @@ public class DriveTrain extends SubsystemBase {
 
         }
 
+        transmissionState = TransmissionMode.torque;
         // encoders --- end!
     }
 
@@ -362,13 +363,21 @@ public class DriveTrain extends SubsystemBase {
         double leftSide = 0;
         double rightSide = 0;
 
-        if (TecbotConstants.MIDDLE_SIDES_CORRECTION > 1) {
-            x *= 1 / TecbotConstants.MIDDLE_SIDES_CORRECTION;
+        double middleSideCorrection = TecbotConstants.MIDDLE_SIDES_CORRECTION_SPEED;
+
+        if (transmissionState == TransmissionMode.torque) {
+
+            middleSideCorrection = TecbotConstants.MIDDLE_SIDES_CORRECTION_TORQUE;
+
+        }
+
+        if (middleSideCorrection > 1) {
+            x *= 1 / middleSideCorrection;
             leftSide = (y - correction + turn);
             rightSide = (y + correction - turn);
         } else {
-            leftSide = TecbotConstants.MIDDLE_SIDES_CORRECTION * (y + correction + turn);
-            rightSide = TecbotConstants.MIDDLE_SIDES_CORRECTION * (y - correction - turn);
+            leftSide = middleSideCorrection * (y + correction + turn);
+            rightSide = middleSideCorrection * (y - correction - turn);
         }
 
         tankDrive(leftSide, rightSide);

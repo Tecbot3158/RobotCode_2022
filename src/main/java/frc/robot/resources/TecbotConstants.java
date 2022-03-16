@@ -21,7 +21,7 @@ public class TecbotConstants {
         public static final double CHASSIS_SWERVE_MAX_DISTANCE = 20;
         public static final double CHASSIS_SWERVE_ARRIVE_OFFSET = 2;
 
-        public static final double TURN_CORRECTION = .02;
+        public static final double TURN_CORRECTION = .015;
         // The distance in angles that it needs to be from target in order to be
         // considered onTarget
         public static final double QUICK_TURN_OFFSET = 20;
@@ -30,7 +30,8 @@ public class TecbotConstants {
         // The sides move at a different speed than the middle wheel, so this constant
         // controls that difference to try to
         // Make them move at the same speed
-        public static final double MIDDLE_SIDES_CORRECTION = .4;
+        public static final double MIDDLE_SIDES_CORRECTION_SPEED = .6;
+        public static final double MIDDLE_SIDES_CORRECTION_TORQUE = .6;
 
         public static final double SPLINE_REDUCING_SPEED_CONSTANT = .8;
         public static final double SPLINE_TURN_CORRECTION = .05;
