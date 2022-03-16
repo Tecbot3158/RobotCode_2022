@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.resources.Navx;
 import frc.robot.subsystems.chassis.DriveTrain;
 import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.transport.Feeder;
 import frc.robot.subsystems.transport.Rollers;
 import frc.robot.subsystems.turret.Turret;
@@ -37,6 +38,8 @@ public class RobotContainer {
 
     private Navx gyroscope;
 
+    private Shooter shooter;
+
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -59,6 +62,8 @@ public class RobotContainer {
         feeder = new Feeder();
 
         rollers = new Rollers();
+
+        shooter = new Shooter();
 
         // configureButtonBindings();
         // this NEEDS to be called from the RobotInit class after all subsystems are
@@ -125,6 +130,10 @@ public class RobotContainer {
 
     public Tecbotcamera getTecbotcamera() {
         return tecbotcamera;
+    }
+
+    public Shooter getShooter(){
+        return shooter;
     }
 
 }
