@@ -46,7 +46,21 @@ public class StepControl {
 
     }
 
+
+    public double setIncrementMultiplier (double value){
+        return this.incrementMultiplier = value;
+    }
+
+    public double setTarget (double target){
+        return this.kTarget = target;
+    }
+
+    public double setMinAbsoluteOutput(double minOutput){
+        return   this.kMinimumAbsoluteOutput = minOutput;
+    }
+
     public double getCurrentPosition(){
         return this.currentPosition;
     }
+
 }
