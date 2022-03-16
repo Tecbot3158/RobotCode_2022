@@ -25,12 +25,12 @@ public class Shooter extends SubsystemBase {
 
     private RelativeEncoder shooterEncoder;
 
-    StepControl stepControl;
+    // StepControl stepControl;
 
 
     public Shooter() {
 
-        // stepControl = new StepControl();
+        // stepControl = new StepControl( 0.05, );
 
         shooterMotors = RobotConfigurator.buildMotorList(
                 RobotMap.SHOOTER_MOTOR_PORTS,
@@ -44,7 +44,12 @@ public class Shooter extends SubsystemBase {
                 follow(shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).getCANSparkMax()
                         , true);
 
+        shooterEncoder = shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).getCANSparkMax().getEncoder();
 
+    }
+
+    public void setShooterMotorsRaw(double speed){
+        shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).set(speed);
     }
 
     public RelativeEncoder getShooterEncoder() {
