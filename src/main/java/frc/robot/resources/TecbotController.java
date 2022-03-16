@@ -5,14 +5,15 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A Tecbot Controller is a Joystick controller in which you can get different
- * values from your controller,
+ * A Tecbot Controller is a Joystick controller in which you can get different values from your controller,
  * whether it is a Ps4, Ps3, Xbox ONE, Xbox 360 or any other controller.
  */
 public class TecbotController {
@@ -21,91 +22,28 @@ public class TecbotController {
     private int currentPovAngle = -1;
     private int previousPovAngle = currentPovAngle;
 
-    // POV Commands for 0°
-    /**
-     * Command for whenPressed state in POV 0
-     */
-    private CommandBase pov0CommandWhenPressed = null;
-
-    /**
-     * Command for whenReleased state in POV 0
-     */
-    private CommandBase pov0CommandWhenReleased = null;
-
-    /**
-     * Command for whileHeld state in POV 0
-     */
-    private CommandBase pov0CommandWhileHeld = null;
-
-    // POV Commands for 90°
-    /**
-     * Command for whenPressed state in POV 90
-     */
-    private CommandBase pov90CommandWhenPressed = null;
-
-    /**
-     * Command for whenReleased state in POV 90
-     */
-    private CommandBase pov90CommandWhenReleased = null;
-
-    /**
-     * Command for whileHeld state in POV 90
-     */
-    private CommandBase pov90CommandWhileHeld = null;
-
-    // POV Commands for 180°
-    /**
-     * Command for whenPressed state in POV 180
-     */
-    private CommandBase pov180CommandWhenPressed = null;
-
-    /**
-     * Command for whenReleased state in POV 180
-     */
-    private CommandBase pov180CommandWhenReleased = null;
-
-    /**
-     * Command for whileHeld state in POV 180
-     */
-    private CommandBase pov180CommandWhileHeld = null;
-
-    // POV Commands for 270°
-    /**
-     * Command for whenPressed state in POV 270
-     */
-    private CommandBase pov270CommandWhenPressed = null;
-
-    /**
-     * Command for whenReleased state in POV 270
-     */
-    private CommandBase pov270CommandWhenReleased = null;
-
-    /**
-     * Command for whileHeld state in POV 270
-     */
-    private CommandBase pov270CommandWhileHeld = null;
 
     /**
      * The ports for the axis on the PS4 Controller in the following order:
      * <ul>
-     * <li>Left Axis X</li>
-     * <li>Left Axis Y</li>
-     * <li>Right Axis X</li>
-     * <li>Right Axis Y</li>
+     *     <li>Left Axis X</li>
+     *     <li>Left Axis Y</li>
+     *     <li>Right Axis X</li>
+     *     <li>Right Axis Y</li>
      * </ul>
      */
-    private final int[] portsJoysticksPS4 = { 0, 1, 2, 5 };
+    private final int[] portsJoysticksPS4 = {0, 1, 2, 5};
 
     /**
      * The ports for the axis on the XBOX Controller in the following order:
      * <ul>
-     * <li>Left Axis X</li>
-     * <li>Left Axis Y</li>
-     * <li>Right Axis X</li>
-     * <li>Right Axis Y</li>
+     *     <li>Left Axis X</li>
+     *     <li>Left Axis Y</li>
+     *     <li>Right Axis X</li>
+     *     <li>Right Axis Y</li>
      * </ul>
      */
-    private final int[] portsJoystickXBOX = { 0, 1, 4, 5 };
+    private final int[] portsJoystickXBOX = {0, 1, 4, 5};
 
     /**
      * The ports for the buttons in PS4 controller.
@@ -113,20 +51,20 @@ public class TecbotController {
      * In the following order:
      * <strong>
      * <ul>
-     * <li>x</li>
-     * <li>o</li>
-     * <li>[] SQUARE</li>
-     * <li>-/\- TRIANGLE</li>
-     * <li>L1</li>
-     * <li>R1</li>
-     * <li><i>SHARE</i></li>
-     * <li><i>OPTIONS</i></li>
-     * <li>L3</li>
-     * <li>R3</li>
+     *     <li>x</li>
+     *     <li>o</li>
+     *     <li>[] SQUARE</li>
+     *     <li>-/\- TRIANGLE</li>
+     *     <li>L1</li>
+     *     <li>R1</li>
+     *     <li><i>SHARE</i></li>
+     *     <li><i>OPTIONS</i></li>
+     *     <li>L3</li>
+     *     <li>R3</li>
      * </ul>
      * </strong>
      */
-    private final int[] portsButtonsPS4 = { 2, 3, 1, 4, 5, 6, 9, 10, 11, 12 };
+    private final int[] portsButtonsPS4 = {2, 3, 1, 4, 5, 6, 9, 10, 11, 12};
 
     /**
      * The ports for the buttons in xbox controller.
@@ -134,42 +72,42 @@ public class TecbotController {
      * In the following order:
      * <strong>
      * <ul>
-     * <li>a</li>
-     * <li>b</li>
-     * <li>x</li>
-     * <li>y</li>
-     * <li>lb</li>
-     * <li>rb</li>
-     * <li><i>BACK</i></li>
-     * <li><i>START</i></li>
-     * <li>LS</li>
-     * <li>RS</li>
+     *     <li>a</li>
+     *     <li>b</li>
+     *     <li>x</li>
+     *     <li>y</li>
+     *     <li>lb</li>
+     *     <li>rb</li>
+     *     <li><i>BACK</i></li>
+     *     <li><i>START</i></li>
+     *     <li>LS</li>
+     *     <li>RS</li>
      * </ul>
      * </strong>
      */
-    private final int[] portsButtonsXBOX = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    private final int[] portsButtonsXBOX = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     /**
      * <h1>Trigger ports for PS4</h1>
      * <br>
      * In the following order:
      * <ul>
-     * <li>Left Trigger Value</li>
-     * <li>Right Trigger Value</li>
+     *     <li>Left Trigger Value</li>
+     *     <li>Right Trigger Value</li>
      * </ul>
      */
-    private final int[] portsTriggersPS4 = { 3, 4 };
+    private final int[] portsTriggersPS4 = {3, 4};
 
     /**
      * <h1>Trigger ports for XBOX</h1>
      * <br>
      * In the following order:
      * <ul>
-     * <li>Left Trigger Value</li>
-     * <li>Right Trigger Value</li>
+     *     <li>Left Trigger Value</li>
+     *     <li>Right Trigger Value</li>
      * </ul>
      */
-    private final int[] portsTriggersXBOX = { 2, 3 };
+    private final int[] portsTriggersXBOX = {2, 3};
 
     /**
      * Joystick object from FRC, this is used to getRawAxis,
@@ -188,7 +126,7 @@ public class TecbotController {
     /**
      * {@link #pilot} buttons.
      */
-    List<JoystickButton> buttons;
+    List<Button> buttons;
     /**
      * Default offset to correct:<br>
      * {@link #getLeftAxisX()}<br>
@@ -226,9 +164,13 @@ public class TecbotController {
         START,
         LS,
         RS,
+        POV_UP,
         POV_0,
+        POV_RIGHT,
         POV_90,
+        POV_DOWN,
         POV_180,
+        POV_LEFT,
         POV_270
     }
 
@@ -238,17 +180,13 @@ public class TecbotController {
      * Creates new {@link TecbotController} with functionality on top of
      * {@link Joystick}, such as:
      * <ul>
-     * <li>Detecting automatically the type of controller (PS4 or XBOX currently
-     * supported) and
-     * will set rawButton ports if controller is not recognized.</li>
-     * <li>using POV as individual buttons with whenReleased, whenPressed,
-     * and whileHeld functionality. (currently supports 0°, 90°, 180°, and 270°
-     * angles.</li>
-     * <li>buttons are already created with this object.</li>
-     * <li>You can use methods such as {@link #getLeftAxisX()},
-     * {@link #getLeftAxisY()},
-     * {@link #getRightAxisX()}, {@link #getRightAxisY()}, and
-     * {@link #getRawAxis(int, boolean)}</li>
+     *     <li>Detecting automatically the type of controller (PS4 or XBOX currently supported) and
+     *     will set rawButton ports if controller is not recognized.</li>
+     *     <li>using POV as individual buttons with whenReleased, whenPressed,
+     *     and whileHeld functionality. (currently supports 0°, 90°, 180°, and 270° angles.</li>
+     *     <li>buttons are already created with this object.</li>
+     *     <li>You can use methods such as {@link #getLeftAxisX()}, {@link #getLeftAxisY()},
+     *          {@link #getRightAxisX()}, {@link #getRightAxisY()}, and {@link #getRawAxis(int, boolean)}</li>
      * </ul>
      *
      * @param port The port that the controller has in the Driver Station.
@@ -260,15 +198,12 @@ public class TecbotController {
         joystickName = pilot.getName().toLowerCase();
 
         controllerType = TypeOfController.XBOX;
-        // if (joystickName.contains("wireless controller") &&
-        // !joystickName.contains("xbox"))
-        // controllerType = TypeOfController.PS4;
-        // if (joystickName.contains("xbox"))
+        //if (joystickName.contains("wireless controller") && !joystickName.contains("xbox"))
+        //    controllerType = TypeOfController.PS4;
+        //if (joystickName.contains("xbox"))
 
-        if (pilot == null)
-            DriverStation.reportWarning("Joystick not found (Tecbot Controller)", true);
-        else
-            setButtons();
+        if (pilot == null) DriverStation.reportWarning("Joystick not found (Tecbot Controller)", true);
+        else setButtons();
         if (controllerType == null && pilot != null)
             DriverStation.reportWarning("Controller not identified, some methods will return 0.", false);
         haptics = new Haptics(pilot);
@@ -280,12 +215,10 @@ public class TecbotController {
 
         controllerType = typeOfController;
 
-        if (pilot == null)
-            DriverStation.reportWarning("Joystick not found (Tecbot Controller)", true);
-        else
-            setButtons();
+        if (pilot == null) DriverStation.reportWarning("Joystick not found (Tecbot Controller)", true);
+        else setButtons();
         if (controllerType == null && pilot != null)
-            DriverStation.reportWarning("Controller not identified, some methods will return 0.", false);
+            DriverStation.reportWarning("Controller not identified, some methods will return 0.", true);
         haptics = new Haptics(pilot);
     }
 
@@ -295,8 +228,7 @@ public class TecbotController {
 
     /**
      * This function will return the value of the Left Axis <i>Y</i>.
-     * <br>
-     * Ranges from -1 to 1.
+     * <br>Ranges from -1 to 1.
      *
      * @return axis value
      */
@@ -315,9 +247,7 @@ public class TecbotController {
                 break;
             default:
                 value = 0;
-                DriverStation.reportWarning(
-                        "Could not get axis value from getLeftAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.",
-                        false);
+                DriverStation.reportWarning("Could not get axis value from getLeftAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.", false);
                 break;
         }
         return ground(value, getOffset());
@@ -325,11 +255,9 @@ public class TecbotController {
 
     /**
      * This function will return the value of the Left Axis <i>Y</i>.
-     * <br>
-     * Ranges from -1 to 1.
+     * <br>Ranges from -1 to 1.
      *
-     * @param speedRelease Set to true if a correction before the speed release
-     *                     point is needed.
+     * @param speedRelease Set to true if a correction before the speed release point is needed.
      * @return The horizontal left axis, corrected if needed.
      */
     public double getLeftAxisX(boolean speedRelease) {
@@ -347,20 +275,16 @@ public class TecbotController {
                 break;
             default:
                 value = 0;
-                DriverStation.reportWarning(
-                        "Could not get axis value from getLeftAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.",
-                        false);
+                DriverStation.reportWarning("Could not get axis value from getLeftAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.", false);
                 break;
         }
-        if (speedRelease)
-            value = speedRelease(value);
+        if (speedRelease) value = speedRelease(value);
         return ground(value, getOffset());
     }
 
     /**
      * This function will return the value of the Left Axis <i>Y</i>.
-     * <br>
-     * Ranges from -1 to 1.
+     * <br>Ranges from -1 to 1.
      *
      * @return axis value
      */
@@ -379,9 +303,7 @@ public class TecbotController {
                 break;
             default:
                 value = 0;
-                DriverStation.reportWarning(
-                        "Could not get axis value from getLeftAxisY(). Returned 0. Returned 0. Use getAxisValue() instead.",
-                        false);
+                DriverStation.reportWarning("Could not get axis value from getLeftAxisY(). Returned 0. Returned 0. Use getAxisValue() instead.", false);
                 break;
         }
         return ground(value, getOffset());
@@ -402,20 +324,16 @@ public class TecbotController {
                 break;
             default:
                 value = 0;
-                DriverStation.reportWarning(
-                        "Could not get axis value from getLeftAxisY(). Returned 0. Returned 0. Use getAxisValue() instead.",
-                        false);
+                DriverStation.reportWarning("Could not get axis value from getLeftAxisY(). Returned 0. Returned 0. Use getAxisValue() instead.", false);
                 break;
         }
-        if (speedRelease)
-            value = speedRelease(value);
+        if (speedRelease) value = speedRelease(value);
         return ground(value, getOffset());
     }
 
     /**
      * This function will return the value of the Right Axis <i>X</i>.
-     * <br>
-     * Ranges from -1 to 1.
+     * <br>Ranges from -1 to 1.
      *
      * @return axis value
      */
@@ -434,9 +352,7 @@ public class TecbotController {
                 break;
             default:
                 value = 0;
-                DriverStation.reportWarning(
-                        "Could not get axis value from getRightAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.",
-                        false);
+                DriverStation.reportWarning("Could not get axis value from getRightAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.", false);
                 break;
         }
         return ground(value, offset);
@@ -444,8 +360,7 @@ public class TecbotController {
 
     /**
      * This function will return the value of the Right Axis <i>Y</i>.
-     * <br>
-     * Ranges from -1 to 1.
+     * <br>Ranges from -1 to 1.
      *
      * @return axis value
      */
@@ -464,9 +379,7 @@ public class TecbotController {
                 break;
             default:
                 value = 0;
-                DriverStation.reportWarning(
-                        "Could not get axis value from getRightAxisY(). Returned 0. Use getAxisValue() instead.",
-                        false);
+                DriverStation.reportWarning("Could not get axis value from getRightAxisY(). Returned 0. Use getAxisValue() instead.", false);
                 break;
         }
         return ground(value, getOffset());
@@ -477,47 +390,46 @@ public class TecbotController {
      *
      * @param axis   axis port in the controller.
      * @param ground If true, it will correct the value according to the offset.
-     *               Default value is 0.1, change it using
-     *               {@link #setOffset(double)}
+     *               Default value is 0.1, change it using {@link #setOffset(double)}
      * @return value of given axis.
-     *         <p>
-     *         BUTTON PORTS FOR XBOX AND PS4:
-     *         The ports for the buttons in xbox controller.
-     *         <br>
-     *         In the following order:
-     *         <br>
-     *         <strong>
-     *         <ul>
-     *         <li>a</li>
-     *         <li>b</li>
-     *         <li>x</li>
-     *         <li>y</li>
-     *         <li>lb</li>
-     *         <li>rb</li>
-     *         <li><i>BACK</i></li>
-     *         <li><i>START</i></li>
-     *         <li>LS</li>
-     *         <li>RS</li>
-     *         </ul>
-     *         </strong>
-     *         <br>
-     *         The ports for the buttons in PS4 controller.
-     *         <br>
-     *         In the following order:<br>
-     *         <strong>
-     *         <ol>
-     *         <li>x</li>
-     *         <li>o</li>
-     *         <li>[-] SQUARE</li>
-     *         <li>-/\- TRIANGLE</li>
-     *         <li>L1</li>
-     *         <li>R1</li>
-     *         <li><i>SHARE</i></li>
-     *         <li><i>OPTIONS</i></li>
-     *         <li>L3</li>
-     *         <li>R3</li>
-     *         </ol>
-     *         </strong>
+     * <p>
+     * BUTTON PORTS FOR XBOX AND PS4:
+     * The ports for the buttons in xbox controller.
+     * <br>
+     * In the following order:
+     * <br>
+     * <strong>
+     * <ul>
+     *     <li>a</li>
+     *     <li>b</li>
+     *     <li>x</li>
+     *     <li>y</li>
+     *     <li>lb</li>
+     *     <li>rb</li>
+     *     <li><i>BACK</i></li>
+     *     <li><i>START</i></li>
+     *     <li>LS</li>
+     * <li>RS</li>
+     * </ul>
+     * </strong>
+     * <br>
+     * The ports for the buttons in PS4 controller.
+     * <br>
+     * In the following order:<br>
+     * <strong>
+     * <ol>
+     *     <li>x</li>
+     *     <li>o</li>
+     *     <li>[-] SQUARE</li>
+     *     <li>-/\- TRIANGLE</li>
+     *     <li>L1</li>
+     *     <li>R1</li>
+     *     <li><i>SHARE</i></li>
+     *     <li><i>OPTIONS</i></li>
+     *     <li>L3</li>
+     *     <li>R3</li>
+     * </ol>
+     * </strong>
      */
     public double getRawAxis(int axis, boolean ground) {
         if (pilot == null) {
@@ -543,16 +455,11 @@ public class TecbotController {
 
     /**
      * @return Returns triggers in controller.
-     *         <br>
-     *         When the triggers are idle, 0 will be returned.
-     *         <br>
-     *         When the right trigger is pressed, it will return a positive
-     *         value (up to 1).
-     *         <br>
-     *         When the left trigger is pressed, it will return a negative value (up
-     *         to -1).
-     *         <br>
-     *         Therefore, both triggers pressed will return 0.
+     * <br>When the triggers are idle, 0 will be returned.
+     * <br>When the right trigger is pressed, it will return a positive
+     * value (up to 1).
+     * <br>When the left trigger is pressed, it will return a negative value (up to -1).
+     * <br>Therefore, both triggers pressed will return 0.
      */
     public double getTriggers() {
         if (pilot == null) {
@@ -570,8 +477,7 @@ public class TecbotController {
                 break;
             default:
                 value = 0;
-                DriverStation.reportWarning(
-                        "Could not get axis value from getTriggers(). Returned 0. Use getAxisValue() instead.", false);
+                DriverStation.reportWarning("Could not get axis value from getTriggers(). Returned 0. Use getAxisValue() instead.", false);
                 break;
         }
         return value;
@@ -625,7 +531,7 @@ public class TecbotController {
      * Sets buttons according to the controller type.
      */
     private void setButtons() {
-        List<JoystickButton> bs = new ArrayList<>();
+        List<Button> bs = new ArrayList<>();
         if (controllerType == null) {
 
         }
@@ -633,13 +539,16 @@ public class TecbotController {
             case XBOX:
                 for (int port : portsButtonsXBOX) {
                     bs.add(new JoystickButton(pilot, port));
-                    // buttonHashMap.put()
+                    //buttonHashMap.put()
                 }
+                addPOV(bs);
                 break;
             case PS4:
                 for (int port : portsButtonsPS4) {
                     bs.add(new JoystickButton(pilot, port));
                 }
+                addPOV(bs);
+
                 break;
             default:
 
@@ -652,16 +561,30 @@ public class TecbotController {
     }
 
     /**
+     * Adds POV Buttons.
+     * Intented for use in Xbox and PS4-type controllers
+     *
+     * @param buttonsList
+     */
+    private void addPOV(List<Button> buttonsList) {
+        buttonsList.add(new POVButton(pilot, 0));
+        buttonsList.add(new POVButton(pilot, 90));
+        buttonsList.add(new POVButton(pilot, 180));
+        buttonsList.add(new POVButton(pilot, 270));
+
+
+    }
+
+    /**
      * @param button the button to return
      * @return Returns JoystickButton Object
      */
-    public JoystickButton getButton(ButtonType button) {
-        if (pilot == null)
-            return null;
+    public Button getButton(ButtonType button) {
+        if (pilot == null) return null;
         int index = 0;
         switch (button) {
             case A:
-                // nothing needs to be done here because index already = 0
+                //nothing needs to be done here because index already = 0
                 break;
             case B:
                 index = 1;
@@ -690,7 +613,24 @@ public class TecbotController {
             case RS:
                 index = 9;
                 break;
+            case POV_UP:
+            case POV_0:
+                index = 10;
+                break;
+            case POV_RIGHT:
+            case POV_90:
+                index = 11;
+                break;
+            case POV_DOWN:
+            case POV_180:
+                index = 12;
+                break;
+            case POV_LEFT:
+            case POV_270:
+                index = 13;
+                break;
             default:
+
                 DriverStation.reportError("Button not recognized. TecbotController", true);
                 break;
         }
@@ -710,24 +650,9 @@ public class TecbotController {
                     ". whenPressed() cancelled, command was not set.", true);
             return;
         }
-        switch (buttonType) {
-            case POV_0:
-                pov0CommandWhenPressed = command;
-                break;
-            case POV_90:
-                pov90CommandWhenPressed = command;
-                break;
-            case POV_180:
-                pov180CommandWhenPressed = command;
-                break;
-            case POV_270:
-                pov270CommandWhenPressed = command;
-                break;
-            default:
-                JoystickButton m_button = getButton(buttonType);
-                m_button.whenPressed(command);
-                break;
-        }
+
+        Button chosenButton = getButton(buttonType);
+        chosenButton.whenPressed(command);
     }
 
     /**
@@ -742,23 +667,8 @@ public class TecbotController {
                     ". whenReleased() cancelled, command was not set.", true);
             return;
         }
-        switch (buttonType) {
-            case POV_0:
-                pov0CommandWhenReleased = command;
-                break;
-            case POV_90:
-                pov90CommandWhenReleased = command;
-                break;
-            case POV_180:
-                pov180CommandWhenReleased = command;
-                break;
-            case POV_270:
-                pov270CommandWhenReleased = command;
-                break;
-            default:
-                JoystickButton m_button = getButton(buttonType);
-                m_button.whenReleased(command);
-        }
+        Button chosenButton = getButton(buttonType);
+        chosenButton.whenReleased(command);
     }
 
     /**
@@ -776,23 +686,9 @@ public class TecbotController {
                     ". whileHeld() cancelled, command was not set.", true);
             return;
         }
-        switch (buttonType) {
-            case POV_0:
-                pov0CommandWhileHeld = command;
-                break;
-            case POV_90:
-                pov90CommandWhileHeld = command;
-                break;
-            case POV_180:
-                pov180CommandWhileHeld = command;
-                break;
-            case POV_270:
-                pov270CommandWhileHeld = command;
-                break;
-            default:
-                JoystickButton m_button = getButton(buttonType);
-                m_button.whileHeld(command);
-        }
+
+        Button chosenButton = getButton(buttonType);
+        chosenButton.whileHeld(command);
     }
 
     /**
@@ -804,130 +700,14 @@ public class TecbotController {
                     ". run() cancelled.", true);
             return;
         }
-        // sets currentPovAngle to POV angle from pilot
-        currentPovAngle = pilot.getPOV();
-        // System.out.println(currentPovAngle);
-        // sets current commands based on currentPovAngle
-        CommandBase currentPovWhenPressedCommand = getPovWhenPressedCommand(currentPovAngle);
-        // CommandBase currentPovWhenReleasedCommand =
-        // getPovWhenReleasedCommand(currentPovAngle);
-        CommandBase currentPovWhileHeldCommand = getPovWhileHeldCommand(currentPovAngle);
 
-        // sets previous commands based on previousPovAngle
-        CommandBase previousPovWhenPressedCommand = getPovWhenPressedCommand(previousPovAngle);
-        CommandBase previousPovWhenReleasedCommand = getPovWhenReleasedCommand(previousPovAngle);
-        CommandBase previousPovWhileHeldCommand = getPovWhileHeldCommand(previousPovAngle);
-
-        /*
-         * if there is a button change (e.g. currentPovAngle differs from
-         * previousPovAngle),
-         * then the previous whileHeld command will be cancelled,
-         * the previous whenReleased command will be scheduled,
-         * and the current whenPressed command will be scheduled.
-         */
-        if (currentPovAngle != previousPovAngle) {
-            if (previousPovWhenReleasedCommand != null)
-                previousPovWhenReleasedCommand.schedule();
-            if (previousPovWhileHeldCommand != null)
-                previousPovWhileHeldCommand.cancel();
-            if (currentPovWhenPressedCommand != null)
-                currentPovWhenPressedCommand.schedule();
-
-            /*
-             * clears all previous commands, this is a requirement
-             * if from code a group command is manually scheduled
-             * and is going to be scheduled again.
-             */
-
-            /*
-             * clearGroupedCommands(
-             * previousPovWhenPressedCommand,
-             * previousPovWhenReleasedCommand,
-             * previousPovWhileHeldCommand,
-             * currentPovWhenPressedCommand
-             * );
-             */
-        }
-        // this will just schedule the whileHeld command,
-        // which should have the isFinished true.
-        // this command also has to be cleared since it will be called several times.
-        if (currentPovWhileHeldCommand != null) {
-            currentPovWhileHeldCommand.schedule();
-            clearGroupedCommands(currentPovWhileHeldCommand);
-        }
-
-        previousPovAngle = currentPovAngle;
-
-        // System.out.println(currentPovWhenPressedCommand);
-        // System.out.println("POV direction -> " + currentPovAngle);
+        //System.out.println(currentPovWhenPressedCommand);
+        //System.out.println("POV direction -> " + currentPovAngle);
     }
 
-    /**
-     * Returns new {@link CommandBase} given the POV angle.
-     *
-     * @param angle POV angle
-     * @return {@link CommandBase} for angle in whenPressed state.
-     */
-    public CommandBase getPovWhenPressedCommand(int angle) {
-        switch (angle) {
-            case 0:
-                return pov0CommandWhenPressed;
-            case 90:
-                return pov90CommandWhenPressed;
-            case 180:
-                return pov180CommandWhenPressed;
-            case 270:
-                return pov270CommandWhenPressed;
-            default:
-                return null;
-        }
-    }
 
     /**
-     * Returns new {@link CommandBase} given the POV angle.
-     *
-     * @param angle POV angle
-     * @return {@link CommandBase} for angle in whenReleased state.
-     */
-    public CommandBase getPovWhenReleasedCommand(int angle) {
-        switch (angle) {
-            case 0:
-                return pov0CommandWhenReleased;
-            case 90:
-                return pov90CommandWhenReleased;
-            case 180:
-                return pov180CommandWhenReleased;
-            case 270:
-                return pov270CommandWhenReleased;
-            default:
-                return null;
-        }
-    }
-
-    /**
-     * Returns new {@link CommandBase} given the POV angle.
-     *
-     * @param angle POV angle
-     * @return {@link CommandBase} for angle in whileHeld state.
-     */
-    public CommandBase getPovWhileHeldCommand(int angle) {
-        switch (angle) {
-            case 0:
-                return pov0CommandWhileHeld;
-            case 90:
-                return pov90CommandWhileHeld;
-            case 180:
-                return pov180CommandWhileHeld;
-            case 270:
-                return pov270CommandWhileHeld;
-            default:
-                return null;
-        }
-    }
-
-    /**
-     * Set the rumble output for the HID. The DS currently supports 2 rumble values,
-     * left rumble and
+     * Set the rumble output for the HID. The DS currently supports 2 rumble values, left rumble and
      * right rumble.
      *
      * @param rumbleType Which rumble value to set
@@ -973,7 +753,8 @@ public class TecbotController {
      * @param commandGroupBases {@link CommandGroupBase}
      */
     private void clearGroupedCommands(CommandBase... commandGroupBases) {
-        for (CommandBase commandGroup : commandGroupBases) {
+        for (CommandBase commandGroup :
+                commandGroupBases) {
             CommandGroupBase.clearGroupedCommand(commandGroup);
         }
     }
@@ -1011,28 +792,4 @@ public class TecbotController {
         return haptics;
     }
 
-    /**
-     * clears ALL commands for POV
-     */
-    public void clearPOVCommands() {
-        // POV UP
-        pov0CommandWhenPressed = null;
-        pov0CommandWhileHeld = null;
-        pov0CommandWhenReleased = null;
-
-        // POV RIGHT
-        pov90CommandWhenPressed = null;
-        pov90CommandWhileHeld = null;
-        pov90CommandWhenReleased = null;
-
-        // POV DOWN
-        pov180CommandWhenPressed = null;
-        pov180CommandWhileHeld = null;
-        pov180CommandWhenReleased = null;
-
-        // POV LEFT
-        pov270CommandWhenPressed = null;
-        pov270CommandWhileHeld = null;
-        pov270CommandWhenReleased = null;
-    }
 }
