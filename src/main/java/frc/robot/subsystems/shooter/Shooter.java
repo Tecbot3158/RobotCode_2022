@@ -16,20 +16,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.resources.Math;
 import frc.robot.resources.RobotConfigurator;
+import frc.robot.resources.StepControl;
 import frc.robot.resources.TecbotMotorList;
 
 public class Shooter extends SubsystemBase {
 
     private final TecbotMotorList shooterMotors;
 
-    private SparkMaxPIDController shooterPIDController;
     private RelativeEncoder shooterEncoder;
 
-    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
-    private double shooterPIDTarget;
+    StepControl stepControl;
 
 
     public Shooter() {
+
+        // stepControl = new StepControl();
 
         shooterMotors = RobotConfigurator.buildMotorList(
                 RobotMap.SHOOTER_MOTOR_PORTS,
@@ -43,58 +44,11 @@ public class Shooter extends SubsystemBase {
                 follow(shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).getCANSparkMax()
                         , true);
 
-        initPID();
 
-    }
-
-    public void initPID() {
-
-        CANSparkMax masterMotor = shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).getCANSparkMax();
-
-        shooterEncoder = masterMotor.getEncoder();
-        shooterPIDController = masterMotor.getPIDController();
-
-        kP = RobotMap.SHOOTER_PID_kP;
-        kI = RobotMap.SHOOTER_PID_kI;
-        kD = RobotMap.SHOOTER_PID_kD;
-        kIz = RobotMap.SHOOTER_PID_kIz;
-        kFF = RobotMap.SHOOTER_PID_kFF;
-        kMaxOutput = RobotMap.SHOOTER_PID_kMaxOutput;
-        kMinOutput = RobotMap.SHOOTER_PID_kMinOutput;
-        maxRPM = RobotMap.SHOOTER_PID_kMaxRPM;
-
-        shooterPIDTarget = RobotMap.SHOOTER_PID_Target;
-
-        // setShooterPIDController(shooterPIDController);
-
-    }
-
-    public SparkMaxPIDController getShooterPIDController(){
-        return shooterPIDController;
     }
 
     public RelativeEncoder getShooterEncoder() {
         return shooterEncoder;
-    }
-
-    public void setShooterPIDController(SparkMaxPIDController pidController) {
-        pidController.setP(kP);
-        pidController.setI(kI);
-        pidController.setD(kD);
-        pidController.setIZone(kIz);
-        pidController.setFF(kFF);
-        pidController.setOutputRange(kMinOutput, kMaxOutput);
-
-    }
-
-    public REVLibError shooterSetPIDReference(double reference,  SparkMaxPIDController pidController) {
-        reference = Math.clamp(reference, -maxRPM, maxRPM);
-        return pidController.setReference(reference, CANSparkMax.ControlType.kVelocity);
-
-    }
-
-    public REVLibError shooterSetDefaultPIDReference( SparkMaxPIDController pidController){
-        return pidController.setReference(Math.clamp(shooterPIDTarget, -maxRPM, maxRPM) , CANSparkMax.ControlType.kVelocity);
     }
 
     /**
