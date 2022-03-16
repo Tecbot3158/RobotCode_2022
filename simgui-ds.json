@@ -1,9 +1,4 @@
 {
-  "Keyboard 0 Settings": {
-    "window": {
-      "visible": true
-    }
-  },
   "keyboardJoysticks": [
     {
       "axisConfig": [
@@ -12,8 +7,8 @@
           "incKey": 68
         },
         {
-          "decKey": 87,
-          "incKey": 83
+          "decKey": 83,
+          "incKey": 87
         },
         {
           "decKey": 69,
@@ -96,7 +91,8 @@
   ],
   "robotJoysticks": [
     {
-      "guid": "030000004c050000cc09000011810000"
+      "guid": "78696e70757401000000000000000000",
+      "useGamepad": true
     }
   ],
   "useEnableDisableHotkeys": true

@@ -31,16 +31,14 @@ public class DefaultDrive extends CommandBase {
     @Override
     public void execute() {
         // left y
-        double y = -Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(true)), -1, 1);
+        double x = Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(true)), -1, 1);
         // left x
-        double x = -Math.clamp((OI.getInstance().getPilot().getLeftAxisY()), -1, 1);
-        if (Robot.getRobotContainer().getDriveTrain().getCurrentDrivingMode() == DriveTrain.DrivingMode.Default) {
-            x = -OI.getInstance().getPilot().getLeftAxisY();
-        }
+        double y = -Math.clamp((OI.getInstance().getPilot().getLeftAxisY()), -1, 1);
+
         // right x
-        double turn = (OI.getInstance().getPilot().getRightAxisX());
+        double turn = -(OI.getInstance().getPilot().getRightAxisX());
         // Triggers
-        double middleWheel = OI.getInstance().getPilot().getTriggers();
+        double middleWheel = -OI.getInstance().getPilot().getRightAxisX();
         SmartDashboard.putNumber("TRIGGERS ", middleWheel);
 
         Robot.getRobotContainer().getDriveTrain().defaultDrive(x, y, turn, middleWheel);

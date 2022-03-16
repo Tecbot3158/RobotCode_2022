@@ -153,7 +153,6 @@ public class TecbotEncoder implements CounterBase {
         }
     }
 
-
     @Override
     public int get() {
         if (encoder != null)
