@@ -2,14 +2,19 @@ package frc.robot.resources.splines;
 
 public class Derivative {
 
-    public double squareX;
-    public double x;
+    public double squareCoeff;
+    public double linearCoeff;
     public double indep;
 
     public Derivative(double square, double lineal, double term) {
-        squareX = square;
-        x = lineal;
+        squareCoeff = square;
+        linearCoeff = lineal;
         indep = term;
     }
 
+    public double fPrime(double x) {
+
+        return (squareCoeff * x * x + linearCoeff * x + indep);
+
+    }
 }

@@ -2,16 +2,25 @@ package frc.robot.resources.splines;
 
 public class CubicSpline {
 
-    public double cubicX;
-    public double squareX;
-    public double x;
-    public double indep;
+    public double cubicCoeff;
+    public double squareCoeff;
+    public double linearCoeff;
+    public double independentTerm;
 
-    public CubicSpline(double cubic, double square, double lineal, double term) {
-        cubicX = cubic;
-        squareX = square;
-        x = lineal;
-        indep = term;
+    public CubicSpline(double cubic, double square, double m_linear, double term) {
+        cubicCoeff = cubic;
+        squareCoeff = square;
+        linearCoeff = m_linear;
+        independentTerm = term;
+    }
+
+    public double f(double x) {
+
+        double cubic = cubicCoeff * x * x * x;
+        double cuadratic = squareCoeff * x * x;
+        double linear = linearCoeff * x;
+
+        return (cubic + cuadratic + linear + independentTerm);
     }
 
 }

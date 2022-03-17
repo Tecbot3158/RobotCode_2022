@@ -1,6 +1,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
+import frc.robot.commands.chassis.drivingModes.ToggleMecanum;
 import frc.robot.commands.feeder.FeederSetToSpeed;
 import frc.robot.commands.oitests.OITestTriggers;
 import frc.robot.commands.shooter.ShooterGoRaw;
@@ -39,9 +42,8 @@ public class OI {
         pilot.whileHeld(TecbotController.ButtonType.POV_0, new ShooterGoRaw(0.5));
         pilot.whileHeld(TecbotController.ButtonType.POV_180, new ShooterGoRaw(-0.5));
 
-
-
-
+        pilot.whenPressed(TecbotController.ButtonType.X, new ToggleMecanum());
+        pilot.whenPressed(TecbotController.ButtonType.A, new ChassisSetDefaultDrive());
 
     }
 
