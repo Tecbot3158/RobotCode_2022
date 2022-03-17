@@ -14,7 +14,7 @@ import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.transport.Feeder;
 import frc.robot.subsystems.transport.Rollers;
 import frc.robot.subsystems.turret.Turret;
-import frc.robot.subsystems.vision.Tecbotcamera;
+import frc.robot.subsystems.vision.TecbotCamera;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -30,7 +30,7 @@ public class RobotContainer {
 
     private Intake intake;
     private DriveTrain driveTrain;
-    private Tecbotcamera tecbotcamera;
+    private TecbotCamera tecbotCamera;
 
     private Turret turret;
     private Feeder feeder;
@@ -39,7 +39,6 @@ public class RobotContainer {
     private Navx gyroscope;
 
     private Shooter shooter;
-
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -51,7 +50,7 @@ public class RobotContainer {
     public RobotContainer() {
 
         gyroscope = new Navx();
-        tecbotcamera = new Tecbotcamera();
+        tecbotCamera = new TecbotCamera();
 
         driveTrain = new DriveTrain();
 
@@ -128,11 +127,11 @@ public class RobotContainer {
         return turret;
     }
 
-    public Tecbotcamera getTecbotcamera() {
-        return tecbotcamera;
+    public TecbotCamera getTecbotCamera() {
+        return tecbotCamera;
     }
 
-    public Shooter getShooter(){
+    public Shooter getShooter() {
         return shooter;
     }
 

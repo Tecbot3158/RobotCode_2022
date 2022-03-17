@@ -9,7 +9,7 @@ import frc.robot.RobotMap;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 
-public class Tecbotcamera extends SubsystemBase {
+public class TecbotCamera extends SubsystemBase {
 
     PhotonCamera photonCamera;
     PhotonPipelineResult latestResult, previousResult;
@@ -21,7 +21,7 @@ public class Tecbotcamera extends SubsystemBase {
      * For now it uses Photonvision with Photonlib to retrieve the values
      * from the Network Tables
      */
-    public Tecbotcamera() {
+    public TecbotCamera() {
 
         photonCamera = new PhotonCamera(RobotMap.TECBOT_CAMERA_NAME);
 
@@ -29,13 +29,14 @@ public class Tecbotcamera extends SubsystemBase {
 
     /**
      * Returns yaw value from latest result.
-     * <p></p>
-     * <b>{@link Tecbotcamera#update() } MUST be called
+     * <p>
+     * </p>
+     * <b>{@link TecbotCamera#update() } MUST be called
      * to update the latest Result. Otherwise, the last fetched
      * result will be used.</b>
      *
      * @return the yaw from the best target, if any.
-     * otherwise, returns 0.
+     *         otherwise, returns 0.
      */
     public double getYaw() {
         double yaw = 0;
@@ -50,13 +51,14 @@ public class Tecbotcamera extends SubsystemBase {
 
     /**
      * Returns area value from target.
-     * <p></p>
-     * <b>{@link Tecbotcamera#update() } MUST be called
+     * <p>
+     * </p>
+     * <b>{@link TecbotCamera#update() } MUST be called
      * to update the latest Result. Otherwise, the last fetched
      * result will be used.</b>
      *
      * @return the area from the best target, if any.
-     * otherwise, returns 0.
+     *         otherwise, returns 0.
      */
     public double getArea() {
         double area = 0;
@@ -71,13 +73,14 @@ public class Tecbotcamera extends SubsystemBase {
 
     /**
      * Returns pitch value from latest result.
-     * <p></p>
-     * <b>{@link Tecbotcamera#update() } MUST be called
+     * <p>
+     * </p>
+     * <b>{@link TecbotCamera#update() } MUST be called
      * to update the latest Result. Otherwise, the last fetched
      * result will be used.</b>
      *
      * @return the pitch from the best target, if any.
-     * otherwise, returns 0.
+     *         otherwise, returns 0.
      */
     public double getPitch() {
         double pitch = 0;
@@ -92,8 +95,8 @@ public class Tecbotcamera extends SubsystemBase {
 
     /**
      * Fetches latest result.
-     * It will overwrite {@link Tecbotcamera#latestResult} and
-     * {@link Tecbotcamera#previousResult}
+     * It will overwrite {@link TecbotCamera#latestResult} and
+     * {@link TecbotCamera#previousResult}
      */
     public void update() {
 

@@ -7,11 +7,11 @@ package frc.robot.commands.turret;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.turret.Turret;
-import frc.robot.subsystems.vision.Tecbotcamera;
+import frc.robot.subsystems.vision.TecbotCamera;
 
 public class MoveTurretToTarget extends CommandBase {
 
-    Tecbotcamera vision;
+    TecbotCamera vision;
     Turret turret;
 
     /**
@@ -20,7 +20,7 @@ public class MoveTurretToTarget extends CommandBase {
     public MoveTurretToTarget() {
         // Use addRequirements() here to declare subsystem dependencies.
 
-        vision = Robot.getRobotContainer().getTecbotcamera();
+        vision = Robot.getRobotContainer().getTecbotCamera();
         turret = Robot.getRobotContainer().getTurret();
 
         addRequirements(turret, vision);
@@ -36,14 +36,14 @@ public class MoveTurretToTarget extends CommandBase {
     public void execute() {
 
         vision.update();
-        double yaw = Robot.getRobotContainer().getTecbotcamera().getYaw();
-//        turret.settoTarget(yaw);
+        double yaw = Robot.getRobotContainer().getTecbotCamera().getYaw();
+        // turret.settoTarget(yaw);
 
-//        if (turret.getTurretPID().atSetpoint()) {
-//
-//            end(true);
-//
-//        }
+        // if (turret.getTurretPID().atSetpoint()) {
+        //
+        // end(true);
+        //
+        // }
 
     }
 
