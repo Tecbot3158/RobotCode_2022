@@ -11,6 +11,7 @@ public class TecbotPWMLEDStrip {
 
     AddressableLED led;
     AddressableLEDBuffer ledBuffer;
+    int rainbowFirstPixelHue;
 
     /**
      * Creates a new Addressable LED strip connected through PWM.
@@ -25,6 +26,7 @@ public class TecbotPWMLEDStrip {
 
         led.setData(ledBuffer);
         led.start();
+        rainbowFirstPixelHue = 0;
     }
 
     /**
@@ -40,5 +42,29 @@ public class TecbotPWMLEDStrip {
             ledBuffer.setHSV(i, h, s, v);
         }
         led.setData(ledBuffer);
+    }
+
+    private void setSequenceRainbow() {
+        // For every pixel
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+            // Calculate the hue - hue is easier for rainbows because the color
+            // shape is a circle so only one value needs to precess
+            final var hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
+            // Set the value
+            ledBuffer.setHSV(i, hue, 255, 128);
+        }
+        // Increase by to make the rainbow "move"
+        rainbowFirstPixelHue += 3;
+        // Check bounds
+        rainbowFirstPixelHue %= 180;
+        led.setData(ledBuffer);
+    }
+
+    public void setClear() {
+        for (int i = 0; i < ledBuffer.getLength(); i++) {
+            ledBuffer.setHSV(i, 0, 0, 0);
+        }
+        led.setData(ledBuffer);
+        // led.stop();
     }
 }
