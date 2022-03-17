@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -39,6 +41,9 @@ public class Robot extends TimedRobot {
         robotContainer.configureButtonBindings();
 
         robotContainer.getDriveTrain().setDefaultCommand(new DefaultDrive());
+        // DoubleSolenoid a = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
+
+        robotContainer.getNavx().reset();
 
     }
 

@@ -80,20 +80,20 @@ public class SplineGenerator {
 		return new CubicSpline(a1, b1, c1, d1);
 	}
 
-	public static Derivative DerivateSpline(CubicSpline spline) {
+	public static Derivative DifferentiateSpline(CubicSpline spline) {
 
 		// Coeficiente x cuadrada de la derivada del spline0
-		double p = (3 * spline.cubicX);
+		double p = (3 * spline.cubicCoeff);
 		// Coeficiente x de la derivada del spline0
-		double q = (2 * spline.squareX);
+		double q = (2 * spline.squareCoeff);
 		// Termino independiente de la derivada del spline0
-		double r = spline.x;
+		double r = spline.linearCoeff;
 
 		return new Derivative(p, q, r);
 	}
 
 	public static double angleFromDerivate(Derivative derivative, double xPos) {
-		double pendienteActual = (derivative.squareX * xPos * xPos) + (derivative.x * xPos) + derivative.indep;
+		double pendienteActual = derivative.fPrime(xPos);
 		System.out.println("m: " + pendienteActual);
 		return Math.toDegrees(Math.atan(1 / pendienteActual));
 	}
