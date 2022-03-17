@@ -48,5 +48,13 @@ public class Intake extends SubsystemBase {
         intakeMotor.set(RobotMap.INTAKE_OFF);
     }
 
-
+    public void toggleIntake() {
+        if (intakeSolenoids.get() == RobotMap.INTAKE_POSITION_RETRACTED) {
+            intakeExtend();
+            intakeMotorsAbsorb();
+        } else {
+            intakeRetract();
+            intakeMotorsOff();
+        }
+    }
 }
