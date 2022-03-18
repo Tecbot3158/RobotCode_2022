@@ -4,7 +4,13 @@ public class Math {
 
     public static final double PI = 3.141592653589793238462643383279502884197;
 
-
+    /**
+     * @param p  input to clamp
+     * @param mn minimum value of the output
+     * @param mx maximum value of the output
+     * @return if the input is within mn and mx, returns p. If the input is out of
+     *         bounds, returns either mn or mx.
+     */
     public static double clamp(double p, double mn, double mx) {
         return java.lang.Math.max(mn, java.lang.Math.min(p, mx));
     }
@@ -76,7 +82,7 @@ public class Math {
      */
 
     public static double[] RGBtoHSV(double r, double g, double b) {
-        double[] hsv = {0f, 0f, 0f};
+        double[] hsv = { 0f, 0f, 0f };
         double minRGB = Math.min(r, Math.min(g, b));
         double maxRGB = Math.max(r, Math.max(g, b));
 
