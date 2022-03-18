@@ -16,6 +16,7 @@ public class Intake extends SubsystemBase {
 
         intakeSolenoids = RobotConfigurator.buildDoubleSolenoid(RobotMap.INTAKE_SOLENOID_PORTS);
         intakeMotor = new TecbotSpeedController(RobotMap.INTAKE_MOTOR_PORT, RobotMap.INTAKE_MOTOR_TYPE);
+        intakeMotor.setInverted(RobotMap.INTAKE_MOTOR_IS_INVERTED);
     }
 
     // getters
