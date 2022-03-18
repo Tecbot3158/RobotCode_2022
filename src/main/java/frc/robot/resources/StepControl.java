@@ -15,6 +15,8 @@ public class StepControl {
 
     double currentOutput = 0;
 
+    double range = 0.01;
+
 
     public StepControl ( double kMinimumAbsoluteOutput, double kTarget, double kCurrentPosition,
                          double kIncrementMultiplier ){
@@ -55,6 +57,10 @@ public class StepControl {
         return this.kTarget = target;
     }
 
+    public double getTarget(){
+        return this.kTarget;
+    }
+
     public double setMinAbsoluteOutput(double minOutput){
         return   this.kMinimumAbsoluteOutput = minOutput;
     }
@@ -62,5 +68,25 @@ public class StepControl {
     public double getCurrentPosition(){
         return this.currentPosition;
     }
+
+    /**
+     * How far off should the current position be in order to be
+     * within range.
+     *
+     * Default: 0.01
+     *
+     * e.g. if it its within 99% it will be considered as in range.
+     *
+     * @param range
+     * @return
+     */
+    public double setRange(double range){
+        return this.range = range;
+    }
+
+    public boolean isInRange(){
+        return Math.abs(currentPosition / kTarget ) <= ( (double) 1 - this.range );
+    }
+
 
 }
