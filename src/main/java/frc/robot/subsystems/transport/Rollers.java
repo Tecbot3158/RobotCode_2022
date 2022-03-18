@@ -26,7 +26,14 @@ public class Rollers extends SubsystemBase {
 
     public void setRaw(double speed) {
         roller.set(speed);
+    }
 
+    public void setAbsorb (){
+        roller.set(RobotMap.TRANSPORT_ROLLERS_ABSORB_SPEED);
+    }
+
+    public void setThrow (){
+        roller.set(RobotMap.TRANSPORT_ROLLERS_THROW_SPEED);
     }
 
     @Override

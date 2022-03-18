@@ -18,12 +18,7 @@ public class Feeder extends SubsystemBase {
     TecbotSpeedController feeder;
 
 
-    private SparkMaxPIDController feederPIDController;
     private RelativeEncoder feederEncoder;
-
-    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM ;
-    private double feederPIDTarget;
-
 
     /**
      * Creates a new Feeder.
@@ -32,52 +27,7 @@ public class Feeder extends SubsystemBase {
         feeder = new TecbotSpeedController(RobotMap.TRANSPORT_FEEDER_PORT, RobotMap.TRANSPORT_FEEDER_MOTOR_TYPE);
         feeder.setInverted(RobotMap.TRANSPORT_FEEDER_IS_INVERTED);
 
-        initPID();
 
-    }
-
-    public void initPID() {
-        CANSparkMax motor = feeder.getCANSparkMax();
-
-        feederEncoder = motor.getEncoder();
-        feederPIDController = motor.getPIDController();
-
-        kP = RobotMap.FEEDER_PID_kP;
-        kI = RobotMap.FEEDER_PID_kI;
-        kD = RobotMap.FEEDER_PID_kD;
-        kIz = RobotMap.FEEDER_PID_kIz;
-        kFF = RobotMap.FEEDER_PID_kFF;
-        kMaxOutput = RobotMap.FEEDER_PID_kMaxOutput;
-        kMinOutput = RobotMap.FEEDER_PID_kMinOutput;
-        maxRPM = RobotMap.FEEDER_PID_kMaxRPM;
-
-        feederPIDTarget = RobotMap.FEEDER_PID_Target;
-
-        setPIDController(feederPIDController);
-    }
-
-    public void setPIDController(SparkMaxPIDController pidController) {
-        pidController.setP(kP);
-        pidController.setI(kI);
-        pidController.setD(kD);
-        pidController.setIZone(kIz);
-        pidController.setFF(kFF);
-        pidController.setOutputRange(kMinOutput, kMaxOutput);
-
-    }
-
-    public REVLibError feederSetPIDReference(double reference, SparkMaxPIDController pidController) {
-        reference = Math.clamp( reference, -maxRPM, maxRPM);
-        return pidController.setReference(reference, CANSparkMax.ControlType.kVelocity);
-
-    }
-
-    public REVLibError feederSetDefaultPIDReference( SparkMaxPIDController pidController){
-        return pidController.setReference(Math.clamp(feederPIDTarget, -maxRPM, maxRPM), CANSparkMax.ControlType.kVelocity);
-    }
-
-    public SparkMaxPIDController getFeederPIDController() {
-        return feederPIDController;
     }
 
     public TecbotSpeedController getFeederMotor() {
