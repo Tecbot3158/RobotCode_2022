@@ -208,8 +208,8 @@ public class DriveTrain extends SubsystemBase {
 
     public void drive(double turn, double speed) {
 
-        double leftPower = (turn + speed);
-        double rightPower = -turn + speed;
+        double leftPower = (-turn + speed);
+        double rightPower = turn + speed;
 
         tankDrive(leftPower, rightPower);
     }
@@ -383,7 +383,7 @@ public class DriveTrain extends SubsystemBase {
             deltaAngle = -deltaAngle + 360;
         }
 
-        double correction = TecbotConstants.TURN_CORRECTION * deltaAngle;
+        double correction = -TecbotConstants.TURN_CORRECTION * deltaAngle;
         double leftSide = 0;
         double rightSide = 0;
 
@@ -397,8 +397,8 @@ public class DriveTrain extends SubsystemBase {
 
         if (middleSideCorrection > 1) {
             x *= 1 / middleSideCorrection;
-            leftSide = (y - correction + turn);
-            rightSide = (y + correction - turn);
+            leftSide = (y + correction + turn);
+            rightSide = (y - correction - turn);
         } else {
             leftSide = middleSideCorrection * (y + correction + turn);
             rightSide = middleSideCorrection * (y - correction - turn);

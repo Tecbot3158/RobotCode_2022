@@ -35,7 +35,7 @@ public class DefaultDrive extends CommandBase {
         double y = -Math.clamp((OI.getInstance().getPilot().getLeftAxisY()), -1, 1);
 
         // right x
-        double turn = -(OI.getInstance().getPilot().getRightAxisX());
+        double turn = (OI.getInstance().getPilot().getRightAxisX());
         // Triggers
         double middleWheel = -OI.getInstance().getPilot().getRightAxisX();
         SmartDashboard.putNumber("TRIGGERS ", middleWheel);
