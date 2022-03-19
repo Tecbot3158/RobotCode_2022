@@ -16,7 +16,7 @@ public class SplineMove extends CommandBase {
     /**
      * Creates a new autonomous command in which the robot will follow the given
      * trajectory.
-     * 
+     *
      * @param spline         The spline that defines the trajectory that this
      *                       command will follow.
      * @param maxSpeed       The maximum speed that will be given to the robot at
