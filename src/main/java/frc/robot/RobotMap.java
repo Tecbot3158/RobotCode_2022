@@ -40,8 +40,9 @@ public class RobotMap {
      * If any of the motors of the chassis must be inverted,
      * indicate the port(s) in these arrays.
      */
-    public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_INVERTED_MOTORS = {DRIVE_TRAIN_LEFT_CHASSIS_PORTS[0], DRIVE_TRAIN_LEFT_CHASSIS_PORTS[1]};
-    public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = {};
+    public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_INVERTED_MOTORS = {};
+    public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = { DRIVE_TRAIN_RIGHT_CHASSIS_PORTS[0], DRIVE_TRAIN_RIGHT_CHASSIS_PORTS[1] };
+    //public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = {};
 
     // encoders
     // specify which motors are responsible for each side of the robot odometry.
@@ -54,6 +55,11 @@ public class RobotMap {
     public static final int DRIVE_TRAIN_RIGHT_CHASSIS_MOTOR_WITH_ENCODER = DRIVE_TRAIN_RIGHT_CHASSIS_PORTS[0]; //12
     // ... dragonfly
     public static final int DRIVE_TRAIN_MIDDLE_CHASSIS_MOTOR_WITH_ENCODER = RobotConfigurator.CONFIG_NOT_SET;
+
+
+
+    public static final double DRIVE_TRAIN_METERS_PER_PULSE_TORQUE = 0;
+    public static final double DRIVE_TRAIN_METERS_PER_PULSE_SPEED = 0;
 
     // chassis encoder-specific
     /*
@@ -81,6 +87,9 @@ public class RobotMap {
     public static final int[] DRIVE_TRAIN_TRANSMISSION_SOLENOID_PORTS = {PCM_1_PORT, 2, 3};
     public static final DoubleSolenoid.Value DRIVE_TRAIN_TORQUE_TRANSMISSION = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value DRIVE_TRAIN_SPEED_TRANSMISSION = DoubleSolenoid.Value.kReverse;
+
+
+
 
     // true if transmission available
     public static final boolean DRIVE_TRAIN_TRANSMISSION_AVAILABLE = true;

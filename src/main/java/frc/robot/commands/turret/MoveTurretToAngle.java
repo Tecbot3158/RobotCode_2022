@@ -4,39 +4,67 @@
 
 package frc.robot.commands.turret;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.resources.StepControl;
+import frc.robot.subsystems.turret.Turret;
 
-public class MoveTurretAngle extends CommandBase {
+public class MoveTurretToAngle extends CommandBase {
+    double kMinimumAbsoluteOutput;
+    double kTarget;
+    double kCurrentPosition;
+    double kIncrementMultiplier;
     /**
      * Creates a new MoveTurretAngle.
      */
 
     double angle;
+    Turret turret;
 
-    public MoveTurretAngle(double Angle) {
+    StepControl stepControl;
+
+    public MoveTurretToAngle(double angle) {
         // Use addRequirements() here to declare subsystem dependencies.
 
-        addRequirements(Robot.getRobotContainer().getTurret());
+        this.turret = Robot.getRobotContainer().getTurret();
+        addRequirements(turret);
 
-        angle = Angle;
+        this.angle = angle;
+
+        kMinimumAbsoluteOutput = RobotMap.TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT;
+        kTarget = turret.getRotationsFromAngle(this.angle);
+        kCurrentPosition = turret.getTurretEncoder().getPosition();
+        kIncrementMultiplier = RobotMap.TURRET_DEFAULT_kINCREMENT_MULTIPLIER;
+
+        stepControl = new StepControl(kMinimumAbsoluteOutput, kTarget, kCurrentPosition, kIncrementMultiplier);
+
+        stepControl.setRange(RobotMap.TURRET_DEFAULT_TARGET_RANGE);
 
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+
+        SmartDashboard.putNumber("turret - target", stepControl.getTarget());
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
 
-//        Robot.getRobotContainer().getTurret().settoAngle(angle);
-//
-//        if (Robot.getRobotContainer().getTurret().getTurretPID().atSetpoint()) {
-//            end(true);
-//        }
+        double rotations = turret.getTurretEncoder().getPosition();
+
+        double speed = stepControl.getOutput(rotations);
+
+        turret.setTurretRaw(speed);
+
+        SmartDashboard.putNumber("turret - speed", speed);
+        SmartDashboard.putNumber("turret - pos", rotations);
+
 
     }
 
@@ -48,6 +76,6 @@ public class MoveTurretAngle extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return stepControl.isInRange();
     }
 }

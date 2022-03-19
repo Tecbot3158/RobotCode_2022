@@ -27,8 +27,8 @@ public class ShooterGoToTarget extends CommandBase {
         shooter = Robot.getRobotContainer().getShooter();
 
        shooter.getShooterEncoder().setPosition(0);
-        currentPos = shooter.getShooterEncoder().getVelocity();
-       target = 100;
+       currentPos = shooter.getShooterEncoder().getVelocity();
+       target = 3500;
 
 
 
@@ -61,15 +61,13 @@ public class ShooterGoToTarget extends CommandBase {
 
         shooter.setShooterMotorsRaw(output);
 
-        SmartDashboard.getNumber("setminout", 0);
-
-        minout = SmartDashboard.getNumber("setminout", minout);
-        target = SmartDashboard.getNumber("settarget", target);
-        increment =  SmartDashboard.getNumber("setincr", increment);
-
-        stepControl.setTarget(target);
-        stepControl.setIncrementMultiplier(increment);
-        stepControl.setMinAbsoluteOutput(minout);
+//        minout = SmartDashboard.getNumber("setminout", minout);
+//        target = SmartDashboard.getNumber("settarget", target);
+//        increment =  SmartDashboard.getNumber("setincr", increment);
+//
+//        stepControl.setTarget(target);
+//        stepControl.setIncrementMultiplier(increment);
+//        stepControl.setMinAbsoluteOutput(minout);
 
 
 
