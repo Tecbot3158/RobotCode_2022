@@ -39,6 +39,7 @@ public class FeederSetToSpeed extends CommandBase {
     @Override
     public void initialize() {
 
+        SmartDashboard.putBoolean("feeder done", false);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -56,6 +57,7 @@ public class FeederSetToSpeed extends CommandBase {
         // feeder.setRaw(0.42);
 
         SmartDashboard.putBoolean("feeder in RANGE.", stepControl.isInRange() );
+
     }
 
     // Called once the command ends or is interrupted.
@@ -64,6 +66,8 @@ public class FeederSetToSpeed extends CommandBase {
         // feeder.setRaw(0);
 
         // System.out.println("OUTTT!");
+
+        SmartDashboard.putBoolean("feeder done", true);
 
 
     }

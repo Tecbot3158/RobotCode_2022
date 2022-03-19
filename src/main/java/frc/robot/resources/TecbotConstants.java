@@ -164,7 +164,7 @@ public class TecbotConstants {
         // TRANSPORTATION SYSTEMS ENDS
 
         // JOYSTICK STARTS
-        public static final double DEFAULT_JOYSTICK_OFFSET = .03;
+        public static final double DEFAULT_JOYSTICK_OFFSET = .15;
         public static final double JOYSTICK_SPEED_RELEASE_POINT = .5;
         public static final double JOYSTICK_SPEED_MULTIPLIER = .45;
         public static final boolean APPLY_SPEED_RELEASE_TO_LEFT_AXIS = true;

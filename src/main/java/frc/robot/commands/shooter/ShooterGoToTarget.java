@@ -28,7 +28,7 @@ public class ShooterGoToTarget extends CommandBase {
 
        shooter.getShooterEncoder().setPosition(0);
        currentPos = shooter.getShooterEncoder().getVelocity();
-       target = 3500;
+       target = 2000;
 
 
 

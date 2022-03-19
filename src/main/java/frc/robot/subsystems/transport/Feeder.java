@@ -27,6 +27,7 @@ public class Feeder extends SubsystemBase {
         feeder = new TecbotSpeedController(RobotMap.TRANSPORT_FEEDER_PORT, RobotMap.TRANSPORT_FEEDER_MOTOR_TYPE);
         feeder.setInverted(RobotMap.TRANSPORT_FEEDER_IS_INVERTED);
 
+        feederEncoder = feeder.getCANSparkMax().getEncoder();
 
     }
 

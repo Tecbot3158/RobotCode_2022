@@ -17,6 +17,9 @@ public class Intake extends SubsystemBase {
         intakeSolenoids = RobotConfigurator.buildDoubleSolenoid(RobotMap.INTAKE_SOLENOID_PORTS);
         intakeMotor = new TecbotSpeedController(RobotMap.INTAKE_MOTOR_PORT, RobotMap.INTAKE_MOTOR_TYPE);
         intakeMotor.setInverted(RobotMap.INTAKE_MOTOR_IS_INVERTED);
+
+        intakeRetract();
+        intakeMotorsOff();
     }
 
     // getters
@@ -31,10 +34,12 @@ public class Intake extends SubsystemBase {
     // actions
     public void intakeRetract() {
         intakeSolenoids.set(RobotMap.INTAKE_POSITION_RETRACTED);
+        System.out.println(" intak reteract !!");
     }
 
     public void intakeExtend() {
         intakeSolenoids.set(RobotMap.INTAKE_POSITION_ACTIVE);
+        System.out.println("Intake extend!!");
     }
 
     public void intakeMotorsAbsorb() {

@@ -12,12 +12,15 @@ import frc.robot.subsystems.transport.Feeder;
 
 public class FeederRaw extends CommandBase {
 
+    private final double speed;
     Feeder feeder;
 
     /**
      * Creates a new IntakeAbsorb.
      */
-    public FeederRaw() {
+    public FeederRaw( double speed) {
+
+        this.speed = speed;
 
         feeder = Robot.getRobotContainer().getFeeder();
         addRequirements(feeder);
@@ -27,6 +30,8 @@ public class FeederRaw extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+
+        feeder.setRaw(speed);
 
     }
 
@@ -56,6 +61,6 @@ public class FeederRaw extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 }
