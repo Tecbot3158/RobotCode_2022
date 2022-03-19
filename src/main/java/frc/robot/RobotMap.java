@@ -18,7 +18,7 @@ public class RobotMap {
     public static final int CLIMBER_LEFT_LIMIT_SWITCH_PORT = 0;
 
     // PCM
-    private static final int PCM_1_PORT = 50;
+    private static final int PCM_1_PORT = 7;
 
     private static final PneumaticsModuleType PCM_TYPE = PneumaticsModuleType.REVPH;
     // PCM end
@@ -26,8 +26,8 @@ public class RobotMap {
     // DRIVETRAIN
 
     // chassis
-    public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_PORTS = {10, 9};
-    public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_PORTS = {1, 2};
+    public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_PORTS = {10, 11};
+    public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_PORTS = {12, 13};
 
     // chassis motor types
     public static final TypeOfMotor[] DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_TYPES = {TypeOfMotor.CAN_SPARK_BRUSHLESS,
@@ -40,7 +40,7 @@ public class RobotMap {
      * If any of the motors of the chassis must be inverted,
      * indicate the port(s) in these arrays.
      */
-    public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_INVERTED_MOTORS = {10, 9};
+    public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_INVERTED_MOTORS = {DRIVE_TRAIN_LEFT_CHASSIS_PORTS[0], DRIVE_TRAIN_LEFT_CHASSIS_PORTS[1]};
     public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = {};
 
     // encoders
@@ -50,8 +50,8 @@ public class RobotMap {
      * indicate the speed controller port here, and put encoder ports in
      * config not set
      */
-    public static final int DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_WITH_ENCODER = 1;
-    public static final int DRIVE_TRAIN_RIGHT_CHASSIS_MOTOR_WITH_ENCODER = 9;
+    public static final int DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_WITH_ENCODER = DRIVE_TRAIN_LEFT_CHASSIS_PORTS[0]; // 10
+    public static final int DRIVE_TRAIN_RIGHT_CHASSIS_MOTOR_WITH_ENCODER = DRIVE_TRAIN_RIGHT_CHASSIS_PORTS[0]; //12
     // ... dragonfly
     public static final int DRIVE_TRAIN_MIDDLE_CHASSIS_MOTOR_WITH_ENCODER = RobotConfigurator.CONFIG_NOT_SET;
 
@@ -78,7 +78,7 @@ public class RobotMap {
     // transmission
     // for toggling between 'torque' and 'speed' modes.
     // ... solenoid
-    public static final int[] DRIVE_TRAIN_TRANSMISSION_SOLENOID_PORTS = {PCM_1_PORT, 4, 5};
+    public static final int[] DRIVE_TRAIN_TRANSMISSION_SOLENOID_PORTS = {PCM_1_PORT, 2, 3};
     public static final DoubleSolenoid.Value DRIVE_TRAIN_TORQUE_TRANSMISSION = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value DRIVE_TRAIN_SPEED_TRANSMISSION = DoubleSolenoid.Value.kReverse;
 
@@ -87,12 +87,12 @@ public class RobotMap {
 
     // dragonfly
 
-    public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_PORT = {11};
+    public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_PORT = {15};
     // before mechanical change the wheel was inverted.
-    public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_INVERTED_MOTORS = {11};
+    public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_INVERTED_MOTORS = {DRIVE_TRAIN_MIDDLE_WHEEL_PORT[0]};
     public static final TypeOfMotor[] DRIVE_TRAIN_MIDDLE_WHEEL_MOTOR_TYPES = {TypeOfMotor.CAN_SPARK_BRUSHLESS};
 
-    public static final int[] DRIVE_TRAIN_WHEEL_SOLENOID_PORTS = {PCM_1_PORT, 6, 7};
+    public static final int[] DRIVE_TRAIN_WHEEL_SOLENOID_PORTS = {PCM_1_PORT, 4, 5};
     public static final DoubleSolenoid.Value DRIVE_TRAIN_LOWERED_WHEEL = DoubleSolenoid.Value.kReverse;
     public static final DoubleSolenoid.Value DRIVE_TRAIN_RAISED_WHEEL = DoubleSolenoid.Value.kForward;
     public static final boolean DRIVE_TRAIN_DRAGON_FLY_IS_AVAILABLE = true;
@@ -102,7 +102,7 @@ public class RobotMap {
     // INTAKE
 
     // intake motor
-    public static final int INTAKE_MOTOR_PORT = 32;
+    public static final int INTAKE_MOTOR_PORT = 20;
     public static final TypeOfMotor INTAKE_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
     public static final boolean INTAKE_MOTOR_IS_INVERTED = true;
     public static final double INTAKE_ABSORB_SPEED = 0.4;
@@ -112,7 +112,7 @@ public class RobotMap {
     // negative when going out of the robot.
 
     // solenoid
-    public static final int[] INTAKE_SOLENOID_PORTS = {PCM_1_PORT, 9, 11};
+    public static final int[] INTAKE_SOLENOID_PORTS = {PCM_1_PORT, 0, 1};
     public static final DoubleSolenoid.Value INTAKE_POSITION_ACTIVE = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value INTAKE_POSITION_RETRACTED = DoubleSolenoid.Value.kReverse;
 
@@ -120,14 +120,14 @@ public class RobotMap {
 
     // TRANSPORT
     // ROLLERS
-    public static final int TRANSPORT_ROLLER_PORT = 6;
+    public static final int TRANSPORT_ROLLER_PORT = 30;
     public static final TypeOfMotor TRANSPORT_ROLLER_MOTOR_TYPE = TypeOfMotor.TALON_SRX;
     public static final boolean TRANSPORT_ROLLER_IS_INVERTED = false;
     public static final double TRANSPORT_ROLLERS_ABSORB_SPEED = 1;
     public static final double TRANSPORT_ROLLERS_THROW_SPEED = -1;
 
     // FEEDER
-    public static final int TRANSPORT_FEEDER_PORT = 8;
+    public static final int TRANSPORT_FEEDER_PORT = 35;
     public static final TypeOfMotor TRANSPORT_FEEDER_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
     public static final boolean TRANSPORT_FEEDER_IS_INVERTED = false;
 
@@ -181,7 +181,7 @@ public class RobotMap {
 
     // TURRET
     // should go clockwise when in positive.
-    public static final int TURRET_MOTOR_PORT = 29;
+    public static final int TURRET_MOTOR_PORT = 45;
     public static final TypeOfMotor TURRET_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
     public static final boolean TURRET_MOTOR_IS_INVERTED = false;
     public static final int[] TURRET_ENCODER_CHANNELS = {RobotConfigurator.CONFIG_NOT_SET,
@@ -221,7 +221,7 @@ public class RobotMap {
     public static final int[] CLIMBER_INVERTED_MOTORS = {};
 
     // in theory 2 pistons, but just one solenoid
-    public static final int[] CLIMBER_SOLENOID_PORTS = {PCM_1_PORT, 9, 10};
+    public static final int[] CLIMBER_SOLENOID_PORTS = {PCM_1_PORT, 6, 7};
     public static final DoubleSolenoid.Value CLIMBER_SOLENOID_EXTENDED_POSITION = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value CLIMBER_SOLENOID_RETRACTED_POSITION = DoubleSolenoid.Value.kReverse;
 
@@ -244,5 +244,4 @@ public class RobotMap {
 
     // VISION --- end
 
-    // INTAKE
 }
