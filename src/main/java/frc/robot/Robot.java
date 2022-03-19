@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.chassis.DefaultDrive;
 import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
+import frc.robot.resources.TecbotConstants;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -139,5 +140,11 @@ public class Robot extends TimedRobot {
 
     public static RobotContainer getRobotContainer() {
         return robotContainer;
+    }
+
+    public static void debug (String value) {
+        if ( TecbotConstants.DEBUG_ENABLED )
+            System.out.println( value );
+
     }
 }
