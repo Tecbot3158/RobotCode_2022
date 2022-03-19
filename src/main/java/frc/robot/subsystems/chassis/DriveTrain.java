@@ -143,8 +143,8 @@ public class DriveTrain extends SubsystemBase {
         transmissionState = TransmissionMode.torque;
         // encoders --- end!
 
-        lastLeftEncoderCount = leftMotorEncoders.getRaw();
-        lastRightEncoderCount = rightMotorEncoders.getRaw();
+        lastLeftEncoderCount = 0;
+        lastRightEncoderCount = 0;
 
     }
 
