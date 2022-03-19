@@ -53,6 +53,7 @@ public class RobotContainer {
         tecbotCamera = new TecbotCamera();
 
         driveTrain = new DriveTrain();
+        driveTrain.InitOdometry(gyroscope);
 
         intake = new Intake();
 

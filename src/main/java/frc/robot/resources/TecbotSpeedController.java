@@ -30,10 +30,10 @@ import edu.wpi.first.wpilibj.motorcontrol.*;
  */
 public class TecbotSpeedController {
 
-
     public enum TypeOfMotor {
 
-        TALON_SRX, PWM_TALON_SRX, VICTOR, SPARK, CAN_SPARK_BRUSHLESS, CAN_SPARK_BRUSHED, JAGUAR, VICTOR_SPX, PWM_VICTOR_SPX
+        TALON_SRX, PWM_TALON_SRX, VICTOR, SPARK, CAN_SPARK_BRUSHLESS, CAN_SPARK_BRUSHED, JAGUAR, VICTOR_SPX,
+        PWM_VICTOR_SPX
 
     }
 
@@ -52,7 +52,6 @@ public class TecbotSpeedController {
     public TecbotSpeedController(int port, TypeOfMotor m) {
 
         motorToUse = m;
-
 
         switch (motorToUse) {
 
@@ -85,7 +84,6 @@ public class TecbotSpeedController {
             case JAGUAR:
 
                 frcMotor = new Jaguar(port);
-
 
                 break;
 
@@ -124,8 +122,10 @@ public class TecbotSpeedController {
     public void set(double speed) {
         speed *= inverted ? -1 : 1;
 
-        if (phoenixMotor != null) phoenixMotor.set(ControlMode.PercentOutput, speed);
-        if (frcMotor != null) frcMotor.set(speed);
+        if (phoenixMotor != null)
+            phoenixMotor.set(ControlMode.PercentOutput, speed);
+        if (frcMotor != null)
+            frcMotor.set(speed);
 
         if (phoenixMotor == null && frcMotor == null)
             DriverStation.reportError("That type of motor doesn't exist!", true);
@@ -146,18 +146,21 @@ public class TecbotSpeedController {
 
     }
 
-
     public void stopMotor() {
 
-        if (frcMotor != null) frcMotor.stopMotor();
-        if (phoenixMotor != null) phoenixMotor.set(ControlMode.PercentOutput, 0);
+        if (frcMotor != null)
+            frcMotor.stopMotor();
+        if (phoenixMotor != null)
+            phoenixMotor.set(ControlMode.PercentOutput, 0);
 
     }
 
     public double get() {
 
-        if (phoenixMotor != null) return phoenixMotor.getMotorOutputPercent();
-        if (frcMotor != null) return frcMotor.get();
+        if (phoenixMotor != null)
+            return phoenixMotor.getMotorOutputPercent();
+        if (frcMotor != null)
+            return frcMotor.get();
         else
             DriverStation.reportError("Null motor", true);
         return 0;
@@ -166,8 +169,10 @@ public class TecbotSpeedController {
 
     public void setEncoderPosition(int value) {
 
-        if (motorToUse == TypeOfMotor.TALON_SRX) phoenixMotor.setSelectedSensorPosition(value);
-        else DriverStation.reportWarning("Not a talonSRX, sensor position not updated", false);
+        if (motorToUse == TypeOfMotor.TALON_SRX)
+            phoenixMotor.setSelectedSensorPosition(value);
+        else
+            DriverStation.reportWarning("Not a talonSRX, sensor position not updated", false);
 
     }
 

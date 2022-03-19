@@ -53,6 +53,7 @@
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/Rollers": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
+      "/LiveWindow/TecbotCamera": "Subsystem",
       "/LiveWindow/Tecbotcamera": "Subsystem",
       "/LiveWindow/Turret": "Subsystem",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",

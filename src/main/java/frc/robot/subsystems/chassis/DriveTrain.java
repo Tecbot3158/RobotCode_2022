@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems.chassis;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,6 +51,16 @@ public class DriveTrain extends SubsystemBase {
     // The angle the robot will stay in during mecanum or swerve drive unless
     // turning.
     double startingAngle;
+
+    // Differential drive odometry, helps to estimate the robot's position
+    // relative to the field when driving on tank mode.
+    DifferentialDriveOdometry odometry;
+
+    double lastLeftEncoderCount = 0;
+    double lastRightEncoderCount = 0;
+
+    double leftEncoderDistance = 0;
+    double rightEncoderDistance = 0;
 
     public enum DrivingMode {
         Default, Pivot, Mecanum, Swerve
@@ -130,6 +142,16 @@ public class DriveTrain extends SubsystemBase {
 
         transmissionState = TransmissionMode.torque;
         // encoders --- end!
+
+        lastLeftEncoderCount = leftMotorEncoders.getRaw();
+        lastRightEncoderCount = rightMotorEncoders.getRaw();
+
+    }
+
+    public void InitOdometry(Navx navx) {
+
+        odometry = new DifferentialDriveOdometry(
+                new Rotation2d(Math.toRadians(navx.getYaw())));
     }
 
     /**
@@ -603,4 +625,34 @@ public class DriveTrain extends SubsystemBase {
         }
 
     }
+
+    @Override
+    public void periodic() {
+
+        double deltaLeft = lastLeftEncoderCount - leftMotorEncoders.getRaw();
+        double deltaRight = lastRightEncoderCount - rightMotorEncoders.getRaw();
+
+        if (transmissionState == TransmissionMode.torque) {
+
+            leftEncoderDistance -= deltaLeft * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_TORQUE;
+            rightEncoderDistance -= deltaRight * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_TORQUE;
+
+        } else {
+
+            leftEncoderDistance -= deltaLeft * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_SPEED;
+            rightEncoderDistance -= deltaRight * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_SPEED;
+
+        }
+
+        lastLeftEncoderCount = leftMotorEncoders.getRaw();
+        lastRightEncoderCount = rightMotorEncoders.getRaw();
+
+        if (odometry != null) {
+            odometry.update(new Rotation2d(Math.toRadians(Robot.getRobotContainer().getNavx().getYaw())),
+                    leftEncoderDistance,
+                    rightEncoderDistance);
+        }
+
+    }
+
 }

@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
@@ -31,15 +30,14 @@ public class Climber extends SubsystemBase {
     private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
     private double ropePIDController0TargetRPM;
 
-
     public Climber() {
 
-        ropeController = RobotConfigurator.buildMotorList(RobotMap.CLIMBER_MOTOR_PORTS, RobotMap.CLIMBER_INVERTED_MOTORS, RobotMap.CLIMBER_MOTOR_TYPES);
+        ropeController = RobotConfigurator.buildMotorList(RobotMap.CLIMBER_MOTOR_PORTS,
+                RobotMap.CLIMBER_INVERTED_MOTORS, RobotMap.CLIMBER_MOTOR_TYPES);
         pistonHanger = RobotConfigurator.buildDoubleSolenoid(RobotMap.CLIMBER_SOLENOID_PORTS);
 
-
-        //TODO disable dragon fly in command for climber! Always!
-        //TODO Dragon fly cannot be extended!!
+        // TODO disable dragon fly in command for climber! Always!
+        // TODO Dragon fly cannot be extended!!
 
         initPID();
 
@@ -66,7 +64,6 @@ public class Climber extends SubsystemBase {
         ropeControllerSetPIDValues(ropePIDController0);
 
         ropeControllerSetPIDValues(ropePIDController1);
-
 
     }
 
@@ -114,6 +111,5 @@ public class Climber extends SubsystemBase {
     public RelativeEncoder getRopeControllerEncoder(int index) {
         return ropeController.getMotors().get(index).getCANSparkMax().getEncoder();
     }
-
 
 }

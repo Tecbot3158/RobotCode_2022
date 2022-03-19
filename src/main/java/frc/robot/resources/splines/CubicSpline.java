@@ -7,6 +7,8 @@ public class CubicSpline {
     public double linearCoeff;
     public double independentTerm;
 
+    private Derivative derivative;
+
     public CubicSpline(double cubic, double square, double m_linear, double term) {
         cubicCoeff = cubic;
         squareCoeff = square;
