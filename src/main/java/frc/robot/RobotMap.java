@@ -83,7 +83,7 @@ public class RobotMap {
         // transmission
         // for toggling between 'torque' and 'speed' modes.
         // ... solenoid
-        public static final int[] DRIVE_TRAIN_TRANSMISSION_SOLENOID_PORTS = { PCM_1_PORT, 2, 3 };
+        public static final int[] DRIVE_TRAIN_TRANSMISSION_SOLENOID_PORTS = { PCM_1_PORT, 4, 11 };
         public static final DoubleSolenoid.Value DRIVE_TRAIN_TORQUE_TRANSMISSION = DoubleSolenoid.Value.kForward;
         public static final DoubleSolenoid.Value DRIVE_TRAIN_SPEED_TRANSMISSION = DoubleSolenoid.Value.kReverse;
 
@@ -97,7 +97,7 @@ public class RobotMap {
         public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_INVERTED_MOTORS = { DRIVE_TRAIN_MIDDLE_WHEEL_PORT[0] };
         public static final TypeOfMotor[] DRIVE_TRAIN_MIDDLE_WHEEL_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS };
 
-        public static final int[] DRIVE_TRAIN_WHEEL_SOLENOID_PORTS = { PCM_1_PORT, 4, 5 };
+        public static final int[] DRIVE_TRAIN_WHEEL_SOLENOID_PORTS = { PCM_1_PORT, 3, 12 };
         public static final DoubleSolenoid.Value DRIVE_TRAIN_LOWERED_WHEEL = DoubleSolenoid.Value.kReverse;
         public static final DoubleSolenoid.Value DRIVE_TRAIN_RAISED_WHEEL = DoubleSolenoid.Value.kForward;
         public static final boolean DRIVE_TRAIN_DRAGON_FLY_IS_AVAILABLE = true;
@@ -111,15 +111,15 @@ public class RobotMap {
         public static final TypeOfMotor INTAKE_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
         public static final boolean INTAKE_MOTOR_IS_INVERTED = true;
         public static final double INTAKE_ABSORB_SPEED = 0.4;
-        public static final double INTAKE_EJECT_SPEED = -0.4;
+        public static final double INTAKE_EJECT_SPEED = -0.3;
         public static final double INTAKE_OFF = 0;
         // intake motor should be positive when receiving balls,
         // negative when going out of the robot.
 
         // solenoid
-        public static final int[] INTAKE_SOLENOID_PORTS = { PCM_1_PORT, 0, 1 };
-        public static final DoubleSolenoid.Value INTAKE_POSITION_ACTIVE = DoubleSolenoid.Value.kForward;
-        public static final DoubleSolenoid.Value INTAKE_POSITION_RETRACTED = DoubleSolenoid.Value.kReverse;
+        public static final int[] INTAKE_SOLENOID_PORTS = { PCM_1_PORT, 5, 10 };
+        public static final DoubleSolenoid.Value INTAKE_POSITION_ACTIVE = DoubleSolenoid.Value.kReverse;
+        public static final DoubleSolenoid.Value INTAKE_POSITION_RETRACTED = DoubleSolenoid.Value.kForward;
 
         // INTAKE --- end
 
@@ -137,7 +137,7 @@ public class RobotMap {
         public static final boolean TRANSPORT_FEEDER_IS_INVERTED = false;
 
         public static final double FEEDER_DEFAULT_TARGET_SPEED = 2500;
-        public static final double FEEDER_DEFAULT_kINCREMENT_MULTIPLIER = 0.005;
+        public static final double FEEDER_DEFAULT_kINCREMENT_MULTIPLIER = 0.000003;
 
         public static final double FEEDER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT = 0.05;
 
@@ -153,6 +153,8 @@ public class RobotMap {
         public static final double FEEDER_PID_kMaxRPM = 6969;
 
         public static final double FEEDER_PID_Target = 6696;
+
+        public static final double FEEDER_DEFAULT_SPEED = 1;
 
         // TRANSPORT --- end
 
@@ -181,6 +183,8 @@ public class RobotMap {
         public static final double SHOOTER_PID_kMaxRPM = 6969;
 
         public static final double SHOOTER_PID_Target = 6696;
+
+        public static final double SHOOTER_DEFAULT_SPEED = 0.6;
 
         // SHOOTER --- end
 
@@ -218,7 +222,7 @@ public class RobotMap {
 
         public static final double TURRET_DEFAULT_TARGET_RANGE = 0.03;
         public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.03;
-        public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = 0.002;
+        public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = 0.0002;
         // TURRET --- end
 
         // CLIMBER
@@ -228,7 +232,7 @@ public class RobotMap {
         public static final int[] CLIMBER_INVERTED_MOTORS = {};
 
         // in theory 2 pistons, but just one solenoid
-        public static final int[] CLIMBER_SOLENOID_PORTS = { PCM_1_PORT, 6, 7 };
+        public static final int[] CLIMBER_SOLENOID_PORTS = { PCM_1_PORT, 1, 14 };
         public static final DoubleSolenoid.Value CLIMBER_SOLENOID_EXTENDED_POSITION = DoubleSolenoid.Value.kForward;
         public static final DoubleSolenoid.Value CLIMBER_SOLENOID_RETRACTED_POSITION = DoubleSolenoid.Value.kReverse;
 
