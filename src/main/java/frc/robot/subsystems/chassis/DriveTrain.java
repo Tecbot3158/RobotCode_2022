@@ -109,16 +109,18 @@ public class DriveTrain extends SubsystemBase {
 
         // encoders begin!
 
-        leftMotorEncoders = RobotConfigurator.buildEncoder(
-                getSpecificMotor(RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_WITH_ENCODER),
-                RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[0], RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[1]);
-        rightMotorEncoders = RobotConfigurator.buildEncoder(
-                getSpecificMotor(RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_MOTOR_WITH_ENCODER),
-                RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[0],
-                RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[1]);
-        middleMotorEncoders = RobotConfigurator.buildEncoder(
-                getSpecificMotor(RobotMap.DRIVE_TRAIN_MIDDLE_CHASSIS_MOTOR_WITH_ENCODER),
-                RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[0], RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[1]);
+        // leftMotorEncoders = RobotConfigurator.buildEncoder(
+        // getSpecificMotor(RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_WITH_ENCODER),
+        // RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[0],
+        // RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[1]);
+        // rightMotorEncoders = RobotConfigurator.buildEncoder(
+        // getSpecificMotor(RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_MOTOR_WITH_ENCODER),
+        // RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[0],
+        // RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[1]);
+        // middleMotorEncoders = RobotConfigurator.buildEncoder(
+        // getSpecificMotor(RobotMap.DRIVE_TRAIN_MIDDLE_CHASSIS_MOTOR_WITH_ENCODER),
+        // RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[0],
+        // RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[1]);
 
         if (RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_IS_INVERTED && middleMotorEncoders != null)
             leftMotorEncoders.setInverted(true);
@@ -628,6 +630,23 @@ public class DriveTrain extends SubsystemBase {
 
     @Override
     public void periodic() {
+
+        if (leftMotorEncoders == null || rightMotorEncoders == null) {
+            leftMotorEncoders = RobotConfigurator.buildEncoder(
+                    getSpecificMotor(RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_MOTOR_WITH_ENCODER),
+                    RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[0],
+                    RobotMap.DRIVE_TRAIN_LEFT_CHASSIS_ENCODER_PORTS[1]);
+            rightMotorEncoders = RobotConfigurator.buildEncoder(
+                    getSpecificMotor(RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_MOTOR_WITH_ENCODER),
+                    RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[0],
+                    RobotMap.DRIVE_TRAIN_RIGHT_CHASSIS_ENCODER_PORTS[1]);
+            middleMotorEncoders = RobotConfigurator.buildEncoder(
+                    getSpecificMotor(RobotMap.DRIVE_TRAIN_MIDDLE_CHASSIS_MOTOR_WITH_ENCODER),
+                    RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[0],
+                    RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[1]);
+
+            return;
+        }
 
         double deltaLeft = lastLeftEncoderCount - leftMotorEncoders.getRaw();
         double deltaRight = lastRightEncoderCount - rightMotorEncoders.getRaw();
