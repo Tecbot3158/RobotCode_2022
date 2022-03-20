@@ -35,7 +35,8 @@ public class MoveTurretToAngle extends CommandBase {
 
         kMinimumAbsoluteOutput = RobotMap.TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT;
         kTarget = turret.getRotationsFromAngle(this.angle);
-        kCurrentPosition = turret.getTurretEncoder().getPosition();
+        kCurrentPosition =  turret.getTurretEncoder().getPosition();
+
         kIncrementMultiplier = RobotMap.TURRET_DEFAULT_kINCREMENT_MULTIPLIER;
 
         stepControl = new StepControl(kMinimumAbsoluteOutput, kTarget, kCurrentPosition, kIncrementMultiplier);
@@ -49,6 +50,7 @@ public class MoveTurretToAngle extends CommandBase {
     public void initialize() {
 
         SmartDashboard.putNumber("turret - target", stepControl.getTarget());
+        SmartDashboard.putNumber("turret - position", stepControl.getCurrentPosition());
 
     }
 
@@ -58,12 +60,18 @@ public class MoveTurretToAngle extends CommandBase {
 
         double rotations = turret.getTurretEncoder().getPosition();
 
-        double speed = stepControl.getOutput(rotations);
+        double speed = stepControl.getOutputPosition(rotations);
 
         turret.setTurretRaw(speed);
 
         SmartDashboard.putNumber("turret - speed", speed);
         SmartDashboard.putNumber("turret - pos", rotations);
+        SmartDashboard.putNumber("turret - minout", kMinimumAbsoluteOutput);
+        SmartDashboard.putNumber("turret - target", kTarget);
+        SmartDashboard.putNumber("turret - mult", kIncrementMultiplier);
+
+        //double inMinOutput = SmartDashboard.putNumber("turret - minout", kMinimumAbsoluteOutput);
+
 
 
     }
@@ -76,6 +84,6 @@ public class MoveTurretToAngle extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return stepControl.isInRange();
+        return false;
     }
 }
