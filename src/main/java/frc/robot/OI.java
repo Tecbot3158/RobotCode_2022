@@ -1,32 +1,23 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
-import frc.robot.commands.chassis.drivingModes.ToggleMecanum;
-import frc.robot.commands.compound.SetFeederAndShooter;
-import frc.robot.commands.compound.ToggleFeederAndShooter;
-import frc.robot.commands.feeder.FeederRaw;
 import frc.robot.commands.feeder.FeederSetToSpeed;
 import frc.robot.commands.feeder.FeederStop;
-import frc.robot.commands.intake.IntakeDefault;
-import frc.robot.commands.intake.basic.*;
-import frc.robot.commands.oitests.OITestTriggers;
-import frc.robot.commands.rollers.RollersMove;
+import frc.robot.commands.intake.IntakeEjectThenStop;
+import frc.robot.commands.intake.basic.IntakeToggleEject;
+import frc.robot.commands.intake.basic.IntakeToggleMotors;
+import frc.robot.commands.intake.basic.IntakeTogglePositionAndMotors;
 import frc.robot.commands.rollers.RollersRunThenStop;
-import frc.robot.commands.rollers.SetRollersRaw;
-import frc.robot.commands.shooter.ShooterGoRaw;
 import frc.robot.commands.shooter.ShooterGoToTarget;
 import frc.robot.commands.shooter.ShooterOff;
-import frc.robot.commands.turret.DriveTurretManually;
-import frc.robot.commands.turret.DriveTurretRaw;
+import frc.robot.commands.turret.DriveTurretToLeft;
+import frc.robot.commands.turret.DriveTurretToRight;
+import frc.robot.commands.turret.MoveTurretToAngle;
 import frc.robot.commands.turret.MoveTurretToCenter;
+import frc.robot.resources.Math;
 import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotController;
-import frc.robot.subsystems.chassis.DriveTrain;
-import frc.robot.subsystems.shooter.Shooter;
 
 public class OI {
 
@@ -49,8 +40,12 @@ public class OI {
 
 
         //pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(Robot.getRobotContainer().getDriveTrain().setDrivingMode(DriveTrain.DrivingMode.Mecanum)  ));
-        pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(Robot.getRobotContainer().getDriveTrain()::setMecanumDrive, Robot.getRobotContainer().getDriveTrain()  ));
+        pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(Robot.getRobotContainer().getDriveTrain()::setMecanumDrive, Robot.getRobotContainer().getDriveTrain()));
 
+        pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyRise, Robot.getRobotContainer().getDriveTrain()));
+        //pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyLower, Robot.getRobotContainer().getDriveTrain()));
+        // lower llanta abajo
+        // rise llanta arriba
 
 
         pilot.whenPressed(TecbotController.ButtonType.POV_UP, new ChassisSetDefaultDrive());
@@ -58,18 +53,43 @@ public class OI {
 //        pilot.whenPressed(TecbotController.ButtonType.Y, new ShooterGoToTarget());
 //        pilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
 
-        pilot.whenPressed(TecbotController.ButtonType.LB, new ShooterOff());
-        pilot.whenPressed(TecbotController.ButtonType.LB, new FeederStop());
-        //pilot.whenPressed(TecbotController.ButtonType.RB, new FeederStop());
-        pilot.whenPressed(TecbotController.ButtonType.RB, new FeederSetToSpeed());
-        pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToTarget());
 
-        pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggleMotors());
+        //pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggleMotors());
+        //pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggle());
+
+        pilot.whenPressed(TecbotController.ButtonType.A, new IntakeTogglePositionAndMotors());
+        pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggleMotors());
+
+        pilot.whenPressed(TecbotController.ButtonType.Y, new IntakeToggleEject());
+//        pilot.whileHeld(TecbotController.ButtonType.Y, new IntakeEjectThenStop());
+
+        copilot.whileHeld(TecbotController.ButtonType.RB, new DriveTurretToRight());
+        copilot.whileHeld(TecbotController.ButtonType.LB, new DriveTurretToLeft());
+
+        //pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggle());
 
 
-        pilot.whileHeld(TecbotController.ButtonType.X, new RollersRunThenStop() );
+        copilot.whileHeld(TecbotController.ButtonType.X, new RollersRunThenStop());
+
+        copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
+        copilot.whenPressed(TecbotController.ButtonType.A, new FeederSetToSpeed());
+
+        copilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
+        copilot.whenPressed(TecbotController.ButtonType.B, new FeederStop());
 
 
+//        copilot.whenPressed(TecbotController.ButtonType.LB, new ShooterOff());
+//        copilot.whenPressed(TecbotController.ButtonType.LB, new FeederStop());
+//        //pilot.whenPressed(TecbotController.ButtonType.RB, new FeederStop());
+//        copilot.whenPressed(TecbotController.ButtonType.RB, new FeederSetToSpeed());
+//        copilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToTarget());
+//
+
+
+        // copilot.whenPressed(TecbotController.ButtonType.);
+        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new MoveTurretToCenter());
+//
+        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new MoveTurretToAngle(30));
 
 
         // pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretManually());
@@ -79,13 +99,6 @@ public class OI {
 
     }
 
-    // singleton
-    public static OI getInstance() {
-        if (instance == null)
-            instance = new OI();
-
-        return instance;
-    }
 
     public double getRollersInput() {
         return pilot.getRightAxisX();
@@ -102,4 +115,50 @@ public class OI {
 
     }
 
+    public double getDefaultDriveInputX() {
+        switch (TecbotConstants.CURRENT_PILOT) {
+            case ALEXG:
+                pilot.setOffset(0.03);
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1);
+            case PAULO:
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
+            case PONCE:
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) ;
+            case ESTEBATO:
+                pilot.setOffset(0.03);
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) ;
+            default:
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) ;
+
+        }
+    }
+
+    public double getDefaultDriveInputY() {
+        switch (TecbotConstants.CURRENT_PILOT) {
+            case ALEXG:
+                pilot.setOffset(0.03);
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1);
+            case PAULO:
+                pilot.setOffset(0.03);
+                return Math.clamp(-(OI.getInstance().getPilot().getTriggers()), -1, 1) ;
+            case PONCE:
+                pilot.setOffset(0.03);
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1) ;
+            case ESTEBATO:
+                pilot.setOffset(0.03);
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1) ;
+            default:
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1) ;
+
+        }
+    }
+
+
+    // singleton
+    public static OI getInstance() {
+        if (instance == null)
+            instance = new OI();
+
+        return instance;
+    }
 }
