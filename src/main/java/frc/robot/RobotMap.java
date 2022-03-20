@@ -221,9 +221,9 @@ public class RobotMap {
         public static final double TURRET_MOTOR_MAX_ROTATIONS = 135 / (double) 360
                         * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION;
 
-        public static final double TURRET_DEFAULT_TARGET_RANGE = 0.03;
-        public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.0001;
-        public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = 0.00002;
+        public static final double TURRET_DEFAULT_TARGET_RANGE = 0.2;
+        public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.065;
+        public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = -0.02;
         // TURRET --- end
 
         // CLIMBER

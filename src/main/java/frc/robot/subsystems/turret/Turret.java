@@ -46,7 +46,7 @@ public class Turret extends SubsystemBase {
      */
     public void setTurretRaw(double speed) {
 
-        turretMotor.set(Math.clamp(speed, -0.1, 0.1));
+        turretMotor.set(Math.clamp(speed, -0.3, 0.3));
 
 
     }
@@ -71,10 +71,10 @@ public class Turret extends SubsystemBase {
 
 
     public void setTurretMoveRight() {
-        turretMotor.set(0.25);
+        turretMotor.set(0.1);
     }
 
     public void setTurretMoveLeft() {
-        turretMotor.set(-0.25);
+        turretMotor.set(-0.1);
     }
 }

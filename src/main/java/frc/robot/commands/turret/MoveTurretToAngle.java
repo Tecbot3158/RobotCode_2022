@@ -29,12 +29,13 @@ public class MoveTurretToAngle extends CommandBase {
         // Use addRequirements() here to declare subsystem dependencies.
 
         this.turret = Robot.getRobotContainer().getTurret();
+
         addRequirements(turret);
 
         this.angle = angle;
 
         kMinimumAbsoluteOutput = RobotMap.TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT;
-        kTarget = turret.getRotationsFromAngle(this.angle);
+        kTarget = - turret.getRotationsFromAngle(this.angle);
         kCurrentPosition =  turret.getTurretEncoder().getPosition();
 
         kIncrementMultiplier = RobotMap.TURRET_DEFAULT_kINCREMENT_MULTIPLIER;
@@ -62,7 +63,7 @@ public class MoveTurretToAngle extends CommandBase {
 
         double speed = stepControl.getOutputPosition(rotations);
 
-        turret.setTurretRaw(speed);
+        turret.setTurretRaw( speed);
 
         SmartDashboard.putNumber("turret - speed", speed);
         SmartDashboard.putNumber("turret - pos", rotations);
@@ -70,20 +71,20 @@ public class MoveTurretToAngle extends CommandBase {
         SmartDashboard.putNumber("turret - target", kTarget);
         SmartDashboard.putNumber("turret - mult", kIncrementMultiplier);
 
-        //double inMinOutput = SmartDashboard.putNumber("turret - minout", kMinimumAbsoluteOutput);
-
-
 
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+
+        turret.setTurretRaw(0);
+
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return stepControl.isInRange();
     }
 }

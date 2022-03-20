@@ -89,7 +89,7 @@ public class OI {
         // copilot.whenPressed(TecbotController.ButtonType.);
         copilot.whenPressed(TecbotController.ButtonType.POV_UP, new MoveTurretToCenter());
 //
-        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new MoveTurretToAngle(30));
+        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new MoveTurretToAngle(90));
 
 
         // pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretManually());

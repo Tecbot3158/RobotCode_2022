@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -124,8 +122,9 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
 
-       SmartDashboard.putNumber("turret encoder:", Robot.getRobotContainer().getTurret().getTurretEncoder().getPosition() );
-        SmartDashboard.putNumber("turret speed:", Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity() );
+        SmartDashboard.putNumber("turret encoder:", Robot.getRobotContainer().getTurret().getTurretEncoder().getPosition());
+        SmartDashboard.putNumber("turret speed:", Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity());
+//        SmartDashboard.putNumber("turret speed:", Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity());
     }
 
     @Override
@@ -145,9 +144,9 @@ public class Robot extends TimedRobot {
         return robotContainer;
     }
 
-    public static void debug (String value) {
-        if ( TecbotConstants.DEBUG_ENABLED )
-            System.out.println( value );
+    public static void debug(String value) {
+        if (TecbotConstants.DEBUG_ENABLED)
+            System.out.println(value);
 
     }
 }
