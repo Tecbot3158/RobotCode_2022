@@ -1,14 +1,11 @@
 package frc.robot.commands.shooter;
 
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.resources.StepControl;
 import frc.robot.subsystems.shooter.Shooter;
-
-import static edu.wpi.first.wpilibj.smartdashboard.SmartDashboard.getNumber;
 
 public class ShooterGoToTarget extends CommandBase {
 
@@ -22,20 +19,20 @@ public class ShooterGoToTarget extends CommandBase {
 
     double minout = 0.0001;
 
-    public ShooterGoToTarget(){
+    public ShooterGoToTarget() {
 
         shooter = Robot.getRobotContainer().getShooter();
 
-       shooter.getShooterEncoder().setPosition(0);
-       currentPos = shooter.getShooterEncoder().getVelocity();
-       target = 2000;
-
-
-
-
-
+        shooter.getShooterEncoder().setPosition(0);
+        currentPos = shooter.getShooterEncoder().getVelocity();
+        target = 3000;
 
         stepControl = new StepControl(minout, target, currentPos, increment);
+
+
+        Subsystem requirements[] = {shooter};
+
+        addRequirements(requirements);
     }
 
     @Override
@@ -45,19 +42,22 @@ public class ShooterGoToTarget extends CommandBase {
         SmartDashboard.putNumber("settarget", target);
         SmartDashboard.putNumber("setincr", increment);
 
+        Robot.debug("init shootergototarget");
+
 
     }
 
     @Override
-    public void execute(){
+    public void execute() {
 
-       double output = stepControl.getOutput( shooter.getShooterEncoder().getVelocity() );
-       double velocity = shooter.getShooterEncoder().getVelocity();
-       // in rpms
+        double output = stepControl.getOutputVelocity(shooter.getShooterEncoder().getVelocity());
+        double velocity = shooter.getShooterEncoder().getVelocity();
+        // in rpms
 
         SmartDashboard.putNumber("shooter encoder. ", shooter.getShooterEncoder().getPosition());
-        SmartDashboard.putNumber("output shooter ", output);
-        SmartDashboard.putNumber("RPMs", velocity);
+        SmartDashboard.putNumber("shooter output ", output);
+        SmartDashboard.putNumber("shooter RPMs", velocity);
+        SmartDashboard.putNumber("shooter target", target);
 
         shooter.setShooterMotorsRaw(output);
 
@@ -69,14 +69,11 @@ public class ShooterGoToTarget extends CommandBase {
 //        stepControl.setIncrementMultiplier(increment);
 //        stepControl.setMinAbsoluteOutput(minout);
 
+        Robot.debug("exec shootergototarget");
 
 
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        //shooter.setShooterMotorsRaw(0);
-    }
 
     @Override
     public boolean isFinished() {

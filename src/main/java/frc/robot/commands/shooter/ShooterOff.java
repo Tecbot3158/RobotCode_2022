@@ -5,26 +5,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.resources.StepControl;
 import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.subsystems.transport.Feeder;
+import frc.robot.subsystems.transport.FeederAndShooterState;
 
-public class ShooterGoRaw extends CommandBase {
-
-    StepControl stepControl;
+public class ShooterOff extends CommandBase {
 
     Shooter shooter;
 
-    double target, currentPos;
-
-    double increment;
-
-    double speed;
-
-    public ShooterGoRaw(double num){
-
-        speed = num;
-
+    public ShooterOff(){
         shooter = Robot.getRobotContainer().getShooter();
 
         addRequirements(shooter);
+
     }
 
     @Override
@@ -35,17 +27,21 @@ public class ShooterGoRaw extends CommandBase {
     @Override
     public void execute(){
 
-        SmartDashboard.putNumber("shooter encoder. ", shooter.getShooterEncoder().getPosition());
-        SmartDashboard.putNumber("output shooter ", speed);
-
-        shooter.setShooterMotorsRaw(speed);
+        shooter.setShooterMotorsRaw(0);
+        Robot.debug("Exec ShooterOff");
+//        Feeder.state = FeederAndShooterState.SHOOTER_OFF;
 
     }
 
     @Override
     public void end(boolean interrupted) {
 
-        shooter.setShooterMotorsRaw(0);
+ //       if (Feeder.state == FeederAndShooterState.FEEDER_OFF )
+ //           Feeder.state = FeederAndShooterState.BOTH_OFF;
+ //       else
+ //           Feeder.state = FeederAndShooterState.SHOOTER_OFF;
+
+
 
     }
 
