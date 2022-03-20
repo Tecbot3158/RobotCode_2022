@@ -40,6 +40,16 @@ public class FeederSetToSpeed extends CommandBase {
     public void initialize() {
 
         SmartDashboard.putBoolean("feeder done", false);
+
+        // if ( Feeder.state == FeederAndShooterState.SHOOTER_ON){
+        //     Feeder.state = FeederAndShooterState.BOTH_ON;
+        // }
+        // else {
+        //     Feeder.state = FeederAndShooterState.FEEDER_ON;
+        // }
+
+        Robot.debug("init feeder Set To speed");
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -48,29 +58,44 @@ public class FeederSetToSpeed extends CommandBase {
 
         currentPosition = feeder.getFeederEncoder().getVelocity();
 
-        double output = stepControl.getOutput(currentPosition);
+        double output = stepControl.getOutputVelocity(currentPosition);
 
         feeder.setRaw(output);
 
-        // feeder.feederSetDefaultPIDReference(feeder.getFeederPIDController());
-        // System.out.println("FEeder set to speed!!!");
-        // feeder.setRaw(0.42);
-
         SmartDashboard.putBoolean("feeder in RANGE.", stepControl.isInRange() );
+        SmartDashboard.putNumber("feeder velocity: ", currentPosition);
+        SmartDashboard.putNumber("feeder output: ", output);
+        SmartDashboard.putNumber("feeder target", target);
+        SmartDashboard.putNumber("feeder kMult", kIncrementMultiplier);
+        SmartDashboard.putNumber("feeder kMinAbsPost", kMinimumAbsOutput);
+
+        Robot.debug("exec feedersettospeed");
+
+        double intarget = SmartDashboard.getNumber("feeder target", target) ;
+
+        if (intarget != target ) {
+            target = intarget;
+            stepControl.setTarget(target);
+        }
+
+        double inkmult  =  SmartDashboard.getNumber("feeder kMult", kIncrementMultiplier) ;
+
+        if (inkmult != kIncrementMultiplier ) {
+            kIncrementMultiplier = inkmult;
+            stepControl.setMinAbsoluteOutput(kIncrementMultiplier);
+        }
+
+        double inkabspost  =  SmartDashboard.getNumber("feeder kMinAbsPost", kMinimumAbsOutput) ;
+
+        if (inkabspost != kMinimumAbsOutput ) {
+            kMinimumAbsOutput = inkmult;
+            stepControl.setMinAbsoluteOutput(kMinimumAbsOutput);
+        }
+
+
 
     }
 
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {
-        // feeder.setRaw(0);
-
-        // System.out.println("OUTTT!");
-
-        SmartDashboard.putBoolean("feeder done", true);
-
-
-    }
 
     // Returns true when the command should end.
     @Override
