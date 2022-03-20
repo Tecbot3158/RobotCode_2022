@@ -123,6 +123,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+
+       SmartDashboard.putNumber("turret encoder:", Robot.getRobotContainer().getTurret().getTurretEncoder().getPosition() );
+        SmartDashboard.putNumber("turret speed:", Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity() );
     }
 
     @Override
