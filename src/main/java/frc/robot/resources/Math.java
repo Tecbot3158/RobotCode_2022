@@ -16,7 +16,7 @@ public class Math {
     }
 
     /**
-     * @return returns mathematical a mod b
+     * @return returns positive a mod b
      */
     public static int module(int a, int b) {
         int mod = a % b;
@@ -107,5 +107,73 @@ public class Math {
             destinationArray[i] = source[i];
         }
         return destinationArray;
+    }
+
+    /**
+     * Returns the angle with the opposite direction of the given angle.
+     * 
+     * @param angle The angle in degrees (from -180 to 180) to generate its opposite
+     *              angle.
+     * @return The opposite angle of the given angle in degrees, from -180 to 180
+     */
+    public static double getOppositeAngle(double angle) {
+
+        double result = angle - 180;
+
+        return normalizeAngle(result);
+
+    }
+
+    /**
+     * Returns an angle which is coterminal with the given one, but in a range of
+     * -180 to 180.
+     * 
+     * @param angle The angle (in degrees) to normalize.
+     * @return An angle(in degrees), coterminal with the given one, but in a range
+     *         of -180 to 180.
+     */
+    public static double normalizeAngle(double angle) {
+
+        double result = angle;
+
+        if (Math.abs(result) < 180) {
+            return result;
+        }
+
+        if (result > 180) {
+            result -= 360;
+        }
+        if (result < -180) {
+            result += 360;
+        }
+
+        return normalizeAngle(result);
+
+    }
+
+    public static double deltaAngle(double angle, double target) {
+
+        double delta = target - angle;
+
+        if (delta > 180) {
+            delta -= 360;
+        }
+
+        if (delta < -180) {
+            delta = 360 - delta;
+        }
+
+        return delta;
+
+    }
+
+    public static double distance(double x1, double x2, double y1, double y2) {
+
+        return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+
+    }
+
+    public static int randomInt(int min, int max) {
+        return (int) (((java.lang.Math.random() + 0.5) * (max - min)) + min);
     }
 }
