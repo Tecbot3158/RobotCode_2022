@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.intake.Intake;
 
-public class IntakeToggle extends CommandBase {
+public class IntakeToggleMotors extends CommandBase {
 
   Intake intake;
 
   /** Creates a new IntakeToggle. */
-  public IntakeToggle() {
+  public IntakeToggleMotors() {
     intake = Robot.getRobotContainer().getIntake();
     addRequirements(intake);
   }
@@ -21,7 +21,11 @@ public class IntakeToggle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.toggleIntakePosition();
+    if (intake.getIntakeMotorState() == Intake.IntakeMotorState.ABSORB )
+
+      intake.setIntakeMotorsState(Intake.IntakeMotorState.OFF);
+    else
+      intake.setIntakeMotorsState(Intake.IntakeMotorState.ABSORB);
   }
 
   // Returns true when the command should end.
