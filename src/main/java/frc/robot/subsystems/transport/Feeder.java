@@ -20,6 +20,10 @@ public class Feeder extends SubsystemBase {
 
     private RelativeEncoder feederEncoder;
 
+//    public static FeederAndShooterState state = FeederAndShooterState.BOTH_OFF;
+
+
+
     /**
      * Creates a new Feeder.
      */
