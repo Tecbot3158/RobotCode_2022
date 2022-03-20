@@ -11,6 +11,8 @@ public class Intake extends SubsystemBase {
     DoubleSolenoid intakeSolenoids;
     TecbotSpeedController intakeMotor;
 
+    IntakeMotorState intakeMotorState = IntakeMotorState.OFF;
+
     // constructor
     public Intake() {
 
@@ -18,7 +20,7 @@ public class Intake extends SubsystemBase {
         intakeMotor = new TecbotSpeedController(RobotMap.INTAKE_MOTOR_PORT, RobotMap.INTAKE_MOTOR_TYPE);
         intakeMotor.setInverted(RobotMap.INTAKE_MOTOR_IS_INVERTED);
 
-        intakeRetract();
+      //  intakeRetract();
         intakeMotorsOff();
     }
 
@@ -50,11 +52,15 @@ public class Intake extends SubsystemBase {
         intakeMotor.set(RobotMap.INTAKE_EJECT_SPEED);
     }
 
+    public void toggleIntakeMotorsEject(){
+        intakeMotor.set(RobotMap.INTAKE_EJECT_SPEED);
+    }
+
     public void intakeMotorsOff() {
         intakeMotor.set(RobotMap.INTAKE_OFF);
     }
 
-    public void toggleIntake() {
+    public void toggleIntakeMotorsAndPosition() {
         if (intakeSolenoids.get() == RobotMap.INTAKE_POSITION_RETRACTED) {
             intakeExtend();
             intakeMotorsAbsorb();
@@ -62,5 +68,43 @@ public class Intake extends SubsystemBase {
             intakeRetract();
             intakeMotorsOff();
         }
+    }
+
+    public void toggleIntakePosition(){
+        if (intakeSolenoids.get() == RobotMap.INTAKE_POSITION_RETRACTED )
+            intakeExtend();
+        else
+            intakeRetract();
+    }
+
+    public void toggleIntakeMotors(){
+
+
+    }
+
+    public void setIntakeMotorsState( IntakeMotorState state ){
+        intakeMotorState = state;
+
+        switch ( state ) {
+            case ABSORB:
+                intakeMotorsAbsorb();
+                break;
+            case EJECT:
+                intakeMotorsEject();
+                break;
+            default:
+                intakeMotorsOff();
+        }
+
+    }
+    public enum IntakeMotorState {
+       ABSORB,
+        EJECT,
+        OFF
+
+    }
+
+    public IntakeMotorState getIntakeMotorState() {
+        return intakeMotorState;
     }
 }
