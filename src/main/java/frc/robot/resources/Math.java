@@ -108,4 +108,8 @@ public class Math {
         }
         return destinationArray;
     }
+
+    public static int randomInt(int min, int max) {
+        return (int) (((java.lang.Math.random() + 0.5) * (max - min)) + min);
+    }
 }
