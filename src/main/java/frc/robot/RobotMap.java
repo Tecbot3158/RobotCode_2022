@@ -110,8 +110,8 @@ public class RobotMap {
         public static final int INTAKE_MOTOR_PORT = 20;
         public static final TypeOfMotor INTAKE_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
         public static final boolean INTAKE_MOTOR_IS_INVERTED = true;
-        public static final double INTAKE_ABSORB_SPEED = 0.4;
-        public static final double INTAKE_EJECT_SPEED = -0.3;
+        public static final double INTAKE_ABSORB_SPEED = 0.6;
+        public static final double INTAKE_EJECT_SPEED = -0.6;
         public static final double INTAKE_OFF = 0;
         // intake motor should be positive when receiving balls,
         // negative when going out of the robot.
@@ -136,10 +136,10 @@ public class RobotMap {
         public static final TypeOfMotor TRANSPORT_FEEDER_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
         public static final boolean TRANSPORT_FEEDER_IS_INVERTED = false;
 
-        public static final double FEEDER_DEFAULT_TARGET_SPEED = 2500;
-        public static final double FEEDER_DEFAULT_kINCREMENT_MULTIPLIER = 0.000003;
+        public static final double FEEDER_DEFAULT_TARGET_SPEED = 3000;
+        public static final double FEEDER_DEFAULT_kINCREMENT_MULTIPLIER = 0.000004;
 
-        public static final double FEEDER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT = 0.05;
+        public static final double FEEDER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT = 0.001;
 
         public static final int FEEDER_ENCODER_MOTOR_PORT = TRANSPORT_FEEDER_PORT;
 
@@ -192,7 +192,8 @@ public class RobotMap {
         // should go clockwise when in positive.
         public static final int TURRET_MOTOR_PORT = 45;
         public static final TypeOfMotor TURRET_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
-        public static final boolean TURRET_MOTOR_IS_INVERTED = false;
+        public static final boolean TURRET_MOTOR_IS_INVERTED = true;
+        public static final boolean TURRET_ENCODER_IS_INVERTED = true;
         public static final int[] TURRET_ENCODER_CHANNELS = { RobotConfigurator.CONFIG_NOT_SET,
                         RobotConfigurator.CONFIG_NOT_SET };
 
@@ -221,8 +222,8 @@ public class RobotMap {
                         * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION;
 
         public static final double TURRET_DEFAULT_TARGET_RANGE = 0.03;
-        public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.03;
-        public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = 0.0002;
+        public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.0001;
+        public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = 0.00002;
         // TURRET --- end
 
         // CLIMBER
