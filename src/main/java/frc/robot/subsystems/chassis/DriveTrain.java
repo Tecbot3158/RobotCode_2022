@@ -32,7 +32,6 @@ public class DriveTrain extends SubsystemBase {
 
     DoubleSolenoid transmission;
 
-
     public enum TransmissionMode {
         torque, speed
     }
@@ -149,10 +148,8 @@ public class DriveTrain extends SubsystemBase {
         lastLeftEncoderCount = 0;
         lastRightEncoderCount = 0;
 
-
         SmartDashboard.putNumber("chassis min x corr", TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
         SmartDashboard.putNumber("chassis turn corr", TecbotConstants.TURN_CORRECTION);
-
 
     }
 
@@ -291,6 +288,16 @@ public class DriveTrain extends SubsystemBase {
         }
     }
 
+    public void angleCorrectionDrive(double power, double targetAngle) {
+
+        double deltaAngle = Math.deltaAngle(targetAngle, Robot.getRobotContainer().getNavx().getYaw());
+
+        double turnCorrection = deltaAngle * TecbotConstants.TURN_CORRECTION;
+
+        drive(power, turnCorrection);
+
+    }
+
     public void stop() {
         dragonFlyDrive(0, 0, 0);
     }
@@ -316,7 +323,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void setDragonFlyRise() {
-            setDragonFlyWheelState(WheelState.Raised);
+        setDragonFlyWheelState(WheelState.Raised);
     }
 
     public void setDragonFlyLower() {
@@ -397,16 +404,17 @@ public class DriveTrain extends SubsystemBase {
             deltaAngle = -deltaAngle + 360;
         }
 
-
         double in_turncorr = SmartDashboard.getNumber("chassis turn corr", TecbotConstants.TURN_CORRECTION);
-        double in_min_x_corr = SmartDashboard.getNumber("chassis min x corr", TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
+        double in_min_x_corr = SmartDashboard.getNumber("chassis min x corr",
+                TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
 
         if (in_turncorr != TecbotConstants.TURN_CORRECTION)
             TecbotConstants.TURN_CORRECTION = in_turncorr;
         if (in_min_x_corr != TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM)
             TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM = in_min_x_corr;
 
-        double correction = -TecbotConstants.TURN_CORRECTION * deltaAngle*(Math.abs(x) + TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
+        double correction = -TecbotConstants.TURN_CORRECTION * deltaAngle
+                * (Math.abs(x) + TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
         double leftSide = 0;
         double rightSide = 0;
 
@@ -677,12 +685,12 @@ public class DriveTrain extends SubsystemBase {
         if (transmissionState == TransmissionMode.torque) {
 
             leftEncoderDistance -= deltaLeft * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_TORQUE;
-            rightEncoderDistance -= deltaRight * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_TORQUE;
+            rightEncoderDistance += deltaRight * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_TORQUE;
 
         } else {
 
             leftEncoderDistance -= deltaLeft * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_SPEED;
-            rightEncoderDistance -= deltaRight * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_SPEED;
+            rightEncoderDistance += deltaRight * RobotMap.DRIVE_TRAIN_METERS_PER_PULSE_SPEED;
 
         }
 
@@ -693,14 +701,25 @@ public class DriveTrain extends SubsystemBase {
             odometry.update(new Rotation2d(Math.toRadians(Robot.getRobotContainer().getNavx().getYaw())),
                     leftEncoderDistance,
                     rightEncoderDistance);
+
+            SmartDashboard.putNumber("X", odometry.getPoseMeters().getX());
+            SmartDashboard.putNumber("Y", odometry.getPoseMeters().getY());
+        } else {
+            InitOdometry(Robot.getRobotContainer().getNavx());
         }
+
+        SmartDashboard.putNumber("LeftEncoderDistance", leftEncoderDistance);
+
+        SmartDashboard.putNumber("X", odometry.getPoseMeters().getX());
+    }
+
+    public void setMecanumDrive() {
+        this.setDrivingMode(DrivingMode.Mecanum);
 
     }
 
-
-    public void setMecanumDrive(){
-       this.setDrivingMode(DrivingMode.Mecanum);
-
+    public DifferentialDriveOdometry getOdometry() {
+        return odometry;
     }
 
 }

@@ -7,10 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.chassis.DefaultDrive;
+import frc.robot.commands.chassis.autonomous.splines.Paths;
+import frc.robot.commands.chassis.autonomous.splines.SplineMove;
 import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
 import frc.robot.resources.TecbotConstants;
 
@@ -27,6 +30,8 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     private static RobotContainer robotContainer;
+
+    SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -48,6 +53,11 @@ public class Robot extends TimedRobot {
         robotContainer.getNavx().reset();
 
         new ChassisSetSpeed().schedule();
+
+        Paths paths = new Paths();
+
+        SplineMove splineTest = new SplineMove(paths.getTestSpline(), 0.4, true, false, true, false);
+        m_chooser.setDefaultOption("splineTest", splineTest);
 
     }
 
@@ -92,7 +102,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        m_autonomousCommand = robotContainer.getAutonomousCommand();
+        m_autonomousCommand = m_chooser.getSelected();
 
         // schedule the autonomous command (example)
         if (m_autonomousCommand != null) {
@@ -124,8 +134,10 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
 
-       SmartDashboard.putNumber("turret encoder:", Robot.getRobotContainer().getTurret().getTurretEncoder().getPosition() );
-        SmartDashboard.putNumber("turret speed:", Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity() );
+        SmartDashboard.putNumber("turret encoder:",
+                Robot.getRobotContainer().getTurret().getTurretEncoder().getPosition());
+        SmartDashboard.putNumber("turret speed:",
+                Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity());
     }
 
     @Override
@@ -145,9 +157,9 @@ public class Robot extends TimedRobot {
         return robotContainer;
     }
 
-    public static void debug (String value) {
-        if ( TecbotConstants.DEBUG_ENABLED )
-            System.out.println( value );
+    public static void debug(String value) {
+        if (TecbotConstants.DEBUG_ENABLED)
+            System.out.println(value);
 
     }
 }

@@ -40,8 +40,12 @@ public class TecbotConstants {
         public static final double MIDDLE_SIDES_CORRECTION_SPEED = .6;
         public static final double MIDDLE_SIDES_CORRECTION_TORQUE = .6;
 
-        public static final double SPLINE_REDUCING_SPEED_CONSTANT = .8;
+        public static final double SPLINE_SPEED_REDUCTION_MAX_DISTANCE = .8;
         public static final double SPLINE_TURN_CORRECTION = .05;
+
+        // This constants angles the robot in order to correct the error in the Y value
+        // while driving a spline.
+        public static final double SPLINE_DRIVE_ANGLE_CORRECTION = 0.01;
 
         public static final double K_DISTANCE_BETWEEN_WHEELS = .53975;
 
@@ -178,7 +182,6 @@ public class TecbotConstants {
 
         public static final TecbotController.TypeOfController CONTROLLER_TYPE_PILOT = TecbotController.TypeOfController.XBOX;
         public static final TecbotController.TypeOfController CONTROLLER_TYPE_COPILOT = TecbotController.TypeOfController.XBOX;
-
 
         public static double CHASSIS_MINIMUM_X_CORRECTION_MECANUM = 0.5;
 }

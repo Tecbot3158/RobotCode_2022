@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import frc.robot.resources.Math;
 import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotSpeedController.TypeOfMotor;
 
@@ -57,8 +58,18 @@ public class RobotMap {
         // ... dragonfly
         public static final int DRIVE_TRAIN_MIDDLE_CHASSIS_MOTOR_WITH_ENCODER = RobotConfigurator.CONFIG_NOT_SET;
 
-        public static final double DRIVE_TRAIN_METERS_PER_PULSE_TORQUE = 0;
-        public static final double DRIVE_TRAIN_METERS_PER_PULSE_SPEED = 0;
+        public static final double DRIVE_TRAIN_PULSES_PER_REVOLUTION = 1;
+
+        // In meters
+        public static final double DRIVE_TRAIN_WHEEL_DIAMETER = 4 * 0.0254;
+
+        public static final double DRIVE_TRAIN_GEAR_RATIO_SPEED = 405.0 / 98.0;
+        public static final double DRIVE_TRAIN_GEAR_RATIO_TORQUE = 225.0 / 28.0;
+
+        public static final double DRIVE_TRAIN_METERS_PER_PULSE_TORQUE = Math.PI * DRIVE_TRAIN_WHEEL_DIAMETER
+                        / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_SPEED);
+        public static final double DRIVE_TRAIN_METERS_PER_PULSE_SPEED = Math.PI * DRIVE_TRAIN_WHEEL_DIAMETER
+                        / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_TORQUE);;
 
         // chassis encoder-specific
         /*

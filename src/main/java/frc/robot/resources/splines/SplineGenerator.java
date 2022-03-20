@@ -92,10 +92,25 @@ public class SplineGenerator {
 		return new Derivative(p, q, r);
 	}
 
-	public static double angleFromDerivate(Derivative derivative, double xPos) {
-		double pendienteActual = derivative.fPrime(xPos);
-		System.out.println("m: " + pendienteActual);
-		return Math.toDegrees(Math.atan(1 / pendienteActual));
+	/**
+	 * Returns the angle at which the robot should be at a certain point x position
+	 * of the spline.
+	 * 
+	 * @param derivative The derivative of the spline.
+	 * @param xPos       The x position of the robot.
+	 * @param vertical   By default, the y-axis is paralell to the driver stations,
+	 *                   true if this needs to be the other way around.
+	 * @return the angle at which the robot should be at a certain point x position
+	 *         of the spline.
+	 */
+	public static double angleFromDerivate(Derivative spline, double xPos, boolean vertical) {
+		double pendienteActual = spline.fPrime(xPos);
+
+		if (vertical) {
+			return Math.toDegrees(Math.atan(1 / pendienteActual));
+		} else {
+			return Math.toDegrees(Math.atan(pendienteActual));
+		}
 	}
 
 }

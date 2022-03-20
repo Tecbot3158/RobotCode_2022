@@ -1,15 +1,16 @@
 package frc.robot.commands.chassis.autonomous.splines;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.resources.Math;
-import frc.robot.resources.splines.CubicSpline;
+import frc.robot.resources.TecbotConstants;
+import frc.robot.resources.TecbotSpeedController;
+import frc.robot.resources.splines.PieceWiseSpline;
 import frc.robot.Robot;
-import frc.robot.OI;
 
 public class SplineMove extends CommandBase {
 
-    CubicSpline spline;
+    PieceWiseSpline spline;
     double maxSpeed;
     boolean speedReduction, vertical, inverted, reverse;
 
@@ -32,7 +33,8 @@ public class SplineMove extends CommandBase {
      *                       forward. True if the robot needs to follow the path
      *                       backwards.
      */
-    public SplineMove(CubicSpline spline, double maxSpeed, boolean speedReduction, boolean vertical, boolean inverted,
+    public SplineMove(PieceWiseSpline spline, double maxSpeed, boolean speedReduction, boolean vertical,
+            boolean inverted,
             boolean reverse) {
 
         addRequirements(Robot.getRobotContainer().getDriveTrain());
@@ -59,12 +61,74 @@ public class SplineMove extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+
+        DifferentialDriveOdometry odometry = Robot.getRobotContainer().getDriveTrain().getOdometry();
+
+        double error = 0;
+
+        double currentAngle = 0;
+
+        if (vertical) {
+
+            error = odometry.getPoseMeters().getX() - spline.f(odometry.getPoseMeters().getY());
+            currentAngle = spline.angle(odometry.getPoseMeters().getY());
+
+        } else {
+
+            error = odometry.getPoseMeters().getY() - spline.f(odometry.getPoseMeters().getX());
+            currentAngle = spline.angle(odometry.getPoseMeters().getX());
+
+        }
+
+        if (reverse) {
+            currentAngle -= error / TecbotConstants.SPLINE_DRIVE_ANGLE_CORRECTION;
+            maxSpeed = -Math.abs(maxSpeed);
+        } else {
+            currentAngle -= error / TecbotConstants.SPLINE_DRIVE_ANGLE_CORRECTION;
+        }
+
+        if (inverted || reverse) {
+            currentAngle = Math.getOppositeAngle(currentAngle);
+        }
+
+        double finalXPosition = spline.getFinalXPosition();
+
+        if (inverted) {
+
+            finalXPosition = spline.getInitialXPosition();
+
+        }
+        double finalYPosition = spline.f(finalXPosition);
+
+        double distanceToTarget = Math.distance(odometry.getPoseMeters().getX(), finalXPosition,
+                odometry.getPoseMeters().getY(), finalYPosition);
+
+        if (vertical) {
+
+            distanceToTarget = Math.distance(odometry.getPoseMeters().getY(), finalXPosition,
+                    odometry.getPoseMeters().getX(), finalYPosition);
+
+        }
+
+        double power = maxSpeed;
+
+        if (speedReduction) {
+
+            double speedReductionCorrection = Math
+                    .clamp(distanceToTarget / TecbotConstants.SPLINE_SPEED_REDUCTION_MAX_DISTANCE, 0, 1);
+
+            power = speedReductionCorrection * maxSpeed;
+        }
+
+        Robot.getRobotContainer().getDriveTrain().angleCorrectionDrive(power, currentAngle);
+
+        return distanceToTarget < TecbotConstants.CHASSIS_STRAIGHT_ARRIVE_OFFSET;
     }
 
 }
