@@ -172,4 +172,8 @@ public class Math {
         return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 
     }
+
+    public static int randomInt(int min, int max) {
+        return (int) (((java.lang.Math.random() + 0.5) * (max - min)) + min);
+    }
 }
