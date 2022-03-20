@@ -10,6 +10,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.resources.Math;
 import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotEncoder;
 import frc.robot.resources.TecbotSpeedController;
@@ -32,6 +33,8 @@ public class Turret extends SubsystemBase {
 
         turretEncoder = RobotConfigurator.buildEncoder(turretMotor, RobotMap.TURRET_ENCODER_CHANNELS[0], RobotMap.TURRET_ENCODER_CHANNELS[1]);
 
+        // turretMotor.getCANSparkMax().getEncoder().setInverted(RobotMap.TURRET_ENCODER_IS_INVERTED);
+
         turretMotor.getCANSparkMax().getEncoder().setPosition(0);
 
     }
@@ -43,7 +46,7 @@ public class Turret extends SubsystemBase {
      */
     public void setTurretRaw(double speed) {
 
-        turretMotor.set(speed);
+        turretMotor.set(Math.clamp(speed, -0.1, 0.1));
 
 
     }
@@ -67,4 +70,11 @@ public class Turret extends SubsystemBase {
     }
 
 
+    public void setTurretMoveRight() {
+        turretMotor.set(0.25);
+    }
+
+    public void setTurretMoveLeft() {
+        turretMotor.set(-0.25);
+    }
 }
