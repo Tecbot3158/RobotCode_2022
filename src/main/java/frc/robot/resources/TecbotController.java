@@ -337,6 +337,28 @@ public class TecbotController {
      *
      * @return axis value
      */
+    public double getRightAxisX(boolean speedRelease) {
+        if (pilot == null) {
+            DriverStation.reportWarning("Controller not found @ port #" + getPilotPort() + ".\nReturning 0", true);
+            return 0;
+        }
+        double value;
+        switch (controllerType) {
+            case PS4:
+                value = pilot.getRawAxis(portsJoysticksPS4[2]);
+                break;
+            case XBOX:
+                value = pilot.getRawAxis(portsJoystickXBOX[2]);
+                break;
+            default:
+                value = 0;
+                DriverStation.reportWarning("Could not get axis value from getRightAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.", false);
+                break;
+        }
+        if (speedRelease) value = speedRelease(value);
+        return ground(value, offset);
+    }
+
     public double getRightAxisX() {
         if (pilot == null) {
             DriverStation.reportWarning("Controller not found @ port #" + getPilotPort() + ".\nReturning 0", true);

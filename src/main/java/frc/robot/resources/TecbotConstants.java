@@ -1,8 +1,14 @@
 package frc.robot.resources;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import frc.robot.HUMAN_DRIVERS;
 
 public class TecbotConstants {
+
+        public static final HUMAN_DRIVERS CURRENT_PILOT = HUMAN_DRIVERS.ESTEBATO;
+        public static final HUMAN_DRIVERS CURRENT_COPILOT = HUMAN_DRIVERS.ALEXG;
+
+        public static final boolean DEBUG_ENABLED = true;
 
         // pneumatics:
         public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.REVPH;
@@ -21,7 +27,8 @@ public class TecbotConstants {
         public static final double CHASSIS_SWERVE_MAX_DISTANCE = 20;
         public static final double CHASSIS_SWERVE_ARRIVE_OFFSET = 2;
 
-        public static final double TURN_CORRECTION = .02;
+        public static double TURN_CORRECTION = 0.06;
+
         // The distance in angles that it needs to be from target in order to be
         // considered onTarget
         public static final double QUICK_TURN_OFFSET = 20;
@@ -164,11 +171,14 @@ public class TecbotConstants {
         // TRANSPORTATION SYSTEMS ENDS
 
         // JOYSTICK STARTS
-        public static final double DEFAULT_JOYSTICK_OFFSET = .15;
+        public static final double DEFAULT_JOYSTICK_OFFSET = 0.03;
         public static final double JOYSTICK_SPEED_RELEASE_POINT = .5;
         public static final double JOYSTICK_SPEED_MULTIPLIER = .45;
         public static final boolean APPLY_SPEED_RELEASE_TO_LEFT_AXIS = true;
 
         public static final TecbotController.TypeOfController CONTROLLER_TYPE_PILOT = TecbotController.TypeOfController.XBOX;
-        public static final TecbotController.TypeOfController CONTROLLER_TYPE_COPILOT = TecbotController.TypeOfController.PS4;
+        public static final TecbotController.TypeOfController CONTROLLER_TYPE_COPILOT = TecbotController.TypeOfController.XBOX;
+
+
+        public static double CHASSIS_MINIMUM_X_CORRECTION_MECANUM = 0.5;
 }

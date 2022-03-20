@@ -35,9 +35,9 @@ public class StepControl {
         return pos;
     }
 
-    public double getOutput( double currentPosition ) {
-        this.currentPosition = currentPosition;
-        double proportion = ( ( kTarget - currentPosition) ) * incrementMultiplier;
+    public double getOutputVelocity(double currentVelocity ) {
+        this.currentPosition = currentVelocity;
+        double proportion = ( ( kTarget - currentVelocity) ) * incrementMultiplier;
         int sign = proportion >= 0 ? 1: -1;
 
         proportion = sign  * Math.clamp(Math.abs(proportion), kMinimumAbsoluteOutput, 1);
@@ -45,6 +45,17 @@ public class StepControl {
         currentOutput += proportion;
 
         return Math.clamp(currentOutput, -1, 1) ;
+
+    }
+
+    public double getOutputPosition(double currentPosition ) {
+        this.currentPosition = currentPosition;
+        double proportion = ( kTarget - currentPosition) / kTarget * incrementMultiplier;
+        int sign = proportion >= 0 ? 1: -1;
+
+        proportion = sign  * Math.clamp(Math.abs(proportion), kMinimumAbsoluteOutput, 1);
+
+        return Math.clamp(proportion, -1, 1) ;
 
     }
 
