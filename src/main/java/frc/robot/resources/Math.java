@@ -1,5 +1,7 @@
 package frc.robot.resources;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Math {
 
     public static final double PI = 3.141592653589793238462643383279502884197;
@@ -174,6 +176,6 @@ public class Math {
     }
 
     public static int randomInt(int min, int max) {
-        return (int) (((java.lang.Math.random() + 0.5) * (max - min)) + min);
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 }

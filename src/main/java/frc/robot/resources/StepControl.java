@@ -1,5 +1,7 @@
 package frc.robot.resources;
 
+import static frc.robot.resources.Math.abs;
+
 public class StepControl {
 
     double currentPosition = 0;
@@ -40,7 +42,7 @@ public class StepControl {
         double proportion = ( ( kTarget - currentVelocity) ) * incrementMultiplier;
         int sign = proportion >= 0 ? 1: -1;
 
-        proportion = sign  * Math.clamp(Math.abs(proportion), kMinimumAbsoluteOutput, 1);
+        proportion = sign  * Math.clamp(abs(proportion), kMinimumAbsoluteOutput, 1);
 
         currentOutput += proportion;
 
@@ -50,10 +52,10 @@ public class StepControl {
 
     public double getOutputPosition(double currentPosition ) {
         this.currentPosition = currentPosition;
-        double proportion = ( kTarget - currentPosition) / kTarget * incrementMultiplier;
+        double proportion = ( kTarget - currentPosition)  * incrementMultiplier;
         int sign = proportion >= 0 ? 1: -1;
 
-        proportion = sign  * Math.clamp(Math.abs(proportion), kMinimumAbsoluteOutput, 1);
+        proportion = sign  * Math.clamp(abs(proportion), kMinimumAbsoluteOutput, 1);
 
         return Math.clamp(proportion, -1, 1) ;
 
@@ -96,7 +98,10 @@ public class StepControl {
     }
 
     public boolean isInRange(){
-        return Math.abs(currentPosition / kTarget ) <= ( (double) 1 - this.range );
+        //double proportion =  Math.abs(currentPosition / kTarget ) ;
+        double proportion =  Math.abs(kTarget - currentPosition);
+        //return proportion >= ( (double) 1 - this.range ) && proportion <= ( (double) 1 + this.range);
+        return proportion <= range;
     }
 
 
