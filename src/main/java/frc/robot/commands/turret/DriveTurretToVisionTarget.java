@@ -38,7 +38,7 @@ public class DriveTurretToVisionTarget extends CommandBase {
 
         kMinimumAbsoluteOutput = RobotMap.TURRET_VISION_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT;
         kTarget = vision.getYaw();
-        kCurrentPosition = turret.getTurretMotor().get();
+        // kCurrentPosition = turret.getTurretMotor().get();
         kIncrementMultiplier = RobotMap.TURRET_VISION_DEFAULT_kINCREMENT_MULTIPLIER;
         range = RobotMap.TURRET_VISION_DEFAULT_TARGET_RANGE;
 
@@ -59,12 +59,12 @@ public class DriveTurretToVisionTarget extends CommandBase {
         double yaw = vision.getYaw();
 
         kTarget = yaw;
-        kCurrentPosition = turret.getTurretMotor().get();
+        // kCurrentPosition = turret.getTurretMotor().get();
 
         // control.setCurrentPosition(kCurrentPosition);
         control.setTarget(kTarget);
 
-        double speed = control.getOutputPosition( kCurrentPosition );
+        double speed = control.getOutputPosition(kCurrentPosition);
 
         turret.setTurretRaw(speed);
 
