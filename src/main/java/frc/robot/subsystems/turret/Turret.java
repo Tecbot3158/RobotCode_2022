@@ -69,15 +69,11 @@ public class Turret extends SubsystemBase {
     }
 
     public void setTurretMoveRight() {
-        turretMotor.set(0.1);
+        turretMotor.set(0.25);
     }
 
     public void setTurretMoveLeft() {
-<<<<<<< HEAD
         System.out.println("move left!!");
         turretMotor.set(-0.25);
-=======
-        turretMotor.set(-0.1);
->>>>>>> 53db3e5e41500116d8e02500d373fff08910c6c0
     }
 }
