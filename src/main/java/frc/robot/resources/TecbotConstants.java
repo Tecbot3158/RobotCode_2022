@@ -5,8 +5,11 @@ import frc.robot.HUMAN_DRIVERS;
 
 public class TecbotConstants {
 
-        public static final HUMAN_DRIVERS CURRENT_PILOT = HUMAN_DRIVERS.ALEXG;
+        public static final HUMAN_DRIVERS CURRENT_PILOT = HUMAN_DRIVERS.PONCE;
         public static final HUMAN_DRIVERS CURRENT_COPILOT = HUMAN_DRIVERS.ALEXG;
+
+
+        public static final double COPILOT_DEFAULT_VIBRATION = 1;
 
         public static final boolean DEBUG_ENABLED = true;
 
@@ -29,7 +32,7 @@ public class TecbotConstants {
         public static final double CHASSIS_SWERVE_MAX_DISTANCE = 20;
         public static final double CHASSIS_SWERVE_ARRIVE_OFFSET = 2;
 
-        public static double TURN_CORRECTION = 0.01;
+    public static double TURN_CORRECTION = 0.01;
 
         // The distance in angles that it needs to be from target in order to be
         // considered onTarget}0 nnnnnnnnNNNNNNN
