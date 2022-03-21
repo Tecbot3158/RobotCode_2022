@@ -18,8 +18,9 @@ public class Paths {
 
     PieceWiseSpline fiveBallAutoPath;
 
-    double[] fiveBallAutoPathXCoordinates = { 1.66, 5, 7.625 };
-    double[] fiveBallAutoPathYCoordinates = { 2.4, 1.95, 1.83 };
+    double[] fiveBallAutoPathXCoordinates = { 1.3, 5, 7.625 };
+    double[] fiveBallAutoPathYCoordinates = { 2.1, 1.95, 1.83 };
+
 
     boolean fiveBallAutoPathVertical = false;
 
