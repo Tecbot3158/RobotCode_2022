@@ -44,6 +44,17 @@ public class TecbotPWMLEDStrip {
     }
 
     /**
+     * Turns off the LED strip. Preferrably an instantaneous call.
+     */
+
+    public void setClear() {
+        for (int i = 0; i < ledBuffer.getLength(); i++) {
+            ledBuffer.setHSV(i, 0, 0, 0);
+        }
+        led.setData(ledBuffer);
+    }
+
+    /**
      * Sets a {@link TecbotLEDStrip} to a single solid color.
      * Please make sure that the parameters are in the following range:
      * 
@@ -63,6 +74,10 @@ public class TecbotPWMLEDStrip {
         led.setData(ledBuffer);
     }
 
+    /**
+     * Sets the LED strip to a rainbow cycle animation.
+     */
+
     public void setRainbowCycle() {
         // For every pixel
         for (var i = 0; i < ledBuffer.getLength(); i++) {
@@ -79,59 +94,33 @@ public class TecbotPWMLEDStrip {
         led.setData(ledBuffer);
     }
 
-    public void setSolidCycle(int hue, int saturation) {
-
-        hue = (int) Math.clamp(hue, 0, 180);
-        saturation = (int) Math.clamp(saturation, 0, 255);
-
-        // For every pixel
-        for (var i = 0; i < ledBuffer.getLength(); i++) {
-            final var value = (firstPixelData + (i * 180 / ledBuffer.getLength())) % 180;
-            ledBuffer.setHSV(i, hue, saturation, value);
-        }
-        firstPixelData += 5;
-        // Check bounds
-        firstPixelData %= 180;
-        led.setData(ledBuffer);
-    }
-
-    public void setAmber() {
-        for (int i = 0; i < ledBuffer.getLength(); i++) {
-            ledBuffer.setHSV(i, 20, 237, 255);
-        }
-        led.setData(ledBuffer);
-    }
-
-    public void setClear() {
-        for (int i = 0; i < ledBuffer.getLength(); i++) {
-            ledBuffer.setHSV(i, 0, 0, 0);
-        }
-        led.setData(ledBuffer);
-        // led.stop();
-    }
-
     /**
-     * Starts a fire animation of a color given its hue and saturation.
+     * Starts a fire animation of a color given its hue and two-axis joystick
+     * information.
      * 
-     * @param hue        hue of the color
-     * @param saturation saturation of the color
-     * @param cooling    How much the fire cools down. The lower the value, the more
-     *                   intense the fire is. Recommended values: 10 when idle, 0
-     *                   when moving.
-     * @param sparking   How many sparks are randomly generated. The larger the
-     *                   value, the more sparks are created. Recommended values: 10
-     *                   when idle, 210 when moving.
+     * @param hue      Hue of the color.
+     * @param x        Joystick x-axis.
+     * @param y        Joystick y-axis.
+     * @param length   length of the fire in natural numbers 1..n.
+     * @param offset   LED offset of the animation in natural numbers 1..n.
+     * @param inverted Should the animation be upside down?
      */
-    public void setFire(int hue, int saturation, int cooling, int sparking) {
+    public void setFireFromJoystick(int hue, double x, double y, int length, int offset, boolean inverted) {
         // Step 0. Check for mistakes from 8th layer and ensure parameters are alright
         hue = (int) Math.clamp(hue, 0, 180);
-        saturation = (int) Math.clamp(saturation, 0, 255);
-        cooling = (int) Math.clamp(cooling, 0, 255);
-        sparking = (int) Math.clamp(sparking, 0, 255);
+        double absoluteMagnitude = Math.clamp(Math.hypot(x, y), 0, 1);
+        cooling = 255 - (int) (absoluteMagnitude * 255);
+
+        // Change the coefficent of absoluteMagnitude to 100 for 100% flame intensity
+        // when full joystick power. Turn down for less intensity in full joystick
+        // power.
+        sparking = (int) (absoluteMagnitude * 80);
 
         // Step 1. Cool down every cell a little
-        for (int i = 0; i < ledBuffer.getLength(); i++) {
-            cooldown = Math.randomInt(0, ((cooling * 10) / ledBuffer.getLength()) + 2);
+        // The second parameter in cooldown definition is changeable
+
+        for (int i = 0; i < length; i++) {
+            cooldown = Math.randomInt(0, ((cooling * 10) / length));
             if (cooldown > heat[i] || heat[i] > 255) {
                 heat[i] %= 255;
             } else {
@@ -140,24 +129,117 @@ public class TecbotPWMLEDStrip {
         }
 
         // Step 2. Heat from each cell drifts 'up' and diffuses a little
-        for (int k = ledBuffer.getLength() - 1; k >= 2; k--) {
-            heat[k] = (heat[k - 1] + heat[k - 2] + heat[k - 2]) / 3;
-        }
+        // The diffusing is also somewhat arbitrary and changeable
 
+        for (int k = length - 1; k >= 2; k--) {
+            heat[k] = (heat[k - 1] + 2 * heat[k - 2]) / 3;
+        }
         heat[1] = (heat[1] + 2 * heat[0]) / 3;
 
         // Step 3. Randomly ignite new 'sparks' near the bottom
-        if (Math.randomInt(0, 255) < sparking) {
-            int y = Math.randomInt(0, 7);
+        // randomLed picks one in the bottom to be a new spark. Change the second
+        // parameter of its definition to increase or decrease the length of the
+        // 'bottom'.
+        // Currently, the 'bottom' is a fifth of the strip.
 
-            heat[y] += Math.randomInt(160, 255);
-        }
+        // sparkIntensity non-surprisingly defines the intensity of the new spark
+        // created in the randomLed
+        // The clamp prevents it from going over, because if the value of randomLed is
+        // something like 258, then the displayed intensity will be 258%255 = 3
+
+        int randomLed = Math.randomInt(0, length / 5);
+        int sparkIntensity = Math.randomInt(155 + sparking, 255);
+        heat[randomLed] = (int) Math.clamp(heat[randomLed] + sparkIntensity, 0, 255);
 
         // Step 4. Convert heat to LED colors
-        for (int j = 0; j < ledBuffer.getLength(); j++) {
-            ledBuffer.setHSV(j, hue, saturation, heat[j]);
+        // Write parameters to buffer. The saturation parameter is changeable.
+
+        for (int j = 0; j < length; j++) {
+            if (!inverted)
+                ledBuffer.setHSV(j + offset, hue, 255 - (heat[j] / 3), heat[j]);
+            else {
+                System.out.println(offset + length - 1 - j);
+                ledBuffer.setHSV(offset + length - 1 - j, hue, 255 - (heat[j] / 3), heat[j]);
+            }
         }
 
         led.setData(ledBuffer);
+    }
+
+    /**
+     * Starts a fire animation of a color given its hue and an input in a range.
+     * 
+     * @param hue      Hue of the color.
+     * @param input    Input.
+     * @param min      The input's range minimum value.
+     * @param max      The input's range maximum value.
+     * @param length   length of the fire in natural numbers 1..n.
+     * @param offset   LED offset of the animation in natural numbers 1..n.
+     * @param inverted Should the animation be upside down?
+     */
+    public void setFireFromInputInRange(int hue, double input, double min, int max, int length, int offset,
+            boolean inverted) {
+        // Step 0. Check for mistakes from 8th layer and ensure parameters are alright
+        hue = (int) Math.clamp(hue, 0, 180);
+        double absoluteMagnitude = Math.clamp(input / (max - min), 0, 1);
+        cooling = 255 - (int) (absoluteMagnitude * 255);
+
+        // Change the coefficent of absoluteMagnitude to 100 for 100% flame intensity
+        // when full joystick power. Turn down for less intensity in full joystick
+        // power.
+        sparking = (int) (absoluteMagnitude * 80);
+
+        // Step 1. Cool down every cell a little
+        // The second parameter in cooldown definition is changeable
+
+        for (int i = 0; i < length; i++) {
+            cooldown = Math.randomInt(0, ((cooling * 10) / length));
+            if (cooldown > heat[i] || heat[i] > 255) {
+                heat[i] %= 255;
+            } else {
+                heat[i] -= cooldown;
+            }
+        }
+
+        // Step 2. Heat from each cell drifts 'up' and diffuses a little
+        // The diffusing is also somewhat arbitrary and changeable
+
+        for (int k = length - 1; k >= 2; k--) {
+            heat[k] = (heat[k - 1] + 2 * heat[k - 2]) / 3;
+        }
+        heat[1] = (heat[1] + 2 * heat[0]) / 3;
+
+        // Step 3. Randomly ignite new 'sparks' near the bottom
+        // randomLed picks one in the bottom to be a new spark. Change the second
+        // parameter of its definition to increase or decrease the length of the
+        // 'bottom'.
+        // Currently, the 'bottom' is a fifth of the strip.
+
+        // sparkIntensity non-surprisingly defines the intensity of the new spark
+        // created in the randomLed
+        // The clamp prevents it from going over, because if the value of randomLed is
+        // something like 258, then the displayed intensity will be 258%255 = 3
+
+        int randomLed = Math.randomInt(0, length / 5);
+        int sparkIntensity = Math.randomInt(155 + sparking, 255);
+        heat[randomLed] = (int) Math.clamp(heat[randomLed] + sparkIntensity, 0, 255);
+
+        // Step 4. Convert heat to LED colors
+        // Write parameters to buffer. The saturation parameter is changeable.
+
+        for (int j = 0; j < length; j++) {
+            if (!inverted)
+                ledBuffer.setHSV(j + offset, hue, 255 - (heat[j] / 3), heat[j]);
+            else {
+                System.out.println(offset + length - 1 - j);
+                ledBuffer.setHSV(offset + length - 1 - j, hue, 255 - (heat[j] / 3), heat[j]);
+            }
+        }
+
+        led.setData(ledBuffer);
+    }
+
+    public int getLength() {
+        return ledBuffer.getLength();
     }
 }
