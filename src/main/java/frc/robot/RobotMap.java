@@ -18,6 +18,7 @@ public class RobotMap {
     public static final int CLIMBER_RIGHT_LIMIT_SWITCH_PORT = 0;
     public static final int CLIMBER_LEFT_LIMIT_SWITCH_PORT = 0;
 
+
     // PCM
     private static final int PCM_1_PORT = 7;
 
@@ -67,10 +68,10 @@ public class RobotMap {
     public static final double DRIVE_TRAIN_GEAR_RATIO_TORQUE = 225.0 / 28.0;
 
     public static final double DRIVE_TRAIN_METERS_PER_PULSE_TORQUE = Math.PI * DRIVE_TRAIN_WHEEL_DIAMETER
-            / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_SPEED);
-    public static final double DRIVE_TRAIN_METERS_PER_PULSE_SPEED = Math.PI * DRIVE_TRAIN_WHEEL_DIAMETER
             / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_TORQUE);
-    ;
+    public static final double DRIVE_TRAIN_METERS_PER_PULSE_SPEED = Math.PI * DRIVE_TRAIN_WHEEL_DIAMETER
+            / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_SPEED);
+
 
     // chassis encoder-specific
     /*
@@ -148,10 +149,12 @@ public class RobotMap {
     public static final TypeOfMotor TRANSPORT_FEEDER_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
     public static final boolean TRANSPORT_FEEDER_IS_INVERTED = false;
 
-    public static final double FEEDER_DEFAULT_TARGET_SPEED = 3000;
-    public static final double FEEDER_DEFAULT_kINCREMENT_MULTIPLIER = 0.000004;
+    public static final double FEEDER_DEFAULT_TARGET_SPEED = 4000;
+    public static final double FEEDER_DEFAULT_kINCREMENT_MULTIPLIER = 0.000005;
 
     public static final double FEEDER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT = 0.001;
+
+    public static final double FEEDER_DEFAULT_RANGE = 300;
 
     public static final int FEEDER_ENCODER_MOTOR_PORT = TRANSPORT_FEEDER_PORT;
 
@@ -185,6 +188,9 @@ public class RobotMap {
 
     public static final int SHOOTER_MOTOR_MASTER_PORT = SHOOTER_MOTOR_PORTS[0];
     public static final int SHOOTER_MOTOR_SLAVE_PORT = SHOOTER_MOTOR_PORTS[1];
+
+
+    public static final double SHOOTER_DEFAULT_RANGE = 90;
 
     public static final double SHOOTER_PID_kP = 6e-5;
     public static final double SHOOTER_PID_kI = 0;
