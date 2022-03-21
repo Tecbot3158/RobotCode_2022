@@ -264,6 +264,9 @@ public class RobotMap {
 
     // CLIMBER
     public static final int[] CLIMBER_MOTOR_PORTS = {50, 51};
+    public static final int   CLIMBER_MOTOR_SLAVE_PORT = CLIMBER_MOTOR_PORTS[1];
+    public static final int   CLIMBER_MOTOR_MASTER_PORT = CLIMBER_MOTOR_PORTS[0];
+
     public static final TypeOfMotor[] CLIMBER_MOTOR_TYPES = {TypeOfMotor.CAN_SPARK_BRUSHLESS,
             TypeOfMotor.CAN_SPARK_BRUSHLESS};
     public static final int[] CLIMBER_INVERTED_MOTORS = {};
@@ -283,6 +286,13 @@ public class RobotMap {
     public static final double CLIMBER_PID_kMaxRPM = 6969;
 
     public static final double CLIMBER_PID_Target = 6500;
+
+    public static final double CLIMBER_DEFAULT_TARGET_SPEED = 4000;
+    public static final double CLIMBER_DEFAULT_kINCREMENT_MULTIPLIER = 0.000005;
+
+    public static final double CLIMBER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT = 0.001;
+
+    public static final double CLIMBER_DEFAULT_RANGE = 0.1;
 
     // CLIMBER --- end
 

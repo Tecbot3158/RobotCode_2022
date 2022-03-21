@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.resources.Navx;
 import frc.robot.subsystems.chassis.DriveTrain;
+import frc.robot.subsystems.climber.Climber;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.transport.Feeder;
@@ -35,6 +36,7 @@ public class RobotContainer {
     private Turret turret;
     private Feeder feeder;
     private Rollers rollers;
+    private Climber climber;
 
     private Navx gyroscope;
 
@@ -64,6 +66,8 @@ public class RobotContainer {
         rollers = new Rollers();
 
         shooter = new Shooter();
+
+        climber = new Climber();
 
         // configureButtonBindings();
         // this NEEDS to be called from the RobotInit class after all subsystems are
@@ -136,4 +140,7 @@ public class RobotContainer {
         return shooter;
     }
 
+    public Climber getClimber() {
+        return climber;
+    }
 }

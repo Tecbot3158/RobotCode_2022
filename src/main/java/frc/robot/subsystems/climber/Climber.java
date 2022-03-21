@@ -21,14 +21,7 @@ public class Climber extends SubsystemBase {
     private final DoubleSolenoid pistonHanger;
     private final TecbotMotorList ropeController;
 
-    private SparkMaxPIDController ropePIDController0;
-    private RelativeEncoder ropeEncoder0;
-
-    private SparkMaxPIDController ropePIDController1;
-    private RelativeEncoder ropeEncoder1;
-
-    private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
-    private double ropePIDController0TargetRPM;
+    private RelativeEncoder ropeEncoder;
 
     public Climber() {
 
@@ -36,55 +29,29 @@ public class Climber extends SubsystemBase {
                 RobotMap.CLIMBER_INVERTED_MOTORS, RobotMap.CLIMBER_MOTOR_TYPES);
         pistonHanger = RobotConfigurator.buildDoubleSolenoid(RobotMap.CLIMBER_SOLENOID_PORTS);
 
+        CANSparkMax leaderMotor = ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).getCANSparkMax();
+
+        CANSparkMax slaveMotor = ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_SLAVE_PORT).getCANSparkMax();
+
+        slaveMotor.follow( leaderMotor, true);
+
+        // santi says break !
+        leaderMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        slaveMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
+
+
         // TODO disable dragon fly in command for climber! Always!
         // TODO Dragon fly cannot be extended!!
-
-        initPID();
-
-    }
-
-    public void initPID() {
-        ropePIDController0 = ropeController.getMotors().get(0).getCANSparkMax().getPIDController();
-        ropeEncoder0 = ropeController.getMotors().get(0).getCANSparkMax().getEncoder();
-
-        ropePIDController1 = ropeController.getMotors().get(1).getCANSparkMax().getPIDController();
-        ropeEncoder1 = ropeController.getMotors().get(1).getCANSparkMax().getEncoder();
-
-        kP = RobotMap.CLIMBER_PID_kP;
-        kI = RobotMap.CLIMBER_PID_kI;
-        kD = RobotMap.CLIMBER_PID_kD;
-        kIz = RobotMap.CLIMBER_PID_kIz;
-        kFF = RobotMap.CLIMBER_PID_kFF;
-        kMaxOutput = RobotMap.CLIMBER_PID_kMaxOutput;
-        kMinOutput = RobotMap.CLIMBER_PID_kMinOutput;
-        maxRPM = RobotMap.CLIMBER_PID_kMaxRPM;
-
-        ropePIDController0TargetRPM = RobotMap.CLIMBER_PID_Target;
-
-        ropeControllerSetPIDValues(ropePIDController0);
-
-        ropeControllerSetPIDValues(ropePIDController1);
-
-    }
-
-    private void ropeControllerSetPIDValues(SparkMaxPIDController pidController) {
-        pidController.setP(kP);
-        pidController.setI(kI);
-        pidController.setD(kD);
-        pidController.setIZone(kIz);
-        pidController.setFF(kFF);
-        pidController.setOutputRange(kMinOutput, kMaxOutput);
-
-    }
-
-    public void runPID(SparkMaxPIDController pidController) {
-        double setPoint = ropePIDController0TargetRPM;
-        pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
 
     }
 
     public void setPistonExtend() {
         pistonHanger.set(RobotMap.CLIMBER_SOLENOID_EXTENDED_POSITION);
+    }
+
+    public DoubleSolenoid.Value getPistonValue(){
+        return pistonHanger.get();
     }
 
     public void setPistonRetract() {
@@ -96,7 +63,7 @@ public class Climber extends SubsystemBase {
     }
 
     public void setRopeControllerRaw(double speed) {
-        ropeController.setAll(speed);
+        ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).set(speed);
     }
 
     public TecbotMotorList getRopeControllerList() {
@@ -104,12 +71,11 @@ public class Climber extends SubsystemBase {
     }
 
     /**
-     * Returns a CAN Spark Max {@link RelativeEncoder}
+     * Returns the master CAN Spark Max {@link RelativeEncoder}
      *
-     * @param index index of the MotorList to retrieve the encoder from.
      */
-    public RelativeEncoder getRopeControllerEncoder(int index) {
-        return ropeController.getMotors().get(index).getCANSparkMax().getEncoder();
+    public RelativeEncoder getRopeControllerEncoder() {
+        return ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).getCANSparkMax().getEncoder();
     }
 
 }
