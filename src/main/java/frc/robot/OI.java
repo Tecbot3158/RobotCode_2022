@@ -1,12 +1,8 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
-import frc.robot.commands.climber.ClimberSetRawMotors;
-import frc.robot.commands.climber.ClimberToggleSolenoids;
-import frc.robot.commands.feeder.FeederSetToSpeed;
-import frc.robot.commands.feeder.FeederStop;
+import frc.robot.commands.feeder.*;
 import frc.robot.commands.intake.basic.IntakeToggleEject;
 import frc.robot.commands.intake.basic.IntakeToggleMotors;
 import frc.robot.commands.intake.basic.IntakeTogglePositionAndMotors;
@@ -18,7 +14,6 @@ import frc.robot.commands.turret.*;
 import frc.robot.resources.Math;
 import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotController;
-import frc.robot.subsystems.shooter.Shooter;
 
 public class OI {
 
@@ -80,12 +75,15 @@ public class OI {
         // pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggle());
 
         copilot.whileHeld(TecbotController.ButtonType.X, new RollersRunThenStop());
+        copilot.whileHeld(TecbotController.ButtonType.X, new FeederSetToSpeedThenStop());
 
         copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
-        copilot.whenPressed(TecbotController.ButtonType.A, new FeederSetToSpeed());
+        // copilot.whenPressed(TecbotController.ButtonType.A, new FeederSetToSpeed());
 
         copilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
         copilot.whenPressed(TecbotController.ButtonType.B, new FeederStop());
+
+        copilot.whileHeld(TecbotController.ButtonType.Y, new FeederEjectThenStop());
 
         // copilot.whenPressed(TecbotController.ButtonType.LB, new ShooterOff());
         // copilot.whenPressed(TecbotController.ButtonType.LB, new FeederStop());
@@ -95,16 +93,18 @@ public class OI {
         //
 
         // copilot.whenPressed(TecbotController.ButtonType.);
-        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new MoveTurretToCenter());
+        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new MoveTurretToAngle(-180));
+        copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new MoveTurretToCenter());
+        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new MoveTurretToAngle(-90));
         //
-        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new MoveTurretToAngle(90));
+        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new MoveTurretToAngle(-270));
 
-        copilot.whenPressed(TecbotController.ButtonType.BACK, new DriveTurretToVisionTarget());
+        copilot.whileHeld(TecbotController.ButtonType.BACK, new DriveTurretToVisionTarget());
 
         // copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
         // DriveTurretToVisionTarget());
 
-        copilot.setOffset(0.13);
+//        copilot.setOffset(0.13);
 
         // Shooter shooter = Robot.getRobotContainer().getShooter();
         copilot.whenPressed(TecbotController.ButtonType.START, new ShooterSetServoSpeeds());
@@ -140,12 +140,16 @@ public class OI {
 
         switch (TecbotConstants.CURRENT_PILOT) {
             case PONCE:
+                return Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)), -1, 1);
+
+            case PAULO:
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
+
+            case ALEXS235:
             case ALEXG:
             case ESTEBATO:
             default:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1);
-            case PAULO:
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
         }
     }
 
@@ -155,8 +159,11 @@ public class OI {
         switch (TecbotConstants.CURRENT_PILOT) {
             // Alex and Esteban want les mêmes choses.
             // and Ponce.
+            case TREVCAN:
             case PAULO:
                 return Math.clamp(-(OI.getInstance().getPilot().getTriggers()), -1, 1);
+
+            case ALEXS235:
             case ALEXG:
             case ESTEBATO:
             case PONCE:
@@ -186,6 +193,17 @@ public class OI {
         return instance;
     }
 
+
+    /**
+     * get the Climber default raw input for the motors.
+     * <p>
+     * Intended for use <b>only</b> in the {@link frc.robot.commands.climber.ClimberSetRawMotors}
+     * command.
+     * </p>
+     * <p>
+     * @return speed ranging from -1 to 1. Inclusive on both sides.
+     * </p>
+     */
     public double getClimberDefaultManualInput() {
         return -copilot.getLeftAxisY();
     }
