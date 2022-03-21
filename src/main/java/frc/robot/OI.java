@@ -11,13 +11,12 @@ import frc.robot.commands.intake.basic.IntakeTogglePositionAndMotors;
 import frc.robot.commands.rollers.RollersRunThenStop;
 import frc.robot.commands.shooter.ShooterGoToTarget;
 import frc.robot.commands.shooter.ShooterOff;
-import frc.robot.commands.turret.DriveTurretToLeft;
-import frc.robot.commands.turret.DriveTurretToRight;
-import frc.robot.commands.turret.MoveTurretToAngle;
-import frc.robot.commands.turret.MoveTurretToCenter;
+import frc.robot.commands.shooter.ShooterSetServoSpeeds;
+import frc.robot.commands.turret.*;
 import frc.robot.resources.Math;
 import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotController;
+import frc.robot.subsystems.shooter.Shooter;
 
 public class OI {
 
@@ -26,6 +25,7 @@ public class OI {
     private TecbotController pilot, copilot;
 
     private OI() {
+
 
     }
 
@@ -37,6 +37,8 @@ public class OI {
 
         pilot = new TecbotController(0, TecbotConstants.CONTROLLER_TYPE_PILOT);
         copilot = new TecbotController(1, TecbotConstants.CONTROLLER_TYPE_COPILOT);
+
+
 
 
         //pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(Robot.getRobotContainer().getDriveTrain().setDrivingMode(DriveTrain.DrivingMode.Mecanum)  ));
@@ -78,23 +80,13 @@ public class OI {
         copilot.whenPressed(TecbotController.ButtonType.B, new FeederStop());
 
 
-//        copilot.whenPressed(TecbotController.ButtonType.LB, new ShooterOff());
-//        copilot.whenPressed(TecbotController.ButtonType.LB, new FeederStop());
-//        //pilot.whenPressed(TecbotController.ButtonType.RB, new FeederStop());
-//        copilot.whenPressed(TecbotController.ButtonType.RB, new FeederSetToSpeed());
-//        copilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToTarget());
-//
-
-
-        // copilot.whenPressed(TecbotController.ButtonType.);
         copilot.whenPressed(TecbotController.ButtonType.POV_UP, new MoveTurretToCenter());
-//
         copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new MoveTurretToAngle(90));
 
+        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToVisionTarget());
 
-        // pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretManually());
-
-        // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new MoveTurretToCenter() );
+        Shooter shooter = Robot.getRobotContainer().getShooter();
+        copilot.whenPressed(TecbotController.ButtonType.START, new ShooterSetServoSpeeds());
 
 
     }
@@ -116,17 +108,16 @@ public class OI {
     }
 
     public double getDefaultDriveInputX() {
+        // default offset for everyone.
+        pilot.setOffset(0.03);
+
         switch (TecbotConstants.CURRENT_PILOT) {
+            case PONCE:
             case ALEXG:
-                pilot.setOffset(0.03);
+            case ESTEBATO:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1);
             case PAULO:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
-            case PONCE:
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) ;
-            case ESTEBATO:
-                pilot.setOffset(0.03);
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) ;
             default:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) ;
 
@@ -134,31 +125,38 @@ public class OI {
     }
 
     public double getDefaultDriveInputY() {
+        pilot.setOffset(0.03);
+        // default offset for everyone.
         switch (TecbotConstants.CURRENT_PILOT) {
+            // Alex and Esteban want les mêmes choses.
+            // and Ponce.
             case ALEXG:
-                pilot.setOffset(0.03);
+            case ESTEBATO:
+            case PONCE:
+            default:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1);
             case PAULO:
-                pilot.setOffset(0.03);
                 return Math.clamp(-(OI.getInstance().getPilot().getTriggers()), -1, 1) ;
-            case PONCE:
-                pilot.setOffset(0.03);
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1) ;
-            case ESTEBATO:
-                pilot.setOffset(0.03);
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1) ;
-            default:
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1) ;
-
         }
     }
 
+    public double getTurretDefaultInput() {
+        return 0;
+    }
 
-    // singleton
+    /**
+     *
+     * get a static OI instance.
+     *
+     * If no instance has been generated, it
+     * will generate one.
+      */
     public static OI getInstance() {
         if (instance == null)
             instance = new OI();
 
         return instance;
     }
+
+
 }
