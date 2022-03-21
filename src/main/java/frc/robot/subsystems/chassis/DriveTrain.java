@@ -151,8 +151,10 @@ public class DriveTrain extends SubsystemBase {
         lastLeftEncoderCount = 0;
         lastRightEncoderCount = 0;
 
-        SmartDashboard.putNumber("chassis min x corr", TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
-        SmartDashboard.putNumber("chassis turn corr", TecbotConstants.TURN_CORRECTION);
+//        SmartDashboard.putNumber("chassis min x corr", TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
+//        SmartDashboard.putNumber("chassis turn corr", TecbotConstants.TURN_CORRECTION);
+
+
 
     }
 
@@ -405,14 +407,14 @@ public class DriveTrain extends SubsystemBase {
             deltaAngle = -deltaAngle + 360;
         }
 
-        double in_turncorr = SmartDashboard.getNumber("chassis turn corr", TecbotConstants.TURN_CORRECTION);
-        double in_min_x_corr = SmartDashboard.getNumber("chassis min x corr",
-                TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
-
-        if (in_turncorr != TecbotConstants.TURN_CORRECTION)
-            TecbotConstants.TURN_CORRECTION = in_turncorr;
-        if (in_min_x_corr != TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM)
-            TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM = in_min_x_corr;
+//        double in_turncorr = SmartDashboard.getNumber("chassis turn corr", TecbotConstants.TURN_CORRECTION);
+//        double in_min_x_corr = SmartDashboard.getNumber("chassis min x corr",
+//                TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
+//
+//        if (in_turncorr != TecbotConstants.TURN_CORRECTION)
+//            TecbotConstants.TURN_CORRECTION = in_turncorr;
+//        if (in_min_x_corr != TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM)
+//            TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM = in_min_x_corr;
 
         double correction = -TecbotConstants.TURN_CORRECTION * deltaAngle
                 * (Math.abs(x) + TecbotConstants.CHASSIS_MINIMUM_X_CORRECTION_MECANUM);
