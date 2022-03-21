@@ -111,12 +111,24 @@ public class TecbotCamera extends SubsystemBase {
 
     }
 
+    public boolean hasTargets() {
+        return hasTargets;
+    }
+
     public PhotonPipelineResult getLatestResult() {
         return latestResult;
     }
 
     public PhotonPipelineResult getPreviousResult() {
         return previousResult;
+    }
+
+    public void setDriverMode(){
+        photonCamera.setDriverMode(true);
+    }
+
+    public void setTargetMode(){
+        photonCamera.setDriverMode(false);
     }
 
 }
