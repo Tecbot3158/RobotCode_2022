@@ -11,10 +11,9 @@ import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.resources.StepControl;
-import frc.robot.resources.TecbotConstants;
 import frc.robot.subsystems.transport.Feeder;
 
-public class FeederSetToSpeed extends CommandBase {
+public class FeederSetToSpeedThenStop extends CommandBase {
 
     Feeder feeder;
 
@@ -25,7 +24,7 @@ public class FeederSetToSpeed extends CommandBase {
     /**
      * Creates a new IntakeAbsorb.
      */
-    public FeederSetToSpeed() {
+    public FeederSetToSpeedThenStop() {
 
         feeder = Robot.getRobotContainer().getFeeder();
         addRequirements(feeder);
@@ -120,7 +119,7 @@ public class FeederSetToSpeed extends CommandBase {
 //
 //        }
 
-        //SmartDashboard.putNumber("feeder REAL RPMS", feeder.getFeederEncoder().getVelocity());
+        SmartDashboard.putNumber("feeder REAL RPMS", feeder.getFeederEncoder().getVelocity());
 
     }
 
@@ -129,6 +128,7 @@ public class FeederSetToSpeed extends CommandBase {
     public void end(boolean interrupted) {
         OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, 0);
         OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
+        feeder.setRaw(0);
 
     }
 
