@@ -50,8 +50,8 @@ public class MoveTurretToAngle extends CommandBase {
     @Override
     public void initialize() {
 
-        SmartDashboard.putNumber("turret - target", stepControl.getTarget());
-        SmartDashboard.putNumber("turret - position", stepControl.getCurrentPosition());
+//        SmartDashboard.putNumber("turret - target", stepControl.getTarget());
+//        SmartDashboard.putNumber("turret - position", stepControl.getCurrentPosition());
 
     }
 
