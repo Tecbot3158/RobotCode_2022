@@ -30,6 +30,17 @@ public class Shooter extends SubsystemBase {
     private PWM servoLeft, servoRight;
 
 
+    private boolean isReady = false;
+
+    public boolean setIsReady( boolean isReady){
+        return this.isReady = isReady;
+    }
+
+    public boolean getIsReady( ){
+        return isReady;
+    }
+
+
     public Shooter() {
 
         // stepControl = new StepControl( 0.05, );
