@@ -20,7 +20,17 @@ public class Feeder extends SubsystemBase {
 
     private RelativeEncoder feederEncoder;
 
-//    public static FeederAndShooterState state = FeederAndShooterState.BOTH_OFF;
+    boolean isReady = false;
+
+    public boolean isReady() {
+        return isReady;
+    }
+
+    public void setReady(boolean ready) {
+        isReady = ready;
+    }
+
+    //    public static FeederAndShooterState state = FeederAndShooterState.BOTH_OFF;
 
 
 
