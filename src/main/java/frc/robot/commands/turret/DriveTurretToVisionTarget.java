@@ -15,7 +15,7 @@ import frc.robot.subsystems.vision.TecbotCamera;
 public class DriveTurretToVisionTarget extends CommandBase {
 
     private double kMinimumAbsoluteOutput;
-    private double kCurrentPosition;
+    private double kCurrentPosition = 0;
     private double kIncrementMultiplier;
     private double kTarget;
 
@@ -49,6 +49,7 @@ public class DriveTurretToVisionTarget extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        vision.setTargetMode();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -61,8 +62,20 @@ public class DriveTurretToVisionTarget extends CommandBase {
         kTarget = yaw;
         // kCurrentPosition = turret.getTurretMotor().get();
 
-        // control.setCurrentPosition(kCurrentPosition);
-        control.setTarget(kTarget);
+        if (vision.hasTargets())
+            control.setTarget(kTarget);
+        else if (vision.getLatestResult() != null && vision.getPreviousResult() != null) {
+            if (!vision.getLatestResult().hasTargets() && !vision.getPreviousResult().hasTargets()) {
+                control.setTarget(0);
+            } else {
+                control.setTarget(vision.getPreviousResult().getBestTarget().getYaw());
+            }
+        } else {
+            if ( vision.getPreviousResult() != null)
+                control.setTarget(vision.getPreviousResult().getBestTarget().getYaw());
+            else
+                control.setTarget(0);
+        }
 
         double speed = control.getOutputPosition(kCurrentPosition);
 
@@ -74,6 +87,8 @@ public class DriveTurretToVisionTarget extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         turret.setTurretRaw(0);
+
+        vision.setDriverMode();
     }
 
     // Returns true when the command should end.
@@ -82,6 +97,7 @@ public class DriveTurretToVisionTarget extends CommandBase {
         boolean inRange = control.isInRange();
         SmartDashboard.putBoolean("Vision IN RANGE ", inRange);
 
-        return control.isInRange();
+        // return control.isInRange();
+        return false;
     }
 }
