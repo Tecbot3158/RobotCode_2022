@@ -4,6 +4,7 @@
 
 package frc.robot.commands.turret;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
@@ -20,6 +21,7 @@ public class DriveTurretToRight extends CommandBase {
         // Use addRequirements() here to declare subsystem dependencies.
 
         turret = Robot.getRobotContainer().getTurret();
+
 
         addRequirements(turret);
     }
@@ -43,6 +45,7 @@ public class DriveTurretToRight extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         turret.setTurretRaw(0);
+
     }
 
     // Returns true when the command should end.
