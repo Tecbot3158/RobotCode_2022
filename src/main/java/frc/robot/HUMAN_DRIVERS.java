@@ -5,4 +5,6 @@ public enum HUMAN_DRIVERS {
     ALEXG,
     PAULO,
     PONCE,
+    TREVCAN,
+    ALEXS235
 }
