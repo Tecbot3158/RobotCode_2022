@@ -44,8 +44,33 @@ public class Turret extends SubsystemBase {
      * @param speed speed for turret
      */
     public void setTurretRaw(double speed) {
+        double clampedSpeed = Math.clamp(speed, RobotMap.TURRET_MINIMUM_SPEED, RobotMap.TURRET_MAXIMUM_SPEED);
+        double realSpeed = clampedSpeed;
 
-        turretMotor.set(Math.clamp(speed, RobotMap.TURRET_MINIMUM_SPEED, RobotMap.TURRET_MAXIMUM_SPEED));
+        if (!inRangeNegativeEncoderValue())
+            realSpeed = Math.clamp(clampedSpeed, -1, 0);
+        if (!inRangePositiveEncoderValue())
+            realSpeed = Math.clamp(clampedSpeed, 0, 1);
+
+        turretMotor.set(realSpeed);
+
+
+//        <= minimo clampear para solo negativos entre -1 y 0
+        // si es mayor al valor mayor, potencia del setRaw a 0 y 1;
+
+    }
+
+    public boolean inRangeNegativeEncoderValue() {
+        RelativeEncoder encoder = turretMotor.getCANSparkMax().getEncoder();
+
+        return encoder.getPosition() >= RobotMap.TURRET_DEFAULT_MINIMUM_ENCODER_VALUE;
+
+    }
+
+    public boolean inRangePositiveEncoderValue() {
+        RelativeEncoder encoder = turretMotor.getCANSparkMax().getEncoder();
+
+        return encoder.getPosition() <= RobotMap.TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE;
 
     }
 
@@ -67,11 +92,10 @@ public class Turret extends SubsystemBase {
     }
 
     public void setTurretMoveRight() {
-        turretMotor.set(RobotMap.TURRET_MANUAL_POSITIVE_SPEED);
+        setTurretRaw(RobotMap.TURRET_MANUAL_POSITIVE_SPEED);
     }
 
     public void setTurretMoveLeft() {
-        System.out.println("move left!!");
-        turretMotor.set(-0.25);
+        setTurretRaw(RobotMap.TURRET_MANUAL_NEGATIVE_SPEED);
     }
 }
