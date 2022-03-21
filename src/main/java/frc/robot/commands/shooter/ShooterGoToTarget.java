@@ -1,10 +1,14 @@
 package frc.robot.commands.shooter;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.resources.StepControl;
+import frc.robot.resources.TecbotConstants;
 import frc.robot.subsystems.shooter.Shooter;
 
 public class ShooterGoToTarget extends CommandBase {
@@ -29,9 +33,11 @@ public class ShooterGoToTarget extends CommandBase {
 
         stepControl = new StepControl(minout, target, currentPos, increment);
 
-        Subsystem requirements[] = { shooter };
+        Subsystem requirements[] = {shooter};
 
         addRequirements(requirements);
+
+        stepControl.setRange(RobotMap.SHOOTER_DEFAULT_RANGE);
     }
 
     @Override
@@ -69,6 +75,25 @@ public class ShooterGoToTarget extends CommandBase {
 
         Robot.debug("exec shootergototarget");
 
+        if (stepControl.isInRange()) {
+            shooter.setIsReady(true);
+            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, TecbotConstants.COPILOT_DEFAULT_VIBRATION);
+            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, TecbotConstants.COPILOT_DEFAULT_VIBRATION);
+        } else {
+            shooter.setIsReady(false);
+            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, 0);
+            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
+
+        }
+
+
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooter.setIsReady(false);
+        OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, 0);
+        OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
     }
 
     @Override
