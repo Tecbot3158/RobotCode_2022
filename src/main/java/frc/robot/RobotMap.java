@@ -67,9 +67,9 @@ public class RobotMap {
         public static final double DRIVE_TRAIN_GEAR_RATIO_TORQUE = 225.0 / 28.0;
 
         public static final double DRIVE_TRAIN_METERS_PER_PULSE_TORQUE = Math.PI * DRIVE_TRAIN_WHEEL_DIAMETER
-                        / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_SPEED);
+                        / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_TORQUE);
         public static final double DRIVE_TRAIN_METERS_PER_PULSE_SPEED = Math.PI * DRIVE_TRAIN_WHEEL_DIAMETER
-                        / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_TORQUE);;
+                        / (DRIVE_TRAIN_PULSES_PER_REVOLUTION * DRIVE_TRAIN_GEAR_RATIO_SPEED);;
 
         // chassis encoder-specific
         /*
@@ -112,6 +112,9 @@ public class RobotMap {
         public static final DoubleSolenoid.Value DRIVE_TRAIN_LOWERED_WHEEL = DoubleSolenoid.Value.kReverse;
         public static final DoubleSolenoid.Value DRIVE_TRAIN_RAISED_WHEEL = DoubleSolenoid.Value.kForward;
         public static final boolean DRIVE_TRAIN_DRAGON_FLY_IS_AVAILABLE = true;
+
+        public static final double DRIVE_TRAIN_INITIAL_X_POSITION = 0;
+        public static final double DRIVE_TRAIN_INITIAL_Y_POSITION = 0;
 
         // DRIVETRAIN --- end
 

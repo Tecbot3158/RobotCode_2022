@@ -10,9 +10,18 @@ public class Paths {
     PieceWiseSpline testSpline;
 
     double[] testSplineXCoordinates = { 0, 2, 4 };
-    double[] testSplineYCoordinates = { 0, 1, 0 };
+    double[] testSplineYCoordinates = { 0, -1, 0 };
 
     boolean testSplineVertical = false;
+
+    //////////////// Five ball auto path////////////////
+
+    PieceWiseSpline fiveBallAutoPath;
+
+    double[] fiveBallAutoPathXCoordinates = { 1.66, 5, 7.625 };
+    double[] fiveBallAutoPathYCoordinates = { 2.4, 1.95, 1.83 };
+
+    boolean fiveBallAutoPathVertical = false;
 
     public Paths() {
 
@@ -27,10 +36,26 @@ public class Paths {
         testSpline = new PieceWiseSpline(testSpline0, testSpline1, testSplineXCoordinates[0], testSplineXCoordinates[1],
                 testSplineXCoordinates[2], testSplineVertical);
 
+        CubicSpline fiveBallAutoPathSpline0 = SplineGenerator.GenerateSpline0(fiveBallAutoPathXCoordinates[0],
+                fiveBallAutoPathXCoordinates[1], fiveBallAutoPathXCoordinates[2], fiveBallAutoPathYCoordinates[0],
+                fiveBallAutoPathYCoordinates[1], fiveBallAutoPathYCoordinates[2]);
+
+        CubicSpline fiveBallAutoPathSpline1 = SplineGenerator.GenerateSpline1(fiveBallAutoPathXCoordinates[0],
+                fiveBallAutoPathXCoordinates[1], fiveBallAutoPathXCoordinates[2], fiveBallAutoPathYCoordinates[0],
+                fiveBallAutoPathYCoordinates[1], fiveBallAutoPathYCoordinates[2]);
+
+        fiveBallAutoPath = new PieceWiseSpline(fiveBallAutoPathSpline0, fiveBallAutoPathSpline0,
+                fiveBallAutoPathXCoordinates[0], fiveBallAutoPathXCoordinates[1], fiveBallAutoPathXCoordinates[2],
+                false);
+
     }
 
     public PieceWiseSpline getTestSpline() {
         return testSpline;
+    }
+
+    public PieceWiseSpline getFiveBallAutoPathSpline() {
+        return fiveBallAutoPath;
     }
 
 }

@@ -5,7 +5,7 @@ import frc.robot.HUMAN_DRIVERS;
 
 public class TecbotConstants {
 
-        public static final HUMAN_DRIVERS CURRENT_PILOT = HUMAN_DRIVERS.ESTEBATO;
+        public static final HUMAN_DRIVERS CURRENT_PILOT = HUMAN_DRIVERS.ALEXG;
         public static final HUMAN_DRIVERS CURRENT_COPILOT = HUMAN_DRIVERS.ALEXG;
 
         public static final boolean DEBUG_ENABLED = true;
@@ -16,21 +16,24 @@ public class TecbotConstants {
         // ﻿﻿﻿﻿﻿﻿ -3509.97021484375 ﻿
         // ﻿﻿﻿﻿﻿﻿ -3524.081787109375 ﻿
 
-        public static final double CHASSIS_TURN_MAX_DISTANCE = 90;
-        public static final double CHASSIS_TURN_ARRIVE_OFFSET = 10;
+        public static final double CHASSIS_TURN_MAX_DISTANCE = 110;
+        public static final double CHASSIS_TURN_ARRIVE_OFFSET = 3;
 
-        public static final double CHASSIS_STRAIGHT_MAX_DISTANCE = 20;
-        public static final double CHASSIS_STRAIGHT_ARRIVE_OFFSET = 2;
+        public static final double CHASSIS_STRAIGHT_MAX_DISTANCE = 0.7;
+        public static final double CHASSIS_STRAIGHT_ARRIVE_OFFSET = 0.07;
+
+        public static final double CHASSIS_SPLINE_ARRIVE_OFFSET = 0.15;
 
         // Constants used to calculate speed reduction control in swerve mode
         // Units in meters
         public static final double CHASSIS_SWERVE_MAX_DISTANCE = 20;
         public static final double CHASSIS_SWERVE_ARRIVE_OFFSET = 2;
 
-        public static double TURN_CORRECTION = 0.06;
+        public static double TURN_CORRECTION = 0.01;
 
         // The distance in angles that it needs to be from target in order to be
-        // considered onTarget
+        // considered onTarget}0 nnnnnnnnNNNNNNN
+        // n222222p222ppppppppppppppppppppppppppppp2222222222222222222222222222222
         public static final double QUICK_TURN_OFFSET = 20;
 
         public static final double QUICK_TURN_CORRECTION = .05;
@@ -40,12 +43,13 @@ public class TecbotConstants {
         public static final double MIDDLE_SIDES_CORRECTION_SPEED = .6;
         public static final double MIDDLE_SIDES_CORRECTION_TORQUE = .6;
 
-        public static final double SPLINE_SPEED_REDUCTION_MAX_DISTANCE = .8;
+        public static final double SPLINE_SPEED_REDUCTION_MAX_DISTANCE = 1;
         public static final double SPLINE_TURN_CORRECTION = .05;
 
         // This constants angles the robot in order to correct the error in the Y value
         // while driving a spline.
         public static final double SPLINE_DRIVE_ANGLE_CORRECTION = 0.01;
+        public static final double SPLINE_DRIVE_ERROR_CORRECTION = 70;
 
         public static final double K_DISTANCE_BETWEEN_WHEELS = .53975;
 

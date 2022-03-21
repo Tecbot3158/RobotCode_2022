@@ -15,7 +15,7 @@ public class ShooterGoToTarget extends CommandBase {
 
     double target, currentPos;
 
-    double increment = 0.000003;
+    double increment = 0.0000045;
 
     double minout = 0.0001;
 
@@ -25,12 +25,11 @@ public class ShooterGoToTarget extends CommandBase {
 
         shooter.getShooterEncoder().setPosition(0);
         currentPos = shooter.getShooterEncoder().getVelocity();
-        target = 3000;
+        target = 3600;
 
         stepControl = new StepControl(minout, target, currentPos, increment);
 
-
-        Subsystem requirements[] = {shooter};
+        Subsystem requirements[] = { shooter };
 
         addRequirements(requirements);
     }
@@ -43,7 +42,6 @@ public class ShooterGoToTarget extends CommandBase {
         SmartDashboard.putNumber("setincr", increment);
 
         Robot.debug("init shootergototarget");
-
 
     }
 
@@ -61,19 +59,17 @@ public class ShooterGoToTarget extends CommandBase {
 
         shooter.setShooterMotorsRaw(output);
 
-//        minout = SmartDashboard.getNumber("setminout", minout);
-//        target = SmartDashboard.getNumber("settarget", target);
-//        increment =  SmartDashboard.getNumber("setincr", increment);
-//
-//        stepControl.setTarget(target);
-//        stepControl.setIncrementMultiplier(increment);
-//        stepControl.setMinAbsoluteOutput(minout);
+        // minout = SmartDashboard.getNumber("setminout", minout);
+        // target = SmartDashboard.getNumber("settarget", target);
+        // increment = SmartDashboard.getNumber("setincr", increment);
+        //
+        // stepControl.setTarget(target);
+        // stepControl.setIncrementMultiplier(increment);
+        // stepControl.setMinAbsoluteOutput(minout);
 
         Robot.debug("exec shootergototarget");
 
-
     }
-
 
     @Override
     public boolean isFinished() {
