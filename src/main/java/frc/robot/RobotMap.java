@@ -156,6 +156,8 @@ public class RobotMap {
 
     public static final double FEEDER_DEFAULT_RANGE = 300;
 
+    public static final double FEEDER_DEFAULT_EJECT_SPEED = -0.5;
+
     public static final int FEEDER_ENCODER_MOTOR_PORT = TRANSPORT_FEEDER_PORT;
 
     public static final double FEEDER_PID_kP = 6e-5;
@@ -242,12 +244,12 @@ public class RobotMap {
 
     public static final double TURRET_DEFAULT_TARGET_RANGE = 0.2;
     public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.065;
-    public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = -0.02;
+    public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = -0.08;
 
 
-    public static final double TURRET_VISION_DEFAULT_TARGET_RANGE = 0.2;
+    public static final double TURRET_VISION_DEFAULT_TARGET_RANGE = 0.05;
     public static final double TURRET_VISION_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.065;
-    public static final double TURRET_VISION_DEFAULT_kINCREMENT_MULTIPLIER = -0.02;
+    public static final double TURRET_VISION_DEFAULT_kINCREMENT_MULTIPLIER = 0.003;
 
     // turret motor - max and min speeds
 
@@ -258,6 +260,10 @@ public class RobotMap {
 
     public static final double TURRET_MANUAL_POSITIVE_SPEED = 0.15;
     public static final double TURRET_MANUAL_NEGATIVE_SPEED = -0.15;
+
+
+    public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE =      21.88084411621093766666;
+    public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE =      -4.41666197776794400000;
 
     // TURRET --- end
 
@@ -293,6 +299,7 @@ public class RobotMap {
     public static final double CLIMBER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT = 0.001;
 
     public static final double CLIMBER_DEFAULT_RANGE = 0.1;
+
 
     // CLIMBER --- end
 
