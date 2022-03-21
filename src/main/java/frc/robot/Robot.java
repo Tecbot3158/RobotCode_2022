@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.chassis.DefaultDrive;
+import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsAuto;
+import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsPath;
 import frc.robot.commands.chassis.autonomous.splines.Paths;
 import frc.robot.commands.chassis.autonomous.splines.SplineMove;
 import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
@@ -55,7 +57,8 @@ public class Robot extends TimedRobot {
         Paths paths = new Paths();
 
         SplineMove splineTest = new SplineMove(paths.getTestSpline(), 0.4, true, false, true, false);
-        m_chooser.setDefaultOption("splineTest", splineTest);
+        FiveBallsAuto fiveBalls = new FiveBallsAuto(paths.getFiveBallAutoPathSpline());
+        m_chooser.setDefaultOption("fiveBalls", fiveBalls);
 
     }
 
@@ -92,6 +95,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledPeriodic() {
+
+        SmartDashboard.putData("Autonomous", m_chooser);
     }
 
     /**
@@ -124,6 +129,7 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
+
     }
 
     /**

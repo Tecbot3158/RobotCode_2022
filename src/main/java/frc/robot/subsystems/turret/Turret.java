@@ -31,7 +31,8 @@ public class Turret extends SubsystemBase {
         turretMotor.getCANSparkMax().restoreFactoryDefaults();
         turretMotor.getCANSparkMax().setIdleMode(CANSparkMax.IdleMode.kBrake);
 
-        turretEncoder = RobotConfigurator.buildEncoder(turretMotor, RobotMap.TURRET_ENCODER_CHANNELS[0], RobotMap.TURRET_ENCODER_CHANNELS[1]);
+        turretEncoder = RobotConfigurator.buildEncoder(turretMotor, RobotMap.TURRET_ENCODER_CHANNELS[0],
+                RobotMap.TURRET_ENCODER_CHANNELS[1]);
 
         // turretMotor.getCANSparkMax().getEncoder().setInverted(RobotMap.TURRET_ENCODER_IS_INVERTED);
 
@@ -48,13 +49,11 @@ public class Turret extends SubsystemBase {
 
         turretMotor.set(Math.clamp(speed, -0.3, 0.3));
 
-
     }
 
-    public RelativeEncoder getTurretEncoder (){
+    public RelativeEncoder getTurretEncoder() {
         return turretMotor.getCANSparkMax().getEncoder();
     }
-
 
     /**
      * get number of rotations converted from an angle in degrees.
@@ -69,12 +68,16 @@ public class Turret extends SubsystemBase {
 
     }
 
-
     public void setTurretMoveRight() {
         turretMotor.set(0.1);
     }
 
     public void setTurretMoveLeft() {
+<<<<<<< HEAD
+        System.out.println("move left!!");
+        turretMotor.set(-0.25);
+=======
         turretMotor.set(-0.1);
+>>>>>>> 53db3e5e41500116d8e02500d373fff08910c6c0
     }
 }

@@ -169,10 +169,15 @@ public class TecbotSpeedController {
 
     public void setEncoderPosition(int value) {
 
-        if (motorToUse == TypeOfMotor.TALON_SRX)
+        if (motorToUse == TypeOfMotor.TALON_SRX) {
             phoenixMotor.setSelectedSensorPosition(value);
-        else
-            DriverStation.reportWarning("Not a talonSRX, sensor position not updated", false);
+            return;
+        }
+        if (motorToUse == TypeOfMotor.CAN_SPARK_BRUSHLESS) {
+            ((CANSparkMax) frcMotor).getEncoder().setPosition(0);
+            return;
+        }
+        DriverStation.reportWarning("Not a talonSRX, sensor position not updated", false);
 
     }
 

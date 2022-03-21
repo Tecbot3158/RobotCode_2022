@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems.chassis;
 
+import java.security.Principal;
+
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -142,7 +145,7 @@ public class DriveTrain extends SubsystemBase {
 
         }
 
-        transmissionState = TransmissionMode.torque;
+        transmissionState = TransmissionMode.speed;
         // encoders --- end!
 
         lastLeftEncoderCount = 0;
@@ -155,8 +158,10 @@ public class DriveTrain extends SubsystemBase {
 
     public void InitOdometry(Navx navx) {
 
+        Pose2d initialPosition = new Pose2d(7.625, 1.83, new Rotation2d(Math.toRadians(navx.getYaw())));
+
         odometry = new DifferentialDriveOdometry(
-                new Rotation2d(Math.toRadians(navx.getYaw())));
+                new Rotation2d(Math.toRadians(navx.getYaw())), initialPosition);
     }
 
     /**
@@ -221,15 +226,9 @@ public class DriveTrain extends SubsystemBase {
 
         maxPower = Math.clamp(maxPower, 0, 1);
 
-        double diffAngle = target - Robot.getRobotContainer().getNavx().getYaw();
+        double diffAngle = Math.deltaAngle(target, Robot.getRobotContainer().getNavx().getYaw());
 
-        if (diffAngle > 180) {
-            diffAngle = diffAngle - 360;
-        } else if (diffAngle < -180) {
-            diffAngle = -diffAngle + 360;
-        }
-
-        double turnPower = Math.clamp((diffAngle / TecbotConstants.CHASSIS_TURN_MAX_DISTANCE), -maxPower, maxPower);
+        double turnPower = (diffAngle / TecbotConstants.CHASSIS_TURN_MAX_DISTANCE) * maxPower;
 
         double diffAbsAngle = Math.abs(diffAngle);
 
@@ -249,7 +248,7 @@ public class DriveTrain extends SubsystemBase {
     public boolean moveStraight(double target, double maxPower) {
         maxPower = Math.clamp(maxPower, 0, 1);
 
-        double deltaEncoder = target - getEncoderRaw(CHASSIS_SIDE.LEFT_CHASSIS);
+        double deltaEncoder = target - leftEncoderDistance;
         double power = Math.clamp(deltaEncoder / TecbotConstants.CHASSIS_STRAIGHT_MAX_DISTANCE, -maxPower, maxPower);
 
         double diffAbs = Math.abs(deltaEncoder);
@@ -265,7 +264,7 @@ public class DriveTrain extends SubsystemBase {
     public boolean moveStraight(double target, double maxPower, double targetAngle) {
         maxPower = Math.clamp(maxPower, 0, 1);
 
-        double deltaEncoder = target - getEncoderRaw(CHASSIS_SIDE.LEFT_CHASSIS);
+        double deltaEncoder = target - leftEncoderDistance;
         double power = Math.clamp(deltaEncoder / TecbotConstants.CHASSIS_STRAIGHT_MAX_DISTANCE, -maxPower, maxPower);
 
         double deltaAngle = targetAngle - Robot.getRobotContainer().getNavx().getYaw();
@@ -283,7 +282,7 @@ public class DriveTrain extends SubsystemBase {
             stop();
             return true;
         } else {
-            drive(power, turnCorrection);
+            drive(-turnCorrection, power);
             return false;
         }
     }
@@ -292,9 +291,11 @@ public class DriveTrain extends SubsystemBase {
 
         double deltaAngle = Math.deltaAngle(targetAngle, Robot.getRobotContainer().getNavx().getYaw());
 
+        SmartDashboard.putNumber("DeltaAngle", deltaAngle);
+
         double turnCorrection = deltaAngle * TecbotConstants.TURN_CORRECTION;
 
-        drive(power, turnCorrection);
+        drive(turnCorrection, power);
 
     }
 
@@ -659,6 +660,18 @@ public class DriveTrain extends SubsystemBase {
 
     }
 
+    public TecbotEncoder getLeftEncoder() {
+
+        return leftMotorEncoders;
+
+    }
+
+    public TecbotEncoder getRightEncoder() {
+
+        return rightMotorEncoders;
+
+    }
+
     @Override
     public void periodic() {
 
@@ -676,6 +689,8 @@ public class DriveTrain extends SubsystemBase {
                     RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[0],
                     RobotMap.DRIVE_TRAIN_MIDDLE_WHEEL_ENCODER_PORTS[1]);
 
+            leftMotorEncoders.reset();
+            rightMotorEncoders.reset();
             return;
         }
 
@@ -720,6 +735,14 @@ public class DriveTrain extends SubsystemBase {
 
     public DifferentialDriveOdometry getOdometry() {
         return odometry;
+    }
+
+    public double getLeftDistance() {
+        return leftEncoderDistance;
+    }
+
+    public double getRightDistance() {
+        return rightEncoderDistance;
     }
 
 }

@@ -14,10 +14,13 @@ package frc.robot.resources;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalSource;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.resources.TecbotSpeedController.TypeOfMotor;
 
 /**
  * TecbotEncoder can be used to create almost any kind of encoder,

@@ -38,6 +38,11 @@ public class OI {
         pilot = new TecbotController(0, TecbotConstants.CONTROLLER_TYPE_PILOT);
         copilot = new TecbotController(1, TecbotConstants.CONTROLLER_TYPE_COPILOT);
 
+        // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
+        // InstantCommand(Robot.getRobotContainer().getDriveTrain().setDrivingMode(DriveTrain.DrivingMode.Mecanum)
+        // ));
+        pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(
+                Robot.getRobotContainer().getDriveTrain()::setMecanumDrive, Robot.getRobotContainer().getDriveTrain()));
 
 
 
@@ -49,27 +54,24 @@ public class OI {
         // lower llanta abajo
         // rise llanta arriba
 
-
         pilot.whenPressed(TecbotController.ButtonType.POV_UP, new ChassisSetDefaultDrive());
 
-//        pilot.whenPressed(TecbotController.ButtonType.Y, new ShooterGoToTarget());
-//        pilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
+        // pilot.whenPressed(TecbotController.ButtonType.Y, new ShooterGoToTarget());
+        // pilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
 
-
-        //pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggleMotors());
-        //pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggle());
+        // pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggleMotors());
+        // pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggle());
 
         pilot.whenPressed(TecbotController.ButtonType.A, new IntakeTogglePositionAndMotors());
         pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggleMotors());
 
         pilot.whenPressed(TecbotController.ButtonType.Y, new IntakeToggleEject());
-//        pilot.whileHeld(TecbotController.ButtonType.Y, new IntakeEjectThenStop());
+        // pilot.whileHeld(TecbotController.ButtonType.Y, new IntakeEjectThenStop());
 
         copilot.whileHeld(TecbotController.ButtonType.RB, new DriveTurretToRight());
         copilot.whileHeld(TecbotController.ButtonType.LB, new DriveTurretToLeft());
 
-        //pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggle());
-
+        // pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggle());
 
         copilot.whileHeld(TecbotController.ButtonType.X, new RollersRunThenStop());
 
@@ -80,17 +82,30 @@ public class OI {
         copilot.whenPressed(TecbotController.ButtonType.B, new FeederStop());
 
 
+        // copilot.whenPressed(TecbotController.ButtonType.LB, new ShooterOff());
+        // copilot.whenPressed(TecbotController.ButtonType.LB, new FeederStop());
+        // //pilot.whenPressed(TecbotController.ButtonType.RB, new FeederStop());
+        // copilot.whenPressed(TecbotController.ButtonType.RB, new FeederSetToSpeed());
+        // copilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToTarget());
+        //
+
+        // copilot.whenPressed(TecbotController.ButtonType.);
         copilot.whenPressed(TecbotController.ButtonType.POV_UP, new MoveTurretToCenter());
         copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new MoveTurretToAngle(90));
 
-        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToVisionTarget());
+
+        // copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToVisionTarget());
 
         Shooter shooter = Robot.getRobotContainer().getShooter();
         copilot.whenPressed(TecbotController.ButtonType.START, new ShooterSetServoSpeeds());
 
+        // pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new
+        // DriveTurretManually());
+
+        // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
+        // MoveTurretToCenter() );
 
     }
-
 
     public double getRollersInput() {
         return pilot.getRightAxisX();
@@ -119,7 +134,7 @@ public class OI {
             case PAULO:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
             default:
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) ;
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1);
 
         }
     }
@@ -133,10 +148,12 @@ public class OI {
             case ALEXG:
             case ESTEBATO:
             case PONCE:
+            case PAULO:
+                return Math.clamp(-(OI.getInstance().getPilot().getTriggers()), -1, 1);
+
             default:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1);
-            case PAULO:
-                return Math.clamp(-(OI.getInstance().getPilot().getTriggers()), -1, 1) ;
+
         }
     }
 
@@ -144,6 +161,7 @@ public class OI {
         return 0;
     }
 
+    // singleton
     /**
      *
      * get a static OI instance.
@@ -151,6 +169,7 @@ public class OI {
      * If no instance has been generated, it
      * will generate one.
       */
+
     public static OI getInstance() {
         if (instance == null)
             instance = new OI();

@@ -1,6 +1,7 @@
 package frc.robot.commands.chassis.autonomous.splines;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.resources.Math;
 import frc.robot.resources.TecbotConstants;
@@ -62,6 +63,9 @@ public class SplineMove extends CommandBase {
     @Override
     public void end(boolean interrupted) {
 
+        System.out.println("Endend spline move");
+        Robot.getRobotContainer().getDriveTrain().stop();
+
     }
 
     // Returns true when the command should end.
@@ -87,10 +91,11 @@ public class SplineMove extends CommandBase {
         }
 
         if (reverse) {
-            currentAngle -= error / TecbotConstants.SPLINE_DRIVE_ANGLE_CORRECTION;
+            currentAngle += error * TecbotConstants.SPLINE_DRIVE_ERROR_CORRECTION;
             maxSpeed = -Math.abs(maxSpeed);
         } else {
-            currentAngle -= error / TecbotConstants.SPLINE_DRIVE_ANGLE_CORRECTION;
+            currentAngle += error * TecbotConstants.SPLINE_DRIVE_ERROR_CORRECTION;
+
         }
 
         if (inverted || reverse) {
@@ -126,9 +131,11 @@ public class SplineMove extends CommandBase {
             power = speedReductionCorrection * maxSpeed;
         }
 
+        SmartDashboard.putNumber("Error", error);
+
         Robot.getRobotContainer().getDriveTrain().angleCorrectionDrive(power, currentAngle);
 
-        return distanceToTarget < TecbotConstants.CHASSIS_STRAIGHT_ARRIVE_OFFSET;
+        return distanceToTarget < TecbotConstants.CHASSIS_SPLINE_ARRIVE_OFFSET;
     }
 
 }
