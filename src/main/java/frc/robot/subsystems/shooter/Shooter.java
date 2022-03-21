@@ -12,6 +12,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.resources.Math;
@@ -25,7 +27,7 @@ public class Shooter extends SubsystemBase {
 
     private RelativeEncoder shooterEncoder;
 
-    // StepControl stepControl;
+    private PWM servoLeft, servoRight;
 
 
     public Shooter() {
@@ -46,6 +48,32 @@ public class Shooter extends SubsystemBase {
 
         shooterEncoder = shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).getCANSparkMax().getEncoder();
 
+        servoLeft = new PWM(RobotMap.SHOOTER_ANGLE_SERVO_PORTS[0]);
+        servoRight = new PWM( RobotMap.SHOOTER_ANGLE_SERVO_PORTS[1] );
+
+        // servoLeft.setPeriodMultiplier(PWM.PeriodMultiplier.k1X);
+        servoLeft.setBounds( 2.5, 0, 1.5, 0,  0.5 );
+        servoRight.setBounds( 2.5, 0, 1.5, 0,  0.5 );
+
+        SmartDashboard.putNumber("SERVO LS", 0);
+        SmartDashboard.putNumber("SERVOR RS", 0);
+
+    }
+
+    public void setServoLeft ( double number ){
+        servoLeft.setSpeed( RobotMap.SHOOTER_ANGLE_SERVOS_ARE_INVERTED[0] ? -1: 1 * number);
+    }
+
+    public void setServoLeftDefaultSpeed (){
+        servoLeft.setPosition( RobotMap.SHOOTER_ANGLE_SERVOS_ARE_INVERTED[0] ? -1: 1 * 0.1);
+    }
+
+    public void setServoRight ( double number ){
+        servoLeft.setSpeed( RobotMap.SHOOTER_ANGLE_SERVOS_ARE_INVERTED[1] ? -1: 1 * number);
+    }
+
+    public void setServoRightDefaultSpeed (){
+        servoLeft.setPosition( RobotMap.SHOOTER_ANGLE_SERVOS_ARE_INVERTED[1] ? -1: 1 * 0.1);
     }
 
     public void setShooterMotorsRaw(double speed){

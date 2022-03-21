@@ -5,9 +5,7 @@
 package frc.robot.subsystems.turret;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import frc.robot.resources.Math;
@@ -31,8 +29,7 @@ public class Turret extends SubsystemBase {
         turretMotor.getCANSparkMax().restoreFactoryDefaults();
         turretMotor.getCANSparkMax().setIdleMode(CANSparkMax.IdleMode.kBrake);
 
-        turretEncoder = RobotConfigurator.buildEncoder(turretMotor, RobotMap.TURRET_ENCODER_CHANNELS[0],
-                RobotMap.TURRET_ENCODER_CHANNELS[1]);
+        turretEncoder = RobotConfigurator.buildEncoder(turretMotor, RobotMap.TURRET_ENCODER_CHANNELS[0], RobotMap.TURRET_ENCODER_CHANNELS[1]);
 
         // turretMotor.getCANSparkMax().getEncoder().setInverted(RobotMap.TURRET_ENCODER_IS_INVERTED);
 
@@ -47,13 +44,15 @@ public class Turret extends SubsystemBase {
      */
     public void setTurretRaw(double speed) {
 
-        turretMotor.set(Math.clamp(speed, -0.3, 0.3));
+        turretMotor.set(Math.clamp(speed, RobotMap.TURRET_MINIMUM_SPEED, RobotMap.TURRET_MAXIMUM_SPEED));
+
 
     }
 
-    public RelativeEncoder getTurretEncoder() {
+    public RelativeEncoder getTurretEncoder (){
         return turretMotor.getCANSparkMax().getEncoder();
     }
+
 
     /**
      * get number of rotations converted from an angle in degrees.
@@ -68,12 +67,16 @@ public class Turret extends SubsystemBase {
 
     }
 
+
     public void setTurretMoveRight() {
-        turretMotor.set(0.25);
+        turretMotor.set(RobotMap.TURRET_MANUAL_POSITIVE_SPEED);
     }
 
     public void setTurretMoveLeft() {
-        System.out.println("move left!!");
-        turretMotor.set(-0.25);
+        turretMotor.set(RobotMap.TURRET_MANUAL_NEGATIVE_SPEED);
+    }
+
+    public CANSparkMax getTurretMotor() {
+        return turretMotor.getCANSparkMax();
     }
 }

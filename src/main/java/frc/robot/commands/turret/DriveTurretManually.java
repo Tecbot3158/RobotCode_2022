@@ -7,15 +7,22 @@ package frc.robot.commands.turret;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.subsystems.turret.Turret;
 
 public class DriveTurretManually extends CommandBase {
+
+   Turret turret;
+
     /**
      * Creates a new DriveTurretManually.
      */
     public DriveTurretManually() {
         // Use addRequirements() here to declare subsystem dependencies.
 
-        addRequirements(Robot.getRobotContainer().getTurret());
+        turret = Robot.getRobotContainer().getTurret();
+
+        addRequirements(turret);
+
     }
 
     // Called when the command is initially scheduled.
@@ -27,10 +34,9 @@ public class DriveTurretManually extends CommandBase {
     @Override
     public void execute() {
 
-        double left = OI.getInstance().getCopilot().getLeftTrigger();
-        double right = OI.getInstance().getCopilot().getRightTrigger();
+        double speed = OI.getInstance().getTurretDefaultInput();
 
-        Robot.getRobotContainer().getTurret().setTurretRaw(right - left);
+        turret.setTurretRaw( speed );
 
     }
 

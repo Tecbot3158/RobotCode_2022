@@ -18,8 +18,11 @@ public class TecbotCamera extends SubsystemBase {
 
     /**
      * Creates a new Tecbot camera.
-     * For now it uses Photonvision with Photonlib to retrieve the values
-     * from the Network Tables
+     * <p></p>
+     * It uses Photonvision with PhotonLib to retrieve the values
+     * from the Network Tables.
+     *
+     * It allows to easily retrieve target values ranging from <code>-1 to 1</code>
      */
     public TecbotCamera() {
 

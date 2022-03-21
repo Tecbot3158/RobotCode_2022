@@ -4,6 +4,7 @@
 
 package frc.robot.commands.turret;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -11,7 +12,7 @@ import frc.robot.resources.StepControl;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.vision.TecbotCamera;
 
-public class MoveTurretToTarget extends CommandBase {
+public class DriveTurretToVisionTarget extends CommandBase {
 
     private double kMinimumAbsoluteOutput;
     private double kCurrentPosition;
@@ -28,7 +29,7 @@ public class MoveTurretToTarget extends CommandBase {
     /**
      * Creates a new MoveTurretToTarget.
      */
-    public MoveTurretToTarget() {
+    public DriveTurretToVisionTarget() {
         // Use addRequirements() here to declare subsystem dependencies.
 
         vision = Robot.getRobotContainer().getTecbotCamera();
@@ -67,19 +68,20 @@ public class MoveTurretToTarget extends CommandBase {
 
         turret.setTurretRaw(speed);
 
-
-
-
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        turret.setTurretRaw(0);
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        boolean inRange = control.isInRange();
+        SmartDashboard.putBoolean("Vision IN RANGE ", inRange);
+
+        return control.isInRange();
     }
 }
