@@ -84,6 +84,13 @@ public class Robot extends TimedRobot {
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
         SmartDashboard.putNumber("Gyro", getRobotContainer().getNavx().getYaw());
+
+        SmartDashboard.putNumber("turret encoder:",
+                Robot.getRobotContainer().getTurret().getTurretEncoder().getPosition());
+        SmartDashboard.putNumber("turret RPMs:",
+                Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity());
+
+
     }
 
     /**
@@ -138,10 +145,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
 
-        SmartDashboard.putNumber("turret encoder:",
-                Robot.getRobotContainer().getTurret().getTurretEncoder().getPosition());
-        SmartDashboard.putNumber("turret speed:",
-                Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity());
+
     }
 
     @Override
