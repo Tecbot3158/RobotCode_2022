@@ -52,8 +52,8 @@ public class Math {
         return java.lang.Math.tan(a);
     }
 
-    public static double atan(double a) {
-        return java.lang.Math.atan(a);
+    public static double atan(double radians) {
+        return java.lang.Math.atan(radians);
     }
 
     public static double hypot(double a, double b) {
@@ -177,5 +177,9 @@ public class Math {
 
     public static int randomInt(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
+    }
+
+    public static double atan2( double y, double x ){
+        return java.lang.Math.atan2( y, x);
     }
 }
