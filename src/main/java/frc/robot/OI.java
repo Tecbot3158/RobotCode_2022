@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
+import frc.robot.commands.climber.ClimberSetRawMotors;
+import frc.robot.commands.climber.ClimberToggleSolenoids;
 import frc.robot.commands.feeder.FeederEjectThenStop;
 import frc.robot.commands.feeder.FeederSetToSpeedThenStop;
 import frc.robot.commands.feeder.FeederStop;
@@ -113,20 +115,17 @@ public class OI {
 //
         // copilot.whenPressed(TecbotController.ButtonType.RS, new ShooterGoToLower());
         // JoystickButton
-        // new Button( )
 
-        // new XboxController(0).getLeftTriggerAxis()
-
-        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngleRelativeToRobot(0));
-        copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(180));
-        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngleRelativeToRobot(90));
-        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngleRelativeToRobot(-90));
+        //copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngleRelativeToRobot(0));
+        //copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(180));
+        //copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngleRelativeToRobot(90));
+        //copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngleRelativeToRobot(270));
 
 
         new TecbotControllerRightTriggerButton().whenActive( new ShooterGoToLower() );
         new TecbotControllerLeftTriggerButton().whileHeld( new DriveTurretToVisionTarget() );
 
-//        copilot.whenPressed(TecbotController.ButtonType.RS, new DriveTurretToAngleRelativeToRobotWithAxis(0));
+        copilot.whenPressed(TecbotController.ButtonType.RS, new DriveTurretToAngleRelativeToRobotWithAxis());
 
 
 
@@ -140,11 +139,11 @@ public class OI {
         // Shooter shooter = Robot.getRobotContainer().getShooter();
         //copilot.whenPressed(TecbotController.ButtonType.START, new ShooterSetServoSpeeds());
 
-        // copilot.whenPressed(TecbotController.ButtonType.BACK, new
-        // ClimberSetRawMotors());
+         copilot.whenPressed(TecbotController.ButtonType.BACK, new
+                 ClimberSetRawMotors());
         //
-        // copilot.whenPressed(TecbotController.ButtonType.POV_UP, new
-        // ClimberToggleSolenoids());
+        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new
+                ClimberToggleSolenoids());
         // copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new
         // ClimberToggleSolenoids());
 
@@ -238,35 +237,6 @@ public class OI {
      */
     public double getClimberDefaultManualInput() {
         return -copilot.getLeftAxisY();
-    }
-
-    public double getTurretInputAngle() {
-        double x = copilot.getRightAxisX();
-        double y = -copilot.getRightAxisY();
-
-
-
-        if (y == 0) {
-            SmartDashboard.putNumber("COP-angle", x < 0 ? 180 : 0);
-            return x < 0 ? 180 : 0;
-        }
-
-        double angle = Math.toDegrees(Math.atan(x / y));
-
-//        if (x < 0 && y > 0) {
-//            angle = 180 + angle;
-//        }
-//        if (y < 0 && x < 0) {
-//            angle = 180 + angle;
-//        }
-//        if (y < 0 && x > 0) {
-//            angle = 360 + angle;
-//        }
-
-
-        SmartDashboard.putNumber("COP-angle", angle);
-        return angle;
-
     }
 
 }
