@@ -6,10 +6,10 @@ package frc.robot.commands.turret;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class MoveTurretToCenter extends SequentialCommandGroup {
+public class DriveTurretToCenter extends SequentialCommandGroup {
 
-    public MoveTurretToCenter(){
-        addCommands( new MoveTurretToAngle(0));
+    public DriveTurretToCenter(){
+        addCommands( new DriveTurretToAngle(0));
     }
 
 }
