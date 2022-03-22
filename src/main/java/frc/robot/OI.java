@@ -1,19 +1,24 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
-import frc.robot.commands.feeder.*;
+import frc.robot.commands.feeder.FeederEjectThenStop;
+import frc.robot.commands.feeder.FeederSetToSpeedThenStop;
+import frc.robot.commands.feeder.FeederStop;
 import frc.robot.commands.intake.basic.IntakeToggleEject;
 import frc.robot.commands.intake.basic.IntakeToggleMotors;
 import frc.robot.commands.intake.basic.IntakeTogglePositionAndMotors;
 import frc.robot.commands.rollers.RollersRunThenStop;
+import frc.robot.commands.shooter.ShooterGoToLower;
 import frc.robot.commands.shooter.ShooterGoToTarget;
 import frc.robot.commands.shooter.ShooterOff;
-import frc.robot.commands.shooter.ShooterSetServoSpeeds;
 import frc.robot.commands.turret.*;
+import frc.robot.commands.turret.basic.DriveTurretToLeft;
+import frc.robot.commands.turret.basic.DriveTurretToRight;
+import frc.robot.resources.*;
 import frc.robot.resources.Math;
-import frc.robot.resources.TecbotConstants;
-import frc.robot.resources.TecbotController;
 
 public class OI {
 
@@ -69,6 +74,10 @@ public class OI {
         pilot.whenPressed(TecbotController.ButtonType.Y, new IntakeToggleEject());
         // pilot.whileHeld(TecbotController.ButtonType.Y, new IntakeEjectThenStop());
 
+
+
+        // COPILOT:
+
         copilot.whileHeld(TecbotController.ButtonType.RB, new DriveTurretToRight());
         copilot.whileHeld(TecbotController.ButtonType.LB, new DriveTurretToLeft());
 
@@ -85,6 +94,8 @@ public class OI {
 
         copilot.whileHeld(TecbotController.ButtonType.Y, new FeederEjectThenStop());
 
+        // limelight gatillo
+
         // copilot.whenPressed(TecbotController.ButtonType.LB, new ShooterOff());
         // copilot.whenPressed(TecbotController.ButtonType.LB, new FeederStop());
         // //pilot.whenPressed(TecbotController.ButtonType.RB, new FeederStop());
@@ -92,14 +103,34 @@ public class OI {
         // copilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToTarget());
         //
 
-        // copilot.whenPressed(TecbotController.ButtonType.);
-        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new MoveTurretToAngle(-180));
-        copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new MoveTurretToCenter());
-        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new MoveTurretToAngle(-90));
-        //
-        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new MoveTurretToAngle(-270));
+        copilot.whileHeld(TecbotController.ButtonType.LS, new DriveTurretToVisionTarget());
 
-        copilot.whileHeld(TecbotController.ButtonType.BACK, new DriveTurretToVisionTarget());
+        // copilot.whenPressed(TecbotController.ButtonType.);
+//        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngle(-180));
+//        copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToCenter());
+//        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(-90));
+//        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngle(-270));
+//
+        // copilot.whenPressed(TecbotController.ButtonType.RS, new ShooterGoToLower());
+        // JoystickButton
+        // new Button( )
+
+        // new XboxController(0).getLeftTriggerAxis()
+
+        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngleRelativeToRobot(0));
+        copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(180));
+        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngleRelativeToRobot(90));
+        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngleRelativeToRobot(-90));
+
+
+        new TecbotControllerRightTriggerButton().whenActive( new ShooterGoToLower() );
+        new TecbotControllerLeftTriggerButton().whileHeld( new DriveTurretToVisionTarget() );
+
+//        copilot.whenPressed(TecbotController.ButtonType.RS, new DriveTurretToAngleRelativeToRobotWithAxis(0));
+
+
+
+//        copilot.whenPressed(TecbotController.ButtonType.START, new DriveTurretToAngleRelativeToRobot(180));
 
         // copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
         // DriveTurretToVisionTarget());
@@ -107,7 +138,7 @@ public class OI {
 //        copilot.setOffset(0.13);
 
         // Shooter shooter = Robot.getRobotContainer().getShooter();
-        copilot.whenPressed(TecbotController.ButtonType.START, new ShooterSetServoSpeeds());
+        //copilot.whenPressed(TecbotController.ButtonType.START, new ShooterSetServoSpeeds());
 
         // copilot.whenPressed(TecbotController.ButtonType.BACK, new
         // ClimberSetRawMotors());
@@ -140,7 +171,7 @@ public class OI {
 
         switch (TecbotConstants.CURRENT_PILOT) {
             case PONCE:
-                return Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)), -1, 1);
+                return Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)), -1, 1) * 0.7;
 
             case PAULO:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
@@ -201,6 +232,7 @@ public class OI {
      * command.
      * </p>
      * <p>
+     *
      * @return speed ranging from -1 to 1. Inclusive on both sides.
      * </p>
      */
@@ -208,4 +240,35 @@ public class OI {
         return -copilot.getLeftAxisY();
     }
 
+    public double getTurretInputAngle() {
+        double x = copilot.getRightAxisX();
+        double y = -copilot.getRightAxisY();
+
+
+
+        if (y == 0) {
+            SmartDashboard.putNumber("COP-angle", x < 0 ? 180 : 0);
+            return x < 0 ? 180 : 0;
+        }
+
+        double angle = Math.toDegrees(Math.atan(x / y));
+
+//        if (x < 0 && y > 0) {
+//            angle = 180 + angle;
+//        }
+//        if (y < 0 && x < 0) {
+//            angle = 180 + angle;
+//        }
+//        if (y < 0 && x > 0) {
+//            angle = 360 + angle;
+//        }
+
+
+        SmartDashboard.putNumber("COP-angle", angle);
+        return angle;
+
+    }
+
 }
+
+// axis para rueda ???
