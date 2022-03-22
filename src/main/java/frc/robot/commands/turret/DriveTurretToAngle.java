@@ -11,7 +11,7 @@ import frc.robot.RobotMap;
 import frc.robot.resources.StepControl;
 import frc.robot.subsystems.turret.Turret;
 
-public class MoveTurretToAngle extends CommandBase {
+public class DriveTurretToAngle extends CommandBase {
     double kMinimumAbsoluteOutput;
     double kTarget;
     double kCurrentPosition;
@@ -25,7 +25,7 @@ public class MoveTurretToAngle extends CommandBase {
 
     StepControl stepControl;
 
-    public MoveTurretToAngle(double angle) {
+    public DriveTurretToAngle(double angle) {
         // Use addRequirements() here to declare subsystem dependencies.
 
         this.turret = Robot.getRobotContainer().getTurret();
@@ -34,11 +34,11 @@ public class MoveTurretToAngle extends CommandBase {
 
         this.angle = angle;
 
-        kMinimumAbsoluteOutput = RobotMap.TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT;
+                kMinimumAbsoluteOutput = RobotMap.TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT;
         kTarget = - turret.getRotationsFromAngle(this.angle);
         kCurrentPosition =  turret.getTurretEncoder().getPosition();
 
-        kIncrementMultiplier = RobotMap.TURRET_DEFAULT_kINCREMENT_MULTIPLIER;
+        kIncrementMultiplier = RobotMap.TURRET_DEFAULT_kCONTROL_START_LIMIT;
 
         stepControl = new StepControl(kMinimumAbsoluteOutput, kTarget, kCurrentPosition, kIncrementMultiplier);
 
