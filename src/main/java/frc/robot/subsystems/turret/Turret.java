@@ -54,7 +54,6 @@ public class Turret extends SubsystemBase {
 
         turretMotor.set(realSpeed);
 
-
 //        <= minimo clampear para solo negativos entre -1 y 0
         // si es mayor al valor mayor, potencia del setRaw a 0 y 1;
 
@@ -97,5 +96,48 @@ public class Turret extends SubsystemBase {
 
     public void setTurretMoveLeft() {
         setTurretRaw(RobotMap.TURRET_MANUAL_NEGATIVE_SPEED);
+    }
+
+    public double getAngleMaxRangeCounterClockwise() {
+        return RobotMap.TURRET_ANGLE_COUNTER_CLOCKWISE;
+    }
+
+    public double getAngleMinRangeClockwise() {
+        return RobotMap.TURRET_ANGLE_CLOCKWISE;
+    }
+
+    public boolean withinAngleRange(double angleDegrees) {
+        if (angleDegrees >= getAngleMaxRangeCounterClockwise() && angleDegrees <= getAngleMinRangeClockwise())
+            return true;
+        else {
+            if (angleDegrees < 0) {
+                double positiveAngle = 360 + angleDegrees;
+                if (positiveAngle >= getAngleMaxRangeCounterClockwise() && positiveAngle <= getAngleMinRangeClockwise())
+                    return true;
+            }
+            if (angleDegrees > 0) {
+                double negativeAngle = -360 + angleDegrees;
+                if (negativeAngle >= getAngleMaxRangeCounterClockwise() && negativeAngle <= getAngleMinRangeClockwise())
+                    return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    public double getRealAngle(double angleDegrees) {
+        if (withinAngleRange(angleDegrees)) {
+            if (!(angleDegrees >= getAngleMaxRangeCounterClockwise() && angleDegrees <= getAngleMinRangeClockwise())) {
+                if (angleDegrees > 0)
+                    return -360 + angleDegrees;
+                else
+                    return 360 + angleDegrees;
+            } else
+                return angleDegrees;
+        }
+
+        return 0;
+
     }
 }
