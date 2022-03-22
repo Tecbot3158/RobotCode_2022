@@ -15,6 +15,10 @@ Anyways, here is a rough overview of the subsystems:
 - view LAMBOT and BOTBUSTERS modes
   - 3 modes. 1; not doing anything. 2; looking but have not found yet. 3; aimed & ready to shoot.
 
+	- actually today:
+		- go for it.create a lineal function for the shooter velocity. starting from 0 to 0.5 to 1,
+		- for several minutes. maybe standard deviation and median 
+
 ## DriveTrain
 The drivetrain is the most important subsystem. It
 allows the robot to move on the floor using wheel and motors.
