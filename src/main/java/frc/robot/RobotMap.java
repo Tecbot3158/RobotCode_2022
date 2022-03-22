@@ -192,7 +192,7 @@ public class RobotMap {
     public static final int SHOOTER_MOTOR_SLAVE_PORT = SHOOTER_MOTOR_PORTS[1];
 
 
-    public static final double SHOOTER_DEFAULT_RANGE = 90;
+    public static final double SHOOTER_DEFAULT_RANGE = 100;
 
     public static final double SHOOTER_PID_kP = 6e-5;
     public static final double SHOOTER_PID_kI = 0;
@@ -235,7 +235,8 @@ public class RobotMap {
 
     public static final double TURRET_MAX_DISTANCE = ((double) 776 / (double) 27);
 
-    public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = (double) 776 / (double) 27;
+    //public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = (double) 776 / (double) 27;
+    public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = 27.0;
 
     public static final double TURRET_MOTOR_MIN_ROTATIONS = -135 / (double) 360
             * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION;
@@ -244,17 +245,17 @@ public class RobotMap {
 
     public static final double TURRET_DEFAULT_TARGET_RANGE = 0.2;
     public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.065;
-    public static final double TURRET_DEFAULT_kINCREMENT_MULTIPLIER = -0.08;
+    public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5;
 
 
     public static final double TURRET_VISION_DEFAULT_TARGET_RANGE = 0.05;
     public static final double TURRET_VISION_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.065;
-    public static final double TURRET_VISION_DEFAULT_kINCREMENT_MULTIPLIER = 0.003;
+    public static final double TURRET_VISION_DEFAULT_kINCREMENT_MULTIPLIER = 0.002;
 
     // turret motor - max and min speeds
 
-    public static final double TURRET_MINIMUM_SPEED = -0.4;
-    public static final double TURRET_MAXIMUM_SPEED = 0.4;
+    public static final double TURRET_MINIMUM_SPEED = -0.2;
+    public static final double TURRET_MAXIMUM_SPEED = 0.2;
 
     // turret motor - manual negative and positive speeds
 
@@ -262,8 +263,13 @@ public class RobotMap {
     public static final double TURRET_MANUAL_NEGATIVE_SPEED = -0.15;
 
 
-    public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE =      21.88084411621093766666;
-    public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE =      -4.41666197776794400000;
+    // public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE =      21.88084411621093766666;
+    public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE =      20;
+    public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE =      -3.5;
+
+    public static final double TURRET_ANGLE_COUNTER_CLOCKWISE =            ( TURRET_DEFAULT_MINIMUM_ENCODER_VALUE * 360 ) / TURRET_ROTATION_TO_MOTOR_ROTATION;
+    public static final double TURRET_ANGLE_CLOCKWISE =            ( TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE * 360 ) / TURRET_ROTATION_TO_MOTOR_ROTATION;
+
 
     // TURRET --- end
 
