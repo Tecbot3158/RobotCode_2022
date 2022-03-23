@@ -1,18 +1,14 @@
 package frc.robot.commands.shooter;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.resources.StepControl;
 import frc.robot.subsystems.shooter.Shooter;
-import frc.robot.subsystems.transport.Feeder;
-import frc.robot.subsystems.transport.FeederAndShooterState;
 
 public class ShooterOff extends CommandBase {
 
     Shooter shooter;
 
-    public ShooterOff(){
+    public ShooterOff() {
         shooter = Robot.getRobotContainer().getShooter();
 
         addRequirements(shooter);
@@ -25,7 +21,7 @@ public class ShooterOff extends CommandBase {
     }
 
     @Override
-    public void execute(){
+    public void execute() {
 
         shooter.setShooterMotorsRaw(0);
         Robot.debug("Exec ShooterOff");
@@ -36,11 +32,10 @@ public class ShooterOff extends CommandBase {
     @Override
     public void end(boolean interrupted) {
 
- //       if (Feeder.state == FeederAndShooterState.FEEDER_OFF )
- //           Feeder.state = FeederAndShooterState.BOTH_OFF;
- //       else
- //           Feeder.state = FeederAndShooterState.SHOOTER_OFF;
-
+        //       if (Feeder.state == FeederAndShooterState.FEEDER_OFF )
+        //           Feeder.state = FeederAndShooterState.BOTH_OFF;
+        //       else
+        //           Feeder.state = FeederAndShooterState.SHOOTER_OFF;
 
 
     }
