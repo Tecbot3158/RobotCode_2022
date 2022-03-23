@@ -191,6 +191,12 @@ public class RobotMap {
 
         public static final double SHOOTER_DEFAULT_RANGE = 30;
 
+        public static final double SHOOTER_CONTROL_kINCREMENT_MULTIPLIER = 0.0000045;
+        public static final double SHOOTER_CONTROL_MINIMUM_OUTPUT = 0.0001;
+
+        public static final double SHOOTER_CONTROL_DEFAULT_TARGET = 1000;
+
+
         /*
          * 5000 - Turret 0 deg = Robot dir = 180 deg
          * 
@@ -280,6 +286,15 @@ public class RobotMap {
                         / TURRET_ROTATION_TO_MOTOR_ROTATION;
         public static final double TURRET_ANGLE_CLOCKWISE = (TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE * 360)
                         / TURRET_ROTATION_TO_MOTOR_ROTATION;
+
+
+        // VISION + TURRET CONSTANTS.
+
+        public static final double TURRET_VISION_VALUE_NORMALIZER_MINIMUM_AREA = 0.2;
+        public static final double TURRET_VISION_VALUE_NORMALIZER_MAXIMUM_AREA = 0.6;
+
+        public static final double TURRET_VISION_MINIMUM_RPMs           = 4000;
+        public static final double TURRET_VISION_MAXIMUM_VARIABLE_RPMs  = 1000;
 
         // TURRET --- end
 
