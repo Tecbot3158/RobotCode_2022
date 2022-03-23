@@ -11,6 +11,7 @@ import frc.robot.RobotMap;
 import frc.robot.resources.StepControl;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.vision.TecbotCamera;
+import frc.robot.subsystems.vision.resources.VisionValueNormalizer;
 
 public class DriveTurretToVisionTarget extends CommandBase {
 
@@ -26,11 +27,15 @@ public class DriveTurretToVisionTarget extends CommandBase {
 
     double range;
 
+    VisionValueNormalizer normalizer;
+
     /**
      * Creates a new MoveTurretToTarget.
      */
     public DriveTurretToVisionTarget() {
         // Use addRequirements() here to declare subsystem dependencies.
+
+        normalizer = new VisionValueNormalizer( 0.2, 0.6 );
 
         vision = Robot.getRobotContainer().getTecbotCamera();
         turret = Robot.getRobotContainer().getTurret();
@@ -80,6 +85,14 @@ public class DriveTurretToVisionTarget extends CommandBase {
         double speed = control.getOutputPosition(kCurrentPosition);
 
         turret.setTurretRaw(speed);
+
+        normalizer.executeAverageArea();
+        double distance = normalizer.getNormalizedDistance();
+
+        SmartDashboard.putNumber("LIME: dist: ", distance);
+
+
+
 
     }
 
