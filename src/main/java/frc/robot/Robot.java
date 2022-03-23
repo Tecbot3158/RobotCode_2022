@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.chassis.DefaultDrive;
 import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsAuto;
+import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsNoSpline;
 import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsPath;
 import frc.robot.commands.chassis.autonomous.splines.Paths;
 import frc.robot.commands.chassis.autonomous.splines.SplineMove;
@@ -56,8 +57,9 @@ public class Robot extends TimedRobot {
         robotContainer.getNavx().reset();
 
         Paths paths = new Paths();
-        SplineMove splineTest = new SplineMove(paths.getTestSpline(), 0.4, true, false, true, false);
-        FiveBallsAuto fiveBalls = new FiveBallsAuto(paths.getFiveBallAutoPathSpline());
+        // FiveBallsAuto fiveBalls = new
+        // FiveBallsAuto(paths.getFiveBallAutoPathSpline());
+        FiveBallsNoSpline fiveBalls = new FiveBallsNoSpline();
         m_chooser.setDefaultOption("fiveBalls", fiveBalls);
 
     }
@@ -145,7 +147,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-
 
     }
 
