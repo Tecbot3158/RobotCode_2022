@@ -1,19 +1,14 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
-import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
 import frc.robot.commands.chassis.drivingModes.ChassisToggleTransmissionMode;
-import frc.robot.commands.climber.ClimberSetRawMotors;
-import frc.robot.commands.climber.ClimberToggleSolenoids;
 import frc.robot.commands.feeder.FeederEjectThenStop;
 import frc.robot.commands.feeder.FeederSetToSpeedThenStop;
 import frc.robot.commands.feeder.FeederStop;
 import frc.robot.commands.intake.basic.IntakeToggleEject;
 import frc.robot.commands.intake.basic.IntakeToggleMotors;
-import frc.robot.commands.intake.basic.IntakeTogglePositionAndMotors;
+import frc.robot.commands.intake.IntakeTogglePositionAndMotors;
 import frc.robot.commands.rollers.RollersRunThenStop;
 import frc.robot.commands.shooter.ShooterGoToLower;
 import frc.robot.commands.shooter.ShooterGoToTarget;
