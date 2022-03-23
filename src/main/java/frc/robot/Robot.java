@@ -168,4 +168,9 @@ public class Robot extends TimedRobot {
             System.out.println(value);
 
     }
+
+    public static void debugSmartDashboard(String key, double value) {
+        if (TecbotConstants.DEBUG_ENABLED)
+            SmartDashboard.putNumber(key, value);
+    }
 }
