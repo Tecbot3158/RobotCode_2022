@@ -6,6 +6,7 @@ package frc.robot.subsystems.vision.resources;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.resources.Math;
 import frc.robot.subsystems.vision.TecbotCamera;
 import org.photonvision.PhotonCamera;
@@ -25,6 +26,9 @@ public class VisionValueNormalizer {
     double maximumArea;
     double range;
 
+
+    private static VisionValueNormalizer instance;
+
     /**
      * Creates a new Tecbot camera.
      * <p></p>
@@ -33,10 +37,10 @@ public class VisionValueNormalizer {
      * <p>
      * It allows to easily retrieve target values ranging from <code>-1 to 1</code>
      */
-    public VisionValueNormalizer(double minArea, double maxArea) {
+    private VisionValueNormalizer() {
 
-        this.minimumArea = minArea;
-        this.maximumArea = maxArea;
+        this.minimumArea = RobotMap.TURRET_VISION_VALUE_NORMALIZER_MINIMUM_AREA;
+        this.maximumArea = RobotMap.TURRET_VISION_VALUE_NORMALIZER_MAXIMUM_AREA;
 
         this.range = this.maximumArea - this.minimumArea;
 
@@ -76,6 +80,12 @@ public class VisionValueNormalizer {
         double actualAreaDelta = averageArea - minimumArea;
         return 1 - Math.clamp( actualAreaDelta / range, 0, 1) ;
 
+    }
+
+    public static VisionValueNormalizer getInstance(){
+        if ( instance != null )
+            instance = new VisionValueNormalizer();
+        return instance;
     }
 
 
