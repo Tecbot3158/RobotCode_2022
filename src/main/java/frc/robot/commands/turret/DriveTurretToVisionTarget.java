@@ -35,7 +35,7 @@ public class DriveTurretToVisionTarget extends CommandBase {
     public DriveTurretToVisionTarget() {
         // Use addRequirements() here to declare subsystem dependencies.
 
-        normalizer = new VisionValueNormalizer( 0.2, 0.6 );
+        normalizer = VisionValueNormalizer.getInstance();
 
         vision = Robot.getRobotContainer().getTecbotCamera();
         turret = Robot.getRobotContainer().getTurret();
@@ -87,12 +87,9 @@ public class DriveTurretToVisionTarget extends CommandBase {
         turret.setTurretRaw(speed);
 
         normalizer.executeAverageArea();
-        double distance = normalizer.getNormalizedDistance();
+        //double distance = normalizer.getNormalizedDistance();
 
-        SmartDashboard.putNumber("LIME: dist: ", distance);
-
-
-
+        //Robot.debugSmartDashboard("LIME: dist", distance);
 
     }
 
