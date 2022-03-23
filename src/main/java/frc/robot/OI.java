@@ -127,7 +127,7 @@ public class OI {
         // copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(180));
 
         copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngle(0));
-        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngle(180));
+//        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngle(180));
 
         copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(90));
         copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngle(270));
@@ -152,10 +152,10 @@ public class OI {
 
         /// ----- climber ----
 
-//        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new
-//                ClimberToggleSolenoids());
-//        copilot.whenPressed(TecbotController.ButtonType.BACK, new
-//                ClimberSetRawMotors());
+        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new
+                ClimberToggleSolenoids());
+        copilot.whenPressed(TecbotController.ButtonType.BACK, new
+                ClimberSetRawMotors());
         // copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new
         // ClimberToggleSolenoids());
 
