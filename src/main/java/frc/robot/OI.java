@@ -137,7 +137,7 @@ public class OI {
         new TecbotControllerRightTriggerButton().whenActive( new ShooterGoToLower() );
 
 
-        copilot.whenPressed(TecbotController.ButtonType.RS, new DriveTurretToAngleRelativeToRobotWithAxis());
+        //copilot.whenPressed(TecbotController.ButtonType.RS, new DriveTurretToAngleRelativeToRobotWithAxis());
 
 
 
