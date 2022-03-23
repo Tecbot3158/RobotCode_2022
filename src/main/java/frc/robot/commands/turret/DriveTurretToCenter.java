@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class DriveTurretToCenter extends SequentialCommandGroup {
 
     public DriveTurretToCenter(){
-        addCommands( new DriveTurretToAngle(0));
+        addCommands( new DriveTurretToAngleRelativeToRobot(0));
     }
 
 }
