@@ -124,11 +124,11 @@ public class OI {
        // copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngleRelativeToRobot(0));
        // copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(180));
 
-        copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(0));
-        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngleRelativeToRobot(180));
+        copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngle(0));
+        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngle(180));
 
-        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngleRelativeToRobot(90));
-        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngleRelativeToRobot(270));
+        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(90));
+        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngle(270));
 
 
 
