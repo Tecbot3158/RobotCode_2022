@@ -11,14 +11,12 @@ import frc.robot.RobotMap;
 import frc.robot.resources.PositionStepControl;
 import frc.robot.subsystems.turret.Turret;
 
-public class DriveTurretToAngleRelativeToRobot extends CommandBase {
+public class DriveTurretToAngle extends CommandBase {
     double kMinimumAbsoluteOutput;
     double kTarget;
     double kCurrentPosition;
     double kStartControlLimit;
-    /**
-     * Creates a new MoveTurretAngle.
-     */
+
 
     double angle;
     Turret turret;
@@ -26,7 +24,7 @@ public class DriveTurretToAngleRelativeToRobot extends CommandBase {
     boolean inRange = false;
     PositionStepControl stepControl;
 
-    public DriveTurretToAngleRelativeToRobot(double angleDegrees) {
+    public DriveTurretToAngle(double angleDegrees) {
         // Use addRequirements() here to declare subsystem dependencies.
 
         this.turret = Robot.getRobotContainer().getTurret();
@@ -46,8 +44,8 @@ public class DriveTurretToAngleRelativeToRobot extends CommandBase {
         kTarget = turret.getRotationsFromAngle(this.angle);
 //        Robot.debug("angle: " +  this.angle);
 //        Robot.debug("target: " +  this.kTarget);
-        System.out.println("angle: " +  this.angle);
-        System.out.println("target: " +  this.kTarget);
+        System.out.println("angle: " + this.angle);
+        System.out.println("target: " + this.kTarget);
         kCurrentPosition = turret.getTurretEncoder().getPosition();
 
         kStartControlLimit = RobotMap.TURRET_DEFAULT_kCONTROL_START_LIMIT;
@@ -84,7 +82,7 @@ public class DriveTurretToAngleRelativeToRobot extends CommandBase {
         SmartDashboard.putNumber("turret - pos", rotations);
         SmartDashboard.putNumber("turret - minout", kMinimumAbsoluteOutput);
         SmartDashboard.putNumber("turret - target", kTarget);
-        SmartDashboard.putNumber("turret - mult", kStartControlLimit );
+        SmartDashboard.putNumber("turret - mult", kStartControlLimit);
 
 
     }
@@ -101,6 +99,6 @@ public class DriveTurretToAngleRelativeToRobot extends CommandBase {
     @Override
     public boolean isFinished() {
         //return stepControl.isInRange() || !inRange;
-        return stepControl.isInRange() ;
+        return stepControl.isInRange();
     }
 }
