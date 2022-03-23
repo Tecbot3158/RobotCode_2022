@@ -191,19 +191,6 @@ public class RobotMap {
 
         public static final double SHOOTER_DEFAULT_RANGE = 30;
 
-        public static final double SHOOTER_PID_kP = 6e-5;
-        public static final double SHOOTER_PID_kI = 0;
-        public static final double SHOOTER_PID_kD = 0;
-        public static final double SHOOTER_PID_kIz = 0;
-        public static final double SHOOTER_PID_kFF = 0.000015;
-        public static final double SHOOTER_PID_kMaxOutput = 1;
-        public static final double SHOOTER_PID_kMinOutput = -1;
-        public static final double SHOOTER_PID_kMaxRPM = 6969;
-
-        public static final double SHOOTER_PID_Target = 6696;
-
-        public static final double SHOOTER_DEFAULT_SPEED = 0.6;
-
         /*
          * 5000 - Turret 0 deg = Robot dir = 180 deg
          * 
