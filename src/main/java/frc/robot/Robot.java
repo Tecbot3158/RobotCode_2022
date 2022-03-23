@@ -48,15 +48,14 @@ public class Robot extends TimedRobot {
 
         robotContainer.configureButtonBindings();
 
+        new ChassisSetSpeed().schedule();
+
         robotContainer.getDriveTrain().setDefaultCommand(new DefaultDrive());
         // DoubleSolenoid a = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
 
         robotContainer.getNavx().reset();
 
-        new ChassisSetSpeed().schedule();
-
         Paths paths = new Paths();
-
         SplineMove splineTest = new SplineMove(paths.getTestSpline(), 0.4, true, false, true, false);
         FiveBallsAuto fiveBalls = new FiveBallsAuto(paths.getFiveBallAutoPathSpline());
         m_chooser.setDefaultOption("fiveBalls", fiveBalls);
