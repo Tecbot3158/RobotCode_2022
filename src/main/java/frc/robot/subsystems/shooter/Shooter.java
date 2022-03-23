@@ -32,14 +32,6 @@ public class Shooter extends SubsystemBase {
 
     private boolean isReady = false;
 
-    public boolean setIsReady( boolean isReady){
-        return this.isReady = isReady;
-    }
-
-    public boolean getIsReady( ){
-        return isReady;
-    }
-
 
     public Shooter() {
 

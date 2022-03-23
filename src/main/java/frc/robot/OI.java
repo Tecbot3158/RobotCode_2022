@@ -13,7 +13,7 @@ import frc.robot.commands.rollers.RollersRunThenStop;
 import frc.robot.commands.shooter.ShooterGoToLower;
 import frc.robot.commands.shooter.ShooterGoToTarget;
 import frc.robot.commands.shooter.ShooterGoToVeryHighValue;
-import frc.robot.commands.shooter.ShooterOff;
+import frc.robot.commands.shooter.basic.ShooterOff;
 import frc.robot.commands.turret.*;
 import frc.robot.commands.turret.basic.DriveTurretToLeft;
 import frc.robot.commands.turret.basic.DriveTurretToRight;

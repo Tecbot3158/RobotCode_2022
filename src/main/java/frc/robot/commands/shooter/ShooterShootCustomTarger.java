@@ -34,7 +34,7 @@ public class ShooterShootCustomTarger extends CommandBase {
 
         stepControl = new StepControl(minout, target, currentPos, increment);
 
-        Subsystem requirements[] = { shooter };
+        Subsystem requirements[] = {shooter};
 
         addRequirements(requirements);
 
@@ -77,13 +77,11 @@ public class ShooterShootCustomTarger extends CommandBase {
         Robot.debug("exec shootergototarget");
 
         if (stepControl.isInRange()) {
-            shooter.setIsReady(true);
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble,
                     TecbotConstants.COPILOT_DEFAULT_VIBRATION);
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble,
                     TecbotConstants.COPILOT_DEFAULT_VIBRATION);
         } else {
-            shooter.setIsReady(false);
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, 0);
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
 
@@ -93,7 +91,6 @@ public class ShooterShootCustomTarger extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        shooter.setIsReady(false);
         OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, 0);
         OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
     }
