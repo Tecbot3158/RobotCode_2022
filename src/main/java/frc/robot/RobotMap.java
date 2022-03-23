@@ -97,8 +97,8 @@ public class RobotMap {
     // for toggling between 'torque' and 'speed' modes.
     // ... solenoid
     public static final int[] DRIVE_TRAIN_TRANSMISSION_SOLENOID_PORTS = {PCM_1_PORT, 4, 11};
-    public static final DoubleSolenoid.Value DRIVE_TRAIN_TORQUE_TRANSMISSION = DoubleSolenoid.Value.kForward;
-    public static final DoubleSolenoid.Value DRIVE_TRAIN_SPEED_TRANSMISSION = DoubleSolenoid.Value.kReverse;
+    public static final DoubleSolenoid.Value DRIVE_TRAIN_TORQUE_TRANSMISSION = DoubleSolenoid.Value.kReverse;
+    public static final DoubleSolenoid.Value DRIVE_TRAIN_SPEED_TRANSMISSION = DoubleSolenoid.Value.kForward;
 
     // true if transmission available
     public static final boolean DRIVE_TRAIN_TRANSMISSION_AVAILABLE = true;
@@ -192,7 +192,7 @@ public class RobotMap {
     public static final int SHOOTER_MOTOR_SLAVE_PORT = SHOOTER_MOTOR_PORTS[1];
 
 
-    public static final double SHOOTER_DEFAULT_RANGE = 100;
+    public static final double SHOOTER_DEFAULT_RANGE = 30;
 
     public static final double SHOOTER_PID_kP = 6e-5;
     public static final double SHOOTER_PID_kI = 0;
@@ -206,6 +206,33 @@ public class RobotMap {
     public static final double SHOOTER_PID_Target = 6696;
 
     public static final double SHOOTER_DEFAULT_SPEED = 0.6;
+
+
+
+    /*
+    5000 - Turret 0 deg  =     Robot dir = 180 deg
+
+
+        target = 4900; 45 deg turret
+
+        con alex:
+
+    5100 - Turret 0 deg  =     Robot dir = 180 deg
+
+
+    5000 45 grados ?? nel pastel
+    5050 45 grados
+    5050 90 grados
+    5000 135 grados
+    5000 180 grados
+    4050 180 grados tarmac
+    4100 135 grados tarmac
+    4200 90 grados tarmac
+    4200 45 grados tarmac
+    4250 0 grados tarmac
+
+
+     */
 
     // SHOOTER --- end
 
@@ -249,8 +276,8 @@ public class RobotMap {
 
 
     public static final double TURRET_VISION_DEFAULT_TARGET_RANGE = 0.05;
-    public static final double TURRET_VISION_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.065;
-    public static final double TURRET_VISION_DEFAULT_kINCREMENT_MULTIPLIER = 0.002;
+    public static final double TURRET_VISION_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0;
+    public static final double TURRET_VISION_DEFAULT_kINCREMENT_MULTIPLIER = 0.0085;
 
     // turret motor - max and min speeds
 
