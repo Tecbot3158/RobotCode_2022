@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
+import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
+import frc.robot.commands.chassis.drivingModes.ChassisToggleTransmissionMode;
 import frc.robot.commands.climber.ClimberSetRawMotors;
 import frc.robot.commands.climber.ClimberToggleSolenoids;
 import frc.robot.commands.feeder.FeederEjectThenStop;
@@ -15,6 +17,7 @@ import frc.robot.commands.intake.basic.IntakeTogglePositionAndMotors;
 import frc.robot.commands.rollers.RollersRunThenStop;
 import frc.robot.commands.shooter.ShooterGoToLower;
 import frc.robot.commands.shooter.ShooterGoToTarget;
+import frc.robot.commands.shooter.ShooterGoToVeryHighValue;
 import frc.robot.commands.shooter.ShooterOff;
 import frc.robot.commands.turret.*;
 import frc.robot.commands.turret.basic.DriveTurretToLeft;
@@ -44,25 +47,31 @@ public class OI {
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
         // InstantCommand(Robot.getRobotContainer().getDriveTrain().setDrivingMode(DriveTrain.DrivingMode.Mecanum)
         // ));
+
+        pilot.whenPressed(TecbotController.ButtonType.POV_UP, new ChassisSetDefaultDrive());
         pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(
                 Robot.getRobotContainer().getDriveTrain()::setMecanumDrive, Robot.getRobotContainer().getDriveTrain()));
 
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
         // InstantCommand(Robot.getRobotContainer().getDriveTrain().setDrivingMode(DriveTrain.DrivingMode.Mecanum)
         // ));
-        pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(
-                Robot.getRobotContainer().getDriveTrain()::setMecanumDrive, Robot.getRobotContainer().getDriveTrain()));
+
+//        pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new InstantCommand(
+//                Robot.getRobotContainer().getDriveTrain()::setMecanumDrive, Robot.getRobotContainer().getDriveTrain()));
 
         pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT,
                 new InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyRise,
                         Robot.getRobotContainer().getDriveTrain()));
+
+        pilot.whenPressed(TecbotController.ButtonType.LB, new ChassisToggleTransmissionMode());
+        pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
+
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
         // InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyLower,
         // Robot.getRobotContainer().getDriveTrain()));
         // lower llanta abajo
         // rise llanta arriba
 
-        pilot.whenPressed(TecbotController.ButtonType.POV_UP, new ChassisSetDefaultDrive());
 
         // pilot.whenPressed(TecbotController.ButtonType.Y, new ShooterGoToTarget());
         // pilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
@@ -88,6 +97,7 @@ public class OI {
         copilot.whileHeld(TecbotController.ButtonType.X, new RollersRunThenStop());
         copilot.whileHeld(TecbotController.ButtonType.X, new FeederSetToSpeedThenStop());
 
+        //copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
         copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
         // copilot.whenPressed(TecbotController.ButtonType.A, new FeederSetToSpeed());
 
@@ -105,7 +115,7 @@ public class OI {
         // copilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToTarget());
         //
 
-        copilot.whileHeld(TecbotController.ButtonType.LS, new DriveTurretToVisionTarget());
+        //copilot.whileHeld(TecbotController.ButtonType.LS, new DriveTurretToVisionTarget());
 
         // copilot.whenPressed(TecbotController.ButtonType.);
 //        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngle(-180));
@@ -116,14 +126,21 @@ public class OI {
         // copilot.whenPressed(TecbotController.ButtonType.RS, new ShooterGoToLower());
         // JoystickButton
 
-        //copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngleRelativeToRobot(0));
-        //copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(180));
-        //copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngleRelativeToRobot(90));
-        //copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngleRelativeToRobot(270));
+       // copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngleRelativeToRobot(0));
+       // copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(180));
+
+        copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngleRelativeToRobot(0));
+        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngleRelativeToRobot(180));
+
+        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngleRelativeToRobot(90));
+        copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngleRelativeToRobot(270));
 
 
-        new TecbotControllerRightTriggerButton().whenActive( new ShooterGoToLower() );
+
         new TecbotControllerLeftTriggerButton().whileHeld( new DriveTurretToVisionTarget() );
+        //copilot.whenPressed(TecbotController.ButtonType., new DriveTurretToAngleRelativeToRobot(270));
+        new TecbotControllerRightTriggerButton().whenActive( new ShooterGoToLower() );
+
 
         copilot.whenPressed(TecbotController.ButtonType.RS, new DriveTurretToAngleRelativeToRobotWithAxis());
 
@@ -139,11 +156,13 @@ public class OI {
         // Shooter shooter = Robot.getRobotContainer().getShooter();
         //copilot.whenPressed(TecbotController.ButtonType.START, new ShooterSetServoSpeeds());
 
-         copilot.whenPressed(TecbotController.ButtonType.BACK, new
-                 ClimberSetRawMotors());
-        //
-        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new
-                ClimberToggleSolenoids());
+        /// ----- climber ----
+
+//         copilot.whenPressed(TecbotController.ButtonType.BACK, new
+//                 ClimberSetRawMotors());
+//        //
+//        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new
+//                ClimberToggleSolenoids());
         // copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new
         // ClimberToggleSolenoids());
 
