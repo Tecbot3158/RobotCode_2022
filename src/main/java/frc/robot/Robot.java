@@ -10,13 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.chassis.DefaultDrive;
-import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsAuto;
 import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsNoSpline;
-import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsPath;
 import frc.robot.commands.chassis.autonomous.splines.Paths;
-import frc.robot.commands.chassis.autonomous.splines.SplineMove;
 import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
-import frc.robot.commands.turret.DriveTurretToAngleRelativeToGyroscope;
 import frc.robot.resources.TecbotConstants;
 
 /**
