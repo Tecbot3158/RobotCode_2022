@@ -9,6 +9,9 @@ import frc.robot.commands.intake.basic.IntakeExtend;
 
 public class PilotRumbleAllOff extends CommandBase {
 
+    /**
+     * turns off all rumble from OI's pilot.
+     */
     public PilotRumbleAllOff() {
 
 
