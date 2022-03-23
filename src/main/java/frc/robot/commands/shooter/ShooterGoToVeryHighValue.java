@@ -11,7 +11,7 @@ import frc.robot.resources.StepControl;
 import frc.robot.resources.TecbotConstants;
 import frc.robot.subsystems.shooter.Shooter;
 
-public class ShooterGoToTarget extends CommandBase {
+public class ShooterGoToVeryHighValue extends CommandBase {
 
     StepControl stepControl;
 
@@ -19,18 +19,26 @@ public class ShooterGoToTarget extends CommandBase {
 
     double target, currentPos;
 
+    //double increment = 0.0000180;
+
     double increment = 0.0000045;
+    //180 5.70
+    //360 cago
 
     double minout = 0.0001;
 
-    public ShooterGoToTarget() {
+    public ShooterGoToVeryHighValue() {
 
         shooter = Robot.getRobotContainer().getShooter();
 
         shooter.getShooterEncoder().setPosition(0);
         currentPos = shooter.getShooterEncoder().getVelocity();
         //target = 4000;
-        target = 3600;
+        //target = 4900;
+        target = 4700;
+        target = 4800;
+        target = 5000;
+        target = 4250;
 
         stepControl = new StepControl(minout, target, currentPos, increment);
 
@@ -86,6 +94,9 @@ public class ShooterGoToTarget extends CommandBase {
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
 
         }
+
+
+        SmartDashboard.putNumber("SHooter: POT: ", shooter.getShooterMotor().get() );
 
 
     }

@@ -7,19 +7,38 @@
 
 package frc.robot.commands.chassis.drivingModes;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.commands.misc.PilotRumbleAllOff;
 import frc.robot.subsystems.chassis.DriveTrain;
 
-public class ChassisToggleTransmissionMode extends InstantCommand {
+public class ChassisToggleTransmissionMode extends CommandBase {
     public ChassisToggleTransmissionMode() {
+
     }
 
     @Override
     public void initialize() {
-        if (Robot.getRobotContainer().getDriveTrain().getTransmissionMode() == DriveTrain.TransmissionMode.speed)
+        if (Robot.getRobotContainer().getDriveTrain().getTransmissionMode() == DriveTrain.TransmissionMode.speed) {
             Robot.getRobotContainer().getDriveTrain().setTransmissionState(DriveTrain.TransmissionMode.torque);
-        else
+        }
+        else {
             Robot.getRobotContainer().getDriveTrain().setTransmissionState(DriveTrain.TransmissionMode.speed);
+            OI.getInstance().getPilot().setRumble(GenericHID.RumbleType.kLeftRumble, 1);
+            OI.getInstance().getPilot().setRumble(GenericHID.RumbleType.kRightRumble, 1);
+            new WaitCommand(0.3).andThen( new PilotRumbleAllOff()).schedule();
+
+        }
+
+    }
+
+    @Override
+    public boolean isFinished() {
+        return true;
     }
 }

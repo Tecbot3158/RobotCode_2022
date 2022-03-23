@@ -131,4 +131,7 @@ public class TecbotCamera extends SubsystemBase {
         photonCamera.setDriverMode(false);
     }
 
+    public PhotonCamera getPhotonCamera() {
+        return photonCamera;
+    }
 }

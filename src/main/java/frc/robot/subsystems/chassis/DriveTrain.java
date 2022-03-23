@@ -579,9 +579,13 @@ public class DriveTrain extends SubsystemBase {
         transmissionState = mode;
         if (mode == TransmissionMode.torque) {
             transmission.set(RobotMap.DRIVE_TRAIN_TORQUE_TRANSMISSION);
+
         } else {
             transmission.set(RobotMap.DRIVE_TRAIN_SPEED_TRANSMISSION);
         }
+
+        System.out.println("mode; " + mode.toString());
+        //System.out.println("transmi; " + mode.toString());
     }
 
     /**

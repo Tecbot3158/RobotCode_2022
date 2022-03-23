@@ -91,6 +91,10 @@ public class Shooter extends SubsystemBase {
         shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).set(speed);
     }
 
+    public CANSparkMax getShooterMotor(){
+        return shooterMotors.getSpecificMotor(RobotMap.SHOOTER_MOTOR_MASTER_PORT).getCANSparkMax();
+    }
+
     public RelativeEncoder getShooterEncoder() {
         return shooterEncoder;
     }
