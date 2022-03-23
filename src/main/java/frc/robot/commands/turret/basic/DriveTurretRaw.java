@@ -13,7 +13,8 @@ public class DriveTurretRaw extends CommandBase {
     double speed = 0;
 
     /**
-     * Creates a new DriveTurretManually.
+     * sets the turret to a constant speed.
+     * then exits immediately.
      */
     public DriveTurretRaw(double speed) {
         this.speed = speed;
@@ -43,6 +44,6 @@ public class DriveTurretRaw extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 }

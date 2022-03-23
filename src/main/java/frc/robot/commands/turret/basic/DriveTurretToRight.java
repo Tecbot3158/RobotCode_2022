@@ -5,6 +5,7 @@
 package frc.robot.commands.turret.basic;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
@@ -15,7 +16,12 @@ public class DriveTurretToRight extends CommandBase {
 
     Turret turret;
     /**
-     * Creates a new DriveTurretManually.
+     * Drives the turret in the clockwise direction.
+     * <p>
+     *     Does not exit the command automatically.
+     *     Intended for the Button.whileHeld command.
+     *     {@link edu.wpi.first.wpilibj2.command.button.Button#whileHeld(Command)}
+     * </p>
      */
     public DriveTurretToRight() {
         // Use addRequirements() here to declare subsystem dependencies.
