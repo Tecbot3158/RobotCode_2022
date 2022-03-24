@@ -10,8 +10,10 @@ package frc.robot.subsystems.climber;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.OI;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.resources.Math;
 import frc.robot.resources.RobotConfigurator;
@@ -40,6 +42,8 @@ public class Climber extends SubsystemBase {
         leaderMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
         slaveMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
+        ropeEncoder.setPosition(0);
+
 
 
         // TODO disable dragon fly in command for climber! Always!
@@ -66,12 +70,14 @@ public class Climber extends SubsystemBase {
     public void setRopeControllerRaw(double speed) {
 
         double clampedSpeed = Math.clamp(speed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
-        double realSpeed = 0;
-
-        if ( ! withinLowerRange() )
-            realSpeed = Math.clamp(clampedSpeed, 0, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
-        if ( ! withinUpperRange() )
-            realSpeed = Math.clamp(clampedSpeed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, 0);
+        double realSpeed = clampedSpeed;
+        Robot.debugSmartDashboard("CLIMB - enc", ropeEncoder.getPosition());
+//        double realSpeed = 0;
+//
+//        if ( ! withinLowerRange() )
+//            realSpeed = Math.clamp(clampedSpeed, 0, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
+//        if ( ! withinUpperRange() )
+//            realSpeed = Math.clamp(clampedSpeed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, 0);
 
         ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).set(realSpeed);
     }
