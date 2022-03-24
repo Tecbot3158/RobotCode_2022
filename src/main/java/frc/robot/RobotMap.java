@@ -217,6 +217,9 @@ public class RobotMap {
          * 4200 90 grados tarmac
          * 4200 45 grados tarmac
          * 4250 0 grados tarmac
+         *
+         * 200 * rot / 180
+         *
          * 
          * 
          */
@@ -251,7 +254,8 @@ public class RobotMap {
 
         // public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = (double) 776 /
         // (double) 27;
-        public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = 27.0;
+        public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = 26.0;
+        //public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = 27.0;
 
         public static final double TURRET_MOTOR_MIN_ROTATIONS = -135 / (double) 360
                         * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION;
@@ -260,7 +264,8 @@ public class RobotMap {
 
         public static final double TURRET_DEFAULT_TARGET_RANGE = 0.2;
         public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.065;
-        public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5;
+        //public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5;
+        public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5.3;
 
         public static final double TURRET_VISION_DEFAULT_TARGET_RANGE = 0.05;
         public static final double TURRET_VISION_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0;
@@ -345,7 +350,7 @@ public class RobotMap {
         public static final double CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_EXTENDED = 0;
         // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED =
         // 91.7401;
-        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 95.7401;
+        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 90.0;
 
         public static final double CLIMBER_RAW_AXIS_MULTIPLIER = 1;
 

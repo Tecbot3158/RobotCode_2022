@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.resources.Math;
 import frc.robot.resources.StepControl;
 import frc.robot.resources.TecbotConstants;
 import frc.robot.subsystems.shooter.Shooter;
@@ -55,14 +56,22 @@ public class ShooterGoToVariableVisionTarget extends CommandBase {
     @Override
     public void execute() {
 
+        double turretPosition = Robot.getRobotContainer().getTurret().getPosition();
+        double turretAngle = Robot.getRobotContainer().getTurret().getAngleFromRotations(turretPosition);
+        double turretIncrement = Math.abs(180 - turretAngle) / 180 * 200;
+
         double normalizeDistance = VisionValueNormalizer.getInstance().getNormalizedDistance();
         target = RobotMap.TURRET_VISION_MINIMUM_RPMs +
-                normalizeDistance * RobotMap.TURRET_VISION_MAXIMUM_VARIABLE_RPMs;
+                normalizeDistance * RobotMap.TURRET_VISION_MAXIMUM_VARIABLE_RPMs +
+                turretIncrement;
 
         stepControl.setTarget(target);
 
         double velocity = shooter.getShooterEncoder().getVelocity();
         double output = stepControl.getOutputVelocity(velocity);
+
+        Robot.debugSmartDashboard("TURRET ANGLE: ", turretAngle);
+        Robot.debugSmartDashboard("TURRET INCREM: ", turretIncrement);
 
         Robot.debugSmartDashboard("shooter encoder. ", shooter.getShooterEncoder().getPosition());
         Robot.debugSmartDashboard("shooter output ", output);

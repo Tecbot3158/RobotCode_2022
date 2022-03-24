@@ -44,8 +44,8 @@ public class DriveTurretToAngle extends CommandBase {
         kTarget = turret.getRotationsFromAngle(this.angle);
 //        Robot.debug("angle: " +  this.angle);
 //        Robot.debug("target: " +  this.kTarget);
-        System.out.println("angle: " + this.angle);
-        System.out.println("target: " + this.kTarget);
+//        System.out.println("angle: " + this.angle);
+//        System.out.println("target: " + this.kTarget);
         kCurrentPosition = turret.getTurretEncoder().getPosition();
 
         kStartControlLimit = RobotMap.TURRET_DEFAULT_kCONTROL_START_LIMIT;

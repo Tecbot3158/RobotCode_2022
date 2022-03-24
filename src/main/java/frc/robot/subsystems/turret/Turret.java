@@ -90,6 +90,10 @@ public class Turret extends SubsystemBase {
 
     }
 
+    public double getAngleFromRotations(double rotations){
+        return rotations * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION / 360;
+    }
+
     public void setTurretMoveRight() {
         setTurretRaw(RobotMap.TURRET_MANUAL_POSITIVE_SPEED);
     }
@@ -139,5 +143,9 @@ public class Turret extends SubsystemBase {
 
         return 0;
 
+    }
+
+    public double getPosition() {
+        return getTurretEncoder().getPosition();
     }
 }
