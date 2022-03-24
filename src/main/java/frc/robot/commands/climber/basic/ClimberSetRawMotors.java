@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.resources.Math;
-import frc.robot.resources.StepControl;
 import frc.robot.subsystems.climber.Climber;
 
 public class ClimberSetRawMotors extends CommandBase {
@@ -31,13 +29,9 @@ public class ClimberSetRawMotors extends CommandBase {
     @Override
     public void initialize() {
 
-        SmartDashboard.putBoolean("climber done", false);
-
         Robot.debug("init climber Set To speed");
 
         climber.getRopeControllerEncoder().setPosition(0);
-
-
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -46,12 +40,12 @@ public class ClimberSetRawMotors extends CommandBase {
 
         double input = OI.getInstance().getClimberDefaultManualInput();
 
-        double speed = Math.clamp(input * 0.6, -0.6, 0.6);
+        double speed = input * RobotMap.CLIMBER_RAW_AXIS_MULTIPLIER;
 
         double position = climber.getRopeControllerEncoder().getPosition();
 
-        SmartDashboard.putNumber("CLIMB-speed", speed);
-        SmartDashboard.putNumber("CLIMB-encoder", position);
+        Robot.debugSmartDashboard("CLIMB-speed", speed);
+        Robot.debugSmartDashboard("CLIMB-encoder", position);
 
         climber.setRopeControllerRaw( speed );
 

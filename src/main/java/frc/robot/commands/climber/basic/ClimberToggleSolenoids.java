@@ -20,7 +20,10 @@ public class ClimberToggleSolenoids extends CommandBase {
     public ClimberToggleSolenoids() {
 
         climber = Robot.getRobotContainer().getClimber();
-        addRequirements(climber);
+        //addRequirements(climber);
+        // remove requirements due to conflict with
+        // ClimberSetRawMotors.java
+
 
     }
 
