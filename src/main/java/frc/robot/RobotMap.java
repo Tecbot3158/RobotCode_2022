@@ -278,8 +278,12 @@ public class RobotMap {
 
         // public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE =
         // 21.88084411621093766666;
+//        public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE = 20;
+//        public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = -3.5;
+
+
         public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE = 20;
-        public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = -3.5;
+        public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = -2.14;
 
         public static final double TURRET_ANGLE_COUNTER_CLOCKWISE = (TURRET_DEFAULT_MINIMUM_ENCODER_VALUE * 360)
                         / TURRET_ROTATION_TO_MOTOR_ROTATION;
