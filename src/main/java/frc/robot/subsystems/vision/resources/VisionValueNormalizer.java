@@ -26,12 +26,12 @@ public class VisionValueNormalizer {
     double maximumArea;
     double range;
 
-
     private static VisionValueNormalizer instance;
 
     /**
      * Creates a new Tecbot camera.
-     * <p></p>
+     * <p>
+     * </p>
      * It uses Photonvision with PhotonLib to retrieve the values
      * from the Network Tables.
      * <p>
@@ -64,7 +64,6 @@ public class VisionValueNormalizer {
         sum += area;
         SmartDashboard.putNumber("LIME: area ", area);
 
-
     }
 
     public double getAverageArea() {
@@ -78,15 +77,14 @@ public class VisionValueNormalizer {
      */
     public double getNormalizedDistance() {
         double actualAreaDelta = averageArea - minimumArea;
-        return 1 - Math.clamp( actualAreaDelta / range, 0, 1) ;
+        return 1 - Math.clamp(actualAreaDelta / range, 0, 1);
 
     }
 
-    public static VisionValueNormalizer getInstance(){
-        if ( instance != null )
+    public static VisionValueNormalizer getInstance() {
+        if (instance == null)
             instance = new VisionValueNormalizer();
         return instance;
     }
-
 
 }
