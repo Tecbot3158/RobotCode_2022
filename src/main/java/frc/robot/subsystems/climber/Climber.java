@@ -78,7 +78,7 @@ public class Climber extends SubsystemBase {
         Robot.debugSmartDashboard("CLIMB - enc", ropeEncoder.getPosition());
         Robot.debugSmartDashboard("CLIMB - SPEED", realSpeed);
 
-        boolean freeMode = false;
+        boolean freeMode = true;
         if (!freeMode) {
 
             if (getPistonState() == RobotMap.CLIMBER_SOLENOID_RETRACTED_POSITION) {

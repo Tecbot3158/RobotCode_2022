@@ -65,7 +65,7 @@ public class ShooterGoToVariableVisionTarget extends CommandBase {
                 normalizeDistance * RobotMap.TURRET_VISION_MAXIMUM_VARIABLE_RPMs +
                 turretIncrement;
 
-        stepControl.setTarget(target);
+        stepControl.setTarget(target*.9);
 
         double velocity = shooter.getShooterEncoder().getVelocity();
         double output = stepControl.getOutputVelocity(velocity);

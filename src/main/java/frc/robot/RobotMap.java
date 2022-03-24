@@ -189,7 +189,7 @@ public class RobotMap {
         public static final int SHOOTER_MOTOR_MASTER_PORT = SHOOTER_MOTOR_PORTS[0];
         public static final int SHOOTER_MOTOR_SLAVE_PORT = SHOOTER_MOTOR_PORTS[1];
 
-        public static final double SHOOTER_DEFAULT_RANGE = 30;
+        public static final double SHOOTER_DEFAULT_RANGE = 50; // changed by joe
 
         public static final double SHOOTER_CONTROL_kINCREMENT_MULTIPLIER = 0.0000045;
         public static final double SHOOTER_CONTROL_MINIMUM_OUTPUT = 0.0001;
@@ -262,10 +262,10 @@ public class RobotMap {
         public static final double TURRET_MOTOR_MAX_ROTATIONS = 135 / (double) 360
                         * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION;
 
-        public static final double TURRET_DEFAULT_TARGET_RANGE = 0.2;
-        public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.065;
+        public static final double TURRET_DEFAULT_TARGET_RANGE = 0.05;
+        public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.035;
         //public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5;
-        public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5.3;
+        public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5.7;
 
         public static final double TURRET_VISION_DEFAULT_TARGET_RANGE = 0.05;
         public static final double TURRET_VISION_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0;
