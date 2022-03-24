@@ -330,6 +330,11 @@ public class RobotMap {
 
         public static final double CLIMBER_DEFAULT_RANGE = 0.1;
 
+        public static final double CLIMBER_RAW_MINIMUM_SPEED = -0.6;
+        public static final double CLIMBER_RAW_MAXIMUM_SPEED = 0.6;
+
+        public static final double CLIMBER_RAW_AXIS_MULTIPLIER = 1;
+
         // CLIMBER --- end
 
         // VISION
