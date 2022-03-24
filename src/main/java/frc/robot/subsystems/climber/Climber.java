@@ -9,10 +9,11 @@ package frc.robot.subsystems.climber;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.OI;
 import frc.robot.RobotMap;
+import frc.robot.resources.Math;
 import frc.robot.resources.RobotConfigurator;
 import frc.robot.resources.TecbotMotorList;
 
@@ -50,7 +51,7 @@ public class Climber extends SubsystemBase {
         pistonHanger.set(RobotMap.CLIMBER_SOLENOID_EXTENDED_POSITION);
     }
 
-    public DoubleSolenoid.Value getPistonValue(){
+    public DoubleSolenoid.Value getPistonState(){
         return pistonHanger.get();
     }
 
@@ -63,7 +64,23 @@ public class Climber extends SubsystemBase {
     }
 
     public void setRopeControllerRaw(double speed) {
-        ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).set(speed);
+
+        double clampedSpeed = Math.clamp(speed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
+        double realSpeed = 0;
+
+        if ( ! withinLowerRange() )
+            realSpeed = Math.clamp(clampedSpeed, 0, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
+        if ( ! withinUpperRange() )
+            realSpeed = Math.clamp(clampedSpeed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, 0);
+
+        ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).set(realSpeed);
+    }
+
+    public boolean withinLowerRange(){
+        return true;
+    }
+    public boolean withinUpperRange(){
+        return true;
     }
 
     public TecbotMotorList getRopeControllerList() {
