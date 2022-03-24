@@ -88,7 +88,7 @@ public class Climber extends SubsystemBase {
                         !withinRangePositivePistonExtended())
                     realSpeed = Math.clamp(clampedSpeed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, 0);
 
-                // if we are within the minimum and maximum range,
+                // if we are within the minimum and maximum range
                 // do absolutely nothing and leave variable as is.
             } else {
                 // means pistons are extended !
