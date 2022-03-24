@@ -196,7 +196,6 @@ public class RobotMap {
 
         public static final double SHOOTER_CONTROL_DEFAULT_TARGET = 1000;
 
-
         /*
          * 5000 - Turret 0 deg = Robot dir = 180 deg
          * 
@@ -287,14 +286,13 @@ public class RobotMap {
         public static final double TURRET_ANGLE_CLOCKWISE = (TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE * 360)
                         / TURRET_ROTATION_TO_MOTOR_ROTATION;
 
-
         // VISION + TURRET CONSTANTS.
 
         public static final double TURRET_VISION_VALUE_NORMALIZER_MINIMUM_AREA = 0.2;
         public static final double TURRET_VISION_VALUE_NORMALIZER_MAXIMUM_AREA = 0.6;
 
-        public static final double TURRET_VISION_MINIMUM_RPMs           = 4000;
-        public static final double TURRET_VISION_MAXIMUM_VARIABLE_RPMs  = 1000;
+        public static final double TURRET_VISION_MINIMUM_RPMs = 4000;
+        public static final double TURRET_VISION_MAXIMUM_VARIABLE_RPMs = 1000;
 
         // TURRET --- end
 
@@ -306,6 +304,8 @@ public class RobotMap {
         public static final TypeOfMotor[] CLIMBER_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS,
                         TypeOfMotor.CAN_SPARK_BRUSHLESS };
         public static final int[] CLIMBER_INVERTED_MOTORS = {};
+        public static boolean CLIMBER_MOTOR_MASTER_IS_INVERTED = true;
+        public static boolean CLIMBER_MOTOR_SLAVE_IS_INVERTED = false;
 
         // in theory 2 pistons, but just one solenoid
         public static final int[] CLIMBER_SOLENOID_PORTS = { PCM_1_PORT, 1, 14 };
@@ -332,6 +332,16 @@ public class RobotMap {
 
         public static final double CLIMBER_RAW_MINIMUM_SPEED = -0.6;
         public static final double CLIMBER_RAW_MAXIMUM_SPEED = 0.6;
+
+        public static final double CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_RETRACTED = 0;
+        // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_RETRACTED =
+        // 91.7401;
+        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_RETRACTED = 95.7401;
+
+        public static final double CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_EXTENDED = 0;
+        // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED =
+        // 91.7401;
+        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 95.7401;
 
         public static final double CLIMBER_RAW_AXIS_MULTIPLIER = 1;
 

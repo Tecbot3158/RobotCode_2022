@@ -17,6 +17,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.resources.Math;
 import frc.robot.resources.RobotConfigurator;
+import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotMotorList;
 
 public class Climber extends SubsystemBase {
@@ -33,18 +34,21 @@ public class Climber extends SubsystemBase {
         pistonHanger = RobotConfigurator.buildDoubleSolenoid(RobotMap.CLIMBER_SOLENOID_PORTS);
 
         CANSparkMax leaderMotor = ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).getCANSparkMax();
+        leaderMotor.setInverted(RobotMap.CLIMBER_MOTOR_MASTER_IS_INVERTED);
 
         CANSparkMax slaveMotor = ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_SLAVE_PORT).getCANSparkMax();
 
-        slaveMotor.follow( leaderMotor, true);
+        slaveMotor.follow(leaderMotor, true);
+        // MUST ALWATS be true when following another motor,
+        // EVEN if the other motor is inverted.!!
 
         // santi says break !
         leaderMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
         slaveMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
+        ropeEncoder = ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).getCANSparkMax().getEncoder();
+
         ropeEncoder.setPosition(0);
-
-
 
         // TODO disable dragon fly in command for climber! Always!
         // TODO Dragon fly cannot be extended!!
@@ -55,7 +59,7 @@ public class Climber extends SubsystemBase {
         pistonHanger.set(RobotMap.CLIMBER_SOLENOID_EXTENDED_POSITION);
     }
 
-    public DoubleSolenoid.Value getPistonState(){
+    public DoubleSolenoid.Value getPistonState() {
         return pistonHanger.get();
     }
 
@@ -72,21 +76,60 @@ public class Climber extends SubsystemBase {
         double clampedSpeed = Math.clamp(speed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
         double realSpeed = clampedSpeed;
         Robot.debugSmartDashboard("CLIMB - enc", ropeEncoder.getPosition());
-//        double realSpeed = 0;
-//
-//        if ( ! withinLowerRange() )
-//            realSpeed = Math.clamp(clampedSpeed, 0, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
-//        if ( ! withinUpperRange() )
-//            realSpeed = Math.clamp(clampedSpeed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, 0);
+        Robot.debugSmartDashboard("CLIMB - SPEED", realSpeed);
 
-        ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).set(realSpeed);
+        boolean freeMode = true;
+        if (!freeMode) {
+
+            if (getPistonState() == RobotMap.CLIMBER_SOLENOID_RETRACTED_POSITION) {
+                if (!withinRangePistonRetracted() && !withinRangeNegativePistonExtended())
+                    realSpeed = Math.clamp(clampedSpeed, 0, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
+                else if (!withinRangeNegativePistonExtended() &&
+                        !withinRangePositivePistonExtended())
+                    realSpeed = Math.clamp(clampedSpeed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, 0);
+
+                // if we are within the minimum and maximum range,
+                // do absolutely nothing and leave variable as is.
+            } else {
+                // means pistons are extended !
+                if (!withinRangePistonExtended() && !withinRangeNegativePistonExtended())
+                    realSpeed = Math.clamp(clampedSpeed, 0, RobotMap.CLIMBER_RAW_MAXIMUM_SPEED);
+                if (!withinRangePistonExtended() && !withinRangePositivePistonExtended())
+                    realSpeed = Math.clamp(clampedSpeed, RobotMap.CLIMBER_RAW_MINIMUM_SPEED, 0);
+            }
+            ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).set(
+                    realSpeed);
+        } else {
+
+            ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).set(realSpeed);
+        }
+
     }
 
-    public boolean withinLowerRange(){
-        return true;
+    public boolean withinRangeNegativePistonExtended() {
+        return (ropeEncoder.getPosition() > RobotMap.CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_EXTENDED);
     }
-    public boolean withinUpperRange(){
-        return true;
+
+    public boolean withinRangePositivePistonExtended() {
+        return (ropeEncoder.getPosition() < RobotMap.CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED);
+    }
+
+    public boolean withinRangePistonExtended() {
+        return (ropeEncoder.getPosition() > RobotMap.CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_EXTENDED) &&
+                (ropeEncoder.getPosition() < RobotMap.CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED);
+    }
+
+    public boolean withinRangePistonRetracted() {
+        return (ropeEncoder.getPosition() > RobotMap.CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_RETRACTED) &&
+                (ropeEncoder.getPosition() < RobotMap.CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_RETRACTED);
+    }
+
+    public boolean withinRangeNegativePistonRetracted() {
+        return (ropeEncoder.getPosition() > RobotMap.CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_RETRACTED);
+    }
+
+    public boolean withinRangePositivePistonRetracted() {
+        return (ropeEncoder.getPosition() < RobotMap.CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_RETRACTED);
     }
 
     public TecbotMotorList getRopeControllerList() {

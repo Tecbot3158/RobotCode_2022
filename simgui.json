@@ -48,6 +48,7 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Climber": "Subsystem",
       "/LiveWindow/DriveTrain": "Subsystem",
       "/LiveWindow/Feeder": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
@@ -60,7 +61,8 @@
       "/LiveWindow/Ungrouped/Talon SRX [30]": "Motor Controller",
       "/LiveWindow/Ungrouped/Talon SRX [7]": "Motor Controller",
       "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
-      "/SmartDashboard/Autonomous": "String Chooser"
+      "/SmartDashboard/Autonomous": "String Chooser",
+      "/SmartDashboard/Drivetrain": "Subsystem"
     },
     "windows": {
       "/FMSInfo": {
