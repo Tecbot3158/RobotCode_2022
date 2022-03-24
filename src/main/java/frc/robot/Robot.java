@@ -10,8 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.chassis.DefaultDrive;
-import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsNoSpline;
+import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsAuto;
+import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsPath;
+import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallNoSpline.FiveBallsNoSpline;
 import frc.robot.commands.chassis.autonomous.splines.Paths;
+import frc.robot.commands.chassis.autonomous.splines.SplineMove;
+import frc.robot.commands.chassis.autonomous.stepControl.SpeedReductionTurn;
 import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
 import frc.robot.resources.TecbotConstants;
 
@@ -56,7 +60,11 @@ public class Robot extends TimedRobot {
         // FiveBallsAuto fiveBalls = new
         // FiveBallsAuto(paths.getFiveBallAutoPathSpline());
         FiveBallsNoSpline fiveBalls = new FiveBallsNoSpline();
+
+        SpeedReductionTurn turn = new SpeedReductionTurn(90, 0.3);
+        m_chooser.addOption("turn", turn);
         m_chooser.setDefaultOption("fiveBalls", fiveBalls);
+        SmartDashboard.putData("Drivetrain", Robot.getRobotContainer().getDriveTrain());
 
     }
 
@@ -124,6 +132,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
+
     }
 
     @Override

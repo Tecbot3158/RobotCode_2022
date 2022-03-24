@@ -34,7 +34,7 @@ public class FeederSetToSpeed extends CommandBase {
         target = RobotMap.FEEDER_DEFAULT_TARGET_SPEED;
         currentPosition = feeder.getFeederEncoder().getVelocity();
         kIncrementMultiplier = RobotMap.FEEDER_DEFAULT_kINCREMENT_MULTIPLIER;
-        stepControl = new StepControl( kMinimumAbsOutput, target, currentPosition, kIncrementMultiplier);
+        stepControl = new StepControl(kMinimumAbsOutput, target, currentPosition, kIncrementMultiplier);
         // Use addRequirements() here to declare subsystem dependencies.
 
         stepControl.setRange(RobotMap.FEEDER_DEFAULT_RANGE);
@@ -47,10 +47,10 @@ public class FeederSetToSpeed extends CommandBase {
         SmartDashboard.putBoolean("feeder done", false);
 
         // if ( Feeder.state == FeederAndShooterState.SHOOTER_ON){
-        //     Feeder.state = FeederAndShooterState.BOTH_ON;
+        // Feeder.state = FeederAndShooterState.BOTH_ON;
         // }
         // else {
-        //     Feeder.state = FeederAndShooterState.FEEDER_ON;
+        // Feeder.state = FeederAndShooterState.FEEDER_ON;
         // }
 
         Robot.debug("init feeder Set To speed");
@@ -63,67 +63,73 @@ public class FeederSetToSpeed extends CommandBase {
     @Override
     public void execute() {
 
+        // if ( ! Robot.getRobotContainer().getShooter().getIsReady() )
+        // stepControl.setTarget( -1000 );
+        // else
+        // stepControl.setTarget( RobotMap.FEEDER_DEFAULT_TARGET_SPEED );
+        //
+        //
+        // currentPosition = feeder.getFeederEncoder().getVelocity();
+        //
+        // double output = stepControl.getOutputVelocity(currentPosition);
+        //
+        // feeder.setRaw(output);
+        //
+        // SmartDashboard.putBoolean("feeder in RANGE.", stepControl.isInRange() );
+        // SmartDashboard.putNumber("feeder velocity: ", currentPosition);
+        // SmartDashboard.putNumber("feeder output: ", output);
+        // SmartDashboard.putNumber("feeder target", target);
+        // SmartDashboard.putNumber("feeder kMult", kIncrementMultiplier);
+        // SmartDashboard.putNumber("feeder kMinAbsPost", kMinimumAbsOutput);
+        //
+        // Robot.debug("exec feedersettospeed");
+        //
+        // double intarget = SmartDashboard.getNumber("feeder target", target) ;
+        //
+        // if (intarget != target ) {
+        // target = intarget;
+        // stepControl.setTarget(target);
+        // }
+        //
+        // double inkmult = SmartDashboard.getNumber("feeder kMult",
+        // kIncrementMultiplier) ;
+        //
+        // if (inkmult != kIncrementMultiplier ) {
+        // kIncrementMultiplier = inkmult;
+        // stepControl.setMinAbsoluteOutput(kIncrementMultiplier);
+        // }
+        //
+        // double inkabspost = SmartDashboard.getNumber("feeder kMinAbsPost",
+        // kMinimumAbsOutput) ;
+        //
+        // if (inkabspost != kMinimumAbsOutput ) {
+        // kMinimumAbsOutput = inkmult;
+        // stepControl.setMinAbsoluteOutput(kMinimumAbsOutput);
+        // }
+        //
+        //
+        // if ( stepControl.isInRange() &&
+        // Robot.getRobotContainer().getShooter().getIsReady() ) {
+        // feeder.setReady( true );
+        // OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble,
+        // TecbotConstants.COPILOT_DEFAULT_VIBRATION);
+        // OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble,
+        // TecbotConstants.COPILOT_DEFAULT_VIBRATION);
+        // } else {
+        // feeder.setReady( false ); ;
+        //
+        // OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble,
+        // 0);
+        // OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble,
+        // 0);
+        //
+        //
+        // }
 
-//        if ( ! Robot.getRobotContainer().getShooter().getIsReady() )
-//            stepControl.setTarget( -1000 );
-//        else
-//            stepControl.setTarget( RobotMap.FEEDER_DEFAULT_TARGET_SPEED );
-//
-//
-//        currentPosition = feeder.getFeederEncoder().getVelocity();
-//
-//        double output = stepControl.getOutputVelocity(currentPosition);
-//
-//        feeder.setRaw(output);
-//
-//        SmartDashboard.putBoolean("feeder in RANGE.", stepControl.isInRange() );
-//        SmartDashboard.putNumber("feeder velocity: ", currentPosition);
-//        SmartDashboard.putNumber("feeder output: ", output);
-//        SmartDashboard.putNumber("feeder target", target);
-//        SmartDashboard.putNumber("feeder kMult", kIncrementMultiplier);
-//        SmartDashboard.putNumber("feeder kMinAbsPost", kMinimumAbsOutput);
-//
-//        Robot.debug("exec feedersettospeed");
-//
-//        double intarget = SmartDashboard.getNumber("feeder target", target) ;
-//
-//        if (intarget != target ) {
-//            target = intarget;
-//            stepControl.setTarget(target);
-//        }
-//
-//        double inkmult  =  SmartDashboard.getNumber("feeder kMult", kIncrementMultiplier) ;
-//
-//        if (inkmult != kIncrementMultiplier ) {
-//            kIncrementMultiplier = inkmult;
-//            stepControl.setMinAbsoluteOutput(kIncrementMultiplier);
-//        }
-//
-//        double inkabspost  =  SmartDashboard.getNumber("feeder kMinAbsPost", kMinimumAbsOutput) ;
-//
-//        if (inkabspost != kMinimumAbsOutput ) {
-//            kMinimumAbsOutput = inkmult;
-//            stepControl.setMinAbsoluteOutput(kMinimumAbsOutput);
-//        }
-//
-//
-//        if ( stepControl.isInRange()  && Robot.getRobotContainer().getShooter().getIsReady() ) {
-//            feeder.setReady( true );
-//            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, TecbotConstants.COPILOT_DEFAULT_VIBRATION);
-//            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, TecbotConstants.COPILOT_DEFAULT_VIBRATION);
-//        } else {
-//            feeder.setReady( false ); ;
-//
-//            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, 0);
-//            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
-//
-//
-//        }
-
-        //SmartDashboard.putNumber("feeder REAL RPMS", feeder.getFeederEncoder().getVelocity());
+        // SmartDashboard.putNumber("feeder REAL RPMS",
+        // feeder.getFeederEncoder().getVelocity());
 
     }
-
 
     @Override
     public void end(boolean interrupted) {
@@ -135,6 +141,6 @@ public class FeederSetToSpeed extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 }

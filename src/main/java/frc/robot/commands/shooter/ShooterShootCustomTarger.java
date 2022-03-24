@@ -48,8 +48,6 @@ public class ShooterShootCustomTarger extends CommandBase {
         SmartDashboard.putNumber("settarget", target);
         SmartDashboard.putNumber("setincr", increment);
 
-        Robot.debug("init shootergototarget");
-
     }
 
     @Override
@@ -73,8 +71,6 @@ public class ShooterShootCustomTarger extends CommandBase {
         // stepControl.setTarget(target);
         // stepControl.setIncrementMultiplier(increment);
         // stepControl.setMinAbsoluteOutput(minout);
-
-        Robot.debug("exec shootergototarget");
 
         if (stepControl.isInRange()) {
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble,

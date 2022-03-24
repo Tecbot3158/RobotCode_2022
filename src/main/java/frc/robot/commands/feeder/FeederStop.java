@@ -26,7 +26,6 @@ public class FeederStop extends CommandBase {
     @Override
     public void initialize() {
 
-
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -40,10 +39,10 @@ public class FeederStop extends CommandBase {
     @Override
     public void end(boolean interrupted) {
 
-//        if (Feeder.state == FeederAndShooterState.SHOOTER_OFF )
-//            Feeder.state = FeederAndShooterState.BOTH_OFF;
-//        else
-//            Feeder.state = FeederAndShooterState.FEEDER_OFF;
+        // if (Feeder.state == FeederAndShooterState.SHOOTER_OFF )
+        // Feeder.state = FeederAndShooterState.BOTH_OFF;
+        // else
+        // Feeder.state = FeederAndShooterState.FEEDER_OFF;
 
     }
 
