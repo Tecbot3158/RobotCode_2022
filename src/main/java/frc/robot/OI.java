@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
 import frc.robot.commands.chassis.drivingModes.ChassisToggleTransmissionMode;
 import frc.robot.commands.climber.ClimberSetInitThenClearBindingsThenSetClimberBindings;
+import frc.robot.commands.climber.ClimberToggleFreeMode;
 import frc.robot.commands.climber.basic.ClimberSetRawMotors;
 import frc.robot.commands.climber.basic.ClimberToggleSolenoids;
 import frc.robot.commands.feeder.FeederEjectThenStop;
@@ -14,7 +15,6 @@ import frc.robot.commands.intake.basic.IntakeToggleEject;
 import frc.robot.commands.intake.basic.IntakeToggleMotors;
 import frc.robot.commands.rollers.RollersRunThenStop;
 import frc.robot.commands.shooter.ShooterGoToLower;
-import frc.robot.commands.shooter.ShooterGoToTarget;
 import frc.robot.commands.shooter.ShooterGoToVariableVisionTarget;
 import frc.robot.commands.shooter.ShooterGoToVeryHighValue;
 import frc.robot.commands.shooter.basic.ShooterOff;
@@ -271,6 +271,10 @@ public class OI {
 
         copilot.whenPressed(TecbotController.ButtonType.START, new ClimberToggleSolenoids());
         //copilot.whenPressed(TecbotController.ButtonType.BACK, new ClimberInitiateClimbingMode());
+
+        // RS toggle climb free and non-free mode.
+
+        copilot.whenPressed(TecbotController.ButtonType.RS, new ClimberToggleFreeMode());
 
     }
 
