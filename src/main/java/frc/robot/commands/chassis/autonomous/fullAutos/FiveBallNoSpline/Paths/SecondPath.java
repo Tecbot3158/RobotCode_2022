@@ -13,10 +13,10 @@ public class SecondPath extends SequentialCommandGroup {
     public SecondPath() {
         super(
                 new SpeedReductionTurn(-170, 0.5),
-                new SpeedReductionStraight(2.2606, 0.3, -170),
+                new SpeedReductionStraight(2.2606, 0.4, -170),
                 new DriveTurretToAngle(30),
                 new RollersAbsorb(),
-                new FeederSetForNSeconds(3),
+                new FeederSetForNSeconds(2),
                 new RollersStop());
     }
 

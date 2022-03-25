@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.chassis.DefaultDrive;
 import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsAuto;
 import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallsPath;
+import frc.robot.commands.chassis.autonomous.fullAutos.ThreeBallsAuto;
 import frc.robot.commands.chassis.autonomous.fullAutos.FiveBallNoSpline.FiveBallsNoSpline;
+import frc.robot.commands.chassis.autonomous.fullAutos.TwoBalls.TwoBallsAuto;
 import frc.robot.commands.chassis.autonomous.splines.Paths;
 import frc.robot.commands.chassis.autonomous.splines.SplineMove;
 import frc.robot.commands.chassis.autonomous.stepControl.SpeedReductionTurn;
@@ -61,8 +63,9 @@ public class Robot extends TimedRobot {
         // FiveBallsAuto(paths.getFiveBallAutoPathSpline());
         FiveBallsNoSpline fiveBalls = new FiveBallsNoSpline();
 
-        SpeedReductionTurn turn = new SpeedReductionTurn(90, 0.3);
-        m_chooser.addOption("turn", turn);
+        m_chooser.addOption("None", null);
+        m_chooser.addOption("2 Balls", new TwoBallsAuto());
+        m_chooser.addOption("3 Balls", new ThreeBallsAuto());
         m_chooser.setDefaultOption("fiveBalls", fiveBalls);
         SmartDashboard.putData("Drivetrain", Robot.getRobotContainer().getDriveTrain());
 
