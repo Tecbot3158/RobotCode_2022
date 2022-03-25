@@ -350,7 +350,8 @@ public class RobotMap {
         public static final double CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_EXTENDED = 0;
         // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED =
         // 91.7401;
-        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 90.0;
+        //public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 90.0;
+        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 112.0;
 
         public static final double CLIMBER_RAW_AXIS_MULTIPLIER = 1;
 
