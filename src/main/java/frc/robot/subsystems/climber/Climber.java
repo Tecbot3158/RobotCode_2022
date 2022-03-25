@@ -25,6 +25,8 @@ public class Climber extends SubsystemBase {
     private final DoubleSolenoid pistonHanger;
     private final TecbotMotorList ropeController;
 
+    private static boolean freeMode = false;
+
     private RelativeEncoder ropeEncoder;
 
     public Climber() {
@@ -78,7 +80,7 @@ public class Climber extends SubsystemBase {
         Robot.debugSmartDashboard("CLIMB - enc", ropeEncoder.getPosition());
         Robot.debugSmartDashboard("CLIMB - SPEED", realSpeed);
 
-        boolean freeMode = true;
+        freeMode = true;
         if (!freeMode) {
 
             if (getPistonState() == RobotMap.CLIMBER_SOLENOID_RETRACTED_POSITION) {
@@ -144,4 +146,11 @@ public class Climber extends SubsystemBase {
         return ropeController.getSpecificMotor(RobotMap.CLIMBER_MOTOR_MASTER_PORT).getCANSparkMax().getEncoder();
     }
 
+    public static boolean isFreeMode() {
+        return freeMode;
+    }
+
+    public static void setFreeMode(boolean freeMode) {
+        Climber.freeMode = freeMode;
+    }
 }
