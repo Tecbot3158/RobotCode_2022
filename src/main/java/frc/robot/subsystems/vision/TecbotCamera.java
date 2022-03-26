@@ -7,6 +7,7 @@ package frc.robot.subsystems.vision;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import org.photonvision.PhotonCamera;
+import org.photonvision.common.hardware.VisionLEDMode;
 import org.photonvision.targeting.PhotonPipelineResult;
 
 public class TecbotCamera extends SubsystemBase {
@@ -124,11 +125,14 @@ public class TecbotCamera extends SubsystemBase {
     }
 
     public void setDriverMode(){
+        photonCamera.setLED(VisionLEDMode.kOff);
         photonCamera.setDriverMode(true);
     }
 
     public void setTargetMode(){
         photonCamera.setDriverMode(false);
+        photonCamera.setPipelineIndex(0);
+        photonCamera.setLED(VisionLEDMode.kOn);
     }
 
     public PhotonCamera getPhotonCamera() {

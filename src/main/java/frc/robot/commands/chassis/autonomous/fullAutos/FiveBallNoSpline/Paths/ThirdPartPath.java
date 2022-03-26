@@ -13,7 +13,8 @@ public class ThirdPartPath extends SequentialCommandGroup {
     public ThirdPartPath() {
         super(
 
-                new SpeedReductionStraight(2.9, 0.5, 168),
+                //new SpeedReductionStraight(2.9, 0.5, 168),
+                new SpeedReductionStraight(3, 0.5, 168),
                 new DriveTurretToAngle(25),
                 // previously 15 deg
                 new RollersAbsorb(),

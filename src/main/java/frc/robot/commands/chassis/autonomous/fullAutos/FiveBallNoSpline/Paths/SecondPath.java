@@ -14,7 +14,7 @@ public class SecondPath extends SequentialCommandGroup {
         super(
                 new SpeedReductionTurn(-170, 0.5),
                 new SpeedReductionStraight(2.2606, 0.4, -170),
-                new DriveTurretToAngle(30),
+                new DriveTurretToAngle(37),
                 new RollersAbsorb(),
                 new FeederSetForNSeconds(2),
                 new RollersStop());

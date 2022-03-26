@@ -45,9 +45,9 @@ public class ShooterGoToVariableVisionTarget extends CommandBase {
         stepControl = new StepControl(minimumOutput, target, currentPos, increment);
         stepControl.setRange(RobotMap.SHOOTER_DEFAULT_RANGE);
 
-        Robot.debugSmartDashboard("SHOOT-MIN_OUT", minimumOutput);
-        Robot.debugSmartDashboard("SHOOT-TARGET", target);
-        Robot.debugSmartDashboard("SHOOT-INCREM", increment);
+//        Robot.debugSmartDashboard("SHOOT-MIN_OUT", minimumOutput);
+//        Robot.debugSmartDashboard("SHOOT-TARGET", target);
+//        Robot.debugSmartDashboard("SHOOT-INCREM", increment);
 
         Robot.debug("init SHOOTER");
 
@@ -58,38 +58,47 @@ public class ShooterGoToVariableVisionTarget extends CommandBase {
 
         double turretPosition = Robot.getRobotContainer().getTurret().getPosition();
         double turretAngle = Robot.getRobotContainer().getTurret().getAngleFromRotations(turretPosition);
-        double turretIncrement = Math.abs(180 - turretAngle) / 180 * 200;
+        //double turretIncrement = Math.abs(180 - turretAngle) / 180 * 200;
+        double turretIncrement = 200;
 
         double normalizeDistance = VisionValueNormalizer.getInstance().getNormalizedDistance();
         target = RobotMap.TURRET_VISION_MINIMUM_RPMs +
                 normalizeDistance * RobotMap.TURRET_VISION_MAXIMUM_VARIABLE_RPMs +
                 turretIncrement;
+        target = target * .9;
+        //changed by trevor
 
-        stepControl.setTarget(target*.9);
+        stepControl.setTarget(target);
 
         double velocity = shooter.getShooterEncoder().getVelocity();
         double output = stepControl.getOutputVelocity(velocity);
 
-        Robot.debugSmartDashboard("TURRET ANGLE: ", turretAngle);
-        Robot.debugSmartDashboard("TURRET INCREM: ", turretIncrement);
+//        Robot.debugSmartDashboard("TURRET ANGLE: ", turretAngle);
+//        Robot.debugSmartDashboard("TURRET INCREM: ", turretIncrement);
 
         Robot.debugSmartDashboard("shooter encoder. ", shooter.getShooterEncoder().getPosition());
+        Robot.debugSmartDashboard("shooter DISTNORM. ", normalizeDistance );
         Robot.debugSmartDashboard("shooter output ", output);
         Robot.debugSmartDashboard("shooter RPMs", velocity);
         Robot.debugSmartDashboard("shooter target", target);
+        Robot.debug("Target: " + target );
 
         shooter.setShooterMotorsRaw(output);
 
         if (stepControl.isInRange()) {
+//            System.out.println("RAAAANGEEEEEEEEEEEEEEE");
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble,
                     TecbotConstants.COPILOT_DEFAULT_VIBRATION);
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble,
                     TecbotConstants.COPILOT_DEFAULT_VIBRATION);
         } else {
+            //Robot.debug("NEIIIIN");
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, 0);
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
 
         }
+
+//        Robot.debug("RANGE: " + stepControl.getRange());
 
     }
 

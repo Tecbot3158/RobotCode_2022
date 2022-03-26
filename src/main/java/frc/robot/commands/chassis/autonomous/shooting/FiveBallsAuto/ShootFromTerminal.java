@@ -6,7 +6,7 @@ import frc.robot.commands.shooter.ShooterShootCustomTarger;
 public class ShootFromTerminal extends SequentialCommandGroup {
 
     public ShootFromTerminal() {
-        super(new ShooterShootCustomTarger(5350));
+        super(new ShooterShootCustomTarger(5400 ));
         // before was 5250
     }
 

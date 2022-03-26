@@ -73,9 +73,9 @@ public class RobotContainer {
         climber = new Climber();
 
 
-        UsbCamera camera = CameraServer.startAutomaticCapture();
-
-        camera.setResolution(320, 240);
+//        UsbCamera camera = CameraServer.startAutomaticCapture();
+//
+//        camera.setResolution(320, 240);
 
         // configureButtonBindings();
         // this NEEDS to be called from the RobotInit class after all subsystems are

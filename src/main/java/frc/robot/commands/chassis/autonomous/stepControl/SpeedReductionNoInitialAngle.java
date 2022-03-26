@@ -46,6 +46,6 @@ public class SpeedReductionNoInitialAngle extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return Robot.getRobotContainer().getDriveTrain().moveStraight(target, maxPower);
+        return Robot.getRobotContainer().getDriveTrain().moveStraight(target, maxPower, angle);
     }
 }

@@ -20,6 +20,7 @@ import frc.robot.commands.chassis.autonomous.splines.SplineMove;
 import frc.robot.commands.chassis.autonomous.stepControl.SpeedReductionTurn;
 import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
 import frc.robot.resources.TecbotConstants;
+import frc.robot.subsystems.chassis.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -100,6 +101,9 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("turret RPMs:",
                 Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity());
 
+
+        SmartDashboard.putData("Autonomous", m_chooser);
+
         // OI.getInstance().getTurretInputAngle();
 
     }
@@ -123,6 +127,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        getRobotContainer().getDriveTrain().setTransmissionState(DriveTrain.TransmissionMode.speed);
+        //always put chassi for speed !
+
         m_autonomousCommand = m_chooser.getSelected();
 
         // schedule the autonomous command (example)

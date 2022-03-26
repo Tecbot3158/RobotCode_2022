@@ -38,7 +38,7 @@ public class StepControl {
     }
 
     public double getOutputVelocity(double currentVelocity ) {
-        //this.currentPosition = currentVelocity;
+        this.currentPosition = currentVelocity;
         double proportion = ( ( kTarget - currentVelocity) ) * incrementMultiplier;
         int sign = proportion >= 0 ? 1: -1;
 
@@ -104,5 +104,7 @@ public class StepControl {
         return proportion <= range;
     }
 
-
+    public double getRange() {
+        return range;
+    }
 }

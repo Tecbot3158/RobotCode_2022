@@ -7,7 +7,10 @@ import frc.robot.commands.shooter.ShooterShootCustomTarger;
 public class ShootFromStartingPosition extends SequentialCommandGroup {
 
     public ShootFromStartingPosition() {
-        super(new ShooterShootCustomTarger(3800));
+        //super(new ShooterShootCustomTarger(3800));
+        //super(new ShooterShootCustomTarger(4180));
+        //super(new ShooterShootCustomTarger(4598));
+        super(new ShooterShootCustomTarger(4700));
     }
 
 }

@@ -12,7 +12,7 @@ import frc.robot.commands.turret.DriveTurretToAngle;
 public class ClimberInitiateClimbingMode extends SequentialCommandGroup {
     public ClimberInitiateClimbingMode() {
         super(
-                new IntakeExtend(),
+           //     new IntakeExtend(),
                 new ChassisSetDefaultDrive(),
                 new DriveTurretToAngle(0));
     }

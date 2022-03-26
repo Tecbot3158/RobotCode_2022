@@ -15,8 +15,8 @@ public class FirstPartTwoBallsPath extends SequentialCommandGroup {
     public FirstPartTwoBallsPath() {
         super(
                 new IntakeAbsorbAndExtend(),
-                new SpeedReductionNoInitialAngle(1.04, 0.08),
-                new SpeedReductionNoInitialAngle(-.20, 0.08),
+                new SpeedReductionNoInitialAngle(1.44, 0.08),
+                new SpeedReductionNoInitialAngle(-1.5, 0.08),
                 new WaitCommand(2),
                 new RollersAbsorb(),
                 new FeederSetForNSeconds(2),

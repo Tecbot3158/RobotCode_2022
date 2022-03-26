@@ -29,7 +29,12 @@ public class ShooterGoToLower extends CommandBase {
 
         shooter.getShooterEncoder().setPosition(0);
         currentPos = shooter.getShooterEncoder().getVelocity();
-        target = 1700;
+        //target = 1700;
+        //target = 1260;
+        target = 1310;
+        target = 1500;
+        target = 1600;
+        target = 1900;
 
         stepControl = new StepControl(minout, target, currentPos, increment);
 

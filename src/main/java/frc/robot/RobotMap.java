@@ -189,7 +189,8 @@ public class RobotMap {
         public static final int SHOOTER_MOTOR_MASTER_PORT = SHOOTER_MOTOR_PORTS[0];
         public static final int SHOOTER_MOTOR_SLAVE_PORT = SHOOTER_MOTOR_PORTS[1];
 
-        public static final double SHOOTER_DEFAULT_RANGE = 50; // changed by joe
+        // public static final double SHOOTER_DEFAULT_RANGE = 50; // changed by joe
+        public static final double SHOOTER_DEFAULT_RANGE = 30; // changed by trevor
 
         public static final double SHOOTER_CONTROL_kINCREMENT_MULTIPLIER = 0.0000045;
         public static final double SHOOTER_CONTROL_MINIMUM_OUTPUT = 0.0001;

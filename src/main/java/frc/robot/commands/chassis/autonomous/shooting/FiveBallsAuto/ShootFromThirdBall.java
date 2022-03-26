@@ -7,7 +7,8 @@ import frc.robot.commands.shooter.ShooterShootCustomTarger;
 public class ShootFromThirdBall extends SequentialCommandGroup {
 
     public ShootFromThirdBall() {
-        super(new ShooterShootCustomTarger(4300));
+        super(new ShooterShootCustomTarger( 4000 ));
+        // before was 4300
     }
 
 }

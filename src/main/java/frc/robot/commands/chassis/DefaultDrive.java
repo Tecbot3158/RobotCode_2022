@@ -45,7 +45,8 @@ public class DefaultDrive extends CommandBase {
         // right x
         double turn = (OI.getInstance().getPilot().getRightAxisX());
         // Triggers
-        double middleWheel = -OI.getInstance().getPilot().getRightAxisX();
+        //double middleWheel = -OI.getInstance().getPilot().getRightAxisX();
+        double middleWheel = 0;
         SmartDashboard.putNumber("TRIGGERS ", middleWheel);
 
         Robot.getRobotContainer().getDriveTrain().defaultDrive(x, y, turn, middleWheel);
