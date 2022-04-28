@@ -4,6 +4,8 @@
 
 package frc.robot.resources;
 
+import javax.imageio.stream.MemoryCacheImageInputStream;
+
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 
@@ -159,7 +161,8 @@ public class TecbotPWMLEDStrip {
                 ledBuffer.setHSV(j + offset, hue, 255 - (heat[j] / 3), heat[j]);
             else {
                 System.out.println(offset + length - 1 - j);
-                ledBuffer.setHSV(offset + length - 1 - j, hue, 255 - (heat[j] / 3), heat[j]);
+                double yy = Math.clamp(offset + length - 1 - j, 0, length - 1);
+                ledBuffer.setHSV((int) yy, hue, 255 - (heat[j] / 3), heat[j]);
             }
         }
 

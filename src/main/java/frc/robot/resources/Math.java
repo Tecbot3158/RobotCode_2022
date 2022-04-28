@@ -179,7 +179,8 @@ public class Math {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
-    public static double atan2( double y, double x ){
-        return java.lang.Math.atan2( y, x);
+    public static double atan2(double y, double x) {
+        return java.lang.Math.atan2(y, x);
     }
+
 }

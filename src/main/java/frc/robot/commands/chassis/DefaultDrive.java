@@ -30,22 +30,25 @@ public class DefaultDrive extends CommandBase {
     @Override
     public void execute() {
         // left y
-        // double x = Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
-        // double x = Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) ;
-        //ponce down
-        //double x = Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)), -1, 1);
+        // double x = Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1,
+        // 1) * 0.85;
+        // double x = Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1,
+        // 1) ;
+        // ponce down
+        // double x = Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)),
+        // -1, 1);
         // left x
         // double y = -Math.clamp((OI.getInstance().getPilot().getLeftAxisY()), -1, 1);
         // double y = -Math.clamp((OI.getInstance().getPilot().getLeftAxisY()), -1, 1);
-        //double y = Math.clamp((OI.getInstance().getPilot().getTriggers()), -1, 1);
+        // double y = Math.clamp((OI.getInstance().getPilot().getTriggers()), -1, 1);
 
-        double x = OI.getInstance().getDefaultDriveInputX();
-        double y = OI.getInstance().getDefaultDriveInputY();
+        double x = OI.getInstance().getDefaultDriveInputX() * .20;
+        double y = OI.getInstance().getDefaultDriveInputY() * .20;
 
         // right x
         double turn = (OI.getInstance().getPilot().getRightAxisX());
         // Triggers
-        //double middleWheel = -OI.getInstance().getPilot().getRightAxisX();
+        // double middleWheel = -OI.getInstance().getPilot().getRightAxisX();
         double middleWheel = 0;
         SmartDashboard.putNumber("TRIGGERS ", middleWheel);
 
