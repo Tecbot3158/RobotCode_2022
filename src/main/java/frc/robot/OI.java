@@ -65,12 +65,11 @@ public class OI {
 
         pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new ToggleDragonFlyWheel());
 
-        // pilot.whenPressed(TecbotController.ButtonType.LB, new
-        // ChassisToggleTransmissionMode());
+        pilot.whenPressed(TecbotController.ButtonType.LB, new ChassisToggleTransmissionMode());
         pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
 
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
-        // InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyLower,
+        // InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyLower,y
         // Robot.getRobotContainer().getDriveTrain()));
         // lower llanta abajo
         // rise llanta arriba
@@ -165,10 +164,10 @@ public class OI {
 
         switch (TecbotConstants.CURRENT_PILOT) {
             case PONCE:
-                return Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)), -1, 1) * 0.7;
+                return Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)), -1, 1) * 0.6;
 
             case PAULO:
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.6;
 
             case ALEXS235:
             case ALEXG:
@@ -255,7 +254,6 @@ public class OI {
                 new InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyRise,
                         Robot.getRobotContainer().getDriveTrain()));
 
-        // magia
         // pilot.whenPressed(TecbotController.ButtonType.LB, new
         // ChassisToggleTransmissionMode());
         pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
