@@ -15,6 +15,8 @@ import frc.robot.resources.TecbotSpeedController.TypeOfMotor;
 
 public class RobotMap {
 
+        public static final int DRIVE_TRAIN_INPUT_FACTOR = 1;
+
         public static final int CLIMBER_RIGHT_LIMIT_SWITCH_PORT = 0;
         public static final int CLIMBER_LEFT_LIMIT_SWITCH_PORT = 0;
 
@@ -256,7 +258,7 @@ public class RobotMap {
         // public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = (double) 776 /
         // (double) 27;
         public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = 26.0;
-        //public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = 27.0;
+        // public static final double TURRET_ROTATION_TO_MOTOR_ROTATION = 27.0;
 
         public static final double TURRET_MOTOR_MIN_ROTATIONS = -135 / (double) 360
                         * RobotMap.TURRET_ROTATION_TO_MOTOR_ROTATION;
@@ -265,7 +267,7 @@ public class RobotMap {
 
         public static final double TURRET_DEFAULT_TARGET_RANGE = 0.05;
         public static final double TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT = 0.035;
-        //public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5;
+        // public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5;
         public static final double TURRET_DEFAULT_kCONTROL_START_LIMIT = -5.7;
 
         public static final double TURRET_VISION_DEFAULT_TARGET_RANGE = 0.05;
@@ -284,9 +286,8 @@ public class RobotMap {
 
         // public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE =
         // 21.88084411621093766666;
-//        public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE = 20;
-//        public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = -3.5;
-
+        // public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE = 20;
+        // public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = -3.5;
 
         public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE = 20;
         public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = -2.14;
@@ -351,7 +352,8 @@ public class RobotMap {
         public static final double CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_EXTENDED = 0;
         // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED =
         // 91.7401;
-        //public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 90.0;
+        // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED =
+        // 90.0;
         public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 112.0;
 
         public static final double CLIMBER_RAW_AXIS_MULTIPLIER = 1;

@@ -3,6 +3,23 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
 import frc.robot.commands.chassis.drivingModes.ChassisToggleTransmissionMode;
+import frc.robot.commands.chassis.drivingModes.ToggleDragonFlyWheel;
+import frc.robot.commands.climber.ClimberSetInitThenClearBindingsThenSetClimberBindings;
+import frc.robot.commands.climber.ClimberToggleFreeMode;
+import frc.robot.commands.climber.basic.ClimberSetRawMotors;
+import frc.robot.commands.climber.basic.ClimberToggleSolenoids;
+import frc.robot.commands.feeder.FeederEjectThenStop;
+import frc.robot.commands.feeder.FeederSetToSpeedThenStop;
+import frc.robot.commands.feeder.FeederStop;
+import frc.robot.commands.intake.IntakeTogglePositionAndMotors;
+import frc.robot.commands.intake.basic.IntakeToggleEject;
+import frc.robot.commands.intake.basic.IntakeToggleMotors;
+import frc.robot.commands.rollers.RollersRunThenStop;
+import frc.robot.commands.shooter.ShooterGoToLower;
+import frc.robot.commands.shooter.ShooterGoToVariableVisionTarget;
+import frc.robot.commands.shooter.ShooterGoToVeryHighValue;
+import frc.robot.commands.shooter.basic.ShooterOff;
+import frc.robot.commands.turret.DriveTurretToAngle;
 import frc.robot.commands.turret.DriveTurretToVisionTarget;
 import frc.robot.commands.turret.basic.DriveTurretToLeft;
 import frc.robot.commands.turret.basic.DriveTurretToRight;
@@ -46,17 +63,13 @@ public class OI {
         // Robot.getRobotContainer().getDriveTrain()::setMecanumDrive,
         // Robot.getRobotContainer().getDriveTrain()));
 
-        // pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT,
-        new InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyRise,
-                Robot.getRobotContainer().getDriveTrain());
+        pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new ToggleDragonFlyWheel());
 
-        // pilot.whenPressed(TecbotController.ButtonType.LB, new
-        // ChassisToggleTransmissionMode());
-        // pilot.whenPressed(TecbotController.ButtonType.RB, new
-        // ShooterGoToVeryHighValue());
+        pilot.whenPressed(TecbotController.ButtonType.LB, new ChassisToggleTransmissionMode());
+        pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
 
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
-        // InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyLower,
+        // InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyLower,y
         // Robot.getRobotContainer().getDriveTrain()));
         // lower llanta abajo
         // rise llanta arriba
@@ -67,11 +80,10 @@ public class OI {
         // pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggleMotors());
         // pilot.whenPressed(TecbotController.ButtonType.A, new IntakeToggle());
 
-        // pilot.whenPressed(TecbotController.ButtonType.A, new
-        // IntakeTogglePositionAndMotors());
-        // pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggleMotors());
+        pilot.whenPressed(TecbotController.ButtonType.A, new IntakeTogglePositionAndMotors());
+        pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggleMotors());
 
-        // pilot.whenPressed(TecbotController.ButtonType.Y, new IntakeToggleEject());
+        pilot.whenPressed(TecbotController.ButtonType.Y, new IntakeToggleEject());
         // pilot.whileHeld(TecbotController.ButtonType.Y, new IntakeEjectThenStop());
 
         // COPILOT:
@@ -152,10 +164,10 @@ public class OI {
 
         switch (TecbotConstants.CURRENT_PILOT) {
             case PONCE:
-                return Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)), -1, 1) * 0.7;
+                return Math.clamp(-(OI.getInstance().getPilot().getRightAxisX(false)), -1, 1) * 0.6;
 
             case PAULO:
-                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.85;
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.6;
 
             case ALEXS235:
             case ALEXG:
@@ -183,6 +195,10 @@ public class OI {
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1);
 
         }
+    }
+
+    public double getMiddleWheel() {
+        return pilot.getRightAxisX();
     }
 
     public double getTurretDefaultInput() {
@@ -238,7 +254,8 @@ public class OI {
                 new InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyRise,
                         Robot.getRobotContainer().getDriveTrain()));
 
-        pilot.whenPressed(TecbotController.ButtonType.LB, new ChassisToggleTransmissionMode());
+        // pilot.whenPressed(TecbotController.ButtonType.LB, new
+        // ChassisToggleTransmissionMode());
         pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
 
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
