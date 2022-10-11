@@ -3,7 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
 import frc.robot.commands.chassis.drivingModes.ChassisToggleTransmissionMode;
-import frc.robot.commands.chassis.drivingModes.ToggleDragonFlyWheel;
+//import frc.robot.commands.chassis.drivingModes.ToggleDragonFlyWheel;
 import frc.robot.commands.climber.ClimberSetInitThenClearBindingsThenSetClimberBindings;
 import frc.robot.commands.climber.ClimberToggleFreeMode;
 import frc.robot.commands.climber.basic.ClimberSetRawMotors;
@@ -18,6 +18,7 @@ import frc.robot.commands.rollers.RollersRunThenStop;
 import frc.robot.commands.shooter.ShooterGoToLower;
 import frc.robot.commands.shooter.ShooterGoToVariableVisionTarget;
 import frc.robot.commands.shooter.ShooterGoToVeryHighValue;
+import frc.robot.commands.shooter.basic.ShooterGoRaw;
 import frc.robot.commands.shooter.basic.ShooterOff;
 import frc.robot.commands.turret.DriveTurretToAngle;
 import frc.robot.commands.turret.DriveTurretToVisionTarget;
@@ -63,7 +64,8 @@ public class OI {
         // Robot.getRobotContainer().getDriveTrain()::setMecanumDrive,
         // Robot.getRobotContainer().getDriveTrain()));
 
-        pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new ToggleDragonFlyWheel());
+        // pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new
+        // ToggleDragonFlyWheel());
 
         pilot.whenPressed(TecbotController.ButtonType.LB, new ChassisToggleTransmissionMode());
         pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
@@ -127,12 +129,12 @@ public class OI {
          */
 
         copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngle(0));
-        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngle(180));
-        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(90));
+        copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngle(184));
+        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(92));
         copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngle(270));
 
-        new TecbotControllerLeftTriggerButton().whileHeld(new DriveTurretToVisionTarget());
-        new TecbotControllerRightTriggerButton().whenActive(new ShooterGoToLower());
+        new TecbotControllerLeftTriggerButton().whileHeld(new ShooterGoRaw(0.3));
+        // new TecbotControllerRightTriggerButton().whileActive(new ShooterGoRaw(0.3));
 
         // copilot.whenPressed(TecbotController.ButtonType.BACK, new
         // ClimberInitiateClimbingMode());
@@ -140,6 +142,7 @@ public class OI {
         // ClimberToggleSolenoids());
         copilot.whenPressed(TecbotController.ButtonType.BACK,
                 new ClimberSetInitThenClearBindingsThenSetClimberBindings());
+        // copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.3));
 
     }
 

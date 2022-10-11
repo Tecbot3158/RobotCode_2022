@@ -29,15 +29,18 @@ public class FeederSetToSpeed extends CommandBase {
 
         feeder = Robot.getRobotContainer().getFeeder();
         addRequirements(feeder);
-
-        kMinimumAbsOutput = RobotMap.FEEDER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT;
-        target = RobotMap.FEEDER_DEFAULT_TARGET_SPEED;
-        currentPosition = feeder.getFeederEncoder().getVelocity();
-        kIncrementMultiplier = RobotMap.FEEDER_DEFAULT_kINCREMENT_MULTIPLIER;
-        stepControl = new StepControl(kMinimumAbsOutput, target, currentPosition, kIncrementMultiplier);
-        // Use addRequirements() here to declare subsystem dependencies.
-
-        stepControl.setRange(RobotMap.FEEDER_DEFAULT_RANGE);
+        /*
+         * APPARENTLY OBSOLETE, NOT USED ANYWAYS
+         * kMinimumAbsOutput = RobotMap.FEEDER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT;
+         * target = RobotMap.FEEDER_DEFAULT_TARGET_SPEED;
+         * currentPosition = feeder.getFeederEncoder().getVelocity();
+         * kIncrementMultiplier = RobotMap.FEEDER_DEFAULT_kINCREMENT_MULTIPLIER;
+         * stepControl = new StepControl(kMinimumAbsOutput, target, currentPosition,
+         * kIncrementMultiplier);
+         * // Use addRequirements() here to declare subsystem dependencies.
+         * 
+         * stepControl.setRange(RobotMap.FEEDER_DEFAULT_RANGE);
+         */
     }
 
     // Called when the command is initially scheduled.
@@ -55,7 +58,7 @@ public class FeederSetToSpeed extends CommandBase {
 
         Robot.debug("init feeder Set To speed");
 
-        feeder.setRaw(1);
+        feeder.setRaw(RobotMap.FEEDER_DEFAULT_FEED_SPEED);
 
     }
 

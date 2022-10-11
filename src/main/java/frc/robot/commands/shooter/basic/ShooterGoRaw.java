@@ -18,7 +18,7 @@ public class ShooterGoRaw extends CommandBase {
 
     double speed;
 
-    public ShooterGoRaw(double num){
+    public ShooterGoRaw(double num) {
 
         speed = num;
 
@@ -33,12 +33,13 @@ public class ShooterGoRaw extends CommandBase {
     }
 
     @Override
-    public void execute(){
+    public void execute() {
 
         SmartDashboard.putNumber("shooter encoder. ", shooter.getShooterEncoder().getPosition());
         SmartDashboard.putNumber("output shooter ", speed);
 
         shooter.setShooterMotorsRaw(speed);
+        System.out.println("Shootergoraw active");
 
     }
 
@@ -51,6 +52,6 @@ public class ShooterGoRaw extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return false;
     }
 }

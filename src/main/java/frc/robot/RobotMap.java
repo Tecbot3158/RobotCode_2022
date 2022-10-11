@@ -105,7 +105,8 @@ public class RobotMap {
 
         // dragonfly
 
-        public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_PORT = { 15 };
+        // ORIGINALMENTE ESTO ES , LO CAMBIÉ A 35
+        public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_PORT = { 35 };
         // before mechanical change the wheel was inverted.
         public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_INVERTED_MOTORS = { DRIVE_TRAIN_MIDDLE_WHEEL_PORT[0] };
         public static final TypeOfMotor[] DRIVE_TRAIN_MIDDLE_WHEEL_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS };
@@ -145,8 +146,8 @@ public class RobotMap {
         public static final double TRANSPORT_ROLLERS_THROW_SPEED = -1;
 
         // FEEDER
-        public static final int TRANSPORT_FEEDER_PORT = 35;
-        public static final TypeOfMotor TRANSPORT_FEEDER_MOTOR_TYPE = TypeOfMotor.CAN_SPARK_BRUSHLESS;
+        public static final int TRANSPORT_FEEDER_PORT = 15;
+        public static final TypeOfMotor TRANSPORT_FEEDER_MOTOR_TYPE = TypeOfMotor.VICTOR_SPX;
         public static final boolean TRANSPORT_FEEDER_IS_INVERTED = false;
 
         public static final double FEEDER_DEFAULT_TARGET_SPEED = 4000;
@@ -155,7 +156,7 @@ public class RobotMap {
         public static final double FEEDER_DEFAULT_kMINIMUM_ABSOLUTE_OUTPUT = 0.001;
 
         public static final double FEEDER_DEFAULT_RANGE = 300;
-
+        public static final double FEEDER_DEFAULT_FEED_SPEED = 0.5;
         public static final double FEEDER_DEFAULT_EJECT_SPEED = -0.5;
 
         public static final int FEEDER_ENCODER_MOTOR_PORT = TRANSPORT_FEEDER_PORT;
@@ -179,12 +180,11 @@ public class RobotMap {
         public static final int[] SHOOTER_MOTOR_PORTS = { 40, 41 };
         public static final TypeOfMotor[] SHOOTER_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS,
                         TypeOfMotor.CAN_SPARK_BRUSHLESS };
-        public static final boolean[] SHOOTER_MOTORS_ARE_INVERTED = { false, false };
-        public static final int[] SHOOTER_INVERTED_MOTORS = {};
+        public static final int[] SHOOTER_INVERTED_MOTORS = { 40 };
 
         public static final int[] SHOOTER_ANGLE_SERVO_PORTS = { 5, 4 }; // left, then right
 
-        public static final boolean[] SHOOTER_ANGLE_SERVOS_ARE_INVERTED = { false, true };
+        public static final boolean[] SHOOTER_ANGLE_SERVOS_ARE_INVERTED = { true, true };
 
         public static final int SHOOTER_ENCODER_MOTOR_PORT = SHOOTER_MOTOR_PORTS[0];
 
@@ -290,7 +290,7 @@ public class RobotMap {
         // public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = -3.5;
 
         public static final double TURRET_DEFAULT_MAXIMUM_ENCODER_VALUE = 20;
-        public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = -2.14;
+        public static final double TURRET_DEFAULT_MINIMUM_ENCODER_VALUE = 0;
 
         public static final double TURRET_ANGLE_COUNTER_CLOCKWISE = (TURRET_DEFAULT_MINIMUM_ENCODER_VALUE * 360)
                         / TURRET_ROTATION_TO_MOTOR_ROTATION;

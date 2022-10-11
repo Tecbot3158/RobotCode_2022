@@ -13,7 +13,6 @@ public class Feeder extends SubsystemBase {
 
     TecbotSpeedController feeder;
 
-
     private RelativeEncoder feederEncoder;
 
     boolean isReady = false;
@@ -26,8 +25,7 @@ public class Feeder extends SubsystemBase {
         isReady = ready;
     }
 
-    //    public static FeederAndShooterState state = FeederAndShooterState.BOTH_OFF;
-
+    // public static FeederAndShooterState state = FeederAndShooterState.BOTH_OFF;
 
     /**
      * Creates a new Feeder.
@@ -36,7 +34,9 @@ public class Feeder extends SubsystemBase {
         feeder = new TecbotSpeedController(RobotMap.TRANSPORT_FEEDER_PORT, RobotMap.TRANSPORT_FEEDER_MOTOR_TYPE);
         feeder.setInverted(RobotMap.TRANSPORT_FEEDER_IS_INVERTED);
 
-        feederEncoder = feeder.getCANSparkMax().getEncoder();
+        // Currently obsolete, no encoder is associated to feeder motor controller.
+        if (feeder.getCANSparkMax() != null)
+            feederEncoder = feeder.getCANSparkMax().getEncoder();
 
     }
 
@@ -52,8 +52,10 @@ public class Feeder extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
     }
-
-    public RelativeEncoder getFeederEncoder() {
-        return feederEncoder;
-    }
+    // CURRENTLY OBSOLETE, NO ENCODER AVAILABLE
+    /*
+     * public RelativeEncoder getFeederEncoder() {
+     * return feederEncoder;
+     * }
+     */
 }

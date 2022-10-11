@@ -101,9 +101,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("turret RPMs:",
                 Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity());
 
-
         SmartDashboard.putData("Autonomous", m_chooser);
-
+        // System.out.println(getRobotContainer().getIntake().getIntakeSolenoids().get());
         // OI.getInstance().getTurretInputAngle();
 
     }
@@ -128,7 +127,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         getRobotContainer().getDriveTrain().setTransmissionState(DriveTrain.TransmissionMode.speed);
-        //always put chassi for speed !
+        // always put chassi for speed !
 
         m_autonomousCommand = m_chooser.getSelected();
 
