@@ -20,6 +20,7 @@ import frc.robot.commands.chassis.autonomous.splines.SplineMove;
 import frc.robot.commands.chassis.autonomous.stepControl.SpeedReductionTurn;
 import frc.robot.commands.chassis.drivingModes.ChassisSetSpeed;
 import frc.robot.resources.TecbotConstants;
+import frc.robot.resources.TecbotPWMLEDStrip;
 import frc.robot.subsystems.chassis.DriveTrain;
 
 /**
@@ -163,6 +164,23 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
 
+        double x = OI.getInstance().getCopilot().getRightAxisX();
+        double y = OI.getInstance().getCopilot().getRightAxisY();
+        // ;
+
+        // this works:
+        // robotContainer.getTecbotPWMLEDStrip().setRainbowCycle();
+
+        // this doesn't work!
+        // robotContainer.getTecbotPWMLEDStrip().setFireFromInputInRange(1, 0.1, 0, 1,
+        // 60, 1, false);
+
+        // this works!
+        robotContainer.getTecbotPWMLEDStrip().setSolidHSV(0, 0, 0);
+
+        // robotContainer.getTecbotPWMLEDStrip().setFireFromJoystick(129, x, y,
+        // TecbotConstants.LED_STRIP_LENGTH, 1,
+        // true);
     }
 
     @Override

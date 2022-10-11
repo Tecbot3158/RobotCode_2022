@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.resources.Navx;
+import frc.robot.resources.TecbotConstants;
+import frc.robot.resources.TecbotPWMLEDStrip;
 import frc.robot.subsystems.chassis.DriveTrain;
 import frc.robot.subsystems.climber.Climber;
 import frc.robot.subsystems.intake.Intake;
@@ -45,6 +47,9 @@ public class RobotContainer {
 
     private Shooter shooter;
 
+    TecbotPWMLEDStrip ledsPWM;
+    TecbotPWMLEDStrip ledsPWM1;
+
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
@@ -72,10 +77,12 @@ public class RobotContainer {
 
         climber = new Climber();
 
+        ledsPWM = new TecbotPWMLEDStrip(TecbotConstants.LED_STRIP_PWM_PORT, TecbotConstants.LED_STRIP_LENGTH);
+        // ledsPWM1 = new TecbotPWMLEDStrip(9, 60);
 
-//        UsbCamera camera = CameraServer.startAutomaticCapture();
-//
-//        camera.setResolution(320, 240);
+        // UsbCamera camera = CameraServer.startAutomaticCapture();
+        //
+        // camera.setResolution(320, 240);
 
         // configureButtonBindings();
         // this NEEDS to be called from the RobotInit class after all subsystems are
@@ -152,4 +159,11 @@ public class RobotContainer {
         return climber;
     }
 
+    public TecbotPWMLEDStrip getTecbotPWMLEDStrip() {
+        return ledsPWM;
+    }
+
+    public TecbotPWMLEDStrip getTecbotPWMLEDStrip1() {
+        return ledsPWM1;
+    }
 }
