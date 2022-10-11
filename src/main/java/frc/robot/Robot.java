@@ -163,9 +163,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-
-        double x = OI.getInstance().getCopilot().getRightAxisX();
-        double y = OI.getInstance().getCopilot().getRightAxisY();
+        double y = OI.getInstance().getDefaultDriveInputY();
         // ;
 
         // this works:
@@ -176,7 +174,11 @@ public class Robot extends TimedRobot {
         // 60, 1, false);
 
         // this works!
-        robotContainer.getTecbotPWMLEDStrip().setSolidHSV(0, 0, 0);
+        // robotContainer.getTecbotPWMLEDStrip().setSolidHSV(0, 0, 0);
+
+        // this probably works
+        robotContainer.getTecbotPWMLEDStrip().setFireWithVariableIntensity(
+                233, Math.abs(y), 0, 1, TecbotConstants.LED_STRIP_LENGTH, 0, false);
 
         // robotContainer.getTecbotPWMLEDStrip().setFireFromJoystick(129, x, y,
         // TecbotConstants.LED_STRIP_LENGTH, 1,

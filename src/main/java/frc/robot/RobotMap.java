@@ -15,7 +15,7 @@ import frc.robot.resources.TecbotSpeedController.TypeOfMotor;
 
 public class RobotMap {
 
-        public static final int DRIVE_TRAIN_INPUT_FACTOR = 1;
+        public static final double DRIVE_TRAIN_INPUT_FACTOR = 0.5;
 
         public static final int CLIMBER_RIGHT_LIMIT_SWITCH_PORT = 0;
         public static final int CLIMBER_LEFT_LIMIT_SWITCH_PORT = 0;
@@ -105,7 +105,7 @@ public class RobotMap {
 
         // dragonfly
 
-        // ORIGINALMENTE ESTO ES , LO CAMBIÉ A 35
+        // ORIGINALMENTE ESTO ERA 15, LO CAMBIÉ A 35
         public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_PORT = { 35 };
         // before mechanical change the wheel was inverted.
         public static final int[] DRIVE_TRAIN_MIDDLE_WHEEL_INVERTED_MOTORS = { DRIVE_TRAIN_MIDDLE_WHEEL_PORT[0] };

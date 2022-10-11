@@ -21,8 +21,7 @@ public class IntakeToggleMotors extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (intake.getIntakeMotorState() == Intake.IntakeMotorState.ABSORB )
-
+    if (intake.getIntakeMotorState() == Intake.IntakeMotorState.ABSORB)
       intake.setIntakeMotorsState(Intake.IntakeMotorState.OFF);
     else
       intake.setIntakeMotorsState(Intake.IntakeMotorState.ABSORB);
