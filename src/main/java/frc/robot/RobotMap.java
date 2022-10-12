@@ -15,7 +15,8 @@ import frc.robot.resources.TecbotSpeedController.TypeOfMotor;
 
 public class RobotMap {
 
-        public static final double DRIVE_TRAIN_INPUT_FACTOR = 0.5;
+        public static final double DRIVE_TRAIN_INPUT_FACTOR_CAPPED = 0.5;
+        public static final double DRIVE_TRAIN_INPUT_FACTOR_FREE = 1;
 
         public static final int CLIMBER_RIGHT_LIMIT_SWITCH_PORT = 0;
         public static final int CLIMBER_LEFT_LIMIT_SWITCH_PORT = 0;

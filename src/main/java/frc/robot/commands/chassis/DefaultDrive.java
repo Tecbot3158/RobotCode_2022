@@ -17,6 +17,9 @@ public class DefaultDrive extends CommandBase {
     /**
      * Creates a new Command.
      */
+
+    private double inputMultiplier;
+
     public DefaultDrive() {
         addRequirements(Robot.getRobotContainer().getDriveTrain());
     }
@@ -42,13 +45,18 @@ public class DefaultDrive extends CommandBase {
         // double y = -Math.clamp((OI.getInstance().getPilot().getLeftAxisY()), -1, 1);
         // double y = Math.clamp((OI.getInstance().getPilot().getTriggers()), -1, 1);
 
-        double x = OI.getInstance().getDefaultDriveInputX() * RobotMap.DRIVE_TRAIN_INPUT_FACTOR;
-        double y = OI.getInstance().getDefaultDriveInputY() * RobotMap.DRIVE_TRAIN_INPUT_FACTOR;
+        if (Robot.getRobotContainer().getDriveTrain().getIsInputCapped())
+            inputMultiplier = RobotMap.DRIVE_TRAIN_INPUT_FACTOR_CAPPED;
+        else
+            inputMultiplier = RobotMap.DRIVE_TRAIN_INPUT_FACTOR_FREE;
+
+        double x = OI.getInstance().getDefaultDriveInputX() * inputMultiplier;
+        double y = OI.getInstance().getDefaultDriveInputY() * inputMultiplier;
 
         // right x
-        double turn = (OI.getInstance().getPilot().getRightAxisX()) * RobotMap.DRIVE_TRAIN_INPUT_FACTOR;
+        double turn = (OI.getInstance().getPilot().getRightAxisX()) * inputMultiplier;
         // Triggers
-        double middleWheel = -OI.getInstance().getMiddleWheel() * RobotMap.DRIVE_TRAIN_INPUT_FACTOR;
+        double middleWheel = -OI.getInstance().getMiddleWheel() * inputMultiplier;
         // double middleWheel = 0;
         SmartDashboard.putNumber("TRIGGERS ", middleWheel);
 

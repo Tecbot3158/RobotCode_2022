@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
 import frc.robot.commands.chassis.drivingModes.ChassisToggleTransmissionMode;
+import frc.robot.commands.chassis.drivingModes.ToggleInputState;
 //import frc.robot.commands.chassis.drivingModes.ToggleDragonFlyWheel;
 import frc.robot.commands.climber.ClimberSetInitThenClearBindingsThenSetClimberBindings;
 import frc.robot.commands.climber.ClimberToggleFreeMode;
@@ -84,6 +85,9 @@ public class OI {
         pilot.whenPressed(TecbotController.ButtonType.B, new IntakeToggleMotors());
 
         pilot.whenPressed(TecbotController.ButtonType.Y, new IntakeToggleEject());
+
+        pilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new ToggleInputState());
+
         // pilot.whileHeld(TecbotController.ButtonType.Y, new IntakeEjectThenStop());
 
         // COPILOT:

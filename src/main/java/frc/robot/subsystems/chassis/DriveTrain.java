@@ -63,6 +63,8 @@ public class DriveTrain extends SubsystemBase {
     double leftEncoderDistance = 0;
     double rightEncoderDistance = 0;
 
+    private boolean isInputCapped = true;
+
     public enum DrivingMode {
         Default, Pivot, Mecanum, Swerve
     }
@@ -203,6 +205,14 @@ public class DriveTrain extends SubsystemBase {
                 break;
 
         }
+    }
+
+    public boolean getIsInputCapped() {
+        return isInputCapped;
+    }
+
+    public void toggleInputMultiplier() {
+        isInputCapped = !isInputCapped;
     }
 
     public void setMiddleWheel(double power) {
