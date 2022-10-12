@@ -7,7 +7,6 @@ import frc.robot.subsystems.climber.Climber;
 
 public class ClimberToggleFreeMode extends CommandBase {
 
-
     public ClimberToggleFreeMode() {
 
     }

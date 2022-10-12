@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.resources.Math;
 
 public class DefaultDrive extends CommandBase {
     /**
@@ -47,9 +46,9 @@ public class DefaultDrive extends CommandBase {
         double y = OI.getInstance().getDefaultDriveInputY() * RobotMap.DRIVE_TRAIN_INPUT_FACTOR;
 
         // right x
-        double turn = (OI.getInstance().getPilot().getRightAxisX());
+        double turn = (OI.getInstance().getPilot().getRightAxisX()) * RobotMap.DRIVE_TRAIN_INPUT_FACTOR;
         // Triggers
-        double middleWheel = -OI.getInstance().getMiddleWheel();
+        double middleWheel = -OI.getInstance().getMiddleWheel() * RobotMap.DRIVE_TRAIN_INPUT_FACTOR;
         // double middleWheel = 0;
         SmartDashboard.putNumber("TRIGGERS ", middleWheel);
 

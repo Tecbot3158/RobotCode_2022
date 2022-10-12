@@ -7,7 +7,7 @@ import java.util.function.BooleanSupplier;
 
 public class TecbotControllerLeftTriggerButton extends Button implements BooleanSupplier {
 
-    public TecbotControllerLeftTriggerButton(){
+    public TecbotControllerLeftTriggerButton() {
 
     }
 

@@ -43,9 +43,9 @@ public class RobotMap {
          * If any of the motors of the chassis must be inverted,
          * indicate the port(s) in these arrays.
          */
-        public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_INVERTED_MOTORS = {};
-        public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = { DRIVE_TRAIN_RIGHT_CHASSIS_PORTS[0],
-                        DRIVE_TRAIN_RIGHT_CHASSIS_PORTS[1] };
+        public static final int[] DRIVE_TRAIN_LEFT_CHASSIS_INVERTED_MOTORS = { DRIVE_TRAIN_LEFT_CHASSIS_PORTS[0],
+                        DRIVE_TRAIN_LEFT_CHASSIS_PORTS[1] };
+        public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = {};
         // public static final int[] DRIVE_TRAIN_RIGHT_CHASSIS_INVERTED_MOTORS = {};
 
         // encoders
@@ -180,7 +180,7 @@ public class RobotMap {
         public static final int[] SHOOTER_MOTOR_PORTS = { 40, 41 };
         public static final TypeOfMotor[] SHOOTER_MOTOR_TYPES = { TypeOfMotor.CAN_SPARK_BRUSHLESS,
                         TypeOfMotor.CAN_SPARK_BRUSHLESS };
-        public static final int[] SHOOTER_INVERTED_MOTORS = { 40 };
+        public static final int[] SHOOTER_INVERTED_MOTORS = { SHOOTER_MOTOR_PORTS[0] };
 
         public static final int[] SHOOTER_ANGLE_SERVO_PORTS = { 5, 4 }; // left, then right
 

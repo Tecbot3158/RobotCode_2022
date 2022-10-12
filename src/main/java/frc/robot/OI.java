@@ -15,13 +15,11 @@ import frc.robot.commands.intake.IntakeTogglePositionAndMotors;
 import frc.robot.commands.intake.basic.IntakeToggleEject;
 import frc.robot.commands.intake.basic.IntakeToggleMotors;
 import frc.robot.commands.rollers.RollersRunThenStop;
-import frc.robot.commands.shooter.ShooterGoToLower;
 import frc.robot.commands.shooter.ShooterGoToVariableVisionTarget;
 import frc.robot.commands.shooter.ShooterGoToVeryHighValue;
 import frc.robot.commands.shooter.basic.ShooterGoRaw;
 import frc.robot.commands.shooter.basic.ShooterOff;
 import frc.robot.commands.turret.DriveTurretToAngle;
-import frc.robot.commands.turret.DriveTurretToVisionTarget;
 import frc.robot.commands.turret.basic.DriveTurretToLeft;
 import frc.robot.commands.turret.basic.DriveTurretToRight;
 import frc.robot.resources.Math;
@@ -175,6 +173,9 @@ public class OI {
             case ALEXS235:
             case ALEXG:
             case ESTEBATO:
+            case JOAQUIN:
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.7;
+
             default:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1);
         }
@@ -194,6 +195,9 @@ public class OI {
             case ALEXG:
             case ESTEBATO:
             case PONCE:
+            case JOAQUIN:
+                return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1);
+
             default:
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisY(false)), -1, 1);
 
