@@ -1,6 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
 import frc.robot.commands.chassis.drivingModes.ChassisToggleTransmissionMode;
 import frc.robot.commands.chassis.drivingModes.ToggleInputState;
@@ -132,7 +134,7 @@ public class OI {
 
         copilot.whenPressed(TecbotController.ButtonType.POV_DOWN, new DriveTurretToAngle(0));
         copilot.whenPressed(TecbotController.ButtonType.POV_UP, new DriveTurretToAngle(184));
-        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(92));
+        copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(90));
         copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngle(270));
 
         new TecbotControllerLeftTriggerButton().whileHeld(new ShooterGoRaw(0.3));
@@ -140,12 +142,18 @@ public class OI {
 
         // copilot.whenPressed(TecbotController.ButtonType.BACK, new
         // ClimberInitiateClimbingMode());
-        // copilot.whenPressed(TecbotController.ButtonType.START, new
-        // ClimberToggleSolenoids());
+        // copilot.whenPressed(TecbotController.ButtonType.START,
+        // new ClimberSetInitThenClearBindingsThenSetClimberBindings());
+        // copilot.getRawButtonObj(5).whenPressed(new
+        // ClimberSetInitThenClearBindingsThenSetClimberBindings());
+        // copilot.whenPressed(TecbotController.ButtonType.BACK,
+        // new ClimberSetInitThenClearBindingsThenSetClimberBindings());
+        // copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.3));
+        // copilotBackButton.whenPressed(new
+        // ClimberSetInitThenClearBindingsThenSetClimberBindings());
+
         copilot.whenPressed(TecbotController.ButtonType.BACK,
                 new ClimberSetInitThenClearBindingsThenSetClimberBindings());
-        // copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.3));
-
     }
 
     public double getRollersInput() {

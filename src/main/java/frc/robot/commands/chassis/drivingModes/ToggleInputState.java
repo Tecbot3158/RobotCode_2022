@@ -18,5 +18,6 @@ public class ToggleInputState extends InstantCommand {
     @Override
     public void initialize() {
         Robot.getRobotContainer().getDriveTrain().toggleInputMultiplier();
+
     }
 }

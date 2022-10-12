@@ -63,6 +63,7 @@ public class DriveTrain extends SubsystemBase {
     double leftEncoderDistance = 0;
     double rightEncoderDistance = 0;
 
+    // Should the driving input be limited?
     private boolean isInputCapped = true;
 
     public enum DrivingMode {
@@ -205,14 +206,6 @@ public class DriveTrain extends SubsystemBase {
                 break;
 
         }
-    }
-
-    public boolean getIsInputCapped() {
-        return isInputCapped;
-    }
-
-    public void toggleInputMultiplier() {
-        isInputCapped = !isInputCapped;
     }
 
     public void setMiddleWheel(double power) {
@@ -675,15 +668,11 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public TecbotEncoder getLeftEncoder() {
-
         return leftMotorEncoders;
-
     }
 
     public TecbotEncoder getRightEncoder() {
-
         return rightMotorEncoders;
-
     }
 
     @Override
@@ -757,6 +746,20 @@ public class DriveTrain extends SubsystemBase {
 
     public double getRightDistance() {
         return rightEncoderDistance;
+    }
+
+    public boolean getIsInputCapped() {
+        return isInputCapped;
+    }
+
+    public void setIsInputCapped(boolean state) {
+        isInputCapped = state;
+        System.out.println("input is capped: " + isInputCapped);
+    }
+
+    public void toggleInputMultiplier() {
+        isInputCapped = !isInputCapped;
+        System.out.println("input is capped: " + isInputCapped);
     }
 
 }

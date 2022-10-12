@@ -3,6 +3,7 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.OI;
+import frc.robot.Robot;
 import frc.robot.commands.climber.basic.ClimberSetRawMotors;
 
 public class ClimberSetInitThenClearBindingsThenSetClimberBindings extends CommandBase {
@@ -17,13 +18,15 @@ public class ClimberSetInitThenClearBindingsThenSetClimberBindings extends Comma
     @Override
     public void initialize() {
 
+        System.out.println("CLIMBINGMODEEEEEINITTTT");
+
         new ClimberInitiateClimbingMode().schedule();
 
         CommandScheduler.getInstance().clearButtons();
 
         OI.getInstance().configureButtonBindingsForClimbingMode();
 
-        new ClimberSetRawMotors().schedule( );
+        new ClimberSetRawMotors().schedule();
     }
 
     @Override

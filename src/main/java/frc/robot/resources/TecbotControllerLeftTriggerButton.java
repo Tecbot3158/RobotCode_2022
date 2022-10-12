@@ -13,6 +13,7 @@ public class TecbotControllerLeftTriggerButton extends Button implements Boolean
 
     @Override
     public boolean getAsBoolean() {
-        return OI.getInstance().getCopilot().getLeftTrigger() > 0.13;
+        // return OI.getInstance().getCopilot().getLeftTrigger() > 0.25;
+        return OI.getInstance().getCopilot().getRawAxis(2, false) > 0.25;
     }
 }

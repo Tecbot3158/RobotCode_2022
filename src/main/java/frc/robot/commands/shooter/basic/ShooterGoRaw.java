@@ -39,7 +39,7 @@ public class ShooterGoRaw extends CommandBase {
         SmartDashboard.putNumber("output shooter ", speed);
 
         shooter.setShooterMotorsRaw(speed);
-        System.out.println("Shootergoraw active");
+        // System.out.println("Shootergoraw active");
 
     }
 

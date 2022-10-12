@@ -40,17 +40,18 @@ public class ClimberSetRawMotors extends CommandBase {
 
         double input = OI.getInstance().getClimberDefaultManualInput();
 
-        double speed = input * RobotMap.CLIMBER_RAW_AXIS_MULTIPLIER;
+        double inputWithDeadzone = Math.abs(input) < 0.05 ? 0 : input;
+
+        double speed = inputWithDeadzone * RobotMap.CLIMBER_RAW_AXIS_MULTIPLIER;
 
         double position = climber.getRopeControllerEncoder().getPosition();
 
-        Robot.debugSmartDashboard("CLIMB-speed", speed);
-        Robot.debugSmartDashboard("CLIMB-encoder", position);
+        Robot.debug("CLIMB-speed" + speed);
+        Robot.debug("CLIMB-encoder" + position);
 
-        climber.setRopeControllerRaw( speed );
+        climber.setRopeControllerRaw(speed);
 
     }
-
 
     @Override
     public void end(boolean interrupted) {

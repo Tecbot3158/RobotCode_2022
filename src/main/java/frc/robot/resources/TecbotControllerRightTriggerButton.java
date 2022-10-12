@@ -13,6 +13,7 @@ public class TecbotControllerRightTriggerButton extends Button implements Boolea
 
     @Override
     public boolean getAsBoolean() {
+        System.out.println();
         return OI.getInstance().getCopilot().getRightTrigger() > 0.13;
     }
 }
