@@ -198,7 +198,7 @@ public class RobotMap {
         public static final double SHOOTER_CONTROL_kINCREMENT_MULTIPLIER = 0.0000045;
         public static final double SHOOTER_CONTROL_MINIMUM_OUTPUT = 0.0001;
 
-        public static final double SHOOTER_CONTROL_DEFAULT_TARGET = 500;
+        public static final double SHOOTER_CONTROL_DEFAULT_TARGET = 1000;
 
         /*
          * 5000 - Turret 0 deg = Robot dir = 180 deg

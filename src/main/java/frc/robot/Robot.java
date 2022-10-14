@@ -65,11 +65,12 @@ public class Robot extends TimedRobot {
         // FiveBallsAuto(paths.getFiveBallAutoPathSpline());
         FiveBallsNoSpline fiveBalls = new FiveBallsNoSpline();
 
-        m_chooser.addOption("None", null);
-        m_chooser.addOption("2 Balls", new TwoBallsAuto());
-        m_chooser.addOption("3 Balls", new ThreeBallsAuto());
-        m_chooser.setDefaultOption("fiveBalls", fiveBalls);
-        SmartDashboard.putData("Drivetrain", Robot.getRobotContainer().getDriveTrain());
+        // m_chooser.addOption("None", null);
+        m_chooser.setDefaultOption("2 Balls", new TwoBallsAuto());
+        // m_chooser.addOption("3 Balls", new ThreeBallsAuto());
+        // m_chooser.addOption("fiveBalls", fiveBalls);
+        // SmartDashboard.putData("Drivetrain",
+        // Robot.getRobotContainer().getDriveTrain());
 
     }
 

@@ -21,6 +21,7 @@ import frc.robot.commands.rollers.RollersRunThenStop;
 import frc.robot.commands.shooter.ShooterGoToTarget;
 import frc.robot.commands.shooter.ShooterGoToVariableVisionTarget;
 import frc.robot.commands.shooter.ShooterGoToVeryHighValue;
+import frc.robot.commands.shooter.ShooterShootCustomTarger;
 import frc.robot.commands.shooter.basic.ShooterGoRaw;
 import frc.robot.commands.shooter.basic.ShooterOff;
 import frc.robot.commands.turret.DriveTurretToAngle;
@@ -104,8 +105,11 @@ public class OI {
         copilot.whileHeld(TecbotController.ButtonType.X, new FeederSetToSpeedThenStop());
 
         // copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
+        // copilot.whenPressed(TecbotController.ButtonType.A, new
+        // ShooterGoToVariableVisionTarget());
+
+        copilot.whenPressed(TecbotController.ButtonType.A, new ShooterShootCustomTarger(1500));
         // copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
-        copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
         // copilot.whenPressed(TecbotController.ButtonType.A, new FeederSetToSpeed());
 
         copilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
@@ -139,6 +143,12 @@ public class OI {
         copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngle(270));
 
         new TecbotControllerLeftTriggerButton().whileHeld(new ShooterGoRaw(0.3));
+
+        // new TecbotControllerLeftTriggerButton().whileHeld(new
+        // ShooterShootCustomTarger(1500));
+        // Maximum5600
+        // 0.3-1600-1700
+        // 0.27-1500 revoluciones
         // new TecbotControllerRightTriggerButton().whileActive(new ShooterGoRaw(0.3));
 
         // copilot.whenPressed(TecbotController.ButtonType.BACK, new
@@ -153,16 +163,14 @@ public class OI {
         // copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.3));
         // copilotBackButton.whenPressed(new
         // ClimberSetInitThenClearBindingsThenSetClimberBindings());
-=======
         // copilot.whenPressed(TecbotController.ButtonType.START, new
         // ClimberToggleSolenoids());
         copilot.whenPressed(TecbotController.ButtonType.BACK,
                 new ClimberSetInitThenClearBindingsThenSetClimberBindings());
-        copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.4));
->>>>>>> Stashed changes
+        // copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.4));
 
-        copilot.whenPressed(TecbotController.ButtonType.BACK,
-                new ClimberSetInitThenClearBindingsThenSetClimberBindings());
+        // copilot.whenPressed(TecbotController.ButtonType.BACK,
+        // new ClimberSetInitThenClearBindingsThenSetClimberBindings());
     }
 
     public double getRollersInput() {
