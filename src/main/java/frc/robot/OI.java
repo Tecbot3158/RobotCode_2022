@@ -143,7 +143,7 @@ public class OI {
 
         // copilot.whenPressed(TecbotController.ButtonType.BACK, new
         // ClimberInitiateClimbingMode());
-<<<<<<< Updated upstream
+        // Updated upstream
         // copilot.whenPressed(TecbotController.ButtonType.START,
         // new ClimberSetInitThenClearBindingsThenSetClimberBindings());
         // copilot.getRawButtonObj(5).whenPressed(new
