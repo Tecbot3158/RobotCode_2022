@@ -114,7 +114,7 @@ public class TecbotConstants {
         // used to be 0.75
         public static final double SHOOTER_TRENCH_SHOOTING_SPEED = 0.75;
         // used to be 0.97
-        public static final double SHOOTER_INITIATION_LINE_SHOOTING_SPEED = 0.97;
+        public static final double SHOOTER_INITIATION_LINE_SHOOTING_SPEED = 0.95;
         // used to be 0.75
         public static final double SHOOTER_TARGET_ZONE_SHOOTING_SPEED = 0.75;
         public static final double SHOOTER_OFF = 0;

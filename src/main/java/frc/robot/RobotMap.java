@@ -198,7 +198,7 @@ public class RobotMap {
         public static final double SHOOTER_CONTROL_kINCREMENT_MULTIPLIER = 0.0000045;
         public static final double SHOOTER_CONTROL_MINIMUM_OUTPUT = 0.0001;
 
-        public static final double SHOOTER_CONTROL_DEFAULT_TARGET = 1000;
+        public static final double SHOOTER_CONTROL_DEFAULT_TARGET = 500;
 
         /*
          * 5000 - Turret 0 deg = Robot dir = 180 deg
@@ -348,14 +348,14 @@ public class RobotMap {
         public static final double CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_RETRACTED = 0;
         // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_RETRACTED =
         // 91.7401;
-        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_RETRACTED = 95.7401;
+        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_RETRACTED = 85.3843;
 
         public static final double CLIMBER_ENCODER_MINIMUM_VALUE_PISTON_EXTENDED = 0;
         // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED =
         // 91.7401;
         // public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED =
         // 90.0;
-        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 112.0;
+        public static final double CLIMBER_ENCODER_MAXIMUM_VALUE_PISTON_EXTENDED = 88.122;
 
         public static final double CLIMBER_RAW_AXIS_MULTIPLIER = 1;
 

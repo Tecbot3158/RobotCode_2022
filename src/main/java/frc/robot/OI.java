@@ -18,6 +18,7 @@ import frc.robot.commands.intake.IntakeTogglePositionAndMotors;
 import frc.robot.commands.intake.basic.IntakeToggleEject;
 import frc.robot.commands.intake.basic.IntakeToggleMotors;
 import frc.robot.commands.rollers.RollersRunThenStop;
+import frc.robot.commands.shooter.ShooterGoToTarget;
 import frc.robot.commands.shooter.ShooterGoToVariableVisionTarget;
 import frc.robot.commands.shooter.ShooterGoToVeryHighValue;
 import frc.robot.commands.shooter.basic.ShooterGoRaw;
@@ -104,7 +105,7 @@ public class OI {
 
         // copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
         // copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
-        copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToVariableVisionTarget());
+        copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
         // copilot.whenPressed(TecbotController.ButtonType.A, new FeederSetToSpeed());
 
         copilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
@@ -142,6 +143,7 @@ public class OI {
 
         // copilot.whenPressed(TecbotController.ButtonType.BACK, new
         // ClimberInitiateClimbingMode());
+<<<<<<< Updated upstream
         // copilot.whenPressed(TecbotController.ButtonType.START,
         // new ClimberSetInitThenClearBindingsThenSetClimberBindings());
         // copilot.getRawButtonObj(5).whenPressed(new
@@ -151,6 +153,13 @@ public class OI {
         // copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.3));
         // copilotBackButton.whenPressed(new
         // ClimberSetInitThenClearBindingsThenSetClimberBindings());
+=======
+        // copilot.whenPressed(TecbotController.ButtonType.START, new
+        // ClimberToggleSolenoids());
+        copilot.whenPressed(TecbotController.ButtonType.BACK,
+                new ClimberSetInitThenClearBindingsThenSetClimberBindings());
+        copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.4));
+>>>>>>> Stashed changes
 
         copilot.whenPressed(TecbotController.ButtonType.BACK,
                 new ClimberSetInitThenClearBindingsThenSetClimberBindings());
