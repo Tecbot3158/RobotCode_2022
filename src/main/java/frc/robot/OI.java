@@ -75,7 +75,7 @@ public class OI {
         pilot.whenPressed(TecbotController.ButtonType.LB, new ChassisToggleTransmissionMode());
         pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
 
-        pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new ToggleDragonFlyRaw());
+        pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new ToggleDragonFlyRaw());
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
         // InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyLower,y
         // Robot.getRobotContainer().getDriveTrain()));
@@ -296,7 +296,8 @@ public class OI {
         // InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyRise,
         // Robot.getRobotContainer().getDriveTrain()));
 
-        pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new ToggleDragonFlyWheel());
+        // pilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new
+        // ToggleDragonFlyWheel());
 
         pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
 
