@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.chassis.drivingModes.ChassisSetDefaultDrive;
 import frc.robot.commands.chassis.drivingModes.ChassisToggleTransmissionMode;
+import frc.robot.commands.chassis.drivingModes.ToggleDragonFlyRaw;
 import frc.robot.commands.chassis.drivingModes.ToggleDragonFlyWheel;
 import frc.robot.commands.chassis.drivingModes.ToggleInputState;
 //import frc.robot.commands.chassis.drivingModes.ToggleDragonFlyWheel;
@@ -74,6 +75,7 @@ public class OI {
         pilot.whenPressed(TecbotController.ButtonType.LB, new ChassisToggleTransmissionMode());
         pilot.whenPressed(TecbotController.ButtonType.RB, new ShooterGoToVeryHighValue());
 
+        pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new ToggleDragonFlyRaw());
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
         // InstantCommand(Robot.getRobotContainer().getDriveTrain()::setDragonFlyLower,y
         // Robot.getRobotContainer().getDriveTrain()));

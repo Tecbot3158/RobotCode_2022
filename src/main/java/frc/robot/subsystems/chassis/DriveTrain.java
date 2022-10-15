@@ -339,6 +339,14 @@ public class DriveTrain extends SubsystemBase {
         return (dragonFlyWheelSolenoid.get() == DoubleSolenoid.Value.kForward);
     }
 
+    public DoubleSolenoid.Value getDragonFlySolenoidValue() {
+        return dragonFlyWheelSolenoid.get();
+    }
+
+    public void setDragonFlyRaw(DoubleSolenoid.Value value) {
+        dragonFlyWheelSolenoid.set(value);
+    }
+
     public WheelState getDragonFlyWheelState() {
         if (!RobotMap.DRIVE_TRAIN_DRAGON_FLY_IS_AVAILABLE)
             return null;
