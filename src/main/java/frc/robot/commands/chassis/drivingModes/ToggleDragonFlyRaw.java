@@ -22,8 +22,8 @@ public class ToggleDragonFlyRaw extends InstantCommand {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("TOGGLING DRAGONFLYWHEEL");
-        System.out.println("Valor antes: " + driveTrain.getDragonFlySolenoidValue());
+        Robot.debug("TOGGLING DRAGONFLYWHEEL");
+        Robot.debug("Valor antes: " + driveTrain.getDragonFlySolenoidValue());
 
         if (driveTrain.getDragonFlySolenoidValue() == DoubleSolenoid.Value.kForward) {
             driveTrain.setDragonFlyRaw(DoubleSolenoid.Value.kReverse);
@@ -31,6 +31,6 @@ public class ToggleDragonFlyRaw extends InstantCommand {
             driveTrain.setDragonFlyRaw(DoubleSolenoid.Value.kForward);
         }
 
-        System.out.println("Valor después: " + driveTrain.getDragonFlySolenoidValue());
+        Robot.debug("Valor después: " + driveTrain.getDragonFlySolenoidValue());
     }
 }

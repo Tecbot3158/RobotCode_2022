@@ -58,8 +58,8 @@ public class DefaultDrive extends CommandBase {
         // Triggers
         double middleWheel = -OI.getInstance().getMiddleWheel() * inputMultiplier;
         // double middleWheel = 0;
-        SmartDashboard.putNumber("TRIGGERS ", middleWheel);
-
+        // SmartDashboard.putNumber("TRIGGERS ", middleWheel);
+        Robot.debug("middleWheel power in DefaultDriveCommand: " + middleWheel);
         Robot.getRobotContainer().getDriveTrain().defaultDrive(x, y, turn, middleWheel);
     }
 
