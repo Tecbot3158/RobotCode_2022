@@ -147,7 +147,7 @@ public class OI {
         copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(90));
         copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngle(270));
 
-        new TecbotControllerLeftTriggerButton().whileHeld(new ShooterGoRaw(0.8));
+        new TecbotControllerLeftTriggerButton().whileHeld(new ShooterGoRaw(0.4));
 
         // new TecbotControllerLeftTriggerButton().whileHeld(new
         // ShooterShootCustomTarger(1500));

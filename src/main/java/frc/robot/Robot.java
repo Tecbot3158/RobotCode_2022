@@ -106,6 +106,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Autonomous", m_chooser);
         // System.out.println(getRobotContainer().getIntake().getIntakeSolenoids().get());
         // OI.getInstance().getTurretInputAngle();
+        robotContainer.getTecbotPWMLEDStrip().setSolidHSV(180, 255, 255);
 
     }
 
@@ -179,8 +180,6 @@ public class Robot extends TimedRobot {
         // robotContainer.getTecbotPWMLEDStrip().setSolidHSV(0, 0, 0);
 
         // this probably works
-        robotContainer.getTecbotPWMLEDStrip().setFireWithVariableIntensity(
-                233, Math.abs(ledInput), 0, 1, TecbotConstants.LED_STRIP_LENGTH, 0, false);
 
         // robotContainer.getTecbotPWMLEDStrip().setFireFromJoystick(129, x, y,
         // TecbotConstants.LED_STRIP_LENGTH, 1,
