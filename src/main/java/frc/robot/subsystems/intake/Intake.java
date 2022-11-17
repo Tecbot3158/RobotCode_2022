@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
         intakeMotor = new TecbotSpeedController(RobotMap.INTAKE_MOTOR_PORT, RobotMap.INTAKE_MOTOR_TYPE);
         intakeMotor.setInverted(RobotMap.INTAKE_MOTOR_IS_INVERTED);
 
-      //  intakeRetract();
+        // intakeRetract();
         intakeMotorsOff();
     }
 
@@ -41,7 +41,7 @@ public class Intake extends SubsystemBase {
 
     public void intakeExtend() {
         intakeSolenoids.set(RobotMap.INTAKE_POSITION_ACTIVE);
-        System.out.println("Intake extend!!");
+        System.out.println(" intak extend !!");
     }
 
     public void intakeMotorsAbsorb() {
@@ -52,7 +52,7 @@ public class Intake extends SubsystemBase {
         intakeMotor.set(RobotMap.INTAKE_EJECT_SPEED);
     }
 
-    public void toggleIntakeMotorsEject(){
+    public void toggleIntakeMotorsEject() {
         intakeMotor.set(RobotMap.INTAKE_EJECT_SPEED);
     }
 
@@ -70,22 +70,21 @@ public class Intake extends SubsystemBase {
         }
     }
 
-    public void toggleIntakePosition(){
-        if (intakeSolenoids.get() == RobotMap.INTAKE_POSITION_RETRACTED )
+    public void toggleIntakePosition() {
+        if (intakeSolenoids.get() == RobotMap.INTAKE_POSITION_RETRACTED)
             intakeExtend();
         else
             intakeRetract();
     }
 
-    public void toggleIntakeMotors(){
-
+    public void toggleIntakeMotors() {
 
     }
 
-    public void setIntakeMotorsState( IntakeMotorState state ){
+    public void setIntakeMotorsState(IntakeMotorState state) {
         intakeMotorState = state;
 
-        switch ( state ) {
+        switch (state) {
             case ABSORB:
                 intakeMotorsAbsorb();
                 break;
@@ -97,8 +96,9 @@ public class Intake extends SubsystemBase {
         }
 
     }
+
     public enum IntakeMotorState {
-       ABSORB,
+        ABSORB,
         EJECT,
         OFF
 

@@ -114,7 +114,7 @@ public class TecbotConstants {
         // used to be 0.75
         public static final double SHOOTER_TRENCH_SHOOTING_SPEED = 0.75;
         // used to be 0.97
-        public static final double SHOOTER_INITIATION_LINE_SHOOTING_SPEED = 0.97;
+        public static final double SHOOTER_INITIATION_LINE_SHOOTING_SPEED = 0.95;
         // used to be 0.75
         public static final double SHOOTER_TARGET_ZONE_SHOOTING_SPEED = 0.75;
         public static final double SHOOTER_OFF = 0;
@@ -186,11 +186,11 @@ public class TecbotConstants {
         public static final double JOYSTICK_SPEED_MULTIPLIER = .45;
         public static final boolean APPLY_SPEED_RELEASE_TO_LEFT_AXIS = true;
 
-        public static final TecbotController.TypeOfController CONTROLLER_TYPE_PILOT = TecbotController.TypeOfController.PS4;
-        public static final TecbotController.TypeOfController CONTROLLER_TYPE_COPILOT = TecbotController.TypeOfController.PS4;
+        public static final TecbotController.TypeOfController CONTROLLER_TYPE_PILOT = TecbotController.TypeOfController.XBOX;
+        public static final TecbotController.TypeOfController CONTROLLER_TYPE_COPILOT = TecbotController.TypeOfController.XBOX;
 
         public static double CHASSIS_MINIMUM_X_CORRECTION_MECANUM = 0.5;
 
-        public static int LED_STRIP_PWM_PORT = 8;
-        public static int LED_STRIP_LENGTH = 180;
+        public static int LED_STRIP_PWM_PORT = 0;
+        public static int LED_STRIP_LENGTH = 10;
 }

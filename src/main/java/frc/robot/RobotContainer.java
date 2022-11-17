@@ -48,7 +48,7 @@ public class RobotContainer {
     private Shooter shooter;
 
     TecbotPWMLEDStrip ledsPWM;
-    TecbotPWMLEDStrip ledsPWM1;
+    // TecbotPWMLEDStrip ledsPWM1;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -77,7 +77,8 @@ public class RobotContainer {
 
         climber = new Climber();
 
-        ledsPWM = new TecbotPWMLEDStrip(TecbotConstants.LED_STRIP_PWM_PORT, TecbotConstants.LED_STRIP_LENGTH);
+        ledsPWM = new TecbotPWMLEDStrip(
+                TecbotConstants.LED_STRIP_PWM_PORT, TecbotConstants.LED_STRIP_LENGTH);
         // ledsPWM1 = new TecbotPWMLEDStrip(9, 60);
 
         // UsbCamera camera = CameraServer.startAutomaticCapture();
@@ -162,8 +163,9 @@ public class RobotContainer {
     public TecbotPWMLEDStrip getTecbotPWMLEDStrip() {
         return ledsPWM;
     }
-
-    public TecbotPWMLEDStrip getTecbotPWMLEDStrip1() {
-        return ledsPWM1;
-    }
+    /*
+     * public TecbotPWMLEDStrip getTecbotPWMLEDStrip1() {
+     * return ledsPWM1;
+     * }
+     */
 }

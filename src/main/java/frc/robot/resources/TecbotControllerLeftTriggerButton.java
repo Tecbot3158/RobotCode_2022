@@ -7,12 +7,13 @@ import java.util.function.BooleanSupplier;
 
 public class TecbotControllerLeftTriggerButton extends Button implements BooleanSupplier {
 
-    public TecbotControllerLeftTriggerButton(){
+    public TecbotControllerLeftTriggerButton() {
 
     }
 
     @Override
     public boolean getAsBoolean() {
-        return OI.getInstance().getCopilot().getLeftTrigger() > 0.13;
+        // return OI.getInstance().getCopilot().getLeftTrigger() > 0.25;
+        return OI.getInstance().getCopilot().getRawAxis(2, false) > 0.25;
     }
 }

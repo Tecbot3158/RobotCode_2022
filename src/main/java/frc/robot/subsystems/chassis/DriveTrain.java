@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems.chassis;
 
-import java.security.Principal;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
@@ -64,6 +62,9 @@ public class DriveTrain extends SubsystemBase {
 
     double leftEncoderDistance = 0;
     double rightEncoderDistance = 0;
+
+    // Should the driving input be limited?
+    private boolean isInputCapped = true;
 
     public enum DrivingMode {
         Default, Pivot, Mecanum, Swerve
@@ -336,6 +337,14 @@ public class DriveTrain extends SubsystemBase {
         if (!RobotMap.DRIVE_TRAIN_DRAGON_FLY_IS_AVAILABLE)
             return false;
         return (dragonFlyWheelSolenoid.get() == DoubleSolenoid.Value.kForward);
+    }
+
+    public DoubleSolenoid.Value getDragonFlySolenoidValue() {
+        return dragonFlyWheelSolenoid.get();
+    }
+
+    public void setDragonFlyRaw(DoubleSolenoid.Value value) {
+        dragonFlyWheelSolenoid.set(value);
     }
 
     public WheelState getDragonFlyWheelState() {
@@ -667,15 +676,11 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public TecbotEncoder getLeftEncoder() {
-
         return leftMotorEncoders;
-
     }
 
     public TecbotEncoder getRightEncoder() {
-
         return rightMotorEncoders;
-
     }
 
     @Override
@@ -749,6 +754,20 @@ public class DriveTrain extends SubsystemBase {
 
     public double getRightDistance() {
         return rightEncoderDistance;
+    }
+
+    public boolean getIsInputCapped() {
+        return isInputCapped;
+    }
+
+    public void setIsInputCapped(boolean state) {
+        isInputCapped = state;
+        System.out.println("input is capped: " + isInputCapped);
+    }
+
+    public void toggleInputMultiplier() {
+        isInputCapped = !isInputCapped;
+        System.out.println("input is capped: " + isInputCapped);
     }
 
 }

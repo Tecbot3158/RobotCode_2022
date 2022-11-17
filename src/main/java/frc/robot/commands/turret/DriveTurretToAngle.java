@@ -17,7 +17,6 @@ public class DriveTurretToAngle extends CommandBase {
     double kCurrentPosition;
     double kStartControlLimit;
 
-
     double angle;
     Turret turret;
 
@@ -35,17 +34,17 @@ public class DriveTurretToAngle extends CommandBase {
         // to real turret angles.
         // angle = 180 - angle;
 
-        //if (inRange = turret.withinAngleRange(angle))
-        //    this.angle = turret.getRealAngle(angle);
+        // if (inRange = turret.withinAngleRange(angle))
+        // this.angle = turret.getRealAngle(angle);
 
         this.angle = angleDegrees;
 
         kMinimumAbsoluteOutput = RobotMap.TURRET_DEFAULT_MINIMUM_ABSOLUTE_OUTPUT;
         kTarget = turret.getRotationsFromAngle(this.angle);
-//        Robot.debug("angle: " +  this.angle);
-//        Robot.debug("target: " +  this.kTarget);
-//        System.out.println("angle: " + this.angle);
-//        System.out.println("target: " + this.kTarget);
+        // Robot.debug("angle: " + this.angle);
+        // Robot.debug("target: " + this.kTarget);
+        // System.out.println("angle: " + this.angle);
+        // System.out.println("target: " + this.kTarget);
         kCurrentPosition = turret.getTurretEncoder().getPosition();
 
         kStartControlLimit = RobotMap.TURRET_DEFAULT_kCONTROL_START_LIMIT;
@@ -60,8 +59,9 @@ public class DriveTurretToAngle extends CommandBase {
     @Override
     public void initialize() {
 
-//        SmartDashboard.putNumber("turret - target", stepControl.getTarget());
-//        SmartDashboard.putNumber("turret - position", stepControl.getCurrentPosition());
+        // SmartDashboard.putNumber("turret - target", stepControl.getTarget());
+        // SmartDashboard.putNumber("turret - position",
+        // stepControl.getCurrentPosition());
 
     }
 
@@ -69,8 +69,8 @@ public class DriveTurretToAngle extends CommandBase {
     @Override
     public void execute() {
 
-//        if (!inRange)
-//            return;
+        // if (!inRange)
+        // return;
 
         double rotations = turret.getTurretEncoder().getPosition();
 
@@ -83,7 +83,6 @@ public class DriveTurretToAngle extends CommandBase {
         SmartDashboard.putNumber("turret - minout", kMinimumAbsoluteOutput);
         SmartDashboard.putNumber("turret - target", kTarget);
         SmartDashboard.putNumber("turret - mult", kStartControlLimit);
-
 
     }
 
@@ -98,7 +97,7 @@ public class DriveTurretToAngle extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        //return stepControl.isInRange() || !inRange;
+        // return stepControl.isInRange() || !inRange;
         return stepControl.isInRange();
     }
 }

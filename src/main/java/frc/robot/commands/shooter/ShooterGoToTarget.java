@@ -29,12 +29,12 @@ public class ShooterGoToTarget extends CommandBase {
 
         shooter.getShooterEncoder().setPosition(0);
         currentPos = shooter.getShooterEncoder().getVelocity();
-        //target = 4000;
+        // target = 4000;
         target = 3600;
 
         stepControl = new StepControl(minout, target, currentPos, increment);
 
-        Subsystem requirements[] = {shooter};
+        Subsystem requirements[] = { shooter };
 
         addRequirements(requirements);
 
@@ -77,14 +77,15 @@ public class ShooterGoToTarget extends CommandBase {
         Robot.debug("exec shootergototarget");
 
         if (stepControl.isInRange()) {
-            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, TecbotConstants.COPILOT_DEFAULT_VIBRATION);
-            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, TecbotConstants.COPILOT_DEFAULT_VIBRATION);
+            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble,
+                    TecbotConstants.COPILOT_DEFAULT_VIBRATION);
+            OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble,
+                    TecbotConstants.COPILOT_DEFAULT_VIBRATION);
         } else {
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kLeftRumble, 0);
             OI.getInstance().getCopilot().setRumble(GenericHID.RumbleType.kRightRumble, 0);
 
         }
-
 
     }
 

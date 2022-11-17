@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.CANifier.PWMChannel;
+
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -65,11 +68,12 @@ public class Robot extends TimedRobot {
         // FiveBallsAuto(paths.getFiveBallAutoPathSpline());
         FiveBallsNoSpline fiveBalls = new FiveBallsNoSpline();
 
-        m_chooser.addOption("None", null);
-        m_chooser.addOption("2 Balls", new TwoBallsAuto());
-        m_chooser.addOption("3 Balls", new ThreeBallsAuto());
-        m_chooser.setDefaultOption("fiveBalls", fiveBalls);
-        SmartDashboard.putData("Drivetrain", Robot.getRobotContainer().getDriveTrain());
+        // m_chooser.addOption("None", null);
+        m_chooser.setDefaultOption("2 Balls", new TwoBallsAuto());
+        // m_chooser.addOption("3 Balls", new ThreeBallsAuto());
+        // m_chooser.addOption("fiveBalls", fiveBalls);
+        // SmartDashboard.putData("Drivetrain",
+        // Robot.getRobotContainer().getDriveTrain());
 
     }
 
@@ -103,8 +107,9 @@ public class Robot extends TimedRobot {
                 Robot.getRobotContainer().getTurret().getTurretEncoder().getVelocity());
 
         SmartDashboard.putData("Autonomous", m_chooser);
-
+        // System.out.println(getRobotContainer().getIntake().getIntakeSolenoids().get());
         // OI.getInstance().getTurretInputAngle();
+        // robotContainer.getTecbotPWMLEDStrip().setSolidHSV(180, 255, 255);
 
     }
 
@@ -156,6 +161,7 @@ public class Robot extends TimedRobot {
             m_autonomousCommand.cancel();
         }
 
+        robotContainer.getDriveTrain().setIsInputCapped(true);
     }
 
     /**
@@ -163,9 +169,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-
-        double x = OI.getInstance().getCopilot().getRightAxisX();
-        double y = OI.getInstance().getCopilot().getRightAxisY();
+        double ledInput = OI.getInstance().getDefaultDriveInputY();
         // ;
 
         // this works:
@@ -175,8 +179,9 @@ public class Robot extends TimedRobot {
         // robotContainer.getTecbotPWMLEDStrip().setFireFromInputInRange(1, 0.1, 0, 1,
         // 60, 1, false);
 
-        // this works!
-        robotContainer.getTecbotPWMLEDStrip().setSolidHSV(0, 0, 0);
+        // robotContainer.getTecbotPWMLEDStrip().setSolidHSV(0, 255, 255);
+        robotContainer.getTecbotPWMLEDStrip().setRainbowCycle();
+        // this probably works
 
         // robotContainer.getTecbotPWMLEDStrip().setFireFromJoystick(129, x, y,
         // TecbotConstants.LED_STRIP_LENGTH, 1,

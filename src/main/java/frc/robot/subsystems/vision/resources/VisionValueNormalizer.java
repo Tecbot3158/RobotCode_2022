@@ -77,11 +77,11 @@ public class VisionValueNormalizer {
      */
     public double getNormalizedDistance() {
         return 0.5;
-//        double actualAreaDelta = averageArea - minimumArea;
-//        if ( averageArea <= 0 )
-//            return 0.5;
-//
-//        return 1 - Math.clamp(actualAreaDelta / range, 0, 1);
+        // double actualAreaDelta = averageArea - minimumArea;
+        // if ( averageArea <= 0 )
+        // return 0.5;
+        //
+        // return 1 - Math.clamp(actualAreaDelta / range, 0, 1);
 
     }
 
