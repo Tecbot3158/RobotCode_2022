@@ -192,5 +192,5 @@ public class TecbotConstants {
         public static double CHASSIS_MINIMUM_X_CORRECTION_MECANUM = 0.5;
 
         public static int LED_STRIP_PWM_PORT = 0;
-        public static int LED_STRIP_LENGTH = 60;
+        public static int LED_STRIP_LENGTH = 10;
 }

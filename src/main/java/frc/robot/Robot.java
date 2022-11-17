@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.CANifier.PWMChannel;
+
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -106,7 +109,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Autonomous", m_chooser);
         // System.out.println(getRobotContainer().getIntake().getIntakeSolenoids().get());
         // OI.getInstance().getTurretInputAngle();
-        robotContainer.getTecbotPWMLEDStrip().setSolidHSV(180, 255, 255);
+        // robotContainer.getTecbotPWMLEDStrip().setSolidHSV(180, 255, 255);
 
     }
 
@@ -176,9 +179,8 @@ public class Robot extends TimedRobot {
         // robotContainer.getTecbotPWMLEDStrip().setFireFromInputInRange(1, 0.1, 0, 1,
         // 60, 1, false);
 
-        // this works!
-        // robotContainer.getTecbotPWMLEDStrip().setSolidHSV(0, 0, 0);
-
+        // robotContainer.getTecbotPWMLEDStrip().setSolidHSV(0, 255, 255);
+        robotContainer.getTecbotPWMLEDStrip().setRainbowCycle();
         // this probably works
 
         // robotContainer.getTecbotPWMLEDStrip().setFireFromJoystick(129, x, y,

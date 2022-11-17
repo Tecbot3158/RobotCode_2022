@@ -5,6 +5,7 @@
 package frc.robot.commands.chassis.drivingModes;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.chassis.DriveTrain;
@@ -22,15 +23,10 @@ public class ToggleDragonFlyRaw extends InstantCommand {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        Robot.debug("TOGGLING DRAGONFLYWHEEL");
-        Robot.debug("Valor antes: " + driveTrain.getDragonFlySolenoidValue());
-
         if (driveTrain.getDragonFlySolenoidValue() == DoubleSolenoid.Value.kForward) {
             driveTrain.setDragonFlyRaw(DoubleSolenoid.Value.kReverse);
         } else {
             driveTrain.setDragonFlyRaw(DoubleSolenoid.Value.kForward);
         }
-
-        Robot.debug("Valor después: " + driveTrain.getDragonFlySolenoidValue());
     }
 }

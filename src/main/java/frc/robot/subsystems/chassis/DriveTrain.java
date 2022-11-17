@@ -210,7 +210,6 @@ public class DriveTrain extends SubsystemBase {
 
     public void setMiddleWheel(double power) {
         middleMotors.setAll(power);
-        Robot.debug("ASTRID SI VES ESTO Y NO SE MUEVE LA LLANTA DE EN MEDIO\nNO ES PEDO DEL CÓDIGO." + power);
     }
 
     public void tankDrive(double leftPower, double rightPower) {

@@ -114,7 +114,7 @@ public class OI {
         // copilot.whenPressed(TecbotController.ButtonType.A, new );
         // copilot.whenPressed(TecbotController.ButtonType.A, new
         // ShooterShootCustomTarger(1500));
-        copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
+        // copilot.whenPressed(TecbotController.ButtonType.A, new ShooterGoToTarget());
         // copilot.whenPressed(TecbotController.ButtonType.A, new FeederSetToSpeed());
 
         copilot.whenPressed(TecbotController.ButtonType.B, new ShooterOff());
@@ -147,7 +147,7 @@ public class OI {
         copilot.whenPressed(TecbotController.ButtonType.POV_RIGHT, new DriveTurretToAngle(90));
         copilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new DriveTurretToAngle(270));
 
-        new TecbotControllerLeftTriggerButton().whileHeld(new ShooterGoRaw(0.4));
+        new TecbotControllerLeftTriggerButton().whileHeld(new ShooterGoRaw(0.35));
 
         // new TecbotControllerLeftTriggerButton().whileHeld(new
         // ShooterShootCustomTarger(1500));
@@ -170,8 +170,12 @@ public class OI {
         // ClimberSetInitThenClearBindingsThenSetClimberBindings());
         // copilot.whenPressed(TecbotController.ButtonType.START, new
         // ClimberToggleSolenoids());
-        copilot.whenPressed(TecbotController.ButtonType.BACK,
-                new ClimberSetInitThenClearBindingsThenSetClimberBindings());
+
+        // UNCOMMENT TO ENABLE CLIMBING MODE
+
+        // copilot.whenPressed(TecbotController.ButtonType.BACK, new
+        // ClimberSetInitThenClearBindingsThenSetClimberBindings());
+
         // copilot.whenPressed(TecbotController.ButtonType.LS, new ShooterGoRaw(0.4));
 
         // copilot.whenPressed(TecbotController.ButtonType.BACK,
