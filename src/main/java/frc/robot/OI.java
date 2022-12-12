@@ -30,6 +30,8 @@ import frc.robot.commands.turret.DriveTurretToAngle;
 import frc.robot.commands.turret.basic.DriveTurretToLeft;
 import frc.robot.commands.turret.basic.DriveTurretToRight;
 import frc.robot.resources.Math;
+import frc.robot.resources.HighAltitudeGuitarHeroJoystick.AxisType;
+import frc.robot.resources.HighAltitudeGuitarHeroJoystick.ButtonType;
 import frc.robot.resources.*;
 
 public class OI {
@@ -37,6 +39,8 @@ public class OI {
     public static OI instance;
 
     private TecbotController pilot, copilot;
+
+    private HighAltitudeGuitarHeroJoystick guitar;
 
     private OI() {
 
@@ -50,6 +54,13 @@ public class OI {
 
         pilot = new TecbotController(0, TecbotConstants.CONTROLLER_TYPE_PILOT);
         copilot = new TecbotController(1, TecbotConstants.CONTROLLER_TYPE_COPILOT);
+
+        guitar = new HighAltitudeGuitarHeroJoystick(3);
+
+        guitar.whenPressed(ButtonType.RED, new IntakeTogglePositionAndMotors());
+        guitar.whileHeld(ButtonType.BLUE, new ShooterGoRaw(0.35));
+        guitar.whileHeld(ButtonType.ORANGE, new FeederSetToSpeedThenStop());
+        guitar.whenPressedCombo(new ToggleInputState(), ButtonType.RED, ButtonType.BLUE, ButtonType.COMBO);
 
         // pilot.whenPressed(TecbotController.ButtonType.POV_LEFT, new
         // InstantCommand(Robot.getRobotContainer().getDriveTrain().setDrivingMode(DriveTrain.DrivingMode.Mecanum)
@@ -209,6 +220,7 @@ public class OI {
                 return Math.clamp(-(OI.getInstance().getPilot().getLeftAxisX(false)), -1, 1) * 0.6;
 
             case ALEXS235:
+                guitar.getDriveX();
             case ALEXG:
             case ESTEBATO:
             case JOAQUIN:
@@ -230,6 +242,7 @@ public class OI {
                 return Math.clamp(-(OI.getInstance().getPilot().getTriggers()), -1, 1);
 
             case ALEXS235:
+                return guitar.getDriveY();
             case ALEXG:
             case ESTEBATO:
             case PONCE:

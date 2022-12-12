@@ -5,7 +5,7 @@ import frc.robot.HUMAN_DRIVERS;
 
 public class TecbotConstants {
 
-        public static final HUMAN_DRIVERS CURRENT_PILOT = HUMAN_DRIVERS.ALEXG;
+        public static final HUMAN_DRIVERS CURRENT_PILOT = HUMAN_DRIVERS.ALEXS235;
         public static final HUMAN_DRIVERS CURRENT_COPILOT = HUMAN_DRIVERS.ALEXG;
 
         public static final double COPILOT_DEFAULT_VIBRATION = 1;
